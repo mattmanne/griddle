@@ -60,6 +60,28 @@ body {
   font-size: 0.9rem;
 }
 
+.sport-switch {
+  display: flex;
+  gap: 8px;
+  margin: 6px 0 10px;
+}
+
+.sport-btn {
+  background: var(--panel);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  box-shadow: none;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+}
+
+.sport-btn.active {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+  box-shadow: 0 2px 10px rgba(245, 166, 35, 0.35);
+}
+
 .mode-link {
   margin: 6px 0 0;
   font-size: 0.85rem;

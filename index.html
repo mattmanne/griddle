@@ -11,8 +11,12 @@
 <main class="app">
   <header class="app-header">
     <h1>Griddle</h1>
+    <div class="sport-switch" role="group" aria-label="Choose sport">
+      <button type="button" class="sport-btn active" data-sport="nba">🏀 NBA</button>
+      <button type="button" class="sport-btn" data-sport="mlb">⚾ MLB</button>
+    </div>
     <p class="instructions">
-      One batch, 5 guesses, a different pair of stats each time. You'll be given an NBA player's name —
+      One batch, 5 guesses, a different pair of stats each time. You'll be given an <span id="sport-noun">NBA player</span>'s name —
       press and drag on the grid to place their stats, then release to lock in your guess. Share your
       batch when you're done!
     </p>
@@ -74,32 +78,10 @@
     <summary>Kitchen Prep</summary>
     <div class="practice-settings-inputs">
       <label>X stat
-        <select id="stat-x-select">
-          <option value="pts">Points/Game</option>
-          <option value="reb">Rebounds/Game</option>
-          <option value="ast">Assists/Game</option>
-          <option value="stl">Steals/Game</option>
-          <option value="blk">Blocks/Game</option>
-          <option value="mpg">Minutes/Game</option>
-          <option value="fg_pct">Field Goal %</option>
-          <option value="three_pct">3-Point %</option>
-          <option value="ft_pct">Free Throw %</option>
-          <option value="tov">Turnovers/Game</option>
-        </select>
+        <select id="stat-x-select"></select>
       </label>
       <label>Y stat
-        <select id="stat-y-select">
-          <option value="pts">Points/Game</option>
-          <option value="reb" selected>Rebounds/Game</option>
-          <option value="ast">Assists/Game</option>
-          <option value="stl">Steals/Game</option>
-          <option value="blk">Blocks/Game</option>
-          <option value="mpg">Minutes/Game</option>
-          <option value="fg_pct">Field Goal %</option>
-          <option value="three_pct">3-Point %</option>
-          <option value="ft_pct">Free Throw %</option>
-          <option value="tov">Turnovers/Game</option>
-        </select>
+        <select id="stat-y-select"></select>
       </label>
       <label>Player
         <select id="player-select">

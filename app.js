@@ -1,16 +1,43 @@
 (() => {
-  const STAT_DEFS = {
-    pts: { label: 'Points/Game', short: 'PPG' },
-    reb: { label: 'Rebounds/Game', short: 'RPG' },
-    ast: { label: 'Assists/Game', short: 'APG' },
-    stl: { label: 'Steals/Game', short: 'SPG' },
-    blk: { label: 'Blocks/Game', short: 'BPG' },
-    mpg: { label: 'Minutes/Game', short: 'MPG' },
-    fg_pct: { label: 'Field Goal %', short: 'FG%' },
-    three_pct: { label: '3-Point %', short: '3P%' },
-    ft_pct: { label: 'Free Throw %', short: 'FT%' },
-    tov: { label: 'Turnovers/Game', short: 'TOV' },
+  const SPORTS = {
+    nba: {
+      label: 'NBA',
+      noun: 'player',
+      emoji: '🏀',
+      file: 'players.json',
+      defaultPair: ['pts', 'reb'],
+      statDefs: {
+        pts: { label: 'Points/Game', short: 'PPG' },
+        reb: { label: 'Rebounds/Game', short: 'RPG' },
+        ast: { label: 'Assists/Game', short: 'APG' },
+        stl: { label: 'Steals/Game', short: 'SPG' },
+        blk: { label: 'Blocks/Game', short: 'BPG' },
+        mpg: { label: 'Minutes/Game', short: 'MPG' },
+        fg_pct: { label: 'Field Goal %', short: 'FG%' },
+        three_pct: { label: '3-Point %', short: '3P%' },
+        ft_pct: { label: 'Free Throw %', short: 'FT%' },
+        tov: { label: 'Turnovers/Game', short: 'TOV' },
+      },
+    },
+    mlb: {
+      label: 'MLB',
+      noun: 'hitter',
+      emoji: '⚾',
+      file: 'mlb_hitters.json',
+      defaultPair: ['avg', 'hr'],
+      statDefs: {
+        avg: { label: 'Batting Average', short: 'AVG' },
+        hr: { label: 'Home Runs', short: 'HR' },
+        rbi: { label: 'RBIs', short: 'RBI' },
+        obp: { label: 'On-Base %', short: 'OBP' },
+        slg: { label: 'Slugging %', short: 'SLG' },
+        sb: { label: 'Stolen Bases', short: 'SB' },
+      },
+    },
   };
+
+  let currentSport = 'nba';
+  let STAT_DEFS = SPORTS[currentSport].statDefs;
 
   const GRID = 1000;
   const SCORE_MAX = 1000;
@@ -68,14 +95,15 @@
   const shareTextArea = document.getElementById('share-text');
   const copyResultsBtn = document.getElementById('copy-results-btn');
   const replayBtn = document.getElementById('replay-btn');
+  const sportButtons = Array.from(document.querySelectorAll('.sport-btn'));
+  const sportNoun = document.getElementById('sport-noun');
 
   const BUTTER_W = 34;
   const BUTTER_H = 26;
 
   let baseSize = viewport.clientWidth;
   let players = [];
-  let statX = 'pts';
-  let statY = 'reb';
+  let [statX, statY] = SPORTS[currentSport].defaultPair;
   let AXIS_X = { min: 0, max: 100, label: '' };
   let AXIS_Y = { min: 0, max: 100, label: '' };
   let target = null;
@@ -389,26 +417,91 @@
     setZoom(parseFloat(zoomSlider.value));
   });
 
+  function populateStatSelects() {
+    const keys = Object.keys(STAT_DEFS);
+    [statXSelect, statYSelect].forEach((select, i) => {
+      select.innerHTML = '';
+      keys.forEach((key) => {
+        const opt = document.createElement('option');
+        opt.value = key;
+        opt.textContent = STAT_DEFS[key].label;
+        select.appendChild(opt);
+      });
+      select.value = SPORTS[currentSport].defaultPair[i];
+    });
+  }
+
+  function populatePlayerSelect() {
+    playerSelect.innerHTML = '<option value="">Random</option>';
+    players.forEach((p) => {
+      const opt = document.createElement('option');
+      opt.value = p.name;
+      opt.textContent = p.name;
+      playerSelect.appendChild(opt);
+    });
+  }
+
+  function resetRoundUI() {
+    guessIndex = 0;
+    guessResults = [];
+    roundOver = false;
+    locked = false;
+    previewData = null;
+    mode = 'idle';
+    pointers.clear();
+    guessMarker.setAttribute('visibility', 'hidden');
+    targetMarker.setAttribute('visibility', 'hidden');
+    resultLine.setAttribute('visibility', 'hidden');
+    guideX.setAttribute('visibility', 'hidden');
+    guideY.setAttribute('visibility', 'hidden');
+    resultsSection.hidden = true;
+    roundSummary.hidden = true;
+    axisTop.textContent = '';
+    axisBottom.textContent = '';
+    axisLeft.textContent = '';
+    axisRight.textContent = '';
+  }
+
+  function loadSport(sport) {
+    currentSport = sport;
+    STAT_DEFS = SPORTS[sport].statDefs;
+    [statX, statY] = SPORTS[sport].defaultPair;
+
+    sportButtons.forEach((btn) => btn.classList.toggle('active', btn.dataset.sport === sport));
+    sportNoun.textContent = `${SPORTS[sport].label} ${SPORTS[sport].noun}`;
+    forceStatPairCheckbox.checked = false;
+    populateStatSelects();
+    resetRoundUI();
+
+    players = [];
+    actionBtn.disabled = true;
+    actionBtn.textContent = 'Preheating…';
+    targetDisplay.textContent = 'Preheating…';
+    roundProgress.textContent = '';
+
+    fetch(SPORTS[sport].file)
+      .then((res) => res.json())
+      .then((data) => {
+        players = data;
+        populatePlayerSelect();
+        actionBtn.disabled = false;
+        actionBtn.textContent = 'Fire Up the Griddle';
+        targetDisplay.textContent = 'Ready when you are!';
+        roundProgress.textContent = `${players.length} ${SPORTS[sport].noun}s loaded — press "Fire Up the Griddle" to begin.`;
+      })
+      .catch((err) => {
+        targetDisplay.textContent = `Failed to load ${SPORTS[sport].file} — check the console.`;
+        console.error(err);
+      });
+  }
+
+  sportButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (btn.dataset.sport !== currentSport) loadSport(btn.dataset.sport);
+    });
+  });
+
   drawGridlines();
   setZoom(1);
-
-  fetch('players.json')
-    .then((res) => res.json())
-    .then((data) => {
-      players = data;
-      players.forEach((p) => {
-        const opt = document.createElement('option');
-        opt.value = p.name;
-        opt.textContent = p.name;
-        playerSelect.appendChild(opt);
-      });
-      actionBtn.disabled = false;
-      actionBtn.textContent = 'Fire Up the Griddle';
-      targetDisplay.textContent = 'Ready when you are!';
-      roundProgress.textContent = `${players.length} players loaded — press "Fire Up the Griddle" to begin.`;
-    })
-    .catch((err) => {
-      targetDisplay.textContent = 'Failed to load players.json — check the console.';
-      console.error(err);
-    });
+  loadSport(currentSport);
 })();

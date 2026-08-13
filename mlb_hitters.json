@@ -1,0 +1,659 @@
+[
+  {
+    "name": "Babe Ruth",
+    "avg": 342,
+    "hr": 714,
+    "rbi": 2214,
+    "obp": 474,
+    "slg": 690,
+    "sb": 123
+  },
+  {
+    "name": "Lou Gehrig",
+    "avg": 340,
+    "hr": 493,
+    "rbi": 1995,
+    "obp": 447,
+    "slg": 632,
+    "sb": 102
+  },
+  {
+    "name": "Ted Williams",
+    "avg": 344,
+    "hr": 521,
+    "rbi": 1839,
+    "obp": 482,
+    "slg": 634,
+    "sb": 24
+  },
+  {
+    "name": "Stan Musial",
+    "avg": 331,
+    "hr": 475,
+    "rbi": 1951,
+    "obp": 417,
+    "slg": 559,
+    "sb": 78
+  },
+  {
+    "name": "Joe DiMaggio",
+    "avg": 325,
+    "hr": 361,
+    "rbi": 1537,
+    "obp": 398,
+    "slg": 579,
+    "sb": 30
+  },
+  {
+    "name": "Jackie Robinson",
+    "avg": 311,
+    "hr": 137,
+    "rbi": 734,
+    "obp": 409,
+    "slg": 474,
+    "sb": 197
+  },
+  {
+    "name": "Willie Mays",
+    "avg": 301,
+    "hr": 660,
+    "rbi": 1903,
+    "obp": 384,
+    "slg": 557,
+    "sb": 339
+  },
+  {
+    "name": "Mickey Mantle",
+    "avg": 298,
+    "hr": 536,
+    "rbi": 1509,
+    "obp": 421,
+    "slg": 557,
+    "sb": 153
+  },
+  {
+    "name": "Yogi Berra",
+    "avg": 285,
+    "hr": 358,
+    "rbi": 1430,
+    "obp": 348,
+    "slg": 482,
+    "sb": 30
+  },
+  {
+    "name": "Hank Aaron",
+    "avg": 305,
+    "hr": 755,
+    "rbi": 2297,
+    "obp": 374,
+    "slg": 555,
+    "sb": 240
+  },
+  {
+    "name": "Roberto Clemente",
+    "avg": 317,
+    "hr": 240,
+    "rbi": 1305,
+    "obp": 359,
+    "slg": 475,
+    "sb": 83
+  },
+  {
+    "name": "Ernie Banks",
+    "avg": 274,
+    "hr": 512,
+    "rbi": 1636,
+    "obp": 330,
+    "slg": 500,
+    "sb": 50
+  },
+  {
+    "name": "Frank Robinson",
+    "avg": 294,
+    "hr": 586,
+    "rbi": 1812,
+    "obp": 389,
+    "slg": 537,
+    "sb": 204
+  },
+  {
+    "name": "Al Kaline",
+    "avg": 297,
+    "hr": 399,
+    "rbi": 1583,
+    "obp": 376,
+    "slg": 480,
+    "sb": 137
+  },
+  {
+    "name": "Harmon Killebrew",
+    "avg": 256,
+    "hr": 573,
+    "rbi": 1584,
+    "obp": 376,
+    "slg": 509,
+    "sb": 19
+  },
+  {
+    "name": "Reggie Jackson",
+    "avg": 262,
+    "hr": 563,
+    "rbi": 1702,
+    "obp": 356,
+    "slg": 490,
+    "sb": 228
+  },
+  {
+    "name": "Willie Stargell",
+    "avg": 282,
+    "hr": 475,
+    "rbi": 1540,
+    "obp": 360,
+    "slg": 529,
+    "sb": 17
+  },
+  {
+    "name": "Rod Carew",
+    "avg": 328,
+    "hr": 92,
+    "rbi": 1015,
+    "obp": 393,
+    "slg": 429,
+    "sb": 353
+  },
+  {
+    "name": "Pete Rose",
+    "avg": 303,
+    "hr": 160,
+    "rbi": 1314,
+    "obp": 375,
+    "slg": 409,
+    "sb": 198
+  },
+  {
+    "name": "Johnny Bench",
+    "avg": 267,
+    "hr": 389,
+    "rbi": 1376,
+    "obp": 342,
+    "slg": 476,
+    "sb": 68
+  },
+  {
+    "name": "Joe Morgan",
+    "avg": 271,
+    "hr": 268,
+    "rbi": 1133,
+    "obp": 392,
+    "slg": 427,
+    "sb": 689
+  },
+  {
+    "name": "Tony Perez",
+    "avg": 279,
+    "hr": 379,
+    "rbi": 1652,
+    "obp": 341,
+    "slg": 463,
+    "sb": 49
+  },
+  {
+    "name": "Dave Winfield",
+    "avg": 283,
+    "hr": 465,
+    "rbi": 1833,
+    "obp": 353,
+    "slg": 475,
+    "sb": 223
+  },
+  {
+    "name": "Jim Rice",
+    "avg": 298,
+    "hr": 382,
+    "rbi": 1451,
+    "obp": 352,
+    "slg": 502,
+    "sb": 58
+  },
+  {
+    "name": "George Brett",
+    "avg": 305,
+    "hr": 317,
+    "rbi": 1596,
+    "obp": 369,
+    "slg": 487,
+    "sb": 201
+  },
+  {
+    "name": "Mike Schmidt",
+    "avg": 267,
+    "hr": 548,
+    "rbi": 1595,
+    "obp": 380,
+    "slg": 527,
+    "sb": 174
+  },
+  {
+    "name": "Carl Yastrzemski",
+    "avg": 285,
+    "hr": 452,
+    "rbi": 1844,
+    "obp": 379,
+    "slg": 462,
+    "sb": 168
+  },
+  {
+    "name": "Lou Brock",
+    "avg": 293,
+    "hr": 149,
+    "rbi": 900,
+    "obp": 343,
+    "slg": 410,
+    "sb": 938
+  },
+  {
+    "name": "Rickey Henderson",
+    "avg": 279,
+    "hr": 297,
+    "rbi": 1115,
+    "obp": 401,
+    "slg": 419,
+    "sb": 1406
+  },
+  {
+    "name": "Wade Boggs",
+    "avg": 328,
+    "hr": 118,
+    "rbi": 1014,
+    "obp": 415,
+    "slg": 443,
+    "sb": 24
+  },
+  {
+    "name": "Tony Gwynn",
+    "avg": 338,
+    "hr": 135,
+    "rbi": 1138,
+    "obp": 388,
+    "slg": 459,
+    "sb": 319
+  },
+  {
+    "name": "Cal Ripken Jr.",
+    "avg": 276,
+    "hr": 431,
+    "rbi": 1695,
+    "obp": 340,
+    "slg": 447,
+    "sb": 36
+  },
+  {
+    "name": "Paul Molitor",
+    "avg": 306,
+    "hr": 234,
+    "rbi": 1307,
+    "obp": 369,
+    "slg": 448,
+    "sb": 504
+  },
+  {
+    "name": "Kirby Puckett",
+    "avg": 318,
+    "hr": 207,
+    "rbi": 1085,
+    "obp": 360,
+    "slg": 477,
+    "sb": 134
+  },
+  {
+    "name": "Andre Dawson",
+    "avg": 279,
+    "hr": 438,
+    "rbi": 1591,
+    "obp": 323,
+    "slg": 482,
+    "sb": 314
+  },
+  {
+    "name": "Barry Bonds",
+    "avg": 298,
+    "hr": 762,
+    "rbi": 1996,
+    "obp": 444,
+    "slg": 607,
+    "sb": 514
+  },
+  {
+    "name": "Ken Griffey Jr.",
+    "avg": 284,
+    "hr": 630,
+    "rbi": 1836,
+    "obp": 370,
+    "slg": 538,
+    "sb": 184
+  },
+  {
+    "name": "Frank Thomas",
+    "avg": 301,
+    "hr": 521,
+    "rbi": 1704,
+    "obp": 419,
+    "slg": 555,
+    "sb": 32
+  },
+  {
+    "name": "Craig Biggio",
+    "avg": 281,
+    "hr": 291,
+    "rbi": 1175,
+    "obp": 363,
+    "slg": 433,
+    "sb": 414
+  },
+  {
+    "name": "Jeff Bagwell",
+    "avg": 297,
+    "hr": 449,
+    "rbi": 1529,
+    "obp": 408,
+    "slg": 540,
+    "sb": 202
+  },
+  {
+    "name": "Larry Walker",
+    "avg": 313,
+    "hr": 383,
+    "rbi": 1311,
+    "obp": 400,
+    "slg": 565,
+    "sb": 230
+  },
+  {
+    "name": "Tim Raines",
+    "avg": 294,
+    "hr": 170,
+    "rbi": 980,
+    "obp": 385,
+    "slg": 425,
+    "sb": 808
+  },
+  {
+    "name": "Derek Jeter",
+    "avg": 310,
+    "hr": 260,
+    "rbi": 1311,
+    "obp": 377,
+    "slg": 440,
+    "sb": 358
+  },
+  {
+    "name": "Manny Ramirez",
+    "avg": 312,
+    "hr": 555,
+    "rbi": 1831,
+    "obp": 411,
+    "slg": 585,
+    "sb": 38
+  },
+  {
+    "name": "Albert Pujols",
+    "avg": 296,
+    "hr": 703,
+    "rbi": 2218,
+    "obp": 374,
+    "slg": 544,
+    "sb": 117
+  },
+  {
+    "name": "Ichiro Suzuki",
+    "avg": 311,
+    "hr": 117,
+    "rbi": 780,
+    "obp": 355,
+    "slg": 402,
+    "sb": 509
+  },
+  {
+    "name": "Chipper Jones",
+    "avg": 303,
+    "hr": 468,
+    "rbi": 1623,
+    "obp": 401,
+    "slg": 529,
+    "sb": 150
+  },
+  {
+    "name": "Vladimir Guerrero",
+    "avg": 318,
+    "hr": 449,
+    "rbi": 1496,
+    "obp": 379,
+    "slg": 553,
+    "sb": 181
+  },
+  {
+    "name": "David Ortiz",
+    "avg": 286,
+    "hr": 541,
+    "rbi": 1768,
+    "obp": 380,
+    "slg": 552,
+    "sb": 17
+  },
+  {
+    "name": "Ivan Rodriguez",
+    "avg": 296,
+    "hr": 311,
+    "rbi": 1332,
+    "obp": 334,
+    "slg": 464,
+    "sb": 127
+  },
+  {
+    "name": "Todd Helton",
+    "avg": 316,
+    "hr": 369,
+    "rbi": 1406,
+    "obp": 414,
+    "slg": 539,
+    "sb": 37
+  },
+  {
+    "name": "Edgar Martinez",
+    "avg": 312,
+    "hr": 309,
+    "rbi": 1261,
+    "obp": 418,
+    "slg": 515,
+    "sb": 49
+  },
+  {
+    "name": "Jim Thome",
+    "avg": 276,
+    "hr": 612,
+    "rbi": 1699,
+    "obp": 402,
+    "slg": 554,
+    "sb": 19
+  },
+  {
+    "name": "Adrian Beltre",
+    "avg": 286,
+    "hr": 477,
+    "rbi": 1707,
+    "obp": 339,
+    "slg": 480,
+    "sb": 121
+  },
+  {
+    "name": "Miguel Cabrera",
+    "avg": 306,
+    "hr": 511,
+    "rbi": 1881,
+    "obp": 382,
+    "slg": 518,
+    "sb": 40
+  },
+  {
+    "name": "Joey Votto",
+    "avg": 294,
+    "hr": 356,
+    "rbi": 1144,
+    "obp": 409,
+    "slg": 511,
+    "sb": 80
+  },
+  {
+    "name": "Mike Trout",
+    "avg": 299,
+    "hr": 378,
+    "rbi": 954,
+    "obp": 411,
+    "slg": 581,
+    "sb": 212
+  },
+  {
+    "name": "Aaron Judge",
+    "avg": 288,
+    "hr": 315,
+    "rbi": 716,
+    "obp": 406,
+    "slg": 604,
+    "sb": 53
+  },
+  {
+    "name": "Shohei Ohtani",
+    "avg": 282,
+    "hr": 225,
+    "rbi": 567,
+    "obp": 371,
+    "slg": 575,
+    "sb": 145
+  },
+  {
+    "name": "Mookie Betts",
+    "avg": 288,
+    "hr": 271,
+    "rbi": 831,
+    "obp": 365,
+    "slg": 507,
+    "sb": 188
+  },
+  {
+    "name": "Ronald Acuna Jr.",
+    "avg": 289,
+    "hr": 165,
+    "rbi": 417,
+    "obp": 379,
+    "slg": 525,
+    "sb": 196
+  },
+  {
+    "name": "Freddie Freeman",
+    "avg": 300,
+    "hr": 343,
+    "rbi": 1232,
+    "obp": 387,
+    "slg": 512,
+    "sb": 98
+  },
+  {
+    "name": "Juan Soto",
+    "avg": 285,
+    "hr": 201,
+    "rbi": 592,
+    "obp": 421,
+    "slg": 532,
+    "sb": 57
+  },
+  {
+    "name": "Jose Altuve",
+    "avg": 306,
+    "hr": 229,
+    "rbi": 812,
+    "obp": 363,
+    "slg": 468,
+    "sb": 315
+  },
+  {
+    "name": "Manny Machado",
+    "avg": 279,
+    "hr": 342,
+    "rbi": 1049,
+    "obp": 338,
+    "slg": 488,
+    "sb": 99
+  },
+  {
+    "name": "Nolan Arenado",
+    "avg": 285,
+    "hr": 341,
+    "rbi": 1132,
+    "obp": 342,
+    "slg": 515,
+    "sb": 28
+  },
+  {
+    "name": "Paul Goldschmidt",
+    "avg": 289,
+    "hr": 362,
+    "rbi": 1187,
+    "obp": 381,
+    "slg": 510,
+    "sb": 169
+  },
+  {
+    "name": "Christian Yelich",
+    "avg": 287,
+    "hr": 204,
+    "rbi": 748,
+    "obp": 377,
+    "slg": 466,
+    "sb": 205
+  },
+  {
+    "name": "Bryce Harper",
+    "avg": 281,
+    "hr": 336,
+    "rbi": 976,
+    "obp": 389,
+    "slg": 522,
+    "sb": 140
+  },
+  {
+    "name": "Rafael Devers",
+    "avg": 279,
+    "hr": 200,
+    "rbi": 638,
+    "obp": 345,
+    "slg": 511,
+    "sb": 32
+  },
+  {
+    "name": "Vladimir Guerrero Jr.",
+    "avg": 288,
+    "hr": 160,
+    "rbi": 507,
+    "obp": 363,
+    "slg": 500,
+    "sb": 20
+  },
+  {
+    "name": "Jose Ramirez",
+    "avg": 279,
+    "hr": 255,
+    "rbi": 864,
+    "obp": 352,
+    "slg": 504,
+    "sb": 243
+  },
+  {
+    "name": "Yordan Alvarez",
+    "avg": 298,
+    "hr": 164,
+    "rbi": 466,
+    "obp": 390,
+    "slg": 583,
+    "sb": 8
+  }
+]
