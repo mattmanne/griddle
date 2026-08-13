@@ -116,6 +116,12 @@ body {
   color: var(--muted);
 }
 
+.axis-grid[hidden],
+.controls[hidden],
+.legend[hidden] {
+  display: none;
+}
+
 .axis-grid {
   display: grid;
   grid-template-columns: auto 1fr auto;

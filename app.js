@@ -17,6 +17,10 @@
         three_pct: { label: '3-Point %', short: '3P%' },
         ft_pct: { label: 'Free Throw %', short: 'FT%' },
         tov: { label: 'Turnovers/Game', short: 'TOV' },
+        games: { label: 'Games Played', short: 'GP' },
+        career_pts: { label: 'Career Points', short: 'PTS' },
+        career_reb: { label: 'Career Rebounds', short: 'REB' },
+        career_ast: { label: 'Career Assists', short: 'AST' },
       },
     },
     mlb: {
@@ -103,6 +107,11 @@
   const sportButtons = Array.from(document.querySelectorAll('.sport-btn'));
   const sportClause = document.getElementById('sport-clause');
   const debugSportSelect = document.getElementById('debug-sport-select');
+  const targetPanel = document.querySelector('.target-panel');
+  const gameBoard = document.querySelector('.axis-grid');
+  const legendEl = document.querySelector('.legend');
+  const gameControls = document.querySelector('.controls');
+  const practiceSettingsEl = document.querySelector('.practice-settings');
 
   const BUTTER_W = 34;
   const BUTTER_H = 26;
@@ -262,6 +271,11 @@
     } else {
       roundOver = true;
       resultsSection.hidden = true;
+      targetPanel.hidden = true;
+      gameBoard.hidden = true;
+      legendEl.hidden = true;
+      gameControls.hidden = true;
+      practiceSettingsEl.hidden = true;
       const total = guessResults.reduce((a, r) => a + r.score, 0);
       const snark = snarkFor(total, ROUND_MAX);
       roundTotalScoreEl.textContent = total;
@@ -346,6 +360,11 @@
     guessResults = [];
     roundOver = false;
     roundSummary.hidden = true;
+    targetPanel.hidden = false;
+    gameBoard.hidden = false;
+    legendEl.hidden = false;
+    gameControls.hidden = false;
+    practiceSettingsEl.hidden = false;
 
     beginNextGuess();
   }

@@ -35,11 +35,21 @@ explains several otherwise-odd-looking numbers in the data:
   single-season snapshots.** This was a V1 decision so the pool doesn't need
   refreshing every season and so a player's number doesn't swing based on which
   season happened to get picked.
-- **MLB counting stats (HR, RBI, SB) are career *totals*, not per-game/season rates**,
-  because that's how baseball fans actually think about them ("714 home runs"), unlike
-  NBA counting stats which are conventionally discussed per-game. This does mean the
-  axis range is dominated by career length as much as skill — accepted tradeoff for
-  matching how the stats are normally talked about, not a bug.
+- **Every sport's stat pool mixes rate stats (per-game/percentage averages) with
+  counting stats (career totals), on purpose.** MLB shipped with this mix from the
+  start (AVG/OBP/SLG are rates, HR/RBI/SB are career totals, because that's how
+  baseball fans actually talk about them — "714 home runs," not "34.2 HR/season").
+  NBA originally shipped as *all* rate stats (pts/reb/ast/... are all per-game
+  averages) — a real gap, not a deliberate choice, fixed by adding `games`,
+  `career_pts`, `career_reb`, `career_ast` (career totals, all teams combined). Two
+  reasons this matters beyond variety: (1) a stat pool that's 100% per-game rates
+  produces oddly-similar-looking axes guess after guess (most players cluster in a
+  narrow per-game band); mixing in career totals gives genuinely different-shaped
+  rounds. (2) it mirrors how fans actually discuss each sport — some numbers are
+  naturally "per game," others are naturally "in a career." **When adding a new
+  sport, include both kinds of stat from the start** — retrofitting counting stats
+  onto an existing 100+-player pool (as happened here for NBA) means re-researching
+  the entire roster instead of just the new additions.
 - **Fields are omitted (not zeroed) when the underlying stat wasn't tracked in a
   player's era**, rather than guessing or defaulting to 0 (which would be a fabricated
   data point, not a missing one). Concretely for NBA: steals/blocks weren't official
@@ -80,6 +90,33 @@ obvious from reading the functions in isolation:
   sport. Looking up labels via `SPORTS[r.sport].statDefs` at render time (rather than
   relying on the ambient `STAT_DEFS`) is what keeps the breakdown/share text correct
   for every guess in a mixed batch, not just the final one.
+- **Toggling a sport mid-batch must never reset the in-progress round.** An earlier
+  version called a full `resetRoundUI()` from the toggle click handler, which silently
+  discarded `guessIndex`/`guessResults` — a player who toggled MLB off after 2 guesses
+  ended up needing 7 total instead of 5, with no indication anything had been reset.
+  The toggle handler now *only* mutates `enabledSports`; `updateSportUI()` is written
+  to leave `#round-progress` alone whenever a round is active (`guessIndex !== 0 &&
+  !roundOver`), so a toggle only affects which sport the *next* guess draws from.
+
+## Round lifecycle — the board disappears when "Fully Cooked"
+
+Once the 5th guess is scored, `finalizeGuess()` hides `.target-panel`, `.axis-grid`
+(the waffle board), `.legend`, `.controls`, and `.practice-settings`, so `#round-
+summary` ("Fresh Off the Griddle") becomes the only thing on screen besides the
+header — the board has no reason to stay visible once there's nothing left to guess,
+and leaving it up competed with the summary for attention. `beginRound()` un-hides
+all of them again when a new batch starts.
+
+**Gotcha if you touch this:** setting `.hidden = true` in JS only works if nothing in
+`style.css` sets an explicit `display` on that element — the browser's default
+`[hidden] { display: none }` rule loses to an author-stylesheet rule of equal
+specificity (a plain class selector) later in the cascade. `.axis-grid`, `.controls`,
+and `.legend` all declare `display: grid`/`display: flex`, so hiding them silently did
+nothing until `style.css` got an explicit `.axis-grid[hidden], .controls[hidden],
+.legend[hidden] { display: none; }` override. `.target-panel` and `.practice-settings`
+never needed this because they don't set `display` themselves. If you add a new
+element to this hide/show list, check whether its selector sets `display` before
+assuming `.hidden = true` will work.
 
 ## Deployment
 

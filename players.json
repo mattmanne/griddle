@@ -10,7 +10,11 @@
     "fg_pct": 50.7,
     "three_pct": 34.8,
     "ft_pct": 73.7,
-    "tov": 3.5
+    "tov": 3.5,
+    "games": 1562,
+    "career_pts": 42184,
+    "career_reb": 11731,
+    "career_ast": 11584
   },
   {
     "name": "Stephen Curry",
@@ -23,7 +27,11 @@
     "fg_pct": 47.1,
     "three_pct": 42.2,
     "ft_pct": 91.2,
-    "tov": 3.1
+    "tov": 3.1,
+    "games": 1026,
+    "career_pts": 25386,
+    "career_reb": 4819,
+    "career_ast": 6540
   },
   {
     "name": "Giannis Antetokounmpo",
@@ -36,7 +44,11 @@
     "fg_pct": 55.4,
     "three_pct": 28.5,
     "ft_pct": 69.1,
-    "tov": 3
+    "tov": 3,
+    "games": 859,
+    "career_pts": 20538,
+    "career_reb": 8530,
+    "career_ast": 4288
   },
   {
     "name": "Nikola Jokic",
@@ -49,7 +61,11 @@
     "fg_pct": 56.1,
     "three_pct": 36.2,
     "ft_pct": 82.5,
-    "tov": 3
+    "tov": 3,
+    "games": 745,
+    "career_pts": 16210,
+    "career_reb": 8141,
+    "career_ast": 5383
   },
   {
     "name": "Joel Embiid",
@@ -62,7 +78,11 @@
     "fg_pct": 50,
     "three_pct": 33.9,
     "ft_pct": 83,
-    "tov": 3.4
+    "tov": 3.4,
+    "games": 452,
+    "career_pts": 12523,
+    "career_reb": 4987,
+    "career_ast": 1658
   },
   {
     "name": "Luka Doncic",
@@ -75,7 +95,11 @@
     "fg_pct": 46.9,
     "three_pct": 35.2,
     "ft_pct": 75.5,
-    "tov": 4
+    "tov": 4,
+    "games": 450,
+    "career_pts": 12878,
+    "career_reb": 3881,
+    "career_ast": 3700
   },
   {
     "name": "Shai Gilgeous-Alexander",
@@ -88,7 +112,11 @@
     "fg_pct": 50.8,
     "three_pct": 36,
     "ft_pct": 86.4,
-    "tov": 2.3
+    "tov": 2.3,
+    "games": 462,
+    "career_pts": 11294,
+    "career_reb": 2211,
+    "career_ast": 2362
   },
   {
     "name": "Damian Lillard",
@@ -101,7 +129,11 @@
     "fg_pct": 43.9,
     "three_pct": 37.1,
     "ft_pct": 89.9,
-    "tov": 2.8
+    "tov": 2.8,
+    "games": 900,
+    "career_pts": 22598,
+    "career_reb": 3845,
+    "career_ast": 6069
   },
   {
     "name": "Allen Iverson",
@@ -114,7 +146,11 @@
     "fg_pct": 42.5,
     "three_pct": 31.3,
     "ft_pct": 78,
-    "tov": 3.6
+    "tov": 3.6,
+    "games": 914,
+    "career_pts": 24368,
+    "career_reb": 3394,
+    "career_ast": 5624
   },
   {
     "name": "Chris Paul",
@@ -127,7 +163,11 @@
     "fg_pct": 46.9,
     "three_pct": 37,
     "ft_pct": 87,
-    "tov": 2.3
+    "tov": 2.3,
+    "games": 1370,
+    "career_pts": 23058,
+    "career_reb": 6006,
+    "career_ast": 12552
   },
   {
     "name": "John Stockton",
@@ -140,7 +180,11 @@
     "fg_pct": 51.5,
     "three_pct": 38.4,
     "ft_pct": 82.6,
-    "tov": 2.8
+    "tov": 2.8,
+    "games": 1504,
+    "career_pts": 19711,
+    "career_reb": 4051,
+    "career_ast": 15806
   },
   {
     "name": "Kyrie Irving",
@@ -153,7 +197,11 @@
     "fg_pct": 47.4,
     "three_pct": 39.4,
     "ft_pct": 88.8,
-    "tov": 2.5
+    "tov": 2.5,
+    "games": 779,
+    "career_pts": 18433,
+    "career_reb": 3173,
+    "career_ast": 4365
   },
   {
     "name": "James Harden",
@@ -166,7 +214,11 @@
     "fg_pct": 43.9,
     "three_pct": 36.4,
     "ft_pct": 86.3,
-    "tov": 3.7
+    "tov": 3.7,
+    "games": 1151,
+    "career_pts": 27687,
+    "career_reb": 6473,
+    "career_ast": 8316
   },
   {
     "name": "Trae Young",
@@ -179,7 +231,11 @@
     "fg_pct": 43.3,
     "three_pct": 35.2,
     "ft_pct": 87.2,
-    "tov": 4.2
+    "tov": 4.2,
+    "games": 483,
+    "career_pts": 12220,
+    "career_reb": 1687,
+    "career_ast": 4748
   },
   {
     "name": "Kobe Bryant",
@@ -192,7 +248,11 @@
     "fg_pct": 44.7,
     "three_pct": 32.9,
     "ft_pct": 83.7,
-    "tov": 3
+    "tov": 3,
+    "games": 1346,
+    "career_pts": 33643,
+    "career_reb": 7047,
+    "career_ast": 6306
   },
   {
     "name": "Michael Jordan",
@@ -205,7 +265,11 @@
     "fg_pct": 49.7,
     "three_pct": 32.7,
     "ft_pct": 83.5,
-    "tov": 2.7
+    "tov": 2.7,
+    "games": 1072,
+    "career_pts": 32292,
+    "career_reb": 6672,
+    "career_ast": 5633
   },
   {
     "name": "Kevin Durant",
@@ -218,7 +282,11 @@
     "fg_pct": 50.3,
     "three_pct": 39.2,
     "ft_pct": 88.2,
-    "tov": 3.2
+    "tov": 3.2,
+    "games": 1123,
+    "career_pts": 30571,
+    "career_reb": 7828,
+    "career_ast": 4908
   },
   {
     "name": "Jayson Tatum",
@@ -231,7 +299,11 @@
     "fg_pct": 45.8,
     "three_pct": 36.8,
     "ft_pct": 83.9,
-    "tov": 2.4
+    "tov": 2.4,
+    "games": 585,
+    "career_pts": 13784,
+    "career_reb": 4293,
+    "career_ast": 2243
   },
   {
     "name": "Dennis Rodman",
@@ -244,7 +316,11 @@
     "fg_pct": 52.1,
     "three_pct": 23.1,
     "ft_pct": 58.4,
-    "tov": 1.6
+    "tov": 1.6,
+    "games": 911,
+    "career_pts": 6683,
+    "career_reb": 11954,
+    "career_ast": 1600
   },
   {
     "name": "Ben Wallace",
@@ -257,7 +333,11 @@
     "fg_pct": 47.4,
     "three_pct": 13.7,
     "ft_pct": 41.4,
-    "tov": 1
+    "tov": 1,
+    "games": 1088,
+    "career_pts": 6254,
+    "career_reb": 10482,
+    "career_ast": 1437
   },
   {
     "name": "Rudy Gobert",
@@ -270,7 +350,11 @@
     "fg_pct": 65.8,
     "three_pct": 0,
     "ft_pct": 63.3,
-    "tov": 1.6
+    "tov": 1.6,
+    "games": 829,
+    "career_pts": 10458,
+    "career_reb": 9700,
+    "career_ast": 1123
   },
   {
     "name": "Dwight Howard",
@@ -283,7 +367,11 @@
     "fg_pct": 58.7,
     "three_pct": 21.4,
     "ft_pct": 56.7,
-    "tov": 2.7
+    "tov": 2.7,
+    "games": 1242,
+    "career_pts": 19485,
+    "career_reb": 14627,
+    "career_ast": 1676
   },
   {
     "name": "Hakeem Olajuwon",
@@ -296,7 +384,11 @@
     "fg_pct": 51.2,
     "three_pct": 20.2,
     "ft_pct": 71.2,
-    "tov": 3
+    "tov": 3,
+    "games": 1238,
+    "career_pts": 26946,
+    "career_reb": 13748,
+    "career_ast": 3058
   },
   {
     "name": "Dikembe Mutombo",
@@ -309,7 +401,11 @@
     "fg_pct": 51.8,
     "three_pct": 0,
     "ft_pct": 68.4,
-    "tov": 1.8
+    "tov": 1.8,
+    "games": 1196,
+    "career_pts": 11729,
+    "career_reb": 12359,
+    "career_ast": 1240
   },
   {
     "name": "Anthony Davis",
@@ -322,7 +418,11 @@
     "fg_pct": 52.2,
     "three_pct": 29.5,
     "ft_pct": 79.3,
-    "tov": 2
+    "tov": 2,
+    "games": 787,
+    "career_pts": 18978,
+    "career_reb": 8416,
+    "career_ast": 2009
   },
   {
     "name": "Kareem Abdul-Jabbar",
@@ -334,7 +434,11 @@
     "mpg": 36.8,
     "fg_pct": 55.9,
     "three_pct": 5.6,
-    "ft_pct": 72.1
+    "ft_pct": 72.1,
+    "games": 1560,
+    "career_pts": 38387,
+    "career_reb": 17440,
+    "career_ast": 5660
   },
   {
     "name": "Larry Bird",
@@ -347,7 +451,11 @@
     "fg_pct": 49.6,
     "three_pct": 37.6,
     "ft_pct": 88.6,
-    "tov": 3.1
+    "tov": 3.1,
+    "games": 897,
+    "career_pts": 21791,
+    "career_reb": 8974,
+    "career_ast": 5695
   },
   {
     "name": "Tim Duncan",
@@ -360,7 +468,11 @@
     "fg_pct": 50.6,
     "three_pct": 17.9,
     "ft_pct": 69.6,
-    "tov": 2.4
+    "tov": 2.4,
+    "games": 1392,
+    "career_pts": 26496,
+    "career_reb": 15091,
+    "career_ast": 4225
   },
   {
     "name": "Bill Russell",
@@ -369,7 +481,11 @@
     "ast": 4.3,
     "mpg": 42.3,
     "fg_pct": 44,
-    "ft_pct": 56.1
+    "ft_pct": 56.1,
+    "games": 963,
+    "career_pts": 14522,
+    "career_reb": 21620,
+    "career_ast": 4100
   },
   {
     "name": "Wilt Chamberlain",
@@ -378,7 +494,11 @@
     "ast": 4.4,
     "mpg": 45.8,
     "fg_pct": 54,
-    "ft_pct": 51.1
+    "ft_pct": 51.1,
+    "games": 1045,
+    "career_pts": 31419,
+    "career_reb": 23924,
+    "career_ast": 4643
   },
   {
     "name": "Oscar Robertson",
@@ -387,7 +507,11 @@
     "ast": 9.5,
     "mpg": 42.2,
     "fg_pct": 48.5,
-    "ft_pct": 83.8
+    "ft_pct": 83.8,
+    "games": 1040,
+    "career_pts": 26710,
+    "career_reb": 7804,
+    "career_ast": 9887
   },
   {
     "name": "Jerry West",
@@ -396,7 +520,11 @@
     "ast": 6.7,
     "mpg": 39.2,
     "fg_pct": 47.4,
-    "ft_pct": 81.4
+    "ft_pct": 81.4,
+    "games": 932,
+    "career_pts": 25192,
+    "career_reb": 5366,
+    "career_ast": 6238
   },
   {
     "name": "Elgin Baylor",
@@ -405,7 +533,11 @@
     "ast": 4.3,
     "mpg": 40,
     "fg_pct": 43.1,
-    "ft_pct": 78
+    "ft_pct": 78,
+    "games": 846,
+    "career_pts": 23149,
+    "career_reb": 11463,
+    "career_ast": 3650
   },
   {
     "name": "Bob Pettit",
@@ -414,7 +546,11 @@
     "ast": 3,
     "mpg": 38.8,
     "fg_pct": 43.6,
-    "ft_pct": 76.1
+    "ft_pct": 76.1,
+    "games": 792,
+    "career_pts": 20880,
+    "career_reb": 12849,
+    "career_ast": 2369
   },
   {
     "name": "Bob Cousy",
@@ -423,7 +559,11 @@
     "ast": 7.5,
     "mpg": 35.3,
     "fg_pct": 37.5,
-    "ft_pct": 80.3
+    "ft_pct": 80.3,
+    "games": 924,
+    "career_pts": 16960,
+    "career_reb": 4786,
+    "career_ast": 6955
   },
   {
     "name": "Julius Erving",
@@ -436,7 +576,11 @@
     "fg_pct": 50.7,
     "three_pct": 26.1,
     "ft_pct": 77.7,
-    "tov": 3.1
+    "tov": 3.1,
+    "games": 836,
+    "career_pts": 18364,
+    "career_reb": 5601,
+    "career_ast": 3224
   },
   {
     "name": "Rick Barry",
@@ -449,7 +593,11 @@
     "fg_pct": 44.9,
     "three_pct": 33,
     "ft_pct": 90,
-    "tov": 2.5
+    "tov": 2.5,
+    "games": 794,
+    "career_pts": 18395,
+    "career_reb": 5168,
+    "career_ast": 4017
   },
   {
     "name": "Walt Frazier",
@@ -461,7 +609,11 @@
     "mpg": 37.5,
     "fg_pct": 49,
     "ft_pct": 78.6,
-    "tov": 2.1
+    "tov": 2.1,
+    "games": 825,
+    "career_pts": 15581,
+    "career_reb": 4830,
+    "career_ast": 5040
   },
   {
     "name": "Pete Maravich",
@@ -474,7 +626,11 @@
     "fg_pct": 44.1,
     "three_pct": 26.4,
     "ft_pct": 82,
-    "tov": 3.7
+    "tov": 3.7,
+    "games": 658,
+    "career_pts": 15948,
+    "career_reb": 2747,
+    "career_ast": 3563
   },
   {
     "name": "Moses Malone",
@@ -487,7 +643,11 @@
     "fg_pct": 49.1,
     "three_pct": 10,
     "ft_pct": 76.9,
-    "tov": 3.1
+    "tov": 3.1,
+    "games": 1329,
+    "career_pts": 27409,
+    "career_reb": 16212,
+    "career_ast": 1796
   },
   {
     "name": "George Gervin",
@@ -500,7 +660,11 @@
     "fg_pct": 51.1,
     "three_pct": 29.7,
     "ft_pct": 84.4,
-    "tov": 3
+    "tov": 3,
+    "games": 791,
+    "career_pts": 20708,
+    "career_reb": 3607,
+    "career_ast": 2214
   },
   {
     "name": "Nate Archibald",
@@ -513,7 +677,11 @@
     "fg_pct": 46.7,
     "three_pct": 22.4,
     "ft_pct": 81,
-    "tov": 2.7
+    "tov": 2.7,
+    "games": 876,
+    "career_pts": 16481,
+    "career_reb": 2046,
+    "career_ast": 6476
   },
   {
     "name": "Wes Unseld",
@@ -525,7 +693,11 @@
     "mpg": 36.4,
     "fg_pct": 50.9,
     "ft_pct": 63.3,
-    "tov": 1.9
+    "tov": 1.9,
+    "games": 984,
+    "career_pts": 10624,
+    "career_reb": 13769,
+    "career_ast": 3822
   },
   {
     "name": "Magic Johnson",
@@ -538,7 +710,11 @@
     "fg_pct": 52,
     "three_pct": 30.3,
     "ft_pct": 84.8,
-    "tov": 3.9
+    "tov": 3.9,
+    "games": 906,
+    "career_pts": 17707,
+    "career_reb": 6559,
+    "career_ast": 10141
   },
   {
     "name": "Isiah Thomas",
@@ -551,7 +727,11 @@
     "fg_pct": 45.2,
     "three_pct": 29,
     "ft_pct": 75.9,
-    "tov": 3.8
+    "tov": 3.8,
+    "games": 979,
+    "career_pts": 18822,
+    "career_reb": 3478,
+    "career_ast": 9061
   },
   {
     "name": "Charles Barkley",
@@ -564,7 +744,11 @@
     "fg_pct": 54.1,
     "three_pct": 26.6,
     "ft_pct": 73.5,
-    "tov": 3.1
+    "tov": 3.1,
+    "games": 1073,
+    "career_pts": 23757,
+    "career_reb": 12546,
+    "career_ast": 4215
   },
   {
     "name": "Karl Malone",
@@ -577,7 +761,11 @@
     "fg_pct": 51.6,
     "three_pct": 27.4,
     "ft_pct": 74.2,
-    "tov": 3.1
+    "tov": 3.1,
+    "games": 1476,
+    "career_pts": 36928,
+    "career_reb": 14968,
+    "career_ast": 5248
   },
   {
     "name": "Clyde Drexler",
@@ -590,7 +778,11 @@
     "fg_pct": 47.2,
     "three_pct": 31.8,
     "ft_pct": 78.8,
-    "tov": 2.7
+    "tov": 2.7,
+    "games": 1086,
+    "career_pts": 22195,
+    "career_reb": 6677,
+    "career_ast": 6125
   },
   {
     "name": "Dominique Wilkins",
@@ -603,7 +795,11 @@
     "fg_pct": 46.1,
     "three_pct": 31.9,
     "ft_pct": 81.1,
-    "tov": 2.5
+    "tov": 2.5,
+    "games": 1074,
+    "career_pts": 26668,
+    "career_reb": 7169,
+    "career_ast": 2677
   },
   {
     "name": "Patrick Ewing",
@@ -616,7 +812,11 @@
     "fg_pct": 50.4,
     "three_pct": 15.2,
     "ft_pct": 74,
-    "tov": 3
+    "tov": 3,
+    "games": 1183,
+    "career_pts": 24815,
+    "career_reb": 11607,
+    "career_ast": 2215
   },
   {
     "name": "James Worthy",
@@ -629,7 +829,11 @@
     "fg_pct": 52.1,
     "three_pct": 24.1,
     "ft_pct": 76.9,
-    "tov": 2
+    "tov": 2,
+    "games": 926,
+    "career_pts": 16320,
+    "career_reb": 4708,
+    "career_ast": 2791
   },
   {
     "name": "Robert Parish",
@@ -641,7 +845,11 @@
     "mpg": 28.4,
     "fg_pct": 53.7,
     "ft_pct": 72.1,
-    "tov": 2.1
+    "tov": 2.1,
+    "games": 1611,
+    "career_pts": 23334,
+    "career_reb": 14715,
+    "career_ast": 2180
   },
   {
     "name": "Adrian Dantley",
@@ -653,7 +861,11 @@
     "mpg": 35.8,
     "fg_pct": 54,
     "ft_pct": 81.8,
-    "tov": 2.9
+    "tov": 2.9,
+    "games": 955,
+    "career_pts": 23177,
+    "career_reb": 5455,
+    "career_ast": 2830
   },
   {
     "name": "Alex English",
@@ -666,7 +878,11 @@
     "fg_pct": 50.7,
     "three_pct": 21.7,
     "ft_pct": 83.2,
-    "tov": 2.5
+    "tov": 2.5,
+    "games": 1193,
+    "career_pts": 25613,
+    "career_reb": 6538,
+    "career_ast": 4351
   },
   {
     "name": "Kevin McHale",
@@ -678,7 +894,11 @@
     "mpg": 31,
     "fg_pct": 55.4,
     "ft_pct": 79.8,
-    "tov": 1.9
+    "tov": 1.9,
+    "games": 971,
+    "career_pts": 17335,
+    "career_reb": 7122,
+    "career_ast": 1670
   },
   {
     "name": "Bernard King",
@@ -691,7 +911,11 @@
     "fg_pct": 51.8,
     "three_pct": 17.2,
     "ft_pct": 73,
-    "tov": 3.2
+    "tov": 3.2,
+    "games": 874,
+    "career_pts": 19655,
+    "career_reb": 5060,
+    "career_ast": 2863
   },
   {
     "name": "Mark Aguirre",
@@ -704,7 +928,11 @@
     "fg_pct": 48.4,
     "three_pct": 31.2,
     "ft_pct": 74.1,
-    "tov": 2.5
+    "tov": 2.5,
+    "games": 923,
+    "career_pts": 18458,
+    "career_reb": 4578,
+    "career_ast": 2871
   },
   {
     "name": "Buck Williams",
@@ -716,7 +944,11 @@
     "mpg": 32.5,
     "fg_pct": 54.9,
     "ft_pct": 66.4,
-    "tov": 2.1
+    "tov": 2.1,
+    "games": 1307,
+    "career_pts": 16784,
+    "career_reb": 13017,
+    "career_ast": 1646
   },
   {
     "name": "Scottie Pippen",
@@ -729,7 +961,11 @@
     "fg_pct": 47.3,
     "three_pct": 32.6,
     "ft_pct": 70.4,
-    "tov": 2.8
+    "tov": 2.8,
+    "games": 1178,
+    "career_pts": 18940,
+    "career_reb": 7494,
+    "career_ast": 6135
   },
   {
     "name": "Gary Payton",
@@ -742,7 +978,11 @@
     "fg_pct": 46.6,
     "three_pct": 31.7,
     "ft_pct": 72.9,
-    "tov": 2.3
+    "tov": 2.3,
+    "games": 1335,
+    "career_pts": 21813,
+    "career_reb": 5269,
+    "career_ast": 8966
   },
   {
     "name": "Reggie Miller",
@@ -755,7 +995,11 @@
     "fg_pct": 47.1,
     "three_pct": 39.5,
     "ft_pct": 88.8,
-    "tov": 1.7
+    "tov": 1.7,
+    "games": 1389,
+    "career_pts": 25279,
+    "career_reb": 4182,
+    "career_ast": 4141
   },
   {
     "name": "David Robinson",
@@ -768,7 +1012,11 @@
     "fg_pct": 51.8,
     "three_pct": 25,
     "ft_pct": 73.6,
-    "tov": 2.4
+    "tov": 2.4,
+    "games": 987,
+    "career_pts": 20790,
+    "career_reb": 10497,
+    "career_ast": 2441
   },
   {
     "name": "Shawn Kemp",
@@ -781,7 +1029,11 @@
     "fg_pct": 48.8,
     "three_pct": 27.7,
     "ft_pct": 74.1,
-    "tov": 2.6
+    "tov": 2.6,
+    "games": 1051,
+    "career_pts": 15347,
+    "career_reb": 8834,
+    "career_ast": 1704
   },
   {
     "name": "Mitch Richmond",
@@ -794,7 +1046,11 @@
     "fg_pct": 45.5,
     "three_pct": 38.8,
     "ft_pct": 85,
-    "tov": 2.6
+    "tov": 2.6,
+    "games": 976,
+    "career_pts": 20497,
+    "career_reb": 3801,
+    "career_ast": 3398
   },
   {
     "name": "Grant Hill",
@@ -807,7 +1063,11 @@
     "fg_pct": 48.3,
     "three_pct": 31.4,
     "ft_pct": 76.9,
-    "tov": 2.4
+    "tov": 2.4,
+    "games": 1026,
+    "career_pts": 17137,
+    "career_reb": 6169,
+    "career_ast": 4252
   },
   {
     "name": "Alonzo Mourning",
@@ -820,7 +1080,11 @@
     "fg_pct": 52.7,
     "three_pct": 24.7,
     "ft_pct": 69.2,
-    "tov": 2.6
+    "tov": 2.6,
+    "games": 838,
+    "career_pts": 14311,
+    "career_reb": 7137,
+    "career_ast": 946
   },
   {
     "name": "Chris Webber",
@@ -833,7 +1097,11 @@
     "fg_pct": 47.9,
     "three_pct": 29.9,
     "ft_pct": 64.9,
-    "tov": 2.8
+    "tov": 2.8,
+    "games": 831,
+    "career_pts": 17182,
+    "career_reb": 8124,
+    "career_ast": 3526
   },
   {
     "name": "Penny Hardaway",
@@ -846,7 +1114,11 @@
     "fg_pct": 45.8,
     "three_pct": 31.6,
     "ft_pct": 77.4,
-    "tov": 2.5
+    "tov": 2.5,
+    "games": 704,
+    "career_pts": 10684,
+    "career_reb": 3146,
+    "career_ast": 3525
   },
   {
     "name": "Glen Rice",
@@ -859,7 +1131,11 @@
     "fg_pct": 45.6,
     "three_pct": 40,
     "ft_pct": 84.6,
-    "tov": 1.7
+    "tov": 1.7,
+    "games": 1000,
+    "career_pts": 18336,
+    "career_reb": 4387,
+    "career_ast": 2097
   },
   {
     "name": "Dan Majerle",
@@ -872,7 +1148,11 @@
     "fg_pct": 43.1,
     "three_pct": 35.8,
     "ft_pct": 74.1,
-    "tov": 1.2
+    "tov": 1.2,
+    "games": 955,
+    "career_pts": 10925,
+    "career_reb": 4265,
+    "career_ast": 2755
   },
   {
     "name": "Horace Grant",
@@ -885,7 +1165,11 @@
     "fg_pct": 50.9,
     "three_pct": 6.3,
     "ft_pct": 69.2,
-    "tov": 1.1
+    "tov": 1.1,
+    "games": 1165,
+    "career_pts": 12996,
+    "career_reb": 9443,
+    "career_ast": 2575
   },
   {
     "name": "Detlef Schrempf",
@@ -898,7 +1182,11 @@
     "fg_pct": 49.1,
     "three_pct": 38.4,
     "ft_pct": 80.3,
-    "tov": 2
+    "tov": 2,
+    "games": 1136,
+    "career_pts": 15761,
+    "career_reb": 7023,
+    "career_ast": 3833
   },
   {
     "name": "Latrell Sprewell",
@@ -911,7 +1199,11 @@
     "fg_pct": 42.5,
     "three_pct": 33.7,
     "ft_pct": 80.4,
-    "tov": 2.7
+    "tov": 2.7,
+    "games": 913,
+    "career_pts": 16712,
+    "career_reb": 3724,
+    "career_ast": 3664
   },
   {
     "name": "Dirk Nowitzki",
@@ -924,7 +1216,11 @@
     "fg_pct": 47.1,
     "three_pct": 38,
     "ft_pct": 87.9,
-    "tov": 1.6
+    "tov": 1.6,
+    "games": 1522,
+    "career_pts": 31560,
+    "career_reb": 11489,
+    "career_ast": 3651
   },
   {
     "name": "Dwyane Wade",
@@ -937,7 +1233,11 @@
     "fg_pct": 48,
     "three_pct": 29.3,
     "ft_pct": 76.5,
-    "tov": 3.2
+    "tov": 3.2,
+    "games": 1054,
+    "career_pts": 23165,
+    "career_reb": 4933,
+    "career_ast": 5701
   },
   {
     "name": "Paul Pierce",
@@ -950,7 +1250,11 @@
     "fg_pct": 44.5,
     "three_pct": 36.8,
     "ft_pct": 80.6,
-    "tov": 2.6
+    "tov": 2.6,
+    "games": 1343,
+    "career_pts": 26397,
+    "career_reb": 7527,
+    "career_ast": 4708
   },
   {
     "name": "Manu Ginobili",
@@ -963,7 +1267,11 @@
     "fg_pct": 44.7,
     "three_pct": 36.9,
     "ft_pct": 82.7,
-    "tov": 2
+    "tov": 2,
+    "games": 1057,
+    "career_pts": 14043,
+    "career_reb": 3697,
+    "career_ast": 4001
   },
   {
     "name": "Tony Parker",
@@ -976,7 +1284,11 @@
     "fg_pct": 49.1,
     "three_pct": 32.4,
     "ft_pct": 75.1,
-    "tov": 2.3
+    "tov": 2.3,
+    "games": 1254,
+    "career_pts": 19473,
+    "career_reb": 3396,
+    "career_ast": 7036
   },
   {
     "name": "Steve Nash",
@@ -989,7 +1301,11 @@
     "fg_pct": 49,
     "three_pct": 42.8,
     "ft_pct": 90.4,
-    "tov": 2.9
+    "tov": 2.9,
+    "games": 1217,
+    "career_pts": 17387,
+    "career_reb": 3642,
+    "career_ast": 10335
   },
   {
     "name": "Vince Carter",
@@ -1002,7 +1318,11 @@
     "fg_pct": 43.5,
     "three_pct": 37.1,
     "ft_pct": 79.8,
-    "tov": 1.7
+    "tov": 1.7,
+    "games": 1541,
+    "career_pts": 25728,
+    "career_reb": 6606,
+    "career_ast": 4714
   },
   {
     "name": "Ray Allen",
@@ -1015,7 +1335,11 @@
     "fg_pct": 45.2,
     "three_pct": 40,
     "ft_pct": 89.4,
-    "tov": 2.1
+    "tov": 2.1,
+    "games": 1300,
+    "career_pts": 24505,
+    "career_reb": 5272,
+    "career_ast": 4361
   },
   {
     "name": "Jason Kidd",
@@ -1028,7 +1352,11 @@
     "fg_pct": 40,
     "three_pct": 34.9,
     "ft_pct": 78.5,
-    "tov": 2.9
+    "tov": 2.9,
+    "games": 1391,
+    "career_pts": 17529,
+    "career_reb": 8725,
+    "career_ast": 12091
   },
   {
     "name": "Yao Ming",
@@ -1041,7 +1369,11 @@
     "fg_pct": 52.4,
     "three_pct": 20,
     "ft_pct": 83.3,
-    "tov": 2.7
+    "tov": 2.7,
+    "games": 486,
+    "career_pts": 9247,
+    "career_reb": 4494,
+    "career_ast": 769
   },
   {
     "name": "Amar'e Stoudemire",
@@ -1054,7 +1386,11 @@
     "fg_pct": 53.7,
     "three_pct": 23.6,
     "ft_pct": 76.1,
-    "tov": 2.3
+    "tov": 2.3,
+    "games": 846,
+    "career_pts": 15994,
+    "career_reb": 6632,
+    "career_ast": 1050
   },
   {
     "name": "Baron Davis",
@@ -1067,7 +1403,11 @@
     "fg_pct": 40.9,
     "three_pct": 32,
     "ft_pct": 71.1,
-    "tov": 2.8
+    "tov": 2.8,
+    "games": 835,
+    "career_pts": 13447,
+    "career_reb": 3183,
+    "career_ast": 6025
   },
   {
     "name": "Elton Brand",
@@ -1080,7 +1420,11 @@
     "fg_pct": 50,
     "three_pct": 9.5,
     "ft_pct": 73.6,
-    "tov": 1.9
+    "tov": 1.9,
+    "games": 1058,
+    "career_pts": 16827,
+    "career_reb": 9040,
+    "career_ast": 2184
   },
   {
     "name": "Chauncey Billups",
@@ -1093,7 +1437,11 @@
     "fg_pct": 41.5,
     "three_pct": 38.7,
     "ft_pct": 89.4,
-    "tov": 2
+    "tov": 2,
+    "games": 1043,
+    "career_pts": 15802,
+    "career_reb": 2992,
+    "career_ast": 5636
   },
   {
     "name": "Tracy McGrady",
@@ -1106,7 +1454,11 @@
     "fg_pct": 43.5,
     "three_pct": 33.8,
     "ft_pct": 74.6,
-    "tov": 2.2
+    "tov": 2.2,
+    "games": 938,
+    "career_pts": 18381,
+    "career_reb": 5276,
+    "career_ast": 4161
   },
   {
     "name": "Russell Westbrook",
@@ -1119,7 +1471,11 @@
     "fg_pct": 43.9,
     "three_pct": 30.5,
     "ft_pct": 77.2,
-    "tov": 3.9
+    "tov": 3.9,
+    "games": 1301,
+    "career_pts": 27176,
+    "career_reb": 9025,
+    "career_ast": 10351
   },
   {
     "name": "Kawhi Leonard",
@@ -1132,7 +1488,11 @@
     "fg_pct": 49.9,
     "three_pct": 39.2,
     "ft_pct": 86,
-    "tov": 1.7
+    "tov": 1.7,
+    "games": 798,
+    "career_pts": 16546,
+    "career_reb": 5075,
+    "career_ast": 2470
   },
   {
     "name": "Klay Thompson",
@@ -1145,7 +1505,11 @@
     "fg_pct": 45.1,
     "three_pct": 41.1,
     "ft_pct": 86,
-    "tov": 1.6
+    "tov": 1.6,
+    "games": 865,
+    "career_pts": 16536,
+    "career_reb": 3041,
+    "career_ast": 1988
   },
   {
     "name": "Draymond Green",
@@ -1158,7 +1522,11 @@
     "fg_pct": 44.9,
     "three_pct": 32,
     "ft_pct": 71,
-    "tov": 2.3
+    "tov": 2.3,
+    "games": 881,
+    "career_pts": 7665,
+    "career_reb": 6087,
+    "career_ast": 4948
   },
   {
     "name": "DeMar DeRozan",
@@ -1171,7 +1539,11 @@
     "fg_pct": 46.9,
     "three_pct": 30,
     "ft_pct": 84.2,
-    "tov": 2
+    "tov": 2,
+    "games": 1187,
+    "career_pts": 25292,
+    "career_reb": 5208,
+    "career_ast": 4869
   },
   {
     "name": "Blake Griffin",
@@ -1184,7 +1556,11 @@
     "fg_pct": 49.3,
     "three_pct": 32.8,
     "ft_pct": 69.6,
-    "tov": 2.3
+    "tov": 2.3,
+    "games": 765,
+    "career_pts": 14513,
+    "career_reb": 6109,
+    "career_ast": 3055
   },
   {
     "name": "Marc Gasol",
@@ -1197,7 +1573,11 @@
     "fg_pct": 48.1,
     "three_pct": 36,
     "ft_pct": 77.6,
-    "tov": 2
+    "tov": 2,
+    "games": 891,
+    "career_pts": 12514,
+    "career_reb": 6604,
+    "career_ast": 2996
   },
   {
     "name": "Pau Gasol",
@@ -1210,7 +1590,11 @@
     "fg_pct": 50.7,
     "three_pct": 36.8,
     "ft_pct": 75.3,
-    "tov": 2.2
+    "tov": 2.2,
+    "games": 1226,
+    "career_pts": 20894,
+    "career_reb": 11305,
+    "career_ast": 3925
   },
   {
     "name": "Paul George",
@@ -1223,7 +1607,11 @@
     "fg_pct": 44,
     "three_pct": 38.3,
     "ft_pct": 85.3,
-    "tov": 2.7
+    "tov": 2.7,
+    "games": 908,
+    "career_pts": 18697,
+    "career_reb": 5684,
+    "career_ast": 3369
   },
   {
     "name": "Jimmy Butler",
@@ -1236,7 +1624,11 @@
     "fg_pct": 47.2,
     "three_pct": 32.8,
     "ft_pct": 84.3,
-    "tov": 1.6
+    "tov": 1.6,
+    "games": 869,
+    "career_pts": 15898,
+    "career_reb": 4647,
+    "career_ast": 3772
   },
   {
     "name": "LaMarcus Aldridge",
@@ -1249,7 +1641,11 @@
     "fg_pct": 49.3,
     "three_pct": 32,
     "ft_pct": 81.3,
-    "tov": 1.5
+    "tov": 1.5,
+    "games": 1076,
+    "career_pts": 20558,
+    "career_reb": 8736,
+    "career_ast": 2076
   },
   {
     "name": "Al Horford",
@@ -1262,7 +1658,11 @@
     "fg_pct": 50.9,
     "three_pct": 37.7,
     "ft_pct": 76.3,
-    "tov": 1.4
+    "tov": 1.4,
+    "games": 1138,
+    "career_pts": 14705,
+    "career_reb": 8943,
+    "career_ast": 3629
   },
   {
     "name": "Kyle Lowry",
@@ -1275,7 +1675,11 @@
     "fg_pct": 42.3,
     "three_pct": 36.8,
     "ft_pct": 81.5,
-    "tov": 2.2
+    "tov": 2.2,
+    "games": 1173,
+    "career_pts": 16356,
+    "career_reb": 4961,
+    "career_ast": 7099
   },
   {
     "name": "Andre Iguodala",
@@ -1288,7 +1692,11 @@
     "fg_pct": 46.3,
     "three_pct": 33,
     "ft_pct": 70.9,
-    "tov": 1.8
+    "tov": 1.8,
+    "games": 1231,
+    "career_pts": 13968,
+    "career_reb": 6047,
+    "career_ast": 5147
   },
   {
     "name": "Devin Booker",
@@ -1301,7 +1709,11 @@
     "fg_pct": 46.4,
     "three_pct": 35.4,
     "ft_pct": 87.3,
-    "tov": 3
+    "tov": 3,
+    "games": 673,
+    "career_pts": 16452,
+    "career_reb": 2718,
+    "career_ast": 3522
   },
   {
     "name": "Donovan Mitchell",
@@ -1314,7 +1726,11 @@
     "fg_pct": 44.9,
     "three_pct": 36.6,
     "ft_pct": 84,
-    "tov": 2.7
+    "tov": 2.7,
+    "games": 539,
+    "career_pts": 13320,
+    "career_reb": 2324,
+    "career_ast": 2530
   },
   {
     "name": "Ja Morant",
@@ -1327,7 +1743,11 @@
     "fg_pct": 46.9,
     "three_pct": 31.6,
     "ft_pct": 76.6,
-    "tov": 3.4
+    "tov": 3.4,
+    "games": 307,
+    "career_pts": 6942,
+    "career_reb": 1448,
+    "career_ast": 2267
   },
   {
     "name": "Anthony Edwards",
@@ -1340,7 +1760,11 @@
     "fg_pct": 44.6,
     "three_pct": 36.4,
     "ft_pct": 80.4,
-    "tov": 2.9
+    "tov": 2.9,
+    "games": 381,
+    "career_pts": 9097,
+    "career_reb": 2017,
+    "career_ast": 1600
   },
   {
     "name": "Domantas Sabonis",
@@ -1353,7 +1777,11 @@
     "fg_pct": 56,
     "three_pct": 34.7,
     "ft_pct": 72.9,
-    "tov": 2.6
+    "tov": 2.6,
+    "games": 646,
+    "career_pts": 10401,
+    "career_reb": 6880,
+    "career_ast": 3162
   },
   {
     "name": "Jalen Brunson",
@@ -1366,6 +1794,10 @@
     "fg_pct": 48.9,
     "three_pct": 38.9,
     "ft_pct": 82.3,
-    "tov": 2.7
+    "tov": 2.7,
+    "games": 487,
+    "career_pts": 8821,
+    "career_reb": 1549,
+    "career_ast": 2449
   }
 ]
