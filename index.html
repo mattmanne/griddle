@@ -11,12 +11,12 @@
 <main class="app">
   <header class="app-header">
     <h1>Griddle</h1>
-    <div class="sport-switch" role="group" aria-label="Choose sport">
+    <div class="sport-switch" role="group" aria-label="Choose sports (select one or more)">
       <button type="button" class="sport-btn active" data-sport="nba">🏀 NBA</button>
-      <button type="button" class="sport-btn" data-sport="mlb">⚾ MLB</button>
+      <button type="button" class="sport-btn active" data-sport="mlb">⚾ MLB</button>
     </div>
     <p class="instructions">
-      One batch, 5 guesses, a different pair of stats each time. You'll be given an <span id="sport-noun">NBA player</span>'s name —
+      One batch, 5 guesses, a different pair of stats each time. You'll be given <span id="sport-clause">a player</span>'s name —
       press and drag on the grid to place their stats, then release to lock in your guess. Share your
       batch when you're done!
     </p>
@@ -77,6 +77,12 @@
   <details class="practice-settings">
     <summary>Kitchen Prep</summary>
     <div class="practice-settings-inputs">
+      <label>Practice sport
+        <select id="debug-sport-select">
+          <option value="nba">NBA</option>
+          <option value="mlb">MLB</option>
+        </select>
+      </label>
       <label>X stat
         <select id="stat-x-select"></select>
       </label>

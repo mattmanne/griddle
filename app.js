@@ -36,7 +36,12 @@
     },
   };
 
-  let currentSport = 'nba';
+  const SPORT_KEYS = Object.keys(SPORTS);
+  let enabledSports = new Set(SPORT_KEYS);
+  let debugSport = SPORT_KEYS[0];
+  let dataCache = {};
+
+  let currentSport = debugSport;
   let STAT_DEFS = SPORTS[currentSport].statDefs;
 
   const GRID = 1000;
@@ -96,7 +101,8 @@
   const copyResultsBtn = document.getElementById('copy-results-btn');
   const replayBtn = document.getElementById('replay-btn');
   const sportButtons = Array.from(document.querySelectorAll('.sport-btn'));
-  const sportNoun = document.getElementById('sport-noun');
+  const sportClause = document.getElementById('sport-clause');
+  const debugSportSelect = document.getElementById('debug-sport-select');
 
   const BUTTER_W = 34;
   const BUTTER_H = 26;
@@ -131,20 +137,31 @@
     return players.filter((p) => Number.isFinite(p[statX]) && Number.isFinite(p[statY]));
   }
 
-  function randomStatKey(exclude) {
-    const keys = Object.keys(STAT_DEFS).filter((k) => k !== exclude);
-    return keys[Math.floor(Math.random() * keys.length)];
+  function randomKey(keys, exclude) {
+    const pool = exclude ? keys.filter((k) => k !== exclude) : keys;
+    return pool[Math.floor(Math.random() * pool.length)];
   }
 
-  function pickStatPair() {
-    if (forceStatPairCheckbox.checked) {
-      const x = statXSelect.value;
-      const y = statYSelect.value === x ? randomStatKey(x) : statYSelect.value;
-      return [x, y];
+  function pickRoundContext() {
+    const forcedPlayer = playerSelect.value;
+    if (forceStatPairCheckbox.checked || forcedPlayer) {
+      const sport = debugSport;
+      const keys = Object.keys(SPORTS[sport].statDefs);
+      let x, y;
+      if (forceStatPairCheckbox.checked) {
+        x = statXSelect.value;
+        y = statYSelect.value === x ? randomKey(keys, x) : statYSelect.value;
+      } else {
+        x = randomKey(keys);
+        y = randomKey(keys, x);
+      }
+      return { sport, x, y };
     }
-    const x = randomStatKey();
-    const y = randomStatKey(x);
-    return [x, y];
+    const sport = randomKey(Array.from(enabledSports));
+    const keys = Object.keys(SPORTS[sport].statDefs);
+    const x = randomKey(keys);
+    const y = randomKey(keys, x);
+    return { sport, x, y };
   }
 
   function dataToSvg(x, y) {
@@ -214,7 +231,7 @@
     locked = true;
 
     const { dist, score } = computeScore(dataPoint, target);
-    guessResults.push({ statX, statY, score, playerName: target.name });
+    guessResults.push({ sport: currentSport, statX, statY, score, playerName: target.name });
 
     const targetSvg = dataToSvg(target.x, target.y);
     targetMarker.setAttribute('transform', `translate(${targetSvg.sx}, ${targetSvg.sy})`);
@@ -233,7 +250,7 @@
     const xShort = STAT_DEFS[statX].short;
     const yShort = STAT_DEFS[statY].short;
     resultGuess.textContent = `${dataPoint.x.toFixed(1)} ${xShort}, ${dataPoint.y.toFixed(1)} ${yShort}`;
-    resultTargetName.textContent = target.name;
+    resultTargetName.textContent = `${SPORTS[currentSport].emoji} ${target.name}`;
     resultTarget.textContent = `${target.x.toFixed(1)} ${xShort}, ${target.y.toFixed(1)} ${yShort}`;
     resultDistance.textContent = Math.round((dist / Math.SQRT2) * 100);
     resultScore.textContent = score;
@@ -250,7 +267,10 @@
       roundTotalScoreEl.textContent = total;
       roundSnarkEl.textContent = `${snark.emoji} ${snark.text}`;
       roundBreakdownEl.textContent = guessResults
-        .map((r) => `${STAT_DEFS[r.statX].short} vs ${STAT_DEFS[r.statY].short}: ${r.score}`)
+        .map((r) => {
+          const defs = SPORTS[r.sport].statDefs;
+          return `${SPORTS[r.sport].emoji}${defs[r.statX].short} vs ${defs[r.statY].short}: ${r.score}`;
+        })
         .join(' · ');
       shareTextArea.value = buildShareText(total, snark);
       roundSummary.hidden = false;
@@ -263,7 +283,8 @@
   function buildShareText(total, snark) {
     const lines = [`Griddle 🧇 — Batch score ${total}/${ROUND_MAX} ${snark.emoji}`];
     guessResults.forEach((r, i) => {
-      lines.push(`${i + 1}. ${STAT_DEFS[r.statX].short} vs ${STAT_DEFS[r.statY].short} (${r.playerName}) — ${r.score}`);
+      const defs = SPORTS[r.sport].statDefs;
+      lines.push(`${i + 1}. ${SPORTS[r.sport].emoji}${defs[r.statX].short} vs ${defs[r.statY].short} (${r.playerName}) — ${r.score}`);
     });
     return lines.join('\n');
   }
@@ -281,7 +302,12 @@
   function beginNextGuess() {
     guessIndex += 1;
 
-    [statX, statY] = pickStatPair();
+    const ctx = pickRoundContext();
+    currentSport = ctx.sport;
+    STAT_DEFS = SPORTS[currentSport].statDefs;
+    players = dataCache[currentSport];
+    statX = ctx.x;
+    statY = ctx.y;
     AXIS_X = axisRangeForStat(statX);
     AXIS_Y = axisRangeForStat(statY);
     axisTop.textContent = `${AXIS_Y.label} max: ${AXIS_Y.max}`;
@@ -308,7 +334,7 @@
     guideY.setAttribute('visibility', 'hidden');
     resultsSection.hidden = true;
 
-    targetDisplay.textContent = `${player.name} — ${STAT_DEFS[statX].label} vs ${STAT_DEFS[statY].label}`;
+    targetDisplay.textContent = `${SPORTS[currentSport].emoji} ${player.name} — ${STAT_DEFS[statX].label} vs ${STAT_DEFS[statY].label}`;
     roundProgress.textContent = `Guess ${guessIndex} of ${ROUND_SIZE}`;
 
     actionBtn.disabled = true;
@@ -418,22 +444,23 @@
   });
 
   function populateStatSelects() {
-    const keys = Object.keys(STAT_DEFS);
+    const defs = SPORTS[debugSport].statDefs;
+    const keys = Object.keys(defs);
     [statXSelect, statYSelect].forEach((select, i) => {
       select.innerHTML = '';
       keys.forEach((key) => {
         const opt = document.createElement('option');
         opt.value = key;
-        opt.textContent = STAT_DEFS[key].label;
+        opt.textContent = defs[key].label;
         select.appendChild(opt);
       });
-      select.value = SPORTS[currentSport].defaultPair[i];
+      select.value = SPORTS[debugSport].defaultPair[i];
     });
   }
 
   function populatePlayerSelect() {
     playerSelect.innerHTML = '<option value="">Random</option>';
-    players.forEach((p) => {
+    (dataCache[debugSport] || []).forEach((p) => {
       const opt = document.createElement('option');
       opt.value = p.name;
       opt.textContent = p.name;
@@ -460,48 +487,80 @@
     axisBottom.textContent = '';
     axisLeft.textContent = '';
     axisRight.textContent = '';
+    actionBtn.disabled = false;
+    actionBtn.textContent = 'Fire Up the Griddle';
+    targetDisplay.textContent = 'Ready when you are!';
   }
 
-  function loadSport(sport) {
-    currentSport = sport;
-    STAT_DEFS = SPORTS[sport].statDefs;
-    [statX, statY] = SPORTS[sport].defaultPair;
+  function poolSummary() {
+    return Array.from(enabledSports)
+      .map((s) => {
+        const count = (dataCache[s] || []).length;
+        const noun = SPORTS[s].noun + (count === 1 ? '' : 's');
+        return `${count} ${SPORTS[s].label} ${noun}`;
+      })
+      .join(' + ');
+  }
 
-    sportButtons.forEach((btn) => btn.classList.toggle('active', btn.dataset.sport === sport));
-    sportNoun.textContent = `${SPORTS[sport].label} ${SPORTS[sport].noun}`;
-    forceStatPairCheckbox.checked = false;
-    populateStatSelects();
-    resetRoundUI();
+  function sportClauseText() {
+    const list = Array.from(enabledSports);
+    if (list.length === 1) return `an ${SPORTS[list[0]].label} ${SPORTS[list[0]].noun}`;
+    return 'a player';
+  }
 
-    players = [];
+  function updateSportUI() {
+    sportButtons.forEach((btn) => btn.classList.toggle('active', enabledSports.has(btn.dataset.sport)));
+    sportClause.textContent = sportClauseText();
+    roundProgress.textContent = `${poolSummary()} loaded — press "Fire Up the Griddle" to begin.`;
+  }
+
+  function loadAllData() {
     actionBtn.disabled = true;
     actionBtn.textContent = 'Preheating…';
     targetDisplay.textContent = 'Preheating…';
-    roundProgress.textContent = '';
 
-    fetch(SPORTS[sport].file)
-      .then((res) => res.json())
-      .then((data) => {
-        players = data;
+    Promise.all(
+      SPORT_KEYS.map((sport) =>
+        fetch(SPORTS[sport].file)
+          .then((res) => res.json())
+          .then((data) => { dataCache[sport] = data; })
+      )
+    )
+      .then(() => {
+        populateStatSelects();
         populatePlayerSelect();
         actionBtn.disabled = false;
         actionBtn.textContent = 'Fire Up the Griddle';
         targetDisplay.textContent = 'Ready when you are!';
-        roundProgress.textContent = `${players.length} ${SPORTS[sport].noun}s loaded — press "Fire Up the Griddle" to begin.`;
+        updateSportUI();
       })
       .catch((err) => {
-        targetDisplay.textContent = `Failed to load ${SPORTS[sport].file} — check the console.`;
+        targetDisplay.textContent = 'Failed to load player data — check the console.';
         console.error(err);
       });
   }
 
   sportButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      if (btn.dataset.sport !== currentSport) loadSport(btn.dataset.sport);
+      const sport = btn.dataset.sport;
+      if (enabledSports.has(sport)) {
+        if (enabledSports.size === 1) return;
+        enabledSports.delete(sport);
+      } else {
+        enabledSports.add(sport);
+      }
+      resetRoundUI();
+      updateSportUI();
     });
+  });
+
+  debugSportSelect.addEventListener('change', () => {
+    debugSport = debugSportSelect.value;
+    populateStatSelects();
+    populatePlayerSelect();
   });
 
   drawGridlines();
   setZoom(1);
-  loadSport(currentSport);
+  loadAllData();
 })();
