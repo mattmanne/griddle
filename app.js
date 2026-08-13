@@ -468,30 +468,6 @@
     });
   }
 
-  function resetRoundUI() {
-    guessIndex = 0;
-    guessResults = [];
-    roundOver = false;
-    locked = false;
-    previewData = null;
-    mode = 'idle';
-    pointers.clear();
-    guessMarker.setAttribute('visibility', 'hidden');
-    targetMarker.setAttribute('visibility', 'hidden');
-    resultLine.setAttribute('visibility', 'hidden');
-    guideX.setAttribute('visibility', 'hidden');
-    guideY.setAttribute('visibility', 'hidden');
-    resultsSection.hidden = true;
-    roundSummary.hidden = true;
-    axisTop.textContent = '';
-    axisBottom.textContent = '';
-    axisLeft.textContent = '';
-    axisRight.textContent = '';
-    actionBtn.disabled = false;
-    actionBtn.textContent = 'Fire Up the Griddle';
-    targetDisplay.textContent = 'Ready when you are!';
-  }
-
   function poolSummary() {
     return Array.from(enabledSports)
       .map((s) => {
@@ -511,7 +487,9 @@
   function updateSportUI() {
     sportButtons.forEach((btn) => btn.classList.toggle('active', enabledSports.has(btn.dataset.sport)));
     sportClause.textContent = sportClauseText();
-    roundProgress.textContent = `${poolSummary()} loaded — press "Fire Up the Griddle" to begin.`;
+    if (guessIndex === 0 && !roundOver) {
+      roundProgress.textContent = `${poolSummary()} loaded — press "Fire Up the Griddle" to begin.`;
+    }
   }
 
   function loadAllData() {
@@ -549,7 +527,6 @@
       } else {
         enabledSports.add(sport);
       }
-      resetRoundUI();
       updateSportUI();
     });
   });
