@@ -13,7 +13,8 @@ accidentally undone.
 
 - `index.html` / `app.js` / `style.css` — the whole app. No build step, no
   dependencies — deliberately static so it can be served as-is from GitHub Pages.
-- `players.json`, `mlb_hitters.json`, `nhl_skaters.json` — one JSON array per sport, fetched at load.
+- `players.json`, `wnba_players.json`, `mlb_hitters.json`, `nhl_skaters.json` — one JSON
+  array per sport, fetched at load.
 - `archive-v0/` — the original prototype (continuous running-average scoring, no
   batches). Kept for reference, not wired into `index.html`. If you're tempted to
   bring back "session average" style scoring (backlog #13), this is where the old
@@ -72,20 +73,36 @@ When adding a new sport/stat, ask "does this need scaling to avoid a degenerate
 0–1 axis?" and "is there a stat-tracking-era gap I need to omit rather than fake?"
 before wiring up data.
 
+- **WNBA reuses NBA's exact `statDefs` object (`HOOPS_STAT_DEFS` in `app.js`) rather
+  than a copy.** The two leagues track literally the same categories the same way, so
+  duplicating the object would just be two copies to keep in sync by hand. If WNBA's
+  stat set ever needs to diverge from NBA's, give it its own object at that point —
+  don't speculatively split them apart now.
+
 ## Multi-sport architecture — why per-guess random sport, not merged axes
 
 `app.js`'s `SPORTS` config holds one entry per sport (label, emoji, noun, data file,
 default stat pair, and its own `statDefs`). Two things follow from this that aren't
 obvious from reading the functions in isolation:
 
-- **NBA and MLB stats are never plotted on the same axis.** There's no unit in common
-  between "Points/Game" and "Batting Average," so a "combined" stat pair would be
-  meaningless. Instead, "combined mode" means each of the 5 guesses in a batch
-  independently rolls which *enabled* sport it draws from, then proceeds exactly like
-  single-sport mode for that guess (its own stat pair, its own axis range, its own
-  player pool). `enabledSports` (a `Set`) is what the NBA/MLB header buttons toggle —
-  it's deliberately allowed to have 1 or many members, never zero (the toggle handler
-  blocks deselecting the last active sport).
+- **No two sports' stats are ever plotted on the same axis.** There's no unit in
+  common between "Points/Game" and "Batting Average" (or even between NBA's
+  "Points/Game" and NHL's "Points/Game" — different games, different scales), so a
+  "combined" stat pair across sports would be meaningless. Instead, "combined mode"
+  means each of the 5 guesses in a batch independently rolls which *enabled* sport it
+  draws from, then proceeds exactly like single-sport mode for that guess (its own
+  stat pair, its own axis range, its own player pool). `enabledSports` (a `Set`) is
+  what the header's sport toggle buttons control — it's deliberately allowed to have
+  1 or many members, never zero (the toggle handler blocks deselecting the last
+  active sport).
+- **Each `SPORTS` entry carries its own grammatical `article` ('a' or 'an').** The
+  single-sport instructions text ("You'll be given {article} {label} {noun}'s name")
+  can't derive the right article from the label programmatically — NBA/MLB/NHL all
+  happen to start with a letter-name that begins with a vowel sound ("en," "em," "en"),
+  so hardcoding "an" worked by coincidence until WNBA ("double-u") broke it, producing
+  "an WNBA player." Fixed by making `article` an explicit field per sport rather than
+  guessing from the label — the earlier sports couldn't have taught this lesson since
+  NBA/MLB/NHL all happen to be vowel-sound-first.
 - **The debug "Kitchen Prep" panel has its own `debugSport`, independent of
   `enabledSports`.** Forcing a specific stat pair or a specific player only makes
   sense pinned to one sport (you can't force "Points/Game vs Home Runs"), so the

@@ -1,31 +1,44 @@
 (() => {
+  const HOOPS_STAT_DEFS = {
+    pts: { label: 'Points/Game', short: 'PPG' },
+    reb: { label: 'Rebounds/Game', short: 'RPG' },
+    ast: { label: 'Assists/Game', short: 'APG' },
+    stl: { label: 'Steals/Game', short: 'SPG' },
+    blk: { label: 'Blocks/Game', short: 'BPG' },
+    mpg: { label: 'Minutes/Game', short: 'MPG' },
+    fg_pct: { label: 'Field Goal %', short: 'FG%' },
+    three_pct: { label: '3-Point %', short: '3P%' },
+    ft_pct: { label: 'Free Throw %', short: 'FT%' },
+    tov: { label: 'Turnovers/Game', short: 'TOV' },
+    games: { label: 'Games Played', short: 'GP' },
+    career_pts: { label: 'Career Points', short: 'PTS' },
+    career_reb: { label: 'Career Rebounds', short: 'REB' },
+    career_ast: { label: 'Career Assists', short: 'AST' },
+  };
+
   const SPORTS = {
     nba: {
       label: 'NBA',
       noun: 'player',
+      article: 'an',
       emoji: '🏀',
       file: 'players.json',
       defaultPair: ['pts', 'reb'],
-      statDefs: {
-        pts: { label: 'Points/Game', short: 'PPG' },
-        reb: { label: 'Rebounds/Game', short: 'RPG' },
-        ast: { label: 'Assists/Game', short: 'APG' },
-        stl: { label: 'Steals/Game', short: 'SPG' },
-        blk: { label: 'Blocks/Game', short: 'BPG' },
-        mpg: { label: 'Minutes/Game', short: 'MPG' },
-        fg_pct: { label: 'Field Goal %', short: 'FG%' },
-        three_pct: { label: '3-Point %', short: '3P%' },
-        ft_pct: { label: 'Free Throw %', short: 'FT%' },
-        tov: { label: 'Turnovers/Game', short: 'TOV' },
-        games: { label: 'Games Played', short: 'GP' },
-        career_pts: { label: 'Career Points', short: 'PTS' },
-        career_reb: { label: 'Career Rebounds', short: 'REB' },
-        career_ast: { label: 'Career Assists', short: 'AST' },
-      },
+      statDefs: HOOPS_STAT_DEFS,
+    },
+    wnba: {
+      label: 'WNBA',
+      noun: 'player',
+      article: 'a',
+      emoji: '⛹️‍♀️',
+      file: 'wnba_players.json',
+      defaultPair: ['pts', 'reb'],
+      statDefs: HOOPS_STAT_DEFS,
     },
     mlb: {
       label: 'MLB',
       noun: 'hitter',
+      article: 'an',
       emoji: '⚾',
       file: 'mlb_hitters.json',
       defaultPair: ['avg', 'hr'],
@@ -41,6 +54,7 @@
     nhl: {
       label: 'NHL',
       noun: 'skater',
+      article: 'an',
       emoji: '🏒',
       file: 'nhl_skaters.json',
       defaultPair: ['g', 'a'],
@@ -518,7 +532,7 @@
 
   function sportClauseText() {
     const list = Array.from(enabledSports);
-    if (list.length === 1) return `an ${SPORTS[list[0]].label} ${SPORTS[list[0]].noun}`;
+    if (list.length === 1) return `${SPORTS[list[0]].article} ${SPORTS[list[0]].label} ${SPORTS[list[0]].noun}`;
     return 'a player';
   }
 
