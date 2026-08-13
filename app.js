@@ -38,6 +38,25 @@
         sb: { label: 'Stolen Bases', short: 'SB' },
       },
     },
+    nhl: {
+      label: 'NHL',
+      noun: 'skater',
+      emoji: '🏒',
+      file: 'nhl_skaters.json',
+      defaultPair: ['g', 'a'],
+      statDefs: {
+        g: { label: 'Goals/Game', short: 'G/GP' },
+        a: { label: 'Assists/Game', short: 'A/GP' },
+        p: { label: 'Points/Game', short: 'P/GP' },
+        pim: { label: 'Penalty Minutes/Game', short: 'PIM/GP' },
+        sog: { label: 'Shots on Goal/Game', short: 'SOG/GP' },
+        sh_pct: { label: 'Shooting %', short: 'S%' },
+        games: { label: 'Games Played', short: 'GP' },
+        career_g: { label: 'Career Goals', short: 'G' },
+        career_a: { label: 'Career Assists', short: 'A' },
+        career_p: { label: 'Career Points', short: 'PTS' },
+      },
+    },
   };
 
   const SPORT_KEYS = Object.keys(SPORTS);

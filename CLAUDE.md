@@ -13,7 +13,7 @@ accidentally undone.
 
 - `index.html` / `app.js` / `style.css` — the whole app. No build step, no
   dependencies — deliberately static so it can be served as-is from GitHub Pages.
-- `players.json`, `mlb_hitters.json` — one JSON array per sport, fetched at load.
+- `players.json`, `mlb_hitters.json`, `nhl_skaters.json` — one JSON array per sport, fetched at load.
 - `archive-v0/` — the original prototype (continuous running-average scoring, no
   batches). Kept for reference, not wired into `index.html`. If you're tempted to
   bring back "session average" style scoring (backlog #13), this is where the old
@@ -49,16 +49,24 @@ explains several otherwise-odd-looking numbers in the data:
   naturally "per game," others are naturally "in a career." **When adding a new
   sport, include both kinds of stat from the start** — retrofitting counting stats
   onto an existing 100+-player pool (as happened here for NBA) means re-researching
-  the entire roster instead of just the new additions.
+  the entire roster instead of just the new additions. NHL was built with this rule
+  already in place (Goals/Assists/Points/PIM/Shots per game, plus Games Played and
+  career Goals/Assists/Points) — no retrofit needed, confirming it's worth following
+  up front rather than fixing after the fact.
 - **Fields are omitted (not zeroed) when the underlying stat wasn't tracked in a
   player's era**, rather than guessing or defaulting to 0 (which would be a fabricated
   data point, not a missing one). Concretely for NBA: steals/blocks weren't official
   stats before 1973-74, turnovers weren't tracked before 1977-78, and the three-point
   line didn't exist before 1979-80 — players whose careers predate these (Russell,
-  Wilt, Robertson, West, Baylor, Pettit, Cousy) simply don't have those keys.
+  Wilt, Robertson, West, Baylor, Pettit, Cousy) simply don't have those keys. For NHL:
+  individual shots-on-goal (and therefore shooting %) weren't reliably tracked before
+  1959-60, so `sog`/`sh_pct` are omitted for the handful of skaters whose careers
+  predate or straddle that (Howe, Richard, Beliveau, B. Hull, Mahovlich, Mikita).
   `eligiblePlayers()` filters on `Number.isFinite`, so a missing key correctly removes
   a player from any round that needs it, rather than corrupting the axis range with a
-  fake 0.
+  fake 0. **This pattern will keep recurring** — any new sport/era-spanning pool needs
+  the same check: what stat categories didn't exist yet, or weren't officially
+  tracked, for the earliest players in the pool?
 
 When adding a new sport/stat, ask "does this need scaling to avoid a degenerate
 0–1 axis?" and "is there a stat-tracking-era gap I need to omit rather than fake?"
