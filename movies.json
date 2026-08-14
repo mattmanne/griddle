@@ -1,0 +1,722 @@
+[
+  {
+    "name": "The Godfather",
+    "box_office_worldwide": 250933436,
+    "budget": 6000000,
+    "runtime_minutes": 175,
+    "imdb_rating": 9.2,
+    "rt_score": 97,
+    "release_year": 1972
+  },
+  {
+    "name": "Star Wars",
+    "box_office_worldwide": 775398507,
+    "budget": 11000000,
+    "runtime_minutes": 121,
+    "imdb_rating": 8.6,
+    "rt_score": 93,
+    "release_year": 1977
+  },
+  {
+    "name": "Jaws",
+    "box_office_worldwide": 490736300,
+    "budget": 9000000,
+    "runtime_minutes": 124,
+    "imdb_rating": 8.1,
+    "rt_score": 97,
+    "release_year": 1975
+  },
+  {
+    "name": "E.T. the Extra-Terrestrial",
+    "box_office_worldwide": 797307407,
+    "budget": 10500000,
+    "runtime_minutes": 114,
+    "imdb_rating": 7.9,
+    "rt_score": 99,
+    "release_year": 1982
+  },
+  {
+    "name": "Raiders of the Lost Ark",
+    "box_office_worldwide": 389925971,
+    "budget": 20000000,
+    "runtime_minutes": 115,
+    "imdb_rating": 8.4,
+    "rt_score": 94,
+    "release_year": 1981
+  },
+  {
+    "name": "Back to the Future",
+    "box_office_worldwide": 392976852,
+    "budget": 19000000,
+    "runtime_minutes": 116,
+    "imdb_rating": 8.5,
+    "rt_score": 93,
+    "release_year": 1985
+  },
+  {
+    "name": "The Empire Strikes Back",
+    "box_office_worldwide": 550016086,
+    "budget": 30500000,
+    "runtime_minutes": 124,
+    "imdb_rating": 8.7,
+    "rt_score": 93,
+    "release_year": 1980
+  },
+  {
+    "name": "Rocky",
+    "box_office_worldwide": 225000000,
+    "budget": 1000000,
+    "runtime_minutes": 119,
+    "imdb_rating": 8.1,
+    "rt_score": 93,
+    "release_year": 1976
+  },
+  {
+    "name": "Grease",
+    "box_office_worldwide": 396271103,
+    "budget": 6000000,
+    "runtime_minutes": 110,
+    "imdb_rating": 7.2,
+    "rt_score": 65,
+    "release_year": 1978
+  },
+  {
+    "name": "Ghostbusters",
+    "box_office_worldwide": 296640120,
+    "budget": 30000000,
+    "runtime_minutes": 105,
+    "imdb_rating": 7.8,
+    "rt_score": 95,
+    "release_year": 1984
+  },
+  {
+    "name": "Top Gun",
+    "box_office_worldwide": 360552341,
+    "budget": 15000000,
+    "runtime_minutes": 109,
+    "imdb_rating": 7,
+    "rt_score": 55,
+    "release_year": 1986
+  },
+  {
+    "name": "Indiana Jones and the Last Crusade",
+    "box_office_worldwide": 474171806,
+    "budget": 48000000,
+    "runtime_minutes": 127,
+    "imdb_rating": 8.2,
+    "rt_score": 84,
+    "release_year": 1989
+  },
+  {
+    "name": "The Shining",
+    "box_office_worldwide": 50323665,
+    "budget": 19000000,
+    "runtime_minutes": 146,
+    "imdb_rating": 8.4,
+    "rt_score": 84,
+    "release_year": 1980
+  },
+  {
+    "name": "Alien",
+    "box_office_worldwide": 109726643,
+    "budget": 11000000,
+    "runtime_minutes": 116,
+    "imdb_rating": 8.4,
+    "rt_score": 93,
+    "release_year": 1979
+  },
+  {
+    "name": "Blade Runner",
+    "box_office_worldwide": 41824552,
+    "budget": 30000000,
+    "runtime_minutes": 117,
+    "imdb_rating": 8.1,
+    "rt_score": 89,
+    "release_year": 1982
+  },
+  {
+    "name": "The Terminator",
+    "box_office_worldwide": 78371200,
+    "budget": 6400000,
+    "runtime_minutes": 107,
+    "imdb_rating": 8.1,
+    "rt_score": 90,
+    "release_year": 1984
+  },
+  {
+    "name": "Titanic",
+    "box_office_worldwide": 2264000000,
+    "budget": 200000000,
+    "runtime_minutes": 195,
+    "imdb_rating": 7.9,
+    "rt_score": 88,
+    "release_year": 1997
+  },
+  {
+    "name": "Jurassic Park",
+    "box_office_worldwide": 1058000000,
+    "budget": 63000000,
+    "runtime_minutes": 127,
+    "imdb_rating": 8.2,
+    "rt_score": 91,
+    "release_year": 1993
+  },
+  {
+    "name": "The Lion King",
+    "box_office_worldwide": 979000000,
+    "budget": 45000000,
+    "runtime_minutes": 88,
+    "imdb_rating": 8.5,
+    "rt_score": 92,
+    "release_year": 1994
+  },
+  {
+    "name": "Forrest Gump",
+    "box_office_worldwide": 678000000,
+    "budget": 55000000,
+    "runtime_minutes": 142,
+    "imdb_rating": 8.8,
+    "rt_score": 75,
+    "release_year": 1994
+  },
+  {
+    "name": "Pulp Fiction",
+    "box_office_worldwide": 213900000,
+    "budget": 8000000,
+    "runtime_minutes": 154,
+    "imdb_rating": 8.9,
+    "rt_score": 92,
+    "release_year": 1994
+  },
+  {
+    "name": "The Shawshank Redemption",
+    "box_office_worldwide": 73300000,
+    "budget": 25000000,
+    "runtime_minutes": 142,
+    "imdb_rating": 9.3,
+    "rt_score": 89,
+    "release_year": 1994
+  },
+  {
+    "name": "The Matrix",
+    "box_office_worldwide": 473300000,
+    "budget": 63000000,
+    "runtime_minutes": 136,
+    "imdb_rating": 8.7,
+    "rt_score": 83,
+    "release_year": 1999
+  },
+  {
+    "name": "Toy Story",
+    "box_office_worldwide": 401200000,
+    "budget": 30000000,
+    "runtime_minutes": 81,
+    "imdb_rating": 8.3,
+    "rt_score": 100,
+    "release_year": 1995
+  },
+  {
+    "name": "Independence Day",
+    "box_office_worldwide": 817400000,
+    "budget": 75000000,
+    "runtime_minutes": 145,
+    "imdb_rating": 6.9,
+    "rt_score": 77,
+    "release_year": 1996
+  },
+  {
+    "name": "Men in Black",
+    "box_office_worldwide": 589400000,
+    "budget": 90000000,
+    "runtime_minutes": 98,
+    "imdb_rating": 7.3,
+    "rt_score": 91,
+    "release_year": 1997
+  },
+  {
+    "name": "Home Alone",
+    "box_office_worldwide": 476700000,
+    "budget": 18000000,
+    "runtime_minutes": 103,
+    "imdb_rating": 7.7,
+    "rt_score": 66,
+    "release_year": 1990
+  },
+  {
+    "name": "The Sixth Sense",
+    "box_office_worldwide": 672800000,
+    "budget": 40000000,
+    "runtime_minutes": 107,
+    "imdb_rating": 8.1,
+    "rt_score": 86,
+    "release_year": 1999
+  },
+  {
+    "name": "Saving Private Ryan",
+    "box_office_worldwide": 482300000,
+    "budget": 70000000,
+    "runtime_minutes": 170,
+    "imdb_rating": 8.6,
+    "rt_score": 94,
+    "release_year": 1998
+  },
+  {
+    "name": "Good Will Hunting",
+    "box_office_worldwide": 225900000,
+    "budget": 10000000,
+    "runtime_minutes": 126,
+    "imdb_rating": 8.3,
+    "rt_score": 97,
+    "release_year": 1997
+  },
+  {
+    "name": "Fight Club",
+    "box_office_worldwide": 102000000,
+    "budget": 63000000,
+    "runtime_minutes": 139,
+    "imdb_rating": 8.8,
+    "rt_score": 81,
+    "release_year": 1999
+  },
+  {
+    "name": "American Beauty",
+    "box_office_worldwide": 356300000,
+    "budget": 15000000,
+    "runtime_minutes": 122,
+    "imdb_rating": 8.3,
+    "rt_score": 87,
+    "release_year": 1999
+  },
+  {
+    "name": "The Lord of the Rings: The Fellowship of the Ring",
+    "box_office_worldwide": 897539618,
+    "budget": 93000000,
+    "runtime_minutes": 178,
+    "imdb_rating": 8.9,
+    "rt_score": 91,
+    "release_year": 2001
+  },
+  {
+    "name": "Harry Potter and the Sorcerer's Stone",
+    "box_office_worldwide": 1029374615,
+    "budget": 125000000,
+    "runtime_minutes": 152,
+    "imdb_rating": 7.7,
+    "rt_score": 80,
+    "release_year": 2001
+  },
+  {
+    "name": "Spider-Man",
+    "box_office_worldwide": 810925307,
+    "budget": 139000000,
+    "runtime_minutes": 121,
+    "imdb_rating": 7.4,
+    "rt_score": 90,
+    "release_year": 2002
+  },
+  {
+    "name": "The Dark Knight",
+    "box_office_worldwide": 1008480203,
+    "budget": 185000000,
+    "runtime_minutes": 152,
+    "imdb_rating": 9.1,
+    "rt_score": 94,
+    "release_year": 2008
+  },
+  {
+    "name": "Avatar",
+    "box_office_worldwide": 2923710708,
+    "budget": 237000000,
+    "runtime_minutes": 162,
+    "imdb_rating": 7.9,
+    "rt_score": 81,
+    "release_year": 2009
+  },
+  {
+    "name": "Pirates of the Caribbean: The Curse of the Black Pearl",
+    "box_office_worldwide": 654264015,
+    "budget": 140000000,
+    "runtime_minutes": 143,
+    "imdb_rating": 8.1,
+    "rt_score": 79,
+    "release_year": 2003
+  },
+  {
+    "name": "Shrek",
+    "box_office_worldwide": 489732595,
+    "budget": 60000000,
+    "runtime_minutes": 90,
+    "imdb_rating": 7.9,
+    "rt_score": 89,
+    "release_year": 2001
+  },
+  {
+    "name": "Finding Nemo",
+    "box_office_worldwide": 941637960,
+    "budget": 94000000,
+    "runtime_minutes": 100,
+    "imdb_rating": 8.2,
+    "rt_score": 99,
+    "release_year": 2003
+  },
+  {
+    "name": "The Incredibles",
+    "box_office_worldwide": 631688498,
+    "budget": 92000000,
+    "runtime_minutes": 115,
+    "imdb_rating": 8,
+    "rt_score": 97,
+    "release_year": 2004
+  },
+  {
+    "name": "Gladiator",
+    "box_office_worldwide": 465518644,
+    "budget": 103000000,
+    "runtime_minutes": 155,
+    "imdb_rating": 8.5,
+    "rt_score": 80,
+    "release_year": 2000
+  },
+  {
+    "name": "Iron Man",
+    "box_office_worldwide": 585796247,
+    "budget": 150000000,
+    "runtime_minutes": 126,
+    "imdb_rating": 7.9,
+    "rt_score": 94,
+    "release_year": 2008
+  },
+  {
+    "name": "WALL-E",
+    "box_office_worldwide": 532508025,
+    "budget": 180000000,
+    "runtime_minutes": 98,
+    "imdb_rating": 8.4,
+    "rt_score": 95,
+    "release_year": 2008
+  },
+  {
+    "name": "Up",
+    "box_office_worldwide": 735103954,
+    "budget": 175000000,
+    "runtime_minutes": 96,
+    "imdb_rating": 8.3,
+    "rt_score": 98,
+    "release_year": 2009
+  },
+  {
+    "name": "The Departed",
+    "box_office_worldwide": 292095981,
+    "budget": 90000000,
+    "runtime_minutes": 151,
+    "imdb_rating": 8.5,
+    "rt_score": 91,
+    "release_year": 2006
+  },
+  {
+    "name": "No Country for Old Men",
+    "box_office_worldwide": 171635732,
+    "budget": 25000000,
+    "runtime_minutes": 122,
+    "imdb_rating": 8.2,
+    "rt_score": 93,
+    "release_year": 2007
+  },
+  {
+    "name": "Slumdog Millionaire",
+    "box_office_worldwide": 378411362,
+    "budget": 15000000,
+    "runtime_minutes": 120,
+    "imdb_rating": 8,
+    "rt_score": 92,
+    "release_year": 2008
+  },
+  {
+    "name": "The Avengers",
+    "box_office_worldwide": 1520538536,
+    "budget": 220000000,
+    "runtime_minutes": 143,
+    "imdb_rating": 8,
+    "rt_score": 91,
+    "release_year": 2012
+  },
+  {
+    "name": "Frozen",
+    "box_office_worldwide": 1284879663,
+    "budget": 150000000,
+    "runtime_minutes": 102,
+    "imdb_rating": 7.4,
+    "rt_score": 89,
+    "release_year": 2013
+  },
+  {
+    "name": "Inception",
+    "box_office_worldwide": 839796627,
+    "budget": 160000000,
+    "runtime_minutes": 148,
+    "imdb_rating": 8.8,
+    "rt_score": 86,
+    "release_year": 2010
+  },
+  {
+    "name": "Interstellar",
+    "box_office_worldwide": 764344535,
+    "budget": 165000000,
+    "runtime_minutes": 169,
+    "imdb_rating": 8.7,
+    "rt_score": 73,
+    "release_year": 2014
+  },
+  {
+    "name": "Guardians of the Galaxy",
+    "box_office_worldwide": 773350376,
+    "budget": 170000000,
+    "runtime_minutes": 121,
+    "imdb_rating": 8,
+    "rt_score": 91,
+    "release_year": 2014
+  },
+  {
+    "name": "Star Wars: The Force Awakens",
+    "box_office_worldwide": 2071310218,
+    "budget": 245000000,
+    "runtime_minutes": 138,
+    "imdb_rating": 7.7,
+    "rt_score": 93,
+    "release_year": 2015
+  },
+  {
+    "name": "Jurassic World",
+    "box_office_worldwide": 1671537444,
+    "budget": 150000000,
+    "runtime_minutes": 124,
+    "imdb_rating": 6.9,
+    "rt_score": 72,
+    "release_year": 2015
+  },
+  {
+    "name": "Deadpool",
+    "box_office_worldwide": 782837347,
+    "budget": 58000000,
+    "runtime_minutes": 108,
+    "imdb_rating": 8,
+    "rt_score": 85,
+    "release_year": 2016
+  },
+  {
+    "name": "Wonder Woman",
+    "box_office_worldwide": 823970682,
+    "budget": 149000000,
+    "runtime_minutes": 141,
+    "imdb_rating": 7.3,
+    "rt_score": 93,
+    "release_year": 2017
+  },
+  {
+    "name": "Black Panther",
+    "box_office_worldwide": 1349926083,
+    "budget": 200000000,
+    "runtime_minutes": 134,
+    "imdb_rating": 7.3,
+    "rt_score": 96,
+    "release_year": 2018
+  },
+  {
+    "name": "Avengers: Endgame",
+    "box_office_worldwide": 2799439100,
+    "budget": 356000000,
+    "runtime_minutes": 181,
+    "imdb_rating": 8.4,
+    "rt_score": 94,
+    "release_year": 2019
+  },
+  {
+    "name": "Get Out",
+    "box_office_worldwide": 259861530,
+    "budget": 4500000,
+    "runtime_minutes": 104,
+    "imdb_rating": 7.8,
+    "rt_score": 98,
+    "release_year": 2017
+  },
+  {
+    "name": "La La Land",
+    "box_office_worldwide": 523088208,
+    "budget": 30000000,
+    "runtime_minutes": 128,
+    "imdb_rating": 8,
+    "rt_score": 91,
+    "release_year": 2016
+  },
+  {
+    "name": "Mad Max: Fury Road",
+    "box_office_worldwide": 380456026,
+    "budget": 150000000,
+    "runtime_minutes": 120,
+    "imdb_rating": 8.1,
+    "rt_score": 97,
+    "release_year": 2015
+  },
+  {
+    "name": "The Wolf of Wall Street",
+    "box_office_worldwide": 407039432,
+    "budget": 100000000,
+    "runtime_minutes": 180,
+    "imdb_rating": 8.2,
+    "rt_score": 79,
+    "release_year": 2013
+  },
+  {
+    "name": "Parasite",
+    "box_office_worldwide": 263423899,
+    "budget": 11400000,
+    "runtime_minutes": 132,
+    "imdb_rating": 8.5,
+    "rt_score": 99,
+    "release_year": 2019
+  },
+  {
+    "name": "Top Gun: Maverick",
+    "box_office_worldwide": 1495696292,
+    "budget": 170000000,
+    "runtime_minutes": 130,
+    "imdb_rating": 8.2,
+    "rt_score": 96,
+    "release_year": 2022
+  },
+  {
+    "name": "Barbie",
+    "box_office_worldwide": 1447138421,
+    "budget": 145000000,
+    "runtime_minutes": 114,
+    "imdb_rating": 6.8,
+    "rt_score": 88,
+    "release_year": 2023
+  },
+  {
+    "name": "Oppenheimer",
+    "box_office_worldwide": 975811333,
+    "budget": 100000000,
+    "runtime_minutes": 180,
+    "imdb_rating": 8.2,
+    "rt_score": 93,
+    "release_year": 2023
+  },
+  {
+    "name": "Spider-Man: No Way Home",
+    "box_office_worldwide": 1921426073,
+    "budget": 200000000,
+    "runtime_minutes": 148,
+    "imdb_rating": 8.1,
+    "rt_score": 93,
+    "release_year": 2021
+  },
+  {
+    "name": "Dune",
+    "box_office_worldwide": 410668500,
+    "budget": 165000000,
+    "runtime_minutes": 155,
+    "imdb_rating": 8,
+    "rt_score": 83,
+    "release_year": 2021
+  },
+  {
+    "name": "Everything Everywhere All at Once",
+    "box_office_worldwide": 143400000,
+    "budget": 25000000,
+    "runtime_minutes": 139,
+    "imdb_rating": 7.7,
+    "rt_score": 93,
+    "release_year": 2022
+  },
+  {
+    "name": "Encanto",
+    "box_office_worldwide": 261292688,
+    "budget": 150000000,
+    "runtime_minutes": 102,
+    "imdb_rating": 7.2,
+    "rt_score": 92,
+    "release_year": 2021
+  },
+  {
+    "name": "Minions: The Rise of Gru",
+    "box_office_worldwide": 940482695,
+    "budget": 90000000,
+    "runtime_minutes": 87,
+    "imdb_rating": 6.5,
+    "rt_score": 70,
+    "release_year": 2022
+  },
+  {
+    "name": "The Super Mario Bros. Movie",
+    "box_office_worldwide": 1360783214,
+    "budget": 100000000,
+    "runtime_minutes": 92,
+    "imdb_rating": 7,
+    "rt_score": 59,
+    "release_year": 2023
+  },
+  {
+    "name": "Casablanca",
+    "box_office_worldwide": 4757681,
+    "budget": 1000000,
+    "runtime_minutes": 102,
+    "imdb_rating": 8.5,
+    "rt_score": 99,
+    "release_year": 1942
+  },
+  {
+    "name": "Gone with the Wind",
+    "box_office_worldwide": 402382193,
+    "budget": 3850000,
+    "runtime_minutes": 238,
+    "imdb_rating": 8.2,
+    "rt_score": 90,
+    "release_year": 1939
+  },
+  {
+    "name": "The Wizard of Oz",
+    "box_office_worldwide": 25600000,
+    "budget": 2777000,
+    "runtime_minutes": 102,
+    "imdb_rating": 8.1,
+    "rt_score": 98,
+    "release_year": 1939
+  },
+  {
+    "name": "2001: A Space Odyssey",
+    "box_office_worldwide": 148500000,
+    "budget": 10500000,
+    "runtime_minutes": 139,
+    "imdb_rating": 8.3,
+    "rt_score": 90,
+    "release_year": 1968
+  },
+  {
+    "name": "Psycho",
+    "box_office_worldwide": 50000000,
+    "budget": 806947,
+    "runtime_minutes": 109,
+    "imdb_rating": 8.5,
+    "rt_score": 97,
+    "release_year": 1960
+  },
+  {
+    "name": "Avengers: Infinity War",
+    "box_office_worldwide": 2052415039,
+    "budget": 325000000,
+    "runtime_minutes": 149,
+    "imdb_rating": 8.4,
+    "rt_score": 85,
+    "release_year": 2018
+  },
+  {
+    "name": "It",
+    "box_office_worldwide": 719766009,
+    "budget": 35000000,
+    "runtime_minutes": 135,
+    "imdb_rating": 7.3,
+    "rt_score": 85,
+    "release_year": 2017
+  }
+]

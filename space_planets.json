@@ -1,0 +1,101 @@
+[
+  {
+    "name": "Mercury",
+    "distance_from_sun": 57.9,
+    "diameter": 4879,
+    "moons_count": 0,
+    "day_length_hours": 1407.5,
+    "orbital_period_days": 88,
+    "surface_gravity": 3.7
+  },
+  {
+    "name": "Venus",
+    "distance_from_sun": 108.2,
+    "diameter": 12104,
+    "moons_count": 0,
+    "day_length_hours": 5832.5,
+    "orbital_period_days": 224.7,
+    "surface_gravity": 8.87
+  },
+  {
+    "name": "Earth",
+    "distance_from_sun": 149.6,
+    "diameter": 12756,
+    "moons_count": 1,
+    "day_length_hours": 23.9,
+    "orbital_period_days": 365.3,
+    "surface_gravity": 9.81
+  },
+  {
+    "name": "Mars",
+    "distance_from_sun": 227.9,
+    "diameter": 6792,
+    "moons_count": 2,
+    "day_length_hours": 24.6,
+    "orbital_period_days": 687,
+    "surface_gravity": 3.72
+  },
+  {
+    "name": "Jupiter",
+    "distance_from_sun": 778.5,
+    "diameter": 142976,
+    "moons_count": 115,
+    "day_length_hours": 9.9,
+    "orbital_period_days": 4332.6,
+    "surface_gravity": 24.79
+  },
+  {
+    "name": "Saturn",
+    "distance_from_sun": 1433.5,
+    "diameter": 120536,
+    "moons_count": 293,
+    "day_length_hours": 10.5,
+    "orbital_period_days": 10755.7,
+    "surface_gravity": 10.44
+  },
+  {
+    "name": "Uranus",
+    "distance_from_sun": 2871,
+    "diameter": 51113,
+    "moons_count": 29,
+    "day_length_hours": 17.2,
+    "orbital_period_days": 30688.5,
+    "surface_gravity": 8.69
+  },
+  {
+    "name": "Neptune",
+    "distance_from_sun": 4500,
+    "diameter": 24761,
+    "moons_count": 16,
+    "day_length_hours": 16.1,
+    "orbital_period_days": 60195,
+    "surface_gravity": 11.27
+  },
+  {
+    "name": "Pluto",
+    "distance_from_sun": 5906.4,
+    "diameter": 2377,
+    "moons_count": 5,
+    "day_length_hours": 153.3,
+    "orbital_period_days": 90560,
+    "surface_gravity": 0.62
+  },
+  {
+    "name": "Ceres",
+    "distance_from_sun": 414,
+    "diameter": 964,
+    "moons_count": 0,
+    "day_length_hours": 9.1,
+    "orbital_period_days": 1680,
+    "surface_gravity": 0.28
+  },
+  {
+    "name": "Eris",
+    "distance_from_sun": 10126,
+    "diameter": 2326,
+    "moons_count": 1,
+    "day_length_hours": 378.9,
+    "orbital_period_days": 204795.7,
+    "surface_gravity": 0.82
+  }
+]

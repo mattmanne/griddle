@@ -15,10 +15,10 @@ accidentally undone.
 - `index.html` / `app.js` / `style.css` — the whole app. No build step, no
   dependencies — deliberately static so it can be served as-is from GitHub Pages.
 - `players.json`, `wnba_players.json`, `ncaam_players.json`, `mlb_hitters.json`,
-  `nhl_skaters.json`, `cfb_qb_players.json`, `cfb_rb_players.json`,
-  `cfb_wr_players.json`, `nfl_qb_players.json`, `nfl_rb_players.json`,
-  `nfl_wr_players.json`, `geo_countries.json` — one JSON array per pack (or per
-  position group, for football), fetched at load.
+  `nhl_skaters.json`, `football_qb_players.json`, `football_rb_players.json`,
+  `football_wr_players.json`, `geo_countries.json`, `us_states.json`, `movies.json`,
+  `space_planets.json` — one JSON array per pack (or per position group, for
+  football, which spans both college and pro — see below), fetched at load.
 - `archive-v0/` — the original prototype (continuous running-average scoring, no
   batches). Kept for reference, not wired into `index.html`. If you're tempted to
   bring back "session average" style scoring (backlog #15), this is where the old
@@ -89,12 +89,12 @@ data.
 
 - **Packs that track identical categories share one `statDefs` object instead of each
   getting a copy.** `HOOPS_STAT_DEFS` covers NBA/WNBA/NCAA men's basketball.
-  `QB_STAT_DEFS`/`RB_STAT_DEFS`/`WR_STAT_DEFS` each cover a college *and* NFL entry
-  (`cfb_qb`+`nfl_qb`, etc.) — a college and pro quarterback's stat line has the same
-  shape, so `cfb_qb.statDefs === nfl_qb.statDefs` by reference. Duplicating any of
-  these would just be more copies to keep in sync by hand. If one of them ever needs
-  to diverge, give that one pack its own object at that point — don't speculatively
-  split them apart now.
+  `QB_STAT_DEFS`/`RB_STAT_DEFS`/`WR_STAT_DEFS` cover `football_qb`/`football_rb`/
+  `football_wr` (these objects predate the college+NFL merge described below — they
+  were originally shared *between* a `cfb_x` and an `nfl_x` entry, and are now used
+  by a single merged entry each, which is a fine outcome of the same principle:
+  identical shape, one object). If one of them ever needs to diverge, give that pack
+  its own object at that point — don't speculatively split them apart now.
 
 ## Pack architecture — from "sports" to a general framework
 
@@ -168,24 +168,34 @@ people.
   written to leave `#round-progress` alone whenever a round is active (`guessIndex
   !== 0 && !roundOver`), so a toggle only affects which pack the *next* guess draws
   from.
-- **Position groups (college/pro football's QB/RB/WR) are just more `PACKS`
-  entries, not a new sub-feature** — and this same insight is what made adding a
-  non-sports domain like geography a rename-and-data-file exercise rather than a
-  rewrite. Backlog item 7 (now done) originally assumed football needed "the
-  position-group feature" as real new architecture, because QB/RB/WR stats share
-  almost nothing. But the multi-pack toggle system already solved exactly that
-  problem — each position is its own entry with its own file and `statDefs`, toggled
-  independently like any other pack. NFL confirmed this directly: adding it after
-  college football was zero new code, just three more entries pointing at the same
-  `QB_STAT_DEFS`/`RB_STAT_DEFS`/`WR_STAT_DEFS` objects. **The lesson, twice
-  confirmed**: before treating a backlog note's stated blocker as still true, check
-  whether something built since then already resolves it.
-- **The same real person can legitimately appear once per league they played in.**
-  Ja'Marr Chase, CeeDee Lamb, Troy Aikman, and others show up in both a `cfb_*` and
-  an `nfl_*` file with different (correct) stat lines — one row is their college
-  career, the other their pro career. This isn't a duplicate-data bug to clean up;
-  it's the same pattern as Michael Jordan appearing in both `players.json` (NBA) and
-  `ncaam_players.json` (UNC) already. Don't "deduplicate" these across files.
+- **Position groups (football's QB/RB/WR) are just more `PACKS` entries, not a new
+  sub-feature** — and this same insight is what made adding a non-sports domain like
+  geography a rename-and-data-file exercise rather than a rewrite. Backlog item 7
+  originally assumed football needed "the position-group feature" as real new
+  architecture, because QB/RB/WR stats share almost nothing. But the multi-pack
+  toggle system already solved exactly that problem — each position is its own entry
+  with its own file and `statDefs`, toggled independently like any other pack.
+  **The lesson**: before treating a backlog note's stated blocker as still true,
+  check whether something built since then already resolves it.
+- **College and pro football were later merged into one pack per position**
+  (`football_qb`/`football_rb`/`football_wr`), each pooling both the college and NFL
+  rosters together rather than staying six separate toggles (`cfb_qb`+`nfl_qb`,
+  etc.). The catch: ~5-13 players per position played both levels and are real
+  entries in both source lists (Troy Aikman, Ja'Marr Chase, Barry Sanders, and
+  others) — concatenating the arrays as-is would put two rows named "Troy Aikman" in
+  one pool with no way to tell them apart (the debug entry-picker in particular would
+  only ever resolve to whichever one `Array.prototype.find` hits first). Fixed by
+  tagging *only the overlapping names*, and only in the merged file — `Troy Aikman
+  (College)` / `Troy Aikman (NFL)` — while every non-overlapping player keeps their
+  plain name. This is the correct place to fix it: a merge script run once while
+  building the combined JSON files, not a runtime dedup check, since the ambiguity is
+  a data-shape fact about these three specific files, not a general property of
+  `PACKS` entries. Everywhere else in this codebase, the *same* real person
+  legitimately appearing more than once with different (correct) stat lines across
+  *different* files (Michael Jordan in both `players.json` and `ncaam_players.json`)
+  is still fine and shouldn't be "deduplicated" — the football merge is a narrower
+  case where the duplication moved from across-files (harmless) to within-one-file
+  (actually ambiguous), which is what made tagging necessary there specifically.
 - **Packs stay in one flat, combinable toggle list — no separate "sports" vs.
   "trivia" mode.** This matches how the backlog itself frames packs (peers, not a
   hierarchy), and the architecture supports it for free. Not solved yet, and not

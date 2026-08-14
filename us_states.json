@@ -1,0 +1,452 @@
+[
+  {
+    "name": "Alabama",
+    "population": 5193088,
+    "area": 52420,
+    "median_household_income": 62212,
+    "counties": 67,
+    "elevation": 2405,
+    "electoral_votes": 9
+  },
+  {
+    "name": "Alaska",
+    "population": 737270,
+    "area": 665384,
+    "median_household_income": 88121,
+    "counties": 30,
+    "elevation": 20310,
+    "electoral_votes": 3
+  },
+  {
+    "name": "Arizona",
+    "population": 7623818,
+    "area": 113990,
+    "median_household_income": 77315,
+    "counties": 15,
+    "elevation": 12637,
+    "electoral_votes": 11
+  },
+  {
+    "name": "Arkansas",
+    "population": 3114791,
+    "area": 53179,
+    "median_household_income": 58700,
+    "counties": 75,
+    "elevation": 2753,
+    "electoral_votes": 6
+  },
+  {
+    "name": "California",
+    "population": 39355309,
+    "area": 163696,
+    "median_household_income": 95521,
+    "counties": 58,
+    "elevation": 14505,
+    "electoral_votes": 54
+  },
+  {
+    "name": "Colorado",
+    "population": 6012561,
+    "area": 104094,
+    "median_household_income": 92911,
+    "counties": 64,
+    "elevation": 14440,
+    "electoral_votes": 10
+  },
+  {
+    "name": "Connecticut",
+    "population": 3688496,
+    "area": 5543,
+    "median_household_income": 91665,
+    "counties": 9,
+    "elevation": 2386,
+    "electoral_votes": 7
+  },
+  {
+    "name": "Delaware",
+    "population": 1059952,
+    "area": 2489,
+    "median_household_income": 82174,
+    "counties": 3,
+    "elevation": 449,
+    "electoral_votes": 3
+  },
+  {
+    "name": "Florida",
+    "population": 23462518,
+    "area": 65758,
+    "median_household_income": 73311,
+    "counties": 67,
+    "elevation": 345,
+    "electoral_votes": 30
+  },
+  {
+    "name": "Georgia",
+    "population": 11302748,
+    "area": 59425,
+    "median_household_income": 74632,
+    "counties": 159,
+    "elevation": 4784,
+    "electoral_votes": 16
+  },
+  {
+    "name": "Hawaii",
+    "population": 1432820,
+    "area": 10932,
+    "median_household_income": 95322,
+    "counties": 5,
+    "elevation": 13803,
+    "electoral_votes": 4
+  },
+  {
+    "name": "Idaho",
+    "population": 2029733,
+    "area": 83569,
+    "median_household_income": 74942,
+    "counties": 44,
+    "elevation": 12668,
+    "electoral_votes": 4
+  },
+  {
+    "name": "Illinois",
+    "population": 12719141,
+    "area": 57914,
+    "median_household_income": 80306,
+    "counties": 102,
+    "elevation": 1235,
+    "electoral_votes": 19
+  },
+  {
+    "name": "Indiana",
+    "population": 6973333,
+    "area": 36420,
+    "median_household_income": 69477,
+    "counties": 92,
+    "elevation": 1257,
+    "electoral_votes": 11
+  },
+  {
+    "name": "Iowa",
+    "population": 3238387,
+    "area": 56273,
+    "median_household_income": 71433,
+    "counties": 99,
+    "elevation": 1671,
+    "electoral_votes": 6
+  },
+  {
+    "name": "Kansas",
+    "population": 2977220,
+    "area": 82278,
+    "median_household_income": 70333,
+    "counties": 105,
+    "elevation": 4041,
+    "electoral_votes": 6
+  },
+  {
+    "name": "Kentucky",
+    "population": 4606864,
+    "area": 40408,
+    "median_household_income": 61118,
+    "counties": 120,
+    "elevation": 4139,
+    "electoral_votes": 8
+  },
+  {
+    "name": "Louisiana",
+    "population": 4618189,
+    "area": 52378,
+    "median_household_income": 58229,
+    "counties": 64,
+    "elevation": 535,
+    "electoral_votes": 8
+  },
+  {
+    "name": "Maine",
+    "population": 1414874,
+    "area": 35380,
+    "median_household_income": 73733,
+    "counties": 16,
+    "elevation": 5270,
+    "electoral_votes": 4
+  },
+  {
+    "name": "Maryland",
+    "population": 6265347,
+    "area": 12406,
+    "median_household_income": 98678,
+    "counties": 23,
+    "elevation": 3360,
+    "electoral_votes": 10
+  },
+  {
+    "name": "Massachusetts",
+    "population": 7154084,
+    "area": 10554,
+    "median_household_income": 99858,
+    "counties": 14,
+    "elevation": 3489,
+    "electoral_votes": 11
+  },
+  {
+    "name": "Michigan",
+    "population": 10127884,
+    "area": 96714,
+    "median_household_income": 69183,
+    "counties": 83,
+    "elevation": 1978,
+    "electoral_votes": 15
+  },
+  {
+    "name": "Minnesota",
+    "population": 5830405,
+    "area": 86936,
+    "median_household_income": 85086,
+    "counties": 87,
+    "elevation": 2300,
+    "electoral_votes": 10
+  },
+  {
+    "name": "Mississippi",
+    "population": 2954160,
+    "area": 48432,
+    "median_household_income": 54203,
+    "counties": 82,
+    "elevation": 807,
+    "electoral_votes": 6
+  },
+  {
+    "name": "Missouri",
+    "population": 6270541,
+    "area": 69707,
+    "median_household_income": 68545,
+    "counties": 114,
+    "elevation": 1770,
+    "electoral_votes": 10
+  },
+  {
+    "name": "Montana",
+    "population": 1144694,
+    "area": 147040,
+    "median_household_income": 70804,
+    "counties": 56,
+    "elevation": 12807,
+    "electoral_votes": 4
+  },
+  {
+    "name": "Nebraska",
+    "population": 2018006,
+    "area": 77348,
+    "median_household_income": 74590,
+    "counties": 93,
+    "elevation": 5427,
+    "electoral_votes": 5
+  },
+  {
+    "name": "Nevada",
+    "population": 3282188,
+    "area": 110572,
+    "median_household_income": 76364,
+    "counties": 17,
+    "elevation": 13147,
+    "electoral_votes": 6
+  },
+  {
+    "name": "New Hampshire",
+    "population": 1415342,
+    "area": 9349,
+    "median_household_income": 96838,
+    "counties": 10,
+    "elevation": 6288,
+    "electoral_votes": 4
+  },
+  {
+    "name": "New Jersey",
+    "population": 9548215,
+    "area": 8723,
+    "median_household_income": 99781,
+    "counties": 21,
+    "elevation": 1803,
+    "electoral_votes": 14
+  },
+  {
+    "name": "New Mexico",
+    "population": 2125498,
+    "area": 121590,
+    "median_household_income": 62268,
+    "counties": 33,
+    "elevation": 13161,
+    "electoral_votes": 5
+  },
+  {
+    "name": "New York",
+    "population": 20002427,
+    "area": 54555,
+    "median_household_income": 82095,
+    "counties": 62,
+    "elevation": 5344,
+    "electoral_votes": 28
+  },
+  {
+    "name": "North Carolina",
+    "population": 11197968,
+    "area": 53819,
+    "median_household_income": 70804,
+    "counties": 100,
+    "elevation": 6683,
+    "electoral_votes": 16
+  },
+  {
+    "name": "North Dakota",
+    "population": 799358,
+    "area": 70698,
+    "median_household_income": 76525,
+    "counties": 53,
+    "elevation": 3507,
+    "electoral_votes": 3
+  },
+  {
+    "name": "Ohio",
+    "population": 11900510,
+    "area": 44825,
+    "median_household_income": 67769,
+    "counties": 88,
+    "elevation": 1549,
+    "electoral_votes": 17
+  },
+  {
+    "name": "Oklahoma",
+    "population": 4123288,
+    "area": 69699,
+    "median_household_income": 62138,
+    "counties": 77,
+    "elevation": 4974,
+    "electoral_votes": 7
+  },
+  {
+    "name": "Oregon",
+    "population": 4273586,
+    "area": 98381,
+    "median_household_income": 80160,
+    "counties": 36,
+    "elevation": 11249,
+    "electoral_votes": 8
+  },
+  {
+    "name": "Pennsylvania",
+    "population": 13059432,
+    "area": 46055,
+    "median_household_income": 73824,
+    "counties": 67,
+    "elevation": 3212,
+    "electoral_votes": 19
+  },
+  {
+    "name": "Rhode Island",
+    "population": 1114521,
+    "area": 1545,
+    "median_household_income": 84972,
+    "counties": 5,
+    "elevation": 810,
+    "electoral_votes": 4
+  },
+  {
+    "name": "South Carolina",
+    "population": 5570274,
+    "area": 32020,
+    "median_household_income": 67804,
+    "counties": 46,
+    "elevation": 3560,
+    "electoral_votes": 9
+  },
+  {
+    "name": "South Dakota",
+    "population": 935094,
+    "area": 77116,
+    "median_household_income": 71810,
+    "counties": 66,
+    "elevation": 7244,
+    "electoral_votes": 3
+  },
+  {
+    "name": "Tennessee",
+    "population": 7315076,
+    "area": 42181,
+    "median_household_income": 67631,
+    "counties": 95,
+    "elevation": 6644,
+    "electoral_votes": 11
+  },
+  {
+    "name": "Texas",
+    "population": 31709821,
+    "area": 268597,
+    "median_household_income": 75780,
+    "counties": 254,
+    "elevation": 8751,
+    "electoral_votes": 40
+  },
+  {
+    "name": "Utah",
+    "population": 3538904,
+    "area": 84899,
+    "median_household_income": 93421,
+    "counties": 29,
+    "elevation": 13518,
+    "electoral_votes": 6
+  },
+  {
+    "name": "Vermont",
+    "population": 644663,
+    "area": 9623,
+    "median_household_income": 81211,
+    "counties": 14,
+    "elevation": 4400,
+    "electoral_votes": 3
+  },
+  {
+    "name": "Virginia",
+    "population": 8880107,
+    "area": 42775,
+    "median_household_income": 89931,
+    "counties": 133,
+    "elevation": 5728,
+    "electoral_votes": 13
+  },
+  {
+    "name": "Washington",
+    "population": 8001020,
+    "area": 71362,
+    "median_household_income": 94605,
+    "counties": 39,
+    "elevation": 14400,
+    "electoral_votes": 12
+  },
+  {
+    "name": "West Virginia",
+    "population": 1766147,
+    "area": 24230,
+    "median_household_income": 55948,
+    "counties": 55,
+    "elevation": 4862,
+    "electoral_votes": 4
+  },
+  {
+    "name": "Wisconsin",
+    "population": 5972787,
+    "area": 65500,
+    "median_household_income": 74631,
+    "counties": 72,
+    "elevation": 1952,
+    "electoral_votes": 10
+  },
+  {
+    "name": "Wyoming",
+    "population": 588753,
+    "area": 97813,
+    "median_household_income": 72415,
+    "counties": 23,
+    "elevation": 13809,
+    "electoral_votes": 3
+  }
+]
