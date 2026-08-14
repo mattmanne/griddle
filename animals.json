@@ -1,0 +1,613 @@
+[
+  {
+    "name": "Lion",
+    "top_speed_kmh": 80,
+    "weight_kg": 158,
+    "lifespan_years": 12,
+    "gestation_days": 110,
+    "length_cm": 260
+  },
+  {
+    "name": "Tiger",
+    "top_speed_kmh": 65,
+    "weight_kg": 180,
+    "lifespan_years": 10,
+    "gestation_days": 103,
+    "length_cm": 280
+  },
+  {
+    "name": "Cheetah",
+    "top_speed_kmh": 112,
+    "weight_kg": 50,
+    "lifespan_years": 10,
+    "gestation_days": 93,
+    "length_cm": 200
+  },
+  {
+    "name": "Leopard",
+    "top_speed_kmh": 58,
+    "weight_kg": 47,
+    "lifespan_years": 12,
+    "gestation_days": 96,
+    "length_cm": 190
+  },
+  {
+    "name": "Jaguar",
+    "top_speed_kmh": 80,
+    "weight_kg": 63,
+    "lifespan_years": 12,
+    "gestation_days": 100,
+    "length_cm": 185
+  },
+  {
+    "name": "Snow Leopard",
+    "top_speed_kmh": 55,
+    "weight_kg": 40,
+    "lifespan_years": 10,
+    "gestation_days": 95,
+    "length_cm": 195
+  },
+  {
+    "name": "Gray Wolf",
+    "top_speed_kmh": 64,
+    "weight_kg": 40,
+    "lifespan_years": 7,
+    "gestation_days": 63,
+    "length_cm": 165
+  },
+  {
+    "name": "Red Fox",
+    "top_speed_kmh": 48,
+    "weight_kg": 6,
+    "lifespan_years": 3,
+    "gestation_days": 52,
+    "length_cm": 95
+  },
+  {
+    "name": "Arctic Fox",
+    "top_speed_kmh": 46,
+    "weight_kg": 3.5,
+    "lifespan_years": 3,
+    "gestation_days": 52,
+    "length_cm": 85
+  },
+  {
+    "name": "Coyote",
+    "top_speed_kmh": 64,
+    "weight_kg": 13,
+    "lifespan_years": 8,
+    "gestation_days": 63,
+    "length_cm": 115
+  },
+  {
+    "name": "Spotted Hyena",
+    "top_speed_kmh": 60,
+    "weight_kg": 58,
+    "lifespan_years": 12,
+    "gestation_days": 110,
+    "length_cm": 150
+  },
+  {
+    "name": "Grizzly Bear",
+    "top_speed_kmh": 56,
+    "weight_kg": 200,
+    "lifespan_years": 22,
+    "gestation_days": 215,
+    "length_cm": 200
+  },
+  {
+    "name": "Polar Bear",
+    "top_speed_kmh": 40,
+    "weight_kg": 340,
+    "lifespan_years": 18,
+    "gestation_days": 230,
+    "length_cm": 230
+  },
+  {
+    "name": "Black Bear",
+    "top_speed_kmh": 48,
+    "weight_kg": 100,
+    "lifespan_years": 18,
+    "gestation_days": 220,
+    "length_cm": 160
+  },
+  {
+    "name": "Wolverine",
+    "top_speed_kmh": 40,
+    "weight_kg": 13,
+    "lifespan_years": 8,
+    "gestation_days": 40,
+    "length_cm": 100
+  },
+  {
+    "name": "Honey Badger",
+    "top_speed_kmh": 25,
+    "weight_kg": 10,
+    "lifespan_years": 7,
+    "gestation_days": 60,
+    "length_cm": 85
+  },
+  {
+    "name": "African Elephant",
+    "top_speed_kmh": 40,
+    "weight_kg": 5000,
+    "lifespan_years": 60,
+    "gestation_days": 660,
+    "length_cm": 650
+  },
+  {
+    "name": "Asian Elephant",
+    "top_speed_kmh": 25,
+    "weight_kg": 4000,
+    "lifespan_years": 55,
+    "gestation_days": 645,
+    "length_cm": 550
+  },
+  {
+    "name": "Giraffe",
+    "top_speed_kmh": 60,
+    "weight_kg": 900,
+    "lifespan_years": 25,
+    "gestation_days": 457,
+    "length_cm": 430
+  },
+  {
+    "name": "Hippopotamus",
+    "top_speed_kmh": 30,
+    "weight_kg": 1500,
+    "lifespan_years": 40,
+    "gestation_days": 243,
+    "length_cm": 350
+  },
+  {
+    "name": "White Rhinoceros",
+    "top_speed_kmh": 50,
+    "weight_kg": 2100,
+    "lifespan_years": 40,
+    "gestation_days": 490,
+    "length_cm": 390
+  },
+  {
+    "name": "Plains Zebra",
+    "top_speed_kmh": 65,
+    "weight_kg": 300,
+    "lifespan_years": 20,
+    "gestation_days": 365,
+    "length_cm": 240
+  },
+  {
+    "name": "Western Lowland Gorilla",
+    "top_speed_kmh": 40,
+    "weight_kg": 120,
+    "lifespan_years": 35,
+    "gestation_days": 257,
+    "length_cm": 150
+  },
+  {
+    "name": "Chimpanzee",
+    "top_speed_kmh": 32,
+    "weight_kg": 50,
+    "lifespan_years": 33,
+    "gestation_days": 230,
+    "length_cm": 80
+  },
+  {
+    "name": "Bornean Orangutan",
+    "top_speed_kmh": 6,
+    "weight_kg": 56,
+    "lifespan_years": 35,
+    "gestation_days": 260,
+    "length_cm": 120
+  },
+  {
+    "name": "American Bison",
+    "top_speed_kmh": 55,
+    "weight_kg": 640,
+    "lifespan_years": 20,
+    "gestation_days": 285,
+    "length_cm": 350
+  },
+  {
+    "name": "Moose",
+    "top_speed_kmh": 55,
+    "weight_kg": 450,
+    "lifespan_years": 15,
+    "gestation_days": 231,
+    "length_cm": 275
+  },
+  {
+    "name": "Blue Wildebeest",
+    "top_speed_kmh": 80,
+    "weight_kg": 220,
+    "lifespan_years": 20,
+    "gestation_days": 250,
+    "length_cm": 210
+  },
+  {
+    "name": "Dromedary Camel",
+    "top_speed_kmh": 65,
+    "weight_kg": 500,
+    "lifespan_years": 40,
+    "gestation_days": 390,
+    "length_cm": 300
+  },
+  {
+    "name": "Red Kangaroo",
+    "top_speed_kmh": 70,
+    "weight_kg": 55,
+    "lifespan_years": 23,
+    "gestation_days": 33,
+    "length_cm": 130
+  },
+  {
+    "name": "Koala",
+    "top_speed_kmh": 20,
+    "weight_kg": 9,
+    "lifespan_years": 15,
+    "gestation_days": 35,
+    "length_cm": 70
+  },
+  {
+    "name": "Giant Panda",
+    "top_speed_kmh": 32,
+    "weight_kg": 100,
+    "lifespan_years": 20,
+    "gestation_days": 135,
+    "length_cm": 150
+  },
+  {
+    "name": "Ostrich",
+    "top_speed_kmh": 70,
+    "weight_kg": 115,
+    "lifespan_years": 40,
+    "length_cm": 250
+  },
+  {
+    "name": "Peregrine Falcon",
+    "top_speed_kmh": 320,
+    "weight_kg": 0.7,
+    "lifespan_years": 15,
+    "length_cm": 42
+  },
+  {
+    "name": "Bald Eagle",
+    "top_speed_kmh": 160,
+    "weight_kg": 5,
+    "lifespan_years": 20,
+    "length_cm": 80
+  },
+  {
+    "name": "Emperor Penguin",
+    "top_speed_kmh": 9,
+    "weight_kg": 30,
+    "lifespan_years": 20,
+    "length_cm": 115
+  },
+  {
+    "name": "Peacock",
+    "top_speed_kmh": 16,
+    "weight_kg": 5,
+    "lifespan_years": 20,
+    "length_cm": 200
+  },
+  {
+    "name": "Golden Eagle",
+    "top_speed_kmh": 240,
+    "weight_kg": 5,
+    "lifespan_years": 20,
+    "length_cm": 80
+  },
+  {
+    "name": "Ruby-throated Hummingbird",
+    "top_speed_kmh": 50,
+    "weight_kg": 0.0035,
+    "lifespan_years": 5,
+    "length_cm": 9
+  },
+  {
+    "name": "Wandering Albatross",
+    "top_speed_kmh": 120,
+    "weight_kg": 9,
+    "lifespan_years": 50,
+    "length_cm": 115
+  },
+  {
+    "name": "Komodo Dragon",
+    "top_speed_kmh": 20,
+    "weight_kg": 70,
+    "lifespan_years": 30,
+    "length_cm": 250
+  },
+  {
+    "name": "Saltwater Crocodile",
+    "top_speed_kmh": 29,
+    "weight_kg": 450,
+    "lifespan_years": 70,
+    "length_cm": 500
+  },
+  {
+    "name": "American Alligator",
+    "top_speed_kmh": 32,
+    "weight_kg": 360,
+    "lifespan_years": 50,
+    "length_cm": 370
+  },
+  {
+    "name": "King Cobra",
+    "top_speed_kmh": 18,
+    "weight_kg": 9,
+    "lifespan_years": 20,
+    "length_cm": 400
+  },
+  {
+    "name": "Green Anaconda",
+    "top_speed_kmh": 10,
+    "weight_kg": 55,
+    "lifespan_years": 10,
+    "length_cm": 500
+  },
+  {
+    "name": "Galapagos Tortoise",
+    "top_speed_kmh": 0.3,
+    "weight_kg": 300,
+    "lifespan_years": 100,
+    "length_cm": 130
+  },
+  {
+    "name": "Green Sea Turtle",
+    "top_speed_kmh": 35,
+    "weight_kg": 150,
+    "lifespan_years": 70,
+    "length_cm": 115
+  },
+  {
+    "name": "Gila Monster",
+    "top_speed_kmh": 2.5,
+    "weight_kg": 0.7,
+    "lifespan_years": 20,
+    "length_cm": 50
+  },
+  {
+    "name": "Blue Whale",
+    "top_speed_kmh": 48,
+    "weight_kg": 150000,
+    "lifespan_years": 90,
+    "length_cm": 2500,
+    "gestation_days": 335
+  },
+  {
+    "name": "Humpback Whale",
+    "top_speed_kmh": 27,
+    "weight_kg": 36000,
+    "lifespan_years": 50,
+    "length_cm": 1400,
+    "gestation_days": 340
+  },
+  {
+    "name": "Orca (Killer Whale)",
+    "top_speed_kmh": 56,
+    "weight_kg": 5000,
+    "lifespan_years": 50,
+    "length_cm": 700,
+    "gestation_days": 510
+  },
+  {
+    "name": "Sperm Whale",
+    "top_speed_kmh": 37,
+    "weight_kg": 35000,
+    "lifespan_years": 65,
+    "length_cm": 1600,
+    "gestation_days": 450
+  },
+  {
+    "name": "Great White Shark",
+    "top_speed_kmh": 56,
+    "weight_kg": 900,
+    "lifespan_years": 70,
+    "length_cm": 450
+  },
+  {
+    "name": "Whale Shark",
+    "top_speed_kmh": 5,
+    "weight_kg": 19000,
+    "lifespan_years": 80,
+    "length_cm": 1000
+  },
+  {
+    "name": "Hammerhead Shark",
+    "top_speed_kmh": 40,
+    "weight_kg": 230,
+    "lifespan_years": 30,
+    "length_cm": 400
+  },
+  {
+    "name": "Bottlenose Dolphin",
+    "top_speed_kmh": 30,
+    "weight_kg": 300,
+    "lifespan_years": 45,
+    "length_cm": 270,
+    "gestation_days": 365
+  },
+  {
+    "name": "Sea Otter",
+    "top_speed_kmh": 15,
+    "weight_kg": 27,
+    "lifespan_years": 15,
+    "length_cm": 120,
+    "gestation_days": 180
+  },
+  {
+    "name": "California Sea Lion",
+    "top_speed_kmh": 40,
+    "weight_kg": 250,
+    "lifespan_years": 20,
+    "length_cm": 210,
+    "gestation_days": 345
+  },
+  {
+    "name": "Walrus",
+    "top_speed_kmh": 35,
+    "weight_kg": 1000,
+    "lifespan_years": 40,
+    "length_cm": 290,
+    "gestation_days": 470
+  },
+  {
+    "name": "Giant Pacific Octopus",
+    "top_speed_kmh": 40,
+    "weight_kg": 15,
+    "lifespan_years": 4,
+    "length_cm": 150
+  },
+  {
+    "name": "Manta Ray",
+    "top_speed_kmh": 24,
+    "weight_kg": 1350,
+    "lifespan_years": 45,
+    "length_cm": 450
+  },
+  {
+    "name": "Swordfish",
+    "top_speed_kmh": 97,
+    "weight_kg": 200,
+    "lifespan_years": 10,
+    "length_cm": 300
+  },
+  {
+    "name": "Bluefin Tuna",
+    "top_speed_kmh": 70,
+    "weight_kg": 300,
+    "lifespan_years": 25,
+    "length_cm": 250
+  },
+  {
+    "name": "Beluga Whale",
+    "top_speed_kmh": 22,
+    "weight_kg": 1350,
+    "lifespan_years": 45,
+    "length_cm": 400,
+    "gestation_days": 440
+  },
+  {
+    "name": "Eastern Gray Squirrel",
+    "top_speed_kmh": 32,
+    "weight_kg": 0.5,
+    "lifespan_years": 6,
+    "length_cm": 25,
+    "gestation_days": 44
+  },
+  {
+    "name": "European Rabbit",
+    "top_speed_kmh": 48,
+    "weight_kg": 1.5,
+    "lifespan_years": 9,
+    "length_cm": 40,
+    "gestation_days": 31
+  },
+  {
+    "name": "European Hedgehog",
+    "top_speed_kmh": 6.4,
+    "weight_kg": 0.85,
+    "lifespan_years": 5,
+    "length_cm": 25,
+    "gestation_days": 33
+  },
+  {
+    "name": "Little Brown Bat",
+    "top_speed_kmh": 32,
+    "weight_kg": 0.009,
+    "lifespan_years": 6.5,
+    "length_cm": 9,
+    "gestation_days": 55
+  },
+  {
+    "name": "Three-toed Sloth",
+    "top_speed_kmh": 0.24,
+    "weight_kg": 4.5,
+    "lifespan_years": 20,
+    "length_cm": 50,
+    "gestation_days": 180
+  },
+  {
+    "name": "House Mouse",
+    "top_speed_kmh": 13,
+    "weight_kg": 0.02,
+    "lifespan_years": 1,
+    "length_cm": 9,
+    "gestation_days": 20
+  },
+  {
+    "name": "North American Beaver",
+    "top_speed_kmh": 8,
+    "weight_kg": 20,
+    "lifespan_years": 10,
+    "length_cm": 80,
+    "gestation_days": 105
+  },
+  {
+    "name": "Raccoon",
+    "top_speed_kmh": 24,
+    "weight_kg": 7,
+    "lifespan_years": 3,
+    "length_cm": 60,
+    "gestation_days": 63
+  },
+  {
+    "name": "Virginia Opossum",
+    "top_speed_kmh": 11,
+    "weight_kg": 3.5,
+    "lifespan_years": 2,
+    "length_cm": 43,
+    "gestation_days": 13
+  },
+  {
+    "name": "Striped Skunk",
+    "top_speed_kmh": 16,
+    "weight_kg": 3.5,
+    "lifespan_years": 3,
+    "length_cm": 40,
+    "gestation_days": 65
+  },
+  {
+    "name": "Honeybee",
+    "top_speed_kmh": 24,
+    "weight_kg": 0.0001,
+    "lifespan_years": 0.11,
+    "length_cm": 1.2
+  },
+  {
+    "name": "Monarch Butterfly",
+    "top_speed_kmh": 18,
+    "weight_kg": 0.0005,
+    "lifespan_years": 0.08,
+    "length_cm": 4.5
+  },
+  {
+    "name": "Praying Mantis",
+    "top_speed_kmh": 6,
+    "weight_kg": 0.003,
+    "lifespan_years": 1,
+    "length_cm": 7
+  },
+  {
+    "name": "Emperor Scorpion",
+    "top_speed_kmh": 2,
+    "weight_kg": 0.03,
+    "lifespan_years": 8,
+    "length_cm": 20
+  },
+  {
+    "name": "Goliath Birdeater Tarantula",
+    "top_speed_kmh": 1.6,
+    "weight_kg": 0.15,
+    "lifespan_years": 15,
+    "length_cm": 12
+  },
+  {
+    "name": "Dung Beetle",
+    "top_speed_kmh": 10,
+    "weight_kg": 0.003,
+    "lifespan_years": 2,
+    "length_cm": 2.5
+  }
+]

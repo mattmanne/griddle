@@ -186,6 +186,21 @@
         surface_gravity: { label: 'Surface Gravity (m/s²)', short: 'GRAV' },
       },
     },
+    animals: {
+      label: null,
+      noun: 'animal',
+      article: 'an',
+      emoji: '🐾',
+      file: 'animals.json',
+      defaultPair: ['top_speed_kmh', 'weight_kg'],
+      statDefs: {
+        top_speed_kmh: { label: 'Top Speed (km/h)', short: 'SPEED' },
+        weight_kg: { label: 'Weight (kg)', short: 'WEIGHT' },
+        lifespan_years: { label: 'Lifespan (years)', short: 'LIFE' },
+        gestation_days: { label: 'Gestation (days)', short: 'GEST' },
+        length_cm: { label: 'Body Length (cm)', short: 'LEN' },
+      },
+    },
   };
 
   const PACK_KEYS = Object.keys(PACKS);

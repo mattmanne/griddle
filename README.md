@@ -6,7 +6,7 @@ scored by how close you get.
 
 **Play it:** https://mattmanne.github.io/griddle
 
-Eleven packs so far, individually toggleable and mixable in the same batch:
+Twelve packs so far, individually toggleable and mixable in the same batch:
 
 - **Basketball:** NBA, WNBA, NCAA men's
 - **Baseball:** MLB hitters
@@ -15,6 +15,7 @@ Eleven packs so far, individually toggleable and mixable in the same batch:
 - **Geography:** countries, US states
 - **Movies**
 - **Space:** planets (plus Pluto, Ceres, and Eris)
+- **Animals:** mammals, birds, reptiles, marine life, and insects
 
 ## Running locally
 

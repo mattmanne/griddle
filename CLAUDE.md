@@ -16,9 +16,9 @@ accidentally undone.
   dependencies — deliberately static so it can be served as-is from GitHub Pages.
 - `players.json`, `wnba_players.json`, `ncaam_players.json`, `mlb_hitters.json`,
   `nhl_skaters.json`, `football_cfb_players.json`, `football_nfl_players.json`,
-  `geo_countries.json`, `us_states.json`, `movies.json`, `space_planets.json` — one
-  JSON array per pack, fetched at load. The two football files each pool QB/RB/WR
-  together (one file per league, not per position — see below).
+  `geo_countries.json`, `us_states.json`, `movies.json`, `space_planets.json`,
+  `animals.json` — one JSON array per pack, fetched at load. The two football files
+  each pool QB/RB/WR together (one file per league, not per position — see below).
 - `archive-v0/` — the original prototype (continuous running-average scoring, no
   batches). Kept for reference, not wired into `index.html`. If you're tempted to
   bring back "session average" style scoring (backlog #15), this is where the old
@@ -81,6 +81,26 @@ explains several otherwise-odd-looking numbers in the data:
   genuinely should be omitted. The underlying principle is the same either way: only
   ever omit a field when the real number is unknown/unreliable, never when it's
   legitimately zero or small.
+- **`animals.json` has its own version of the era-gap omission pattern: `gestation_days`
+  is omitted (not zeroed) for every non-mammal entry** — birds, reptiles, fish, and
+  insects/arachnids lay eggs and genuinely have no gestation period, so the field is
+  left off those rows entirely rather than faked as 0 or "N/A". This is the same
+  principle as NBA's pre-1973-74 steals/blocks gap, just triggered by biology instead
+  of a stat-tracking era boundary — a reminder that "was this ever tracked/does this
+  concept even apply" is the real question, not "is this pack sports" or "is this pack
+  time-series." A byproduct worth knowing: because `gestation_days` only applies to
+  a subset of the pool, a round that randomly lands on "Gestation vs. X" will only ever
+  surface a mammal as the target (rejection-sampled the same way football's
+  position-specific stats are — see `pickEligiblePair()` below). This was expected and
+  handled for free by that fix rather than requiring pack-specific code.
+- **`animals.json` also spans a much wider numeric range per stat than any prior
+  pack** — `weight_kg` alone runs from a honeybee's 0.0001kg to a blue whale's
+  150,000kg, roughly nine orders of magnitude (versus, say, country population's
+  ~2,800x spread). This is an accepted characteristic of the "animals" domain, not a
+  bug to fix: `axisRangeForStat`'s `Math.floor`/`Math.ceil` still produces a valid
+  (if extremely wide) axis, and a truly degenerate axis would be a *0–1* range problem
+  (the rate-stat-scaling issue described above), not a wide-range problem. No field
+  needed splitting or re-scaling to avoid it.
 
 When adding a new pack/stat, ask "does this need scaling to avoid a degenerate 0–1
 axis?", "is there a stat-tracking-era gap I need to omit rather than fake?", and (for
@@ -210,13 +230,13 @@ people.
 - **Packs stay in one flat, combinable toggle list — no separate "sports" vs.
   "trivia" mode.** This matches how the backlog itself frames packs (peers, not a
   hierarchy), and the architecture supports it for free. Not solved yet, and not
-  being designed for speculatively: 11 toggle buttons already wrap to multiple rows:
+  being designed for speculatively: 12 toggle buttons already wrap to multiple rows:
   once several more non-sports packs exist (~15-20+), a grouping/category UI will
   likely be worth revisiting.
 
 **Sizing note:** `.pack-switch` needs `flex-wrap: wrap` — it didn't originally, which
 was fine at 2-5 buttons but started overflowing the header as more packs were added
-(11 today). If you add another pack, this is why the buttons wrap to a new row
+(12 today). If you add another pack, this is why the buttons wrap to a new row
 instead of running off the edge of the screen.
 
 ## Round lifecycle — the board disappears when "Fully Cooked"
