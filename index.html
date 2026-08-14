@@ -11,21 +11,22 @@
 <main class="app">
   <header class="app-header">
     <h1>Griddle</h1>
-    <div class="sport-switch" role="group" aria-label="Choose sports (select one or more)">
-      <button type="button" class="sport-btn active" data-sport="nba">🏀 NBA</button>
-      <button type="button" class="sport-btn active" data-sport="wnba">⛹️‍♀️ WNBA</button>
-      <button type="button" class="sport-btn active" data-sport="ncaam">🎓 NCAA</button>
-      <button type="button" class="sport-btn active" data-sport="mlb">⚾ MLB</button>
-      <button type="button" class="sport-btn active" data-sport="nhl">🏒 NHL</button>
-      <button type="button" class="sport-btn active" data-sport="cfb_qb">🏈 CFB-QB</button>
-      <button type="button" class="sport-btn active" data-sport="cfb_rb">🏃 CFB-RB</button>
-      <button type="button" class="sport-btn active" data-sport="cfb_wr">🙌 CFB-WR</button>
-      <button type="button" class="sport-btn active" data-sport="nfl_qb">🏈 NFL-QB</button>
-      <button type="button" class="sport-btn active" data-sport="nfl_rb">🏃 NFL-RB</button>
-      <button type="button" class="sport-btn active" data-sport="nfl_wr">🙌 NFL-WR</button>
+    <div class="pack-switch" role="group" aria-label="Choose packs (select one or more)">
+      <button type="button" class="pack-btn active" data-pack="nba">🏀 NBA</button>
+      <button type="button" class="pack-btn active" data-pack="wnba">⛹️‍♀️ WNBA</button>
+      <button type="button" class="pack-btn active" data-pack="ncaam">🎓 NCAA</button>
+      <button type="button" class="pack-btn active" data-pack="mlb">⚾ MLB</button>
+      <button type="button" class="pack-btn active" data-pack="nhl">🏒 NHL</button>
+      <button type="button" class="pack-btn active" data-pack="cfb_qb">🏈 CFB-QB</button>
+      <button type="button" class="pack-btn active" data-pack="cfb_rb">🏃 CFB-RB</button>
+      <button type="button" class="pack-btn active" data-pack="cfb_wr">🙌 CFB-WR</button>
+      <button type="button" class="pack-btn active" data-pack="nfl_qb">🏈 NFL-QB</button>
+      <button type="button" class="pack-btn active" data-pack="nfl_rb">🏃 NFL-RB</button>
+      <button type="button" class="pack-btn active" data-pack="nfl_wr">🙌 NFL-WR</button>
+      <button type="button" class="pack-btn active" data-pack="geo_countries">🌍 Countries</button>
     </div>
     <p class="instructions">
-      One batch, 5 guesses, a different pair of stats each time. You'll be given <span id="sport-clause">a player</span>'s name —
+      One batch, 5 guesses, a different pair of stats each time. You'll be given <span id="pack-clause">an entry</span>'s name —
       press and drag on the grid to place their stats, then release to lock in your guess. Share your
       batch when you're done!
     </p>
@@ -86,8 +87,8 @@
   <details class="practice-settings">
     <summary>Kitchen Prep</summary>
     <div class="practice-settings-inputs">
-      <label>Practice sport
-        <select id="debug-sport-select">
+      <label>Practice pack
+        <select id="debug-pack-select">
           <option value="nba">NBA</option>
           <option value="wnba">WNBA</option>
           <option value="ncaam">NCAA</option>
@@ -99,6 +100,7 @@
           <option value="nfl_qb">NFL-QB</option>
           <option value="nfl_rb">NFL-RB</option>
           <option value="nfl_wr">NFL-WR</option>
+          <option value="geo_countries">Countries</option>
         </select>
       </label>
       <label>X stat
@@ -107,8 +109,8 @@
       <label>Y stat
         <select id="stat-y-select"></select>
       </label>
-      <label>Player
-        <select id="player-select">
+      <label><span id="entry-label">Player</span>
+        <select id="entry-select">
           <option value="">Random</option>
         </select>
       </label>

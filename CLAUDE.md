@@ -1,8 +1,9 @@
 # Griddle — project notes
 
-Griddle is a stats-guessing game: given a player's name and two stat categories, the
-player drags a marker onto an X/Y grid to guess where that player's real stats land.
-5 guesses per batch, scored by distance from the true point.
+Griddle is a stats-guessing game: given a named entry (a player, a country, etc.)
+and two numeric stat categories, you drag a marker onto an X/Y grid to guess where
+that entry's real numbers land. 5 guesses per batch, scored by distance from the
+true point.
 
 This file is for whoever (human or AI) works on the code next. `BACKLOG.md` tracks
 *what's planned and why it's sequenced that way*; this file explains *why the current
@@ -16,8 +17,8 @@ accidentally undone.
 - `players.json`, `wnba_players.json`, `ncaam_players.json`, `mlb_hitters.json`,
   `nhl_skaters.json`, `cfb_qb_players.json`, `cfb_rb_players.json`,
   `cfb_wr_players.json`, `nfl_qb_players.json`, `nfl_rb_players.json`,
-  `nfl_wr_players.json` — one JSON array per sport (or per position group, for
-  football), fetched at load.
+  `nfl_wr_players.json`, `geo_countries.json` — one JSON array per pack (or per
+  position group, for football), fetched at load.
 - `archive-v0/` — the original prototype (continuous running-average scoring, no
   batches). Kept for reference, not wired into `index.html`. If you're tempted to
   bring back "session average" style scoring (backlog #15), this is where the old
@@ -32,141 +33,170 @@ explains several otherwise-odd-looking numbers in the data:
 
 - **Rate stats that are naturally 0–1 (shooting/batting percentages) are stored as
   whole numbers, not decimals.** `fg_pct: 47.1`, not `0.471`. `avg: 305` (baseball's
-  ".305"), not `0.305`. If these were stored as decimals, `axisRangeForStat` would
-  floor/ceil them to a 0–1 range and every player would land in the same tiny sliver
-  of the grid.
+  ".305"), not `0.305`. `literacy_pct: 99.0` (countries), same reasoning. If these
+  were stored as decimals, `axisRangeForStat` would floor/ceil them to a 0–1 range
+  and every entry would land in the same tiny sliver of the grid.
 - **NBA per-game stats (pts, reb, ast, ...) are career *per-game averages*, not
   single-season snapshots.** This was a V1 decision so the pool doesn't need
   refreshing every season and so a player's number doesn't swing based on which
   season happened to get picked.
-- **Every sport's stat pool mixes rate stats (per-game/percentage averages) with
-  counting stats (career totals), on purpose.** MLB shipped with this mix from the
-  start (AVG/OBP/SLG are rates, HR/RBI/SB are career totals, because that's how
-  baseball fans actually talk about them — "714 home runs," not "34.2 HR/season").
-  NBA originally shipped as *all* rate stats (pts/reb/ast/... are all per-game
-  averages) — a real gap, not a deliberate choice, fixed by adding `games`,
-  `career_pts`, `career_reb`, `career_ast` (career totals, all teams combined). Two
-  reasons this matters beyond variety: (1) a stat pool that's 100% per-game rates
-  produces oddly-similar-looking axes guess after guess (most players cluster in a
-  narrow per-game band); mixing in career totals gives genuinely different-shaped
-  rounds. (2) it mirrors how fans actually discuss each sport — some numbers are
-  naturally "per game," others are naturally "in a career." **When adding a new
-  sport, include both kinds of stat from the start** — retrofitting counting stats
-  onto an existing 100+-player pool (as happened here for NBA) means re-researching
-  the entire roster instead of just the new additions. NHL was built with this rule
-  already in place (Goals/Assists/Points/PIM/Shots per game, plus Games Played and
-  career Goals/Assists/Points) — no retrofit needed, confirming it's worth following
-  up front rather than fixing after the fact.
+- **Sports stat pools mix rate stats (per-game/percentage averages) with counting
+  stats (career totals), on purpose.** MLB shipped with this mix from the start
+  (AVG/OBP/SLG are rates, HR/RBI/SB are career totals, because that's how baseball
+  fans actually talk about them — "714 home runs," not "34.2 HR/season"). NBA
+  originally shipped as *all* rate stats — a real gap, not a deliberate choice, fixed
+  by adding `games`/`career_pts`/`career_reb`/`career_ast`. Two reasons this matters
+  beyond variety: (1) a stat pool that's 100% per-game rates produces
+  oddly-similar-looking axes guess after guess; mixing in career totals gives
+  genuinely different-shaped rounds. (2) it mirrors how fans actually discuss each
+  sport. **When adding a new sports pack, include both kinds of stat from the
+  start** — retrofitting counting stats onto an existing large pool (as happened for
+  NBA) means re-researching the entire roster instead of just the new additions.
+  **This rule is sports-specific and doesn't transfer to every pack.** The
+  `geo_countries` pack has no rate-vs-counting split at all — population, area, GDP
+  per capita, etc. are all snapshot-in-time facts about a country, not something a
+  country does "per game" or accumulates "over a career." Don't force a rate/
+  counting split onto a pack where the underlying domain has no such distinction;
+  ask what the domain's numbers are actually like before reusing a sports pattern.
 - **Fields are omitted (not zeroed) when the underlying stat wasn't tracked in a
   player's era**, rather than guessing or defaulting to 0 (which would be a fabricated
   data point, not a missing one). Concretely for NBA: steals/blocks weren't official
   stats before 1973-74, turnovers weren't tracked before 1977-78, and the three-point
-  line didn't exist before 1979-80 — players whose careers predate these (Russell,
-  Wilt, Robertson, West, Baylor, Pettit, Cousy) simply don't have those keys. For NHL:
-  individual shots-on-goal (and therefore shooting %) weren't reliably tracked before
-  1959-60, so `sog`/`sh_pct` are omitted for the handful of skaters whose careers
-  predate or straddle that (Howe, Richard, Beliveau, B. Hull, Mahovlich, Mikita). For
-  NCAA men's basketball: steals/blocks/turnovers weren't official NCAA stats before
-  1985-86, and the 3-point line wasn't adopted nationally until 1986-87, so those
-  fields are omitted for the many pre-1986 legends in `ncaam_players.json` (Maravich,
-  Walton, Alcindor, Robertson, Baylor, West, Bradley, Carr, Thompson, Bird, Magic,
-  Sampson, Ewing, Olajuwon, Jordan). `eligiblePlayers()` filters on `Number.isFinite`,
-  so a missing key correctly removes a player from any round that needs it, rather
-  than corrupting the axis range with a fake 0. **This pattern will keep recurring**
-  — any new sport/era-spanning pool needs the same check: what stat categories didn't
-  exist yet, or weren't officially tracked, for the earliest players in the pool?
-  **It can also show up in fields you didn't anticipate**: researching
-  `ncaam_players.json` turned up several pre-1986 players missing `ast` (assists
-  weren't recorded at all at some schools/eras) or `mpg` (minutes weren't kept before
-  the shot-clock era) — outside the two fields the omission rule was written for.
-  `eligiblePlayers()`'s generic `Number.isFinite` check handled both correctly with
-  zero code changes, which is the actual payoff of that design: it doesn't need to
-  know in advance which fields might be missing for which sport.
+  line didn't exist before 1979-80. For NHL: individual shots-on-goal (and shooting %)
+  weren't reliably tracked before 1959-60. For NCAA men's basketball: steals/blocks/
+  turnovers weren't official before 1985-86, and the 3-point line didn't exist before
+  1986-87 — researching `ncaam_players.json` also turned up two fields the omission
+  rule hadn't anticipated (some pre-1986 players have no recorded `ast` or `mpg` at
+  all). `eligibleEntries()` filters on `Number.isFinite`, so a missing key correctly
+  removes an entry from any round that needs it, rather than corrupting the axis
+  range with a fake 0 — and this is genuinely generic: it coped with the unanticipated
+  `ast`/`mpg` gaps with zero code changes, because it doesn't need to know in advance
+  which fields might be missing for which pack. **This pattern will keep recurring**
+  for era-spanning packs — always ask what didn't exist yet, or wasn't tracked, for
+  the earliest/most extreme entries in a new pool. **It looks different for
+  non-time-series packs.** `geo_countries` has no "era" to speak of, but it has an
+  analogous case: `coastline: 0` for a landlocked country is a *real* value (not a
+  gap — don't omit it), whereas an actually-unreliable figure (e.g. North Korea's
+  GDP per capita, Cuba's — both driven by non-market currency/reporting distortions)
+  genuinely should be omitted. The underlying principle is the same either way: only
+  ever omit a field when the real number is unknown/unreliable, never when it's
+  legitimately zero or small.
 
-When adding a new sport/stat, ask "does this need scaling to avoid a degenerate
-0–1 axis?" and "is there a stat-tracking-era gap I need to omit rather than fake?"
-before wiring up data.
+When adding a new pack/stat, ask "does this need scaling to avoid a degenerate 0–1
+axis?", "is there a stat-tracking-era gap I need to omit rather than fake?", and (for
+non-sports packs) "does the rate-vs-counting split even apply here?" before wiring up
+data.
 
-- **Sports that track identical categories share one `statDefs` object instead of each
+- **Packs that track identical categories share one `statDefs` object instead of each
   getting a copy.** `HOOPS_STAT_DEFS` covers NBA/WNBA/NCAA men's basketball.
   `QB_STAT_DEFS`/`RB_STAT_DEFS`/`WR_STAT_DEFS` each cover a college *and* NFL entry
   (`cfb_qb`+`nfl_qb`, etc.) — a college and pro quarterback's stat line has the same
   shape, so `cfb_qb.statDefs === nfl_qb.statDefs` by reference. Duplicating any of
   these would just be more copies to keep in sync by hand. If one of them ever needs
-  to diverge (e.g. the NFL adds a stat college doesn't track), give that one sport its
-  own object at that point — don't speculatively split them apart now.
+  to diverge, give that one pack its own object at that point — don't speculatively
+  split them apart now.
 
-## Multi-sport architecture — why per-guess random sport, not merged axes
+## Pack architecture — from "sports" to a general framework
 
-`app.js`'s `SPORTS` config holds one entry per sport (label, emoji, noun, data file,
-default stat pair, and its own `statDefs`). Two things follow from this that aren't
-obvious from reading the functions in isolation:
+`app.js`'s `PACKS` config holds one entry per pack (`label`, `noun`, `article`,
+`emoji`, `file`, `defaultPair`, `statDefs`) pointing at a JSON array of
+`{name, ...numeric fields}`. This was originally called `SPORTS` — it was renamed
+once a non-sports pack (`geo_countries`) proved the engine never actually needed the
+entries to be sports. The core loop's "player" terminology (`pickPlayer()` →
+`pickEntry()`, `eligiblePlayers()` → `eligibleEntries()`, the `playerName` field on
+`guessResults` → `entryName`, `#player-select` → `#entry-select`) was renamed at the
+same time for the same reason — nothing in the loop actually requires the pool to be
+people.
 
-- **No two sports' stats are ever plotted on the same axis.** There's no unit in
-  common between "Points/Game" and "Batting Average" (or even between NBA's
-  "Points/Game" and NHL's "Points/Game" — different games, different scales), so a
-  "combined" stat pair across sports would be meaningless. Instead, "combined mode"
-  means each of the 5 guesses in a batch independently rolls which *enabled* sport it
-  draws from, then proceeds exactly like single-sport mode for that guess (its own
-  stat pair, its own axis range, its own player pool). `enabledSports` (a `Set`) is
-  what the header's sport toggle buttons control — it's deliberately allowed to have
-  1 or many members, never zero (the toggle handler blocks deselecting the last
-  active sport).
-- **Each `SPORTS` entry carries its own grammatical `article` ('a' or 'an').** The
-  single-sport instructions text ("You'll be given {article} {label} {noun}'s name")
-  can't derive the right article from the label programmatically — NBA/MLB/NHL all
-  happen to start with a letter-name that begins with a vowel sound ("en," "em," "en"),
-  so hardcoding "an" worked by coincidence until WNBA ("double-u") broke it, producing
-  "an WNBA player." Fixed by making `article` an explicit field per sport rather than
-  guessing from the label — the earlier sports couldn't have taught this lesson since
-  NBA/MLB/NHL all happen to be vowel-sound-first.
-- **The debug "Kitchen Prep" panel has its own `debugSport`, independent of
-  `enabledSports`.** Forcing a specific stat pair or a specific player only makes
-  sense pinned to one sport (you can't force "Points/Game vs Home Runs"), so the
-  practice-sport selector exists so debug overrides stay predictable regardless of
-  what real gameplay has toggled on. See backlog #11 — this panel is debug-only and
-  not yet gated from playtesters.
-- Every `guessResults` entry stores which sport it came from (not just the stat
-  keys), because `STAT_DEFS` is a single mutable module-level binding reassigned each
-  guess — by the time the round summary is built, it only reflects the *last* guess's
-  sport. Looking up labels via `SPORTS[r.sport].statDefs` at render time (rather than
-  relying on the ambient `STAT_DEFS`) is what keeps the breakdown/share text correct
-  for every guess in a mixed batch, not just the final one.
-- **Toggling a sport mid-batch must never reset the in-progress round.** An earlier
+- **No two packs' stats are ever plotted on the same axis.** There's no unit in
+  common between "Points/Game" and "Batting Average" (or "Points/Game" and
+  "Population"), so a "combined" stat pair across packs would be meaningless.
+  Instead, "combined mode" means each of the 5 guesses in a batch independently
+  rolls which *enabled* pack it draws from, then proceeds exactly like single-pack
+  mode for that guess (its own stat pair, its own axis range, its own entry pool).
+  `enabledPacks` (a `Set`) is what the header's toggle buttons control — it's
+  deliberately allowed to have 1 or many members, never zero (the toggle handler
+  blocks deselecting the last active pack).
+- **`label` is optional on a `PACKS` entry.** `poolSummary()` and the single-pack
+  instructions clause both do `${label} ${noun}` when a label exists (e.g. "NBA
+  player") but just `${noun}` when it doesn't (e.g. "country," not "null country").
+  Sports packs have a label because "NBA" vs. "WNBA" vs. "NCAA" genuinely
+  disambiguates leagues that otherwise share a noun; a domain pack like
+  `geo_countries` doesn't need one — there's only one kind of "country" here.
+- **Plurals are computed, not just `+ 's'`.** `poolSummary()` originally did
+  `noun + 's'`, which produced "85 countrys." `pluralize()` special-cases the
+  consonant-+-y case ("country" → "countries") — the one English plural
+  irregularity common enough among plausible pack nouns to be worth handling
+  generically rather than special-casing per pack.
+- **Each `PACKS` entry carries its own grammatical `article` ('a' or 'an').** The
+  single-pack instructions text ("You'll be given {article} {label} {noun}'s name")
+  can't derive the right article from the label programmatically — NBA/MLB/NHL/NFL
+  all happen to start with a letter-name that begins with a vowel sound, so
+  hardcoding "an" worked by coincidence until WNBA ("double-u") broke it, producing
+  "an WNBA player." Fixed by making `article` an explicit field per pack.
+- **When multiple enabled packs don't share a noun, the instructions fall back to
+  "an entry," not "a name."** `packClauseText()` first tries the shared noun if every
+  enabled pack agrees (e.g. NBA+WNBA+NCAA all say "player"); only when nouns genuinely
+  differ (e.g. MLB "hitter" + NHL "skater" + `geo_countries` "country") does it fall
+  back to something generic. The obvious-looking generic choice, "a name," reads fine
+  on its own but breaks the sentence template ("You'll be given {clause}'s name")
+  into "a name's name" — caught by testing the actual rendered sentence, not just the
+  clause in isolation. "an entry" doesn't have this problem. The bare-noun fallback
+  path also always uses the article "a" — correct for every noun in use today (all
+  consonant-sound-first), but would need a real per-noun article lookup if a future
+  pack's noun needs "an" (e.g. "element"); there's a comment at the call site.
+- **The debug "Kitchen Prep" panel has its own `debugPack`, independent of
+  `enabledPacks`.** Forcing a specific stat pair or a specific entry only makes sense
+  pinned to one pack (you can't force "Points/Game vs Home Runs"), so the
+  practice-pack selector exists so debug overrides stay predictable regardless of
+  what real gameplay has toggled on. Its "Player"-labeled entry dropdown is now a
+  dynamic label (`updateEntryLabel()`, capitalizing the current debug pack's `noun`
+  — "Country," "Quarterback," "Player") rather than a hardcoded word, for the same
+  reason the rest of this section exists. See backlog #11 — this panel is debug-only
+  and not yet gated from playtesters.
+- Every `guessResults` entry stores which pack it came from (not just the stat keys),
+  because `STAT_DEFS` is a single mutable module-level binding reassigned each guess
+  — by the time the round summary is built, it only reflects the *last* guess's pack.
+  Looking up labels via `PACKS[r.pack].statDefs` at render time (rather than relying
+  on the ambient `STAT_DEFS`) is what keeps the breakdown/share text correct for
+  every guess in a mixed batch, not just the final one.
+- **Toggling a pack mid-batch must never reset the in-progress round.** An earlier
   version called a full `resetRoundUI()` from the toggle click handler, which silently
-  discarded `guessIndex`/`guessResults` — a player who toggled MLB off after 2 guesses
-  ended up needing 7 total instead of 5, with no indication anything had been reset.
-  The toggle handler now *only* mutates `enabledSports`; `updateSportUI()` is written
-  to leave `#round-progress` alone whenever a round is active (`guessIndex !== 0 &&
-  !roundOver`), so a toggle only affects which sport the *next* guess draws from.
-- **Position groups (college football's QB/RB/WR) are just more `SPORTS` entries, not
-  a new sub-feature.** Backlog item 6 originally assumed college/NFL football needed
-  "the position-group feature" as real new architecture, because QB/RB/WR stats share
-  almost nothing (you can't plot "Passing Yards" against "Receptions" meaningfully any
-  more than you can plot NBA against MLB). But the multi-sport toggle system already
-  solves exactly that problem — each position is its own `SPORTS` entry (`cfb_qb`,
-  `cfb_rb`, `cfb_wr`) with its own file and `statDefs`, toggled independently like any
-  other sport. No position-aware logic was added anywhere; `pickRoundContext()`,
-  `eligiblePlayers()`, etc. don't know or care that six of the eleven `SPORTS` entries
-  happen to represent two real-world sports (college and pro football) split by
-  position. **The lesson**: before treating a backlog note's stated blocker as still
-  true, check whether something built since then already resolves it — item 6's
-  premise was written before the multi-sport toggle system existed. NFL confirmed the
-  prediction directly: adding it after college football was zero new code, just three
-  more `SPORTS` entries pointing at the same `QB_STAT_DEFS`/`RB_STAT_DEFS`/
-  `WR_STAT_DEFS` objects college football already used.
+  discarded `guessIndex`/`guessResults` — a player who toggled a pack off after 2
+  guesses ended up needing 7 total instead of 5, with no indication anything had been
+  reset. The toggle handler now *only* mutates `enabledPacks`; `updatePackUI()` is
+  written to leave `#round-progress` alone whenever a round is active (`guessIndex
+  !== 0 && !roundOver`), so a toggle only affects which pack the *next* guess draws
+  from.
+- **Position groups (college/pro football's QB/RB/WR) are just more `PACKS`
+  entries, not a new sub-feature** — and this same insight is what made adding a
+  non-sports domain like geography a rename-and-data-file exercise rather than a
+  rewrite. Backlog item 7 (now done) originally assumed football needed "the
+  position-group feature" as real new architecture, because QB/RB/WR stats share
+  almost nothing. But the multi-pack toggle system already solved exactly that
+  problem — each position is its own entry with its own file and `statDefs`, toggled
+  independently like any other pack. NFL confirmed this directly: adding it after
+  college football was zero new code, just three more entries pointing at the same
+  `QB_STAT_DEFS`/`RB_STAT_DEFS`/`WR_STAT_DEFS` objects. **The lesson, twice
+  confirmed**: before treating a backlog note's stated blocker as still true, check
+  whether something built since then already resolves it.
 - **The same real person can legitimately appear once per league they played in.**
   Ja'Marr Chase, CeeDee Lamb, Troy Aikman, and others show up in both a `cfb_*` and
   an `nfl_*` file with different (correct) stat lines — one row is their college
-  career, the other their pro career. This isn't a duplicate-data bug to clean up; it's
-  the same pattern as Michael Jordan appearing in both `players.json` (NBA) and
+  career, the other their pro career. This isn't a duplicate-data bug to clean up;
+  it's the same pattern as Michael Jordan appearing in both `players.json` (NBA) and
   `ncaam_players.json` (UNC) already. Don't "deduplicate" these across files.
+- **Packs stay in one flat, combinable toggle list — no separate "sports" vs.
+  "trivia" mode.** This matches how the backlog itself frames packs (peers, not a
+  hierarchy), and the architecture supports it for free. Not solved yet, and not
+  being designed for speculatively: 12 toggle buttons already wrap to 4 rows: once
+  several more non-sports packs exist (~15-20+), a grouping/category UI will likely
+  be worth revisiting.
 
-**Sizing note:** `.sport-switch` needs `flex-wrap: wrap` — it didn't originally, which
-was fine at 2-5 buttons but started overflowing the header once college football added
-3 more toggles (8 total) and NFL added 3 more on top of that (11 total). If you add
-another sport, this is why the buttons wrap to a new row instead of running off the
-edge of the screen.
+**Sizing note:** `.pack-switch` needs `flex-wrap: wrap` — it didn't originally, which
+was fine at 2-5 buttons but started overflowing the header as more packs were added
+(12 today). If you add another pack, this is why the buttons wrap to a new row
+instead of running off the edge of the screen.
 
 ## Round lifecycle — the board disappears when "Fully Cooked"
 

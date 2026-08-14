@@ -60,14 +60,14 @@ body {
   font-size: 0.9rem;
 }
 
-.sport-switch {
+.pack-switch {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin: 6px 0 10px;
 }
 
-.sport-btn {
+.pack-btn {
   background: var(--panel);
   color: var(--muted);
   border: 1px solid var(--line);
@@ -76,7 +76,7 @@ body {
   font-size: 0.85rem;
 }
 
-.sport-btn.active {
+.pack-btn.active {
   background: var(--accent);
   color: var(--accent-ink);
   border-color: var(--accent);

@@ -50,7 +50,7 @@
     career_rec_td: { label: 'Career Receiving TDs', short: 'TD' },
   };
 
-  const SPORTS = {
+  const PACKS = {
     nba: {
       label: 'NBA',
       noun: 'player',
@@ -168,15 +168,32 @@
       defaultPair: ['rec', 'rec_yds'],
       statDefs: WR_STAT_DEFS,
     },
+    geo_countries: {
+      label: null,
+      noun: 'country',
+      article: 'a',
+      emoji: '🌍',
+      file: 'geo_countries.json',
+      defaultPair: ['population', 'area'],
+      statDefs: {
+        population: { label: 'Population', short: 'POP' },
+        area: { label: 'Area (km²)', short: 'AREA' },
+        gdp_per_capita: { label: 'GDP per Capita', short: 'GDP/CAP' },
+        coastline: { label: 'Coastline (km)', short: 'COAST' },
+        life_expectancy: { label: 'Life Expectancy', short: 'LIFE' },
+        literacy_pct: { label: 'Literacy Rate %', short: 'LIT%' },
+        elevation: { label: 'Highest Elevation (m)', short: 'ELEV' },
+      },
+    },
   };
 
-  const SPORT_KEYS = Object.keys(SPORTS);
-  let enabledSports = new Set(SPORT_KEYS);
-  let debugSport = SPORT_KEYS[0];
+  const PACK_KEYS = Object.keys(PACKS);
+  let enabledPacks = new Set(PACK_KEYS);
+  let debugPack = PACK_KEYS[0];
   let dataCache = {};
 
-  let currentSport = debugSport;
-  let STAT_DEFS = SPORTS[currentSport].statDefs;
+  let currentPack = debugPack;
+  let STAT_DEFS = PACKS[currentPack].statDefs;
 
   const GRID = 1000;
   const SCORE_MAX = 1000;
@@ -213,7 +230,7 @@
   const actionBtn = document.getElementById('action-btn');
   const statXSelect = document.getElementById('stat-x-select');
   const statYSelect = document.getElementById('stat-y-select');
-  const playerSelect = document.getElementById('player-select');
+  const entrySelect = document.getElementById('entry-select');
   const forceStatPairCheckbox = document.getElementById('force-stat-pair');
   const targetDisplay = document.getElementById('target-display');
   const roundProgress = document.getElementById('round-progress');
@@ -234,9 +251,10 @@
   const shareTextArea = document.getElementById('share-text');
   const copyResultsBtn = document.getElementById('copy-results-btn');
   const replayBtn = document.getElementById('replay-btn');
-  const sportButtons = Array.from(document.querySelectorAll('.sport-btn'));
-  const sportClause = document.getElementById('sport-clause');
-  const debugSportSelect = document.getElementById('debug-sport-select');
+  const packButtons = Array.from(document.querySelectorAll('.pack-btn'));
+  const packClause = document.getElementById('pack-clause');
+  const debugPackSelect = document.getElementById('debug-pack-select');
+  const entryLabelEl = document.getElementById('entry-label');
   const targetPanel = document.querySelector('.target-panel');
   const gameBoard = document.querySelector('.axis-grid');
   const legendEl = document.querySelector('.legend');
@@ -247,8 +265,8 @@
   const BUTTER_H = 26;
 
   let baseSize = viewport.clientWidth;
-  let players = [];
-  let [statX, statY] = SPORTS[currentSport].defaultPair;
+  let entries = [];
+  let [statX, statY] = PACKS[currentPack].defaultPair;
   let AXIS_X = { min: 0, max: 100, label: '' };
   let AXIS_Y = { min: 0, max: 100, label: '' };
   let target = null;
@@ -265,15 +283,19 @@
     return Math.min(max, Math.max(min, v));
   }
 
+  function capitalize(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
   function axisRangeForStat(key) {
-    const values = players.map((p) => p[key]).filter(Number.isFinite);
+    const values = entries.map((e) => e[key]).filter(Number.isFinite);
     const min = Math.floor(Math.min(...values));
     const max = Math.ceil(Math.max(...values));
     return { min, max: max > min ? max : min + 1, label: STAT_DEFS[key].label };
   }
 
-  function eligiblePlayers() {
-    return players.filter((p) => Number.isFinite(p[statX]) && Number.isFinite(p[statY]));
+  function eligibleEntries() {
+    return entries.filter((e) => Number.isFinite(e[statX]) && Number.isFinite(e[statY]));
   }
 
   function randomKey(keys, exclude) {
@@ -282,10 +304,10 @@
   }
 
   function pickRoundContext() {
-    const forcedPlayer = playerSelect.value;
-    if (forceStatPairCheckbox.checked || forcedPlayer) {
-      const sport = debugSport;
-      const keys = Object.keys(SPORTS[sport].statDefs);
+    const forcedEntry = entrySelect.value;
+    if (forceStatPairCheckbox.checked || forcedEntry) {
+      const pack = debugPack;
+      const keys = Object.keys(PACKS[pack].statDefs);
       let x, y;
       if (forceStatPairCheckbox.checked) {
         x = statXSelect.value;
@@ -294,13 +316,13 @@
         x = randomKey(keys);
         y = randomKey(keys, x);
       }
-      return { sport, x, y };
+      return { pack, x, y };
     }
-    const sport = randomKey(Array.from(enabledSports));
-    const keys = Object.keys(SPORTS[sport].statDefs);
+    const pack = randomKey(Array.from(enabledPacks));
+    const keys = Object.keys(PACKS[pack].statDefs);
     const x = randomKey(keys);
     const y = randomKey(keys, x);
-    return { sport, x, y };
+    return { pack, x, y };
   }
 
   function dataToSvg(x, y) {
@@ -370,7 +392,7 @@
     locked = true;
 
     const { dist, score } = computeScore(dataPoint, target);
-    guessResults.push({ sport: currentSport, statX, statY, score, playerName: target.name });
+    guessResults.push({ pack: currentPack, statX, statY, score, entryName: target.name });
 
     const targetSvg = dataToSvg(target.x, target.y);
     targetMarker.setAttribute('transform', `translate(${targetSvg.sx}, ${targetSvg.sy})`);
@@ -389,7 +411,7 @@
     const xShort = STAT_DEFS[statX].short;
     const yShort = STAT_DEFS[statY].short;
     resultGuess.textContent = `${dataPoint.x.toFixed(1)} ${xShort}, ${dataPoint.y.toFixed(1)} ${yShort}`;
-    resultTargetName.textContent = `${SPORTS[currentSport].emoji} ${target.name}`;
+    resultTargetName.textContent = `${PACKS[currentPack].emoji} ${target.name}`;
     resultTarget.textContent = `${target.x.toFixed(1)} ${xShort}, ${target.y.toFixed(1)} ${yShort}`;
     resultDistance.textContent = Math.round((dist / Math.SQRT2) * 100);
     resultScore.textContent = score;
@@ -412,8 +434,8 @@
       roundSnarkEl.textContent = `${snark.emoji} ${snark.text}`;
       roundBreakdownEl.textContent = guessResults
         .map((r) => {
-          const defs = SPORTS[r.sport].statDefs;
-          return `${SPORTS[r.sport].emoji}${defs[r.statX].short} vs ${defs[r.statY].short}: ${r.score}`;
+          const defs = PACKS[r.pack].statDefs;
+          return `${PACKS[r.pack].emoji}${defs[r.statX].short} vs ${defs[r.statY].short}: ${r.score}`;
         })
         .join(' · ');
       shareTextArea.value = buildShareText(total, snark);
@@ -427,17 +449,17 @@
   function buildShareText(total, snark) {
     const lines = [`Griddle 🧇 — Batch score ${total}/${ROUND_MAX} ${snark.emoji}`];
     guessResults.forEach((r, i) => {
-      const defs = SPORTS[r.sport].statDefs;
-      lines.push(`${i + 1}. ${SPORTS[r.sport].emoji}${defs[r.statX].short} vs ${defs[r.statY].short} (${r.playerName}) — ${r.score}`);
+      const defs = PACKS[r.pack].statDefs;
+      lines.push(`${i + 1}. ${PACKS[r.pack].emoji}${defs[r.statX].short} vs ${defs[r.statY].short} (${r.entryName}) — ${r.score}`);
     });
     return lines.join('\n');
   }
 
-  function pickPlayer() {
-    const pool = eligiblePlayers();
-    const chosenName = playerSelect.value;
+  function pickEntry() {
+    const pool = eligibleEntries();
+    const chosenName = entrySelect.value;
     if (chosenName) {
-      const found = pool.find((p) => p.name === chosenName);
+      const found = pool.find((e) => e.name === chosenName);
       if (found) return found;
     }
     return pool[Math.floor(Math.random() * pool.length)];
@@ -447,9 +469,9 @@
     guessIndex += 1;
 
     const ctx = pickRoundContext();
-    currentSport = ctx.sport;
-    STAT_DEFS = SPORTS[currentSport].statDefs;
-    players = dataCache[currentSport];
+    currentPack = ctx.pack;
+    STAT_DEFS = PACKS[currentPack].statDefs;
+    entries = dataCache[currentPack];
     statX = ctx.x;
     statY = ctx.y;
     AXIS_X = axisRangeForStat(statX);
@@ -463,8 +485,8 @@
     axisRight.textContent = `${AXIS_X.label} max: ${AXIS_X.max}`;
     axisRight.title = axisRight.textContent;
 
-    const player = pickPlayer();
-    target = { x: player[statX], y: player[statY], name: player.name };
+    const entry = pickEntry();
+    target = { x: entry[statX], y: entry[statY], name: entry.name };
 
     locked = false;
     previewData = null;
@@ -478,7 +500,7 @@
     guideY.setAttribute('visibility', 'hidden');
     resultsSection.hidden = true;
 
-    targetDisplay.textContent = `${SPORTS[currentSport].emoji} ${player.name} — ${STAT_DEFS[statX].label} vs ${STAT_DEFS[statY].label}`;
+    targetDisplay.textContent = `${PACKS[currentPack].emoji} ${entry.name} — ${STAT_DEFS[statX].label} vs ${STAT_DEFS[statY].label}`;
     roundProgress.textContent = `Guess ${guessIndex} of ${ROUND_SIZE}`;
 
     actionBtn.disabled = true;
@@ -593,7 +615,7 @@
   });
 
   function populateStatSelects() {
-    const defs = SPORTS[debugSport].statDefs;
+    const defs = PACKS[debugPack].statDefs;
     const keys = Object.keys(defs);
     [statXSelect, statYSelect].forEach((select, i) => {
       select.innerHTML = '';
@@ -603,39 +625,60 @@
         opt.textContent = defs[key].label;
         select.appendChild(opt);
       });
-      select.value = SPORTS[debugSport].defaultPair[i];
+      select.value = PACKS[debugPack].defaultPair[i];
     });
   }
 
-  function populatePlayerSelect() {
-    playerSelect.innerHTML = '<option value="">Random</option>';
-    (dataCache[debugSport] || []).forEach((p) => {
+  function populateEntrySelect() {
+    entrySelect.innerHTML = '<option value="">Random</option>';
+    (dataCache[debugPack] || []).forEach((e) => {
       const opt = document.createElement('option');
-      opt.value = p.name;
-      opt.textContent = p.name;
-      playerSelect.appendChild(opt);
+      opt.value = e.name;
+      opt.textContent = e.name;
+      entrySelect.appendChild(opt);
     });
+  }
+
+  function updateEntryLabel() {
+    entryLabelEl.textContent = capitalize(PACKS[debugPack].noun);
+  }
+
+  function pluralize(noun) {
+    if (/[^aeiou]y$/i.test(noun)) return noun.slice(0, -1) + 'ies';
+    return noun + 's';
   }
 
   function poolSummary() {
-    return Array.from(enabledSports)
-      .map((s) => {
-        const count = (dataCache[s] || []).length;
-        const noun = SPORTS[s].noun + (count === 1 ? '' : 's');
-        return `${count} ${SPORTS[s].label} ${noun}`;
+    return Array.from(enabledPacks)
+      .map((k) => {
+        const pack = PACKS[k];
+        const count = (dataCache[k] || []).length;
+        const noun = count === 1 ? pack.noun : pluralize(pack.noun);
+        const label = pack.label ? `${pack.label} ` : '';
+        return `${count} ${label}${noun}`;
       })
       .join(' + ');
   }
 
-  function sportClauseText() {
-    const list = Array.from(enabledSports);
-    if (list.length === 1) return `${SPORTS[list[0]].article} ${SPORTS[list[0]].label} ${SPORTS[list[0]].noun}`;
-    return 'a player';
+  function packClauseText() {
+    const list = Array.from(enabledPacks);
+    if (list.length === 1) {
+      const pack = PACKS[list[0]];
+      const label = pack.label ? `${pack.label} ` : '';
+      return `${pack.article} ${label}${pack.noun}`;
+    }
+    const nouns = new Set(list.map((k) => PACKS[k].noun));
+    // Bare-noun fallback always uses 'a' — fine while every noun is consonant-sound-first;
+    // revisit if a future pack's noun needs 'an' (e.g. "element").
+    if (nouns.size === 1) return `a ${[...nouns][0]}`;
+    // "an entry" (not "a name") because the template appends "'s name" —
+    // "a name's name" reads badly, "an entry's name" doesn't.
+    return 'an entry';
   }
 
-  function updateSportUI() {
-    sportButtons.forEach((btn) => btn.classList.toggle('active', enabledSports.has(btn.dataset.sport)));
-    sportClause.textContent = sportClauseText();
+  function updatePackUI() {
+    packButtons.forEach((btn) => btn.classList.toggle('active', enabledPacks.has(btn.dataset.pack)));
+    packClause.textContent = packClauseText();
     if (guessIndex === 0 && !roundOver) {
       roundProgress.textContent = `${poolSummary()} loaded — press "Fire Up the Griddle" to begin.`;
     }
@@ -647,43 +690,45 @@
     targetDisplay.textContent = 'Preheating…';
 
     Promise.all(
-      SPORT_KEYS.map((sport) =>
-        fetch(SPORTS[sport].file)
+      PACK_KEYS.map((pack) =>
+        fetch(PACKS[pack].file)
           .then((res) => res.json())
-          .then((data) => { dataCache[sport] = data; })
+          .then((data) => { dataCache[pack] = data; })
       )
     )
       .then(() => {
         populateStatSelects();
-        populatePlayerSelect();
+        populateEntrySelect();
+        updateEntryLabel();
         actionBtn.disabled = false;
         actionBtn.textContent = 'Fire Up the Griddle';
         targetDisplay.textContent = 'Ready when you are!';
-        updateSportUI();
+        updatePackUI();
       })
       .catch((err) => {
-        targetDisplay.textContent = 'Failed to load player data — check the console.';
+        targetDisplay.textContent = 'Failed to load pack data — check the console.';
         console.error(err);
       });
   }
 
-  sportButtons.forEach((btn) => {
+  packButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      const sport = btn.dataset.sport;
-      if (enabledSports.has(sport)) {
-        if (enabledSports.size === 1) return;
-        enabledSports.delete(sport);
+      const pack = btn.dataset.pack;
+      if (enabledPacks.has(pack)) {
+        if (enabledPacks.size === 1) return;
+        enabledPacks.delete(pack);
       } else {
-        enabledSports.add(sport);
+        enabledPacks.add(pack);
       }
-      updateSportUI();
+      updatePackUI();
     });
   });
 
-  debugSportSelect.addEventListener('change', () => {
-    debugSport = debugSportSelect.value;
+  debugPackSelect.addEventListener('change', () => {
+    debugPack = debugPackSelect.value;
     populateStatSelects();
-    populatePlayerSelect();
+    populateEntrySelect();
+    updateEntryLabel();
   });
 
   drawGridlines();

@@ -1,0 +1,846 @@
+[
+  {
+    "name": "United States",
+    "population": 341784857,
+    "area": 9833517,
+    "gdp_per_capita": 94430,
+    "coastline": 19924,
+    "life_expectancy": 79.3,
+    "literacy_pct": 99,
+    "elevation": 6190
+  },
+  {
+    "name": "Canada",
+    "population": 41472081,
+    "area": 9984670,
+    "gdp_per_capita": 60305,
+    "coastline": 202080,
+    "life_expectancy": 82.6,
+    "literacy_pct": 99,
+    "elevation": 5959
+  },
+  {
+    "name": "Mexico",
+    "population": 129739759,
+    "area": 1964375,
+    "gdp_per_capita": 15779,
+    "coastline": 9330,
+    "life_expectancy": 75.1,
+    "literacy_pct": 94.9,
+    "elevation": 5636
+  },
+  {
+    "name": "Brazil",
+    "population": 211140729,
+    "area": 8510346,
+    "gdp_per_capita": 12313,
+    "coastline": 7491,
+    "life_expectancy": 75.9,
+    "literacy_pct": 93.2,
+    "elevation": 2995
+  },
+  {
+    "name": "Argentina",
+    "population": 45538401,
+    "area": 2780400,
+    "gdp_per_capita": 14357,
+    "coastline": 4989,
+    "life_expectancy": 77.4,
+    "literacy_pct": 99,
+    "elevation": 6961
+  },
+  {
+    "name": "Chile",
+    "population": 19658835,
+    "area": 756102,
+    "gdp_per_capita": 20240,
+    "coastline": 6435,
+    "life_expectancy": 81.2,
+    "literacy_pct": 96.9,
+    "elevation": 6893
+  },
+  {
+    "name": "Peru",
+    "population": 33845617,
+    "area": 1285216,
+    "gdp_per_capita": 10960,
+    "coastline": 2414,
+    "life_expectancy": 77.7,
+    "literacy_pct": 94.1,
+    "elevation": 6768
+  },
+  {
+    "name": "Colombia",
+    "population": 52321152,
+    "area": 1138910,
+    "gdp_per_capita": 10104,
+    "coastline": 3208,
+    "life_expectancy": 77.7,
+    "literacy_pct": 94.7,
+    "elevation": 5775
+  },
+  {
+    "name": "Venezuela",
+    "population": 28300854,
+    "area": 912050,
+    "gdp_per_capita": 4140,
+    "coastline": 2800,
+    "life_expectancy": 72.8,
+    "literacy_pct": 97.1,
+    "elevation": 4978
+  },
+  {
+    "name": "Bolivia",
+    "population": 12244159,
+    "area": 1098581,
+    "gdp_per_capita": 6333,
+    "coastline": 0,
+    "life_expectancy": 68.2,
+    "literacy_pct": 92.5,
+    "elevation": 6542
+  },
+  {
+    "name": "Paraguay",
+    "population": 6844146,
+    "area": 406752,
+    "gdp_per_capita": 9372,
+    "coastline": 0,
+    "life_expectancy": 73.8,
+    "literacy_pct": 94.7,
+    "elevation": 842
+  },
+  {
+    "name": "Uruguay",
+    "population": 3388081,
+    "area": 176215,
+    "gdp_per_capita": 27608,
+    "coastline": 660,
+    "life_expectancy": 78.1,
+    "literacy_pct": 98.6,
+    "elevation": 514
+  },
+  {
+    "name": "Ecuador",
+    "population": 17980083,
+    "area": 283561,
+    "gdp_per_capita": 7575,
+    "coastline": 2237,
+    "life_expectancy": 77.4,
+    "literacy_pct": 94.4,
+    "elevation": 6263
+  },
+  {
+    "name": "Cuba",
+    "population": 11019931,
+    "area": 109884,
+    "coastline": 3735,
+    "life_expectancy": 78.1,
+    "literacy_pct": 99.8,
+    "elevation": 1974
+  },
+  {
+    "name": "Jamaica",
+    "population": 2839786,
+    "area": 10991,
+    "gdp_per_capita": 8356,
+    "coastline": 1022,
+    "life_expectancy": 75.7,
+    "literacy_pct": 88.1,
+    "elevation": 2256
+  },
+  {
+    "name": "Costa Rica",
+    "population": 5105525,
+    "area": 51180,
+    "gdp_per_capita": 20299,
+    "coastline": 1290,
+    "life_expectancy": 80.8,
+    "literacy_pct": 97.4,
+    "elevation": 3821
+  },
+  {
+    "name": "Panama",
+    "population": 4458759,
+    "area": 75320,
+    "gdp_per_capita": 20564,
+    "coastline": 2490,
+    "life_expectancy": 79.6,
+    "literacy_pct": 94.1,
+    "elevation": 3475
+  },
+  {
+    "name": "United Kingdom",
+    "population": 69487000,
+    "area": 244376,
+    "gdp_per_capita": 61056,
+    "coastline": 12429,
+    "life_expectancy": 81.3,
+    "literacy_pct": 99,
+    "elevation": 1345
+  },
+  {
+    "name": "France",
+    "population": 69081996,
+    "area": 643801,
+    "gdp_per_capita": 52083,
+    "coastline": 4853,
+    "life_expectancy": 83.3,
+    "literacy_pct": 99,
+    "elevation": 4806
+  },
+  {
+    "name": "Germany",
+    "population": 83467117,
+    "area": 357581,
+    "gdp_per_capita": 65303,
+    "coastline": 2389,
+    "life_expectancy": 81.4,
+    "literacy_pct": 99,
+    "elevation": 2962
+  },
+  {
+    "name": "Italy",
+    "population": 58940756,
+    "area": 302068,
+    "gdp_per_capita": 46505,
+    "coastline": 7600,
+    "life_expectancy": 83.7,
+    "literacy_pct": 99.4,
+    "elevation": 4806
+  },
+  {
+    "name": "Spain",
+    "population": 49801559,
+    "area": 505370,
+    "gdp_per_capita": 41563,
+    "coastline": 4964,
+    "life_expectancy": 83.7,
+    "literacy_pct": 98.3,
+    "elevation": 3718
+  },
+  {
+    "name": "Portugal",
+    "population": 11424031,
+    "area": 92090,
+    "gdp_per_capita": 35434,
+    "coastline": 1793,
+    "life_expectancy": 82.4,
+    "literacy_pct": 94.5,
+    "elevation": 2351
+  },
+  {
+    "name": "Netherlands",
+    "population": 18153386,
+    "area": 41865,
+    "gdp_per_capita": 79918,
+    "coastline": 451,
+    "life_expectancy": 82.2,
+    "literacy_pct": 99,
+    "elevation": 870
+  },
+  {
+    "name": "Belgium",
+    "population": 11867634,
+    "area": 30528,
+    "gdp_per_capita": 65112,
+    "coastline": 67,
+    "life_expectancy": 82.1,
+    "literacy_pct": 99,
+    "elevation": 694
+  },
+  {
+    "name": "Switzerland",
+    "population": 9139676,
+    "area": 41291,
+    "gdp_per_capita": 126177,
+    "coastline": 0,
+    "life_expectancy": 84,
+    "literacy_pct": 99,
+    "elevation": 4634
+  },
+  {
+    "name": "Austria",
+    "population": 9220882,
+    "area": 83878,
+    "gdp_per_capita": 67761,
+    "coastline": 0,
+    "life_expectancy": 82,
+    "literacy_pct": 98,
+    "elevation": 3798
+  },
+  {
+    "name": "Sweden",
+    "population": 10608128,
+    "area": 450295,
+    "gdp_per_capita": 70676,
+    "coastline": 3218,
+    "life_expectancy": 83.3,
+    "literacy_pct": 99,
+    "elevation": 2097
+  },
+  {
+    "name": "Norway",
+    "population": 5633770,
+    "area": 386224,
+    "gdp_per_capita": 105877,
+    "coastline": 83281,
+    "life_expectancy": 83.3,
+    "literacy_pct": 100,
+    "elevation": 2469
+  },
+  {
+    "name": "Denmark",
+    "population": 6031992,
+    "area": 42947,
+    "gdp_per_capita": 83445,
+    "coastline": 7314,
+    "life_expectancy": 81.9,
+    "literacy_pct": 99,
+    "elevation": 171
+  },
+  {
+    "name": "Finland",
+    "population": 5652897,
+    "area": 338145,
+    "gdp_per_capita": 60130,
+    "coastline": 1250,
+    "life_expectancy": 81.9,
+    "literacy_pct": 100,
+    "elevation": 1324
+  },
+  {
+    "name": "Iceland",
+    "population": 389444,
+    "area": 103000,
+    "gdp_per_capita": 110048,
+    "coastline": 4970,
+    "life_expectancy": 82.7,
+    "literacy_pct": 99,
+    "elevation": 2110
+  },
+  {
+    "name": "Ireland",
+    "population": 5458600,
+    "area": 70273,
+    "gdp_per_capita": 140186,
+    "coastline": 1448,
+    "life_expectancy": 82.4,
+    "literacy_pct": 99,
+    "elevation": 1039
+  },
+  {
+    "name": "Poland",
+    "population": 37256000,
+    "area": 312685,
+    "gdp_per_capita": 31336,
+    "coastline": 440,
+    "life_expectancy": 78.6,
+    "literacy_pct": 99.8,
+    "elevation": 2500
+  },
+  {
+    "name": "Greece",
+    "population": 10372335,
+    "area": 131957,
+    "gdp_per_capita": 29696,
+    "coastline": 13676,
+    "life_expectancy": 81.9,
+    "literacy_pct": 97.4,
+    "elevation": 2918
+  },
+  {
+    "name": "Ukraine",
+    "population": 32283000,
+    "area": 603628,
+    "gdp_per_capita": 6980,
+    "coastline": 2782,
+    "life_expectancy": 73.4,
+    "literacy_pct": 99.8,
+    "elevation": 2061
+  },
+  {
+    "name": "Russia",
+    "population": 146028325,
+    "area": 17098246,
+    "gdp_per_capita": 18525,
+    "coastline": 37653,
+    "life_expectancy": 73.2,
+    "literacy_pct": 99.7,
+    "elevation": 5642
+  },
+  {
+    "name": "Czech Republic",
+    "population": 10915839,
+    "area": 78871,
+    "gdp_per_capita": 39795,
+    "coastline": 0,
+    "life_expectancy": 79.8,
+    "literacy_pct": 99,
+    "elevation": 1603
+  },
+  {
+    "name": "Hungary",
+    "population": 9489000,
+    "area": 93030,
+    "gdp_per_capita": 28430,
+    "coastline": 0,
+    "life_expectancy": 77,
+    "literacy_pct": 99.1,
+    "elevation": 1014
+  },
+  {
+    "name": "Romania",
+    "population": 19043151,
+    "area": 238397,
+    "gdp_per_capita": 22538,
+    "coastline": 225,
+    "life_expectancy": 75.9,
+    "literacy_pct": 98.6,
+    "elevation": 2545
+  },
+  {
+    "name": "Monaco",
+    "population": 38857,
+    "area": 2,
+    "gdp_per_capita": 288002,
+    "coastline": 4,
+    "life_expectancy": 86.4,
+    "elevation": 162
+  },
+  {
+    "name": "San Marino",
+    "population": 34172,
+    "area": 61,
+    "gdp_per_capita": 59871,
+    "coastline": 0,
+    "life_expectancy": 85.7,
+    "elevation": 749
+  },
+  {
+    "name": "Luxembourg",
+    "population": 693916,
+    "area": 2586,
+    "gdp_per_capita": 147252,
+    "coastline": 0,
+    "life_expectancy": 82.2,
+    "elevation": 560
+  },
+  {
+    "name": "Saudi Arabia",
+    "population": 33702731,
+    "area": 2149690,
+    "gdp_per_capita": 37811,
+    "coastline": 2640,
+    "life_expectancy": 78.7,
+    "literacy_pct": 97.6,
+    "elevation": 3015
+  },
+  {
+    "name": "United Arab Emirates",
+    "population": 11027129,
+    "area": 83600,
+    "gdp_per_capita": 54214,
+    "coastline": 1318,
+    "life_expectancy": 82.9,
+    "literacy_pct": 98.1
+  },
+  {
+    "name": "Israel",
+    "population": 10147200,
+    "area": 20770,
+    "gdp_per_capita": 69804,
+    "coastline": 273,
+    "life_expectancy": 83.2,
+    "literacy_pct": 97.8,
+    "elevation": 1208
+  },
+  {
+    "name": "Turkey",
+    "population": 86092168,
+    "area": 783562,
+    "gdp_per_capita": 19018,
+    "coastline": 7200,
+    "life_expectancy": 77.2,
+    "literacy_pct": 97.3,
+    "elevation": 5137
+  },
+  {
+    "name": "Iran",
+    "population": 92417681,
+    "area": 1648195,
+    "gdp_per_capita": 3415,
+    "coastline": 2440,
+    "life_expectancy": 77.7,
+    "literacy_pct": 89,
+    "elevation": 5610
+  },
+  {
+    "name": "Iraq",
+    "population": 46118793,
+    "area": 438317,
+    "gdp_per_capita": 5677,
+    "coastline": 58,
+    "life_expectancy": 72.5,
+    "literacy_pct": 85.5,
+    "elevation": 3611
+  },
+  {
+    "name": "Jordan",
+    "population": 11484805,
+    "area": 89342,
+    "gdp_per_capita": 5601,
+    "coastline": 26,
+    "life_expectancy": 77.9,
+    "literacy_pct": 95,
+    "elevation": 1854
+  },
+  {
+    "name": "Qatar",
+    "population": 3214609,
+    "area": 11581,
+    "gdp_per_capita": 68138,
+    "coastline": 563,
+    "life_expectancy": 82.5,
+    "literacy_pct": 93.5,
+    "elevation": 103
+  },
+  {
+    "name": "Egypt",
+    "population": 114535772,
+    "area": 1001450,
+    "gdp_per_capita": 3904,
+    "coastline": 2450,
+    "life_expectancy": 74.5,
+    "literacy_pct": 71.2,
+    "elevation": 2629
+  },
+  {
+    "name": "Nigeria",
+    "population": 227882945,
+    "area": 923768,
+    "gdp_per_capita": 1556,
+    "coastline": 853,
+    "life_expectancy": 52.7,
+    "literacy_pct": 51.1,
+    "elevation": 2419
+  },
+  {
+    "name": "Ethiopia",
+    "population": 128691692,
+    "area": 1104300,
+    "gdp_per_capita": 1081,
+    "coastline": 0,
+    "life_expectancy": 68.3,
+    "literacy_pct": 39,
+    "elevation": 4550
+  },
+  {
+    "name": "Kenya",
+    "population": 55339003,
+    "area": 580367,
+    "gdp_per_capita": 2714,
+    "coastline": 536,
+    "life_expectancy": 69.7,
+    "literacy_pct": 78.7,
+    "elevation": 5199
+  },
+  {
+    "name": "South Africa",
+    "population": 63212384,
+    "area": 1219090,
+    "gdp_per_capita": 7503,
+    "coastline": 2798,
+    "life_expectancy": 66.9,
+    "literacy_pct": 94.4,
+    "elevation": 3450
+  },
+  {
+    "name": "Morocco",
+    "population": 37712505,
+    "area": 446550,
+    "gdp_per_capita": 5107,
+    "coastline": 2945,
+    "life_expectancy": 75.3,
+    "literacy_pct": 73.8,
+    "elevation": 4167
+  },
+  {
+    "name": "Ghana",
+    "population": 33787914,
+    "area": 238537,
+    "gdp_per_capita": 3314,
+    "coastline": 539,
+    "life_expectancy": 69.4,
+    "literacy_pct": 71.5,
+    "elevation": 885
+  },
+  {
+    "name": "Tanzania",
+    "population": 66617606,
+    "area": 947303,
+    "gdp_per_capita": 1362,
+    "coastline": 1424,
+    "life_expectancy": 70.2,
+    "literacy_pct": 77.9,
+    "elevation": 5895
+  },
+  {
+    "name": "Algeria",
+    "population": 46164219,
+    "area": 2381741,
+    "gdp_per_capita": 6628,
+    "coastline": 998,
+    "life_expectancy": 77,
+    "literacy_pct": 75.1,
+    "elevation": 2908
+  },
+  {
+    "name": "Democratic Republic of the Congo",
+    "population": 105789731,
+    "area": 2344858,
+    "gdp_per_capita": 1122,
+    "coastline": 37,
+    "life_expectancy": 61.8,
+    "literacy_pct": 77,
+    "elevation": 5109
+  },
+  {
+    "name": "Rwanda",
+    "population": 13954471,
+    "area": 26338,
+    "gdp_per_capita": 1198,
+    "coastline": 0,
+    "life_expectancy": 67.8,
+    "literacy_pct": 70.8,
+    "elevation": 4507
+  },
+  {
+    "name": "Zambia",
+    "population": 20723965,
+    "area": 752612,
+    "gdp_per_capita": 1831,
+    "coastline": 0,
+    "life_expectancy": 66.3,
+    "literacy_pct": 83,
+    "elevation": 2339
+  },
+  {
+    "name": "Zimbabwe",
+    "population": 16340822,
+    "area": 390757,
+    "gdp_per_capita": 3199,
+    "coastline": 0,
+    "life_expectancy": 63.3,
+    "literacy_pct": 88.7,
+    "elevation": 2592
+  },
+  {
+    "name": "Botswana",
+    "population": 2480244,
+    "area": 582000,
+    "gdp_per_capita": 8490,
+    "coastline": 0,
+    "life_expectancy": 65.6,
+    "literacy_pct": 87.7,
+    "elevation": 1494
+  },
+  {
+    "name": "Chad",
+    "population": 19319064,
+    "area": 1284000,
+    "gdp_per_capita": 1315,
+    "coastline": 0,
+    "life_expectancy": 53,
+    "literacy_pct": 22.3,
+    "elevation": 3445
+  },
+  {
+    "name": "Madagascar",
+    "population": 31195932,
+    "area": 587041,
+    "gdp_per_capita": 656,
+    "coastline": 4828,
+    "life_expectancy": 64.5,
+    "literacy_pct": 71.6,
+    "elevation": 2876
+  },
+  {
+    "name": "Senegal",
+    "population": 18077573,
+    "area": 196712,
+    "gdp_per_capita": 2054,
+    "coastline": 531,
+    "life_expectancy": 70,
+    "literacy_pct": 51.9,
+    "elevation": 648
+  },
+  {
+    "name": "China",
+    "population": 1404890000,
+    "area": 9596961,
+    "gdp_per_capita": 14874,
+    "coastline": 14500,
+    "life_expectancy": 78,
+    "literacy_pct": 96.8,
+    "elevation": 8849
+  },
+  {
+    "name": "Japan",
+    "population": 122950000,
+    "area": 377975,
+    "gdp_per_capita": 35703,
+    "coastline": 29751,
+    "life_expectancy": 84.7,
+    "literacy_pct": 99.8,
+    "elevation": 3776
+  },
+  {
+    "name": "India",
+    "population": 1428627663,
+    "area": 3287263,
+    "gdp_per_capita": 2813,
+    "coastline": 11098,
+    "life_expectancy": 72,
+    "literacy_pct": 75.4,
+    "elevation": 8586
+  },
+  {
+    "name": "Indonesia",
+    "population": 288315089,
+    "area": 1904569,
+    "gdp_per_capita": 5362,
+    "coastline": 54716,
+    "life_expectancy": 73.1,
+    "literacy_pct": 95.4,
+    "elevation": 4884
+  },
+  {
+    "name": "Pakistan",
+    "population": 241499431,
+    "area": 881913,
+    "gdp_per_capita": 1696,
+    "coastline": 1046,
+    "life_expectancy": 69.1,
+    "literacy_pct": 62.8,
+    "elevation": 8611
+  },
+  {
+    "name": "Bangladesh",
+    "population": 175423000,
+    "area": 148460,
+    "gdp_per_capita": 2911,
+    "coastline": 580,
+    "life_expectancy": 74.7,
+    "literacy_pct": 74.7,
+    "elevation": 1064
+  },
+  {
+    "name": "Philippines",
+    "population": 112729484,
+    "area": 300000,
+    "gdp_per_capita": 4443,
+    "coastline": 36289,
+    "life_expectancy": 72.7,
+    "literacy_pct": 96.4,
+    "elevation": 2954
+  },
+  {
+    "name": "Vietnam",
+    "population": 102300000,
+    "area": 331344,
+    "gdp_per_capita": 5115,
+    "coastline": 3444,
+    "life_expectancy": 74.6,
+    "literacy_pct": 95.8,
+    "elevation": 3147
+  },
+  {
+    "name": "Thailand",
+    "population": 65975198,
+    "area": 513120,
+    "gdp_per_capita": 8105,
+    "coastline": 3219,
+    "life_expectancy": 76.4,
+    "literacy_pct": 92.9,
+    "elevation": 2565
+  },
+  {
+    "name": "South Korea",
+    "population": 51106229,
+    "area": 100472,
+    "gdp_per_capita": 37412,
+    "coastline": 2413,
+    "life_expectancy": 84.3,
+    "literacy_pct": 97.9,
+    "elevation": 1947
+  },
+  {
+    "name": "North Korea",
+    "population": 25950000,
+    "area": 120538,
+    "coastline": 2495,
+    "life_expectancy": 73.6,
+    "literacy_pct": 100,
+    "elevation": 2744
+  },
+  {
+    "name": "Malaysia",
+    "population": 34374300,
+    "area": 330803,
+    "gdp_per_capita": 15085,
+    "coastline": 4675,
+    "life_expectancy": 76.7,
+    "literacy_pct": 95,
+    "elevation": 4095
+  },
+  {
+    "name": "Singapore",
+    "population": 6110200,
+    "area": 744,
+    "gdp_per_capita": 107758,
+    "coastline": 193,
+    "life_expectancy": 83.7,
+    "literacy_pct": 97,
+    "elevation": 164
+  },
+  {
+    "name": "Myanmar",
+    "population": 55770232,
+    "area": 676579,
+    "gdp_per_capita": 1519,
+    "coastline": 1930,
+    "life_expectancy": 69.9,
+    "literacy_pct": 75.6,
+    "elevation": 5881
+  },
+  {
+    "name": "Nepal",
+    "population": 31122387,
+    "area": 147181,
+    "gdp_per_capita": 1548,
+    "coastline": 0,
+    "life_expectancy": 72.4,
+    "literacy_pct": 76.3,
+    "elevation": 8849
+  },
+  {
+    "name": "Australia",
+    "population": 27801023,
+    "area": 7688287,
+    "gdp_per_capita": 75648,
+    "coastline": 25760,
+    "life_expectancy": 83.9,
+    "literacy_pct": 99,
+    "elevation": 2228
+  },
+  {
+    "name": "New Zealand",
+    "population": 5354330,
+    "area": 263310,
+    "gdp_per_capita": 52023,
+    "coastline": 15134,
+    "life_expectancy": 82,
+    "literacy_pct": 99,
+    "elevation": 3724
+  }
+]

@@ -12,11 +12,25 @@
 
 **Reprioritized 2026-08-14** — remaining items, in order:
 
-8. **Other trivia domains beyond sports** — e.g. geography facts, and more generally a framework that can plot any numerical trivia pair (not just player/team stats). Sports stats would become one "pack" among several.
+8. ~~**Other trivia domains beyond sports.**~~ **Done.** Renamed the `SPORTS` config to `PACKS` (and the core loop's "player" terminology to generic "entry" terminology — `pickPlayer`→`pickEntry`, etc.) since the engine never actually required sports-shaped data; added the first non-sports pack, **Geography — Countries** (`geo_countries.json`, 85 countries: `population`, `area`, `gdp_per_capita`, `coastline`, `life_expectancy`, `literacy_pct`, `elevation`). See `CLAUDE.md` for the architecture writeup, including two real bugs the new pack surfaced (a `noun + 's'` pluralization bug — "countrys" — and an "a name's name" grammar bug in the mixed-pack instructions text) and why the rate-vs-counting-stat schema rule doesn't apply to a snapshot domain like countries.
+
+   Candidate packs for later (not building yet — for future prioritization):
+
+   | Pack | Why it fits | Notes |
+   |---|---|---|
+   | Geography — US States | same shape as countries, smaller/easier follow-up | population, area, income, elevation, counties |
+   | Movies | box office, budget, runtime, ratings, release year | very recognizable names |
+   | Animals | top speed, weight, lifespan, gestation | fun, easy variety pack |
+   | Space — Planets/Moons | distance from sun, diameter, moons, day length | small fixed set (~8-20), limited pool size |
+   | Video Games | copies sold, Metacritic, budget, release year | strong fan recognition |
+   | Elements (periodic table) | atomic number/mass, melting/boiling point | fixed set of 118, very factual/verifiable |
+   | Companies | market cap, employees, founding year, revenue | numbers shift often, needs an "as of" note |
+   | U.S. Presidents | age at inauguration, years served, height | smaller pool (~45), rich for trivia fans |
+   | Music/Artists | certified sales, #1 hits, Grammys, years active | harder to source cleanly at scale |
 9. **Team statistics** — support guessing team-level stats (not just individual players) as an additional mode alongside the existing player-based one.
-10. **Full code review of the Griddle codebase** — `app.js`/`index.html`/`style.css` and all eleven player-data JSON files, after several fast-moving feature additions (MLB, NHL, WNBA, NCAA, CFB, NFL) built by iterating quickly rather than pausing to review each one. Worth a dedicated pass for correctness, dead code, and consistency across the now-11 `SPORTS` entries before adding more.
-11. **Hide or gate the "Kitchen Prep" debug panel** (practice-sport selector, force stat pair, specific-player picker) for general playtesters — currently visible to anyone who opens the `<details>`. Higher priority now that the panel has grown across 11 sports/position-groups, since more debug surface area means more for a playtester to stumble into.
-12. **Verify all player-data JSON files' stat accuracy/sourcing** before wider release — `players.json`, `wnba_players.json`, `ncaam_players.json`, `mlb_hitters.json`, `nhl_skaters.json`, `cfb_qb_players.json`, `cfb_rb_players.json`, `cfb_wr_players.json`, `nfl_qb_players.json`, `nfl_rb_players.json`, `nfl_wr_players.json` (including the NBA `games`/`career_pts`/`career_reb`/`career_ast` counting stats added later) were all populated via research agents cross-checking Basketball-Reference/Baseball-Reference/Hockey-Reference/Sports-Reference-CFB/Pro-Football-Reference-style sources, not manually verified figure-by-figure, so worth a pass to confirm before real players are scrutinizing the numbers.
+10. **Full code review of the Griddle codebase** — `app.js`/`index.html`/`style.css` and all twelve pack-data JSON files, after several fast-moving feature additions (MLB, NHL, WNBA, NCAA, CFB, NFL, Geography) built by iterating quickly rather than pausing to review each one. Worth a dedicated pass for correctness, dead code, and consistency across the now-12 `PACKS` entries before adding more.
+11. **Hide or gate the "Kitchen Prep" debug panel** (practice-pack selector, force stat pair, specific-entry picker) for general playtesters — currently visible to anyone who opens the `<details>`. Higher priority now that the panel has grown across 12 packs/position-groups, since more debug surface area means more for a playtester to stumble into.
+12. **Verify all pack-data JSON files' stat accuracy/sourcing** before wider release — `players.json`, `wnba_players.json`, `ncaam_players.json`, `mlb_hitters.json`, `nhl_skaters.json`, `cfb_qb_players.json`, `cfb_rb_players.json`, `cfb_wr_players.json`, `nfl_qb_players.json`, `nfl_rb_players.json`, `nfl_wr_players.json`, `geo_countries.json` (including the NBA `games`/`career_pts`/`career_reb`/`career_ast` counting stats added later) were all populated via research agents cross-checking Basketball-Reference/Baseball-Reference/Hockey-Reference/Sports-Reference-CFB/Pro-Football-Reference/CIA-World-Factbook-style sources, not manually verified figure-by-figure, so worth a pass to confirm before real players are scrutinizing the numbers.
 13. **Accessibility pass** — spot-check color contrast (muted text on dark background) and touch target sizes.
 14. **Soccer — deferred, phased rollout:** start with **EPL**, then **Champions League**, then **World Cup**. Leagues/competitions aren't apples-to-apples (goals/90, competition-level differences), needs a normalization decision first — likely handle each competition as its own pool rather than merging them.
 15. **Personal best / score history** via localStorage — V0 had rounds-played/average, dropped in the V1 batch model.
