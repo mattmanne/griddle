@@ -216,6 +216,22 @@
         debut_year: { label: 'Debut Year', short: 'DEBUT' },
       },
     },
+    presidents: {
+      label: null,
+      noun: 'US president',
+      article: 'a',
+      emoji: '🎩',
+      file: 'presidents.json',
+      defaultPair: ['age_at_inauguration', 'years_served'],
+      statDefs: {
+        age_at_inauguration: { label: 'Age at Inauguration', short: 'AGE' },
+        years_served: { label: 'Years Served', short: 'YRS' },
+        height_cm: { label: 'Height (cm)', short: 'HEIGHT' },
+        terms_elected: { label: 'Elections Won', short: 'WINS' },
+        birth_year: { label: 'Birth Year', short: 'BORN' },
+        popular_vote_pct: { label: 'Popular Vote %', short: 'VOTE%' },
+      },
+    },
   };
 
   const PACK_KEYS = Object.keys(PACKS);

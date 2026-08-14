@@ -1,0 +1,397 @@
+[
+  {
+    "name": "George Washington",
+    "age_at_inauguration": 57,
+    "years_served": 7.84,
+    "height_cm": 188,
+    "terms_elected": 2,
+    "birth_year": 1732
+  },
+  {
+    "name": "John Adams",
+    "age_at_inauguration": 61,
+    "years_served": 4,
+    "height_cm": 170,
+    "terms_elected": 1,
+    "birth_year": 1735
+  },
+  {
+    "name": "Thomas Jefferson",
+    "age_at_inauguration": 57,
+    "years_served": 8,
+    "height_cm": 189,
+    "terms_elected": 2,
+    "birth_year": 1743
+  },
+  {
+    "name": "James Madison",
+    "age_at_inauguration": 57,
+    "years_served": 8,
+    "height_cm": 163,
+    "terms_elected": 2,
+    "birth_year": 1751
+  },
+  {
+    "name": "James Monroe",
+    "age_at_inauguration": 58,
+    "years_served": 8,
+    "height_cm": 183,
+    "terms_elected": 2,
+    "birth_year": 1758
+  },
+  {
+    "name": "John Quincy Adams",
+    "age_at_inauguration": 57,
+    "years_served": 4,
+    "height_cm": 170,
+    "terms_elected": 1,
+    "birth_year": 1767,
+    "popular_vote_pct": 30.9
+  },
+  {
+    "name": "Andrew Jackson",
+    "age_at_inauguration": 61,
+    "years_served": 8,
+    "height_cm": 185,
+    "terms_elected": 2,
+    "birth_year": 1767,
+    "popular_vote_pct": 56
+  },
+  {
+    "name": "Martin Van Buren",
+    "age_at_inauguration": 54,
+    "years_served": 4,
+    "height_cm": 168,
+    "terms_elected": 1,
+    "birth_year": 1782,
+    "popular_vote_pct": 50.8
+  },
+  {
+    "name": "William Henry Harrison",
+    "age_at_inauguration": 68,
+    "years_served": 0.08,
+    "height_cm": 173,
+    "terms_elected": 1,
+    "birth_year": 1773,
+    "popular_vote_pct": 52.9
+  },
+  {
+    "name": "John Tyler",
+    "age_at_inauguration": 51,
+    "years_served": 3.92,
+    "height_cm": 183,
+    "terms_elected": 0,
+    "birth_year": 1790
+  },
+  {
+    "name": "James K. Polk",
+    "age_at_inauguration": 49,
+    "years_served": 4,
+    "height_cm": 173,
+    "terms_elected": 1,
+    "birth_year": 1795,
+    "popular_vote_pct": 49.5
+  },
+  {
+    "name": "Zachary Taylor",
+    "age_at_inauguration": 64,
+    "years_served": 1.35,
+    "height_cm": 173,
+    "terms_elected": 1,
+    "birth_year": 1784,
+    "popular_vote_pct": 47.3
+  },
+  {
+    "name": "Millard Fillmore",
+    "age_at_inauguration": 50,
+    "years_served": 2.65,
+    "height_cm": 175,
+    "terms_elected": 0,
+    "birth_year": 1800
+  },
+  {
+    "name": "Franklin Pierce",
+    "age_at_inauguration": 48,
+    "years_served": 4,
+    "height_cm": 178,
+    "terms_elected": 1,
+    "birth_year": 1804,
+    "popular_vote_pct": 50.8
+  },
+  {
+    "name": "James Buchanan",
+    "age_at_inauguration": 65,
+    "years_served": 4,
+    "height_cm": 183,
+    "terms_elected": 1,
+    "birth_year": 1791,
+    "popular_vote_pct": 45.3
+  },
+  {
+    "name": "Abraham Lincoln",
+    "age_at_inauguration": 52,
+    "years_served": 4.12,
+    "height_cm": 193,
+    "terms_elected": 2,
+    "birth_year": 1809,
+    "popular_vote_pct": 39.8
+  },
+  {
+    "name": "Andrew Johnson",
+    "age_at_inauguration": 56,
+    "years_served": 3.88,
+    "height_cm": 178,
+    "terms_elected": 0,
+    "birth_year": 1808
+  },
+  {
+    "name": "Ulysses S. Grant",
+    "age_at_inauguration": 46,
+    "years_served": 8,
+    "height_cm": 173,
+    "terms_elected": 2,
+    "birth_year": 1822,
+    "popular_vote_pct": 52.7
+  },
+  {
+    "name": "Rutherford B. Hayes",
+    "age_at_inauguration": 54,
+    "years_served": 4,
+    "height_cm": 174,
+    "terms_elected": 1,
+    "birth_year": 1822,
+    "popular_vote_pct": 47.9
+  },
+  {
+    "name": "James A. Garfield",
+    "age_at_inauguration": 49,
+    "years_served": 0.55,
+    "height_cm": 183,
+    "terms_elected": 1,
+    "birth_year": 1831,
+    "popular_vote_pct": 48.3
+  },
+  {
+    "name": "Chester A. Arthur",
+    "age_at_inauguration": 51,
+    "years_served": 3.46,
+    "height_cm": 188,
+    "terms_elected": 0,
+    "birth_year": 1829
+  },
+  {
+    "name": "Grover Cleveland",
+    "age_at_inauguration": 47,
+    "years_served": 8,
+    "height_cm": 180,
+    "terms_elected": 2,
+    "birth_year": 1837,
+    "popular_vote_pct": 48.9
+  },
+  {
+    "name": "Benjamin Harrison",
+    "age_at_inauguration": 55,
+    "years_served": 4,
+    "height_cm": 168,
+    "terms_elected": 1,
+    "birth_year": 1833,
+    "popular_vote_pct": 47.8
+  },
+  {
+    "name": "William McKinley",
+    "age_at_inauguration": 54,
+    "years_served": 4.53,
+    "height_cm": 170,
+    "terms_elected": 2,
+    "birth_year": 1843,
+    "popular_vote_pct": 51
+  },
+  {
+    "name": "Theodore Roosevelt",
+    "age_at_inauguration": 42,
+    "years_served": 7.47,
+    "height_cm": 178,
+    "terms_elected": 1,
+    "birth_year": 1858,
+    "popular_vote_pct": 56.4
+  },
+  {
+    "name": "William Howard Taft",
+    "age_at_inauguration": 51,
+    "years_served": 4,
+    "height_cm": 182,
+    "terms_elected": 1,
+    "birth_year": 1857,
+    "popular_vote_pct": 51.6
+  },
+  {
+    "name": "Woodrow Wilson",
+    "age_at_inauguration": 56,
+    "years_served": 8,
+    "height_cm": 180,
+    "terms_elected": 2,
+    "birth_year": 1856,
+    "popular_vote_pct": 41.8
+  },
+  {
+    "name": "Warren G. Harding",
+    "age_at_inauguration": 55,
+    "years_served": 2.41,
+    "height_cm": 183,
+    "terms_elected": 1,
+    "birth_year": 1865,
+    "popular_vote_pct": 60.3
+  },
+  {
+    "name": "Calvin Coolidge",
+    "age_at_inauguration": 51,
+    "years_served": 5.58,
+    "height_cm": 178,
+    "terms_elected": 1,
+    "birth_year": 1872,
+    "popular_vote_pct": 54
+  },
+  {
+    "name": "Herbert Hoover",
+    "age_at_inauguration": 54,
+    "years_served": 4,
+    "height_cm": 180,
+    "terms_elected": 1,
+    "birth_year": 1874,
+    "popular_vote_pct": 58.2
+  },
+  {
+    "name": "Franklin D. Roosevelt",
+    "age_at_inauguration": 51,
+    "years_served": 12.11,
+    "height_cm": 188,
+    "terms_elected": 4,
+    "birth_year": 1882,
+    "popular_vote_pct": 57.4
+  },
+  {
+    "name": "Harry S. Truman",
+    "age_at_inauguration": 60,
+    "years_served": 7.78,
+    "height_cm": 175,
+    "terms_elected": 1,
+    "birth_year": 1884,
+    "popular_vote_pct": 49.6
+  },
+  {
+    "name": "Dwight D. Eisenhower",
+    "age_at_inauguration": 62,
+    "years_served": 8,
+    "height_cm": 179,
+    "terms_elected": 2,
+    "birth_year": 1890,
+    "popular_vote_pct": 55.2
+  },
+  {
+    "name": "John F. Kennedy",
+    "age_at_inauguration": 43,
+    "years_served": 2.84,
+    "height_cm": 183,
+    "terms_elected": 1,
+    "birth_year": 1917,
+    "popular_vote_pct": 49.7
+  },
+  {
+    "name": "Lyndon B. Johnson",
+    "age_at_inauguration": 55,
+    "years_served": 5.16,
+    "height_cm": 192,
+    "terms_elected": 1,
+    "birth_year": 1908,
+    "popular_vote_pct": 61.1
+  },
+  {
+    "name": "Richard Nixon",
+    "age_at_inauguration": 56,
+    "years_served": 5.55,
+    "height_cm": 182,
+    "terms_elected": 2,
+    "birth_year": 1913,
+    "popular_vote_pct": 43.4
+  },
+  {
+    "name": "Gerald Ford",
+    "age_at_inauguration": 61,
+    "years_served": 2.45,
+    "height_cm": 183,
+    "terms_elected": 0,
+    "birth_year": 1913
+  },
+  {
+    "name": "Jimmy Carter",
+    "age_at_inauguration": 52,
+    "years_served": 4,
+    "height_cm": 177,
+    "terms_elected": 1,
+    "birth_year": 1924,
+    "popular_vote_pct": 50.1
+  },
+  {
+    "name": "Ronald Reagan",
+    "age_at_inauguration": 69,
+    "years_served": 8,
+    "height_cm": 185,
+    "terms_elected": 2,
+    "birth_year": 1911,
+    "popular_vote_pct": 50.7
+  },
+  {
+    "name": "George H. W. Bush",
+    "age_at_inauguration": 64,
+    "years_served": 4,
+    "height_cm": 188,
+    "terms_elected": 1,
+    "birth_year": 1924,
+    "popular_vote_pct": 53.4
+  },
+  {
+    "name": "Bill Clinton",
+    "age_at_inauguration": 46,
+    "years_served": 8,
+    "height_cm": 188,
+    "terms_elected": 2,
+    "birth_year": 1946,
+    "popular_vote_pct": 43
+  },
+  {
+    "name": "George W. Bush",
+    "age_at_inauguration": 54,
+    "years_served": 8,
+    "height_cm": 182,
+    "terms_elected": 2,
+    "birth_year": 1946,
+    "popular_vote_pct": 47.9
+  },
+  {
+    "name": "Barack Obama",
+    "age_at_inauguration": 47,
+    "years_served": 8,
+    "height_cm": 185,
+    "terms_elected": 2,
+    "birth_year": 1961,
+    "popular_vote_pct": 52.9
+  },
+  {
+    "name": "Donald Trump",
+    "age_at_inauguration": 70,
+    "years_served": 5.56,
+    "height_cm": 190,
+    "terms_elected": 2,
+    "birth_year": 1946,
+    "popular_vote_pct": 46.1
+  },
+  {
+    "name": "Joe Biden",
+    "age_at_inauguration": 78,
+    "years_served": 4,
+    "height_cm": 183,
+    "terms_elected": 1,
+    "birth_year": 1942,
+    "popular_vote_pct": 51.3
+  }
+]
