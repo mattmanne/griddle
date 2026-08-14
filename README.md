@@ -1,13 +1,18 @@
 # Griddle 🧇
 
-A stats-guessing game. You're given a player's name and two stat categories — drag a
-marker onto an X/Y grid to place where you think their real stats land. 5 guesses per
-batch, scored by how close you get.
+A stats-guessing game. You're given a name and two stat categories — drag a marker
+onto an X/Y grid to place where you think the real numbers land. 5 guesses per batch,
+scored by how close you get.
 
 **Play it:** https://mattmanne.github.io/griddle
 
-Currently covers NBA (108 players) and MLB hitters (73 players) — pick one league or
-mix both in the same batch.
+Twelve packs so far, individually toggleable and mixable in the same batch:
+
+- **Basketball:** NBA, WNBA, NCAA men's
+- **Baseball:** MLB hitters
+- **Hockey:** NHL skaters
+- **Football:** college (QB/RB/WR) and NFL (QB/RB/WR), each position its own pack
+- **Geography:** countries
 
 ## Running locally
 
@@ -19,8 +24,7 @@ npx http-server .
 ```
 
 (Opening `index.html` directly via `file://` won't work — the browser blocks the
-`fetch()` calls that load `players.json`/`mlb_hitters.json` under the `file://`
-protocol.)
+`fetch()` calls that load each pack's JSON file under the `file://` protocol.)
 
 ## Contributing / project notes
 
