@@ -16,6 +16,40 @@
     career_ast: { label: 'Career Assists', short: 'AST' },
   };
 
+  const QB_STAT_DEFS = {
+    pass_yds: { label: 'Passing Yards/Game', short: 'YDS/G' },
+    pass_td: { label: 'Passing TDs/Game', short: 'TD/G' },
+    int: { label: 'Interceptions/Game', short: 'INT/G' },
+    comp_pct: { label: 'Completion %', short: 'COMP%' },
+    rating: { label: 'Passer Rating', short: 'RTG' },
+    rush_yds: { label: 'Rushing Yards/Game', short: 'RUSH/G' },
+    games: { label: 'Games Played', short: 'GP' },
+    career_pass_yds: { label: 'Career Passing Yards', short: 'YDS' },
+    career_pass_td: { label: 'Career Passing TDs', short: 'TD' },
+  };
+
+  const RB_STAT_DEFS = {
+    rush_yds: { label: 'Rushing Yards/Game', short: 'YDS/G' },
+    rush_td: { label: 'Rushing TDs/Game', short: 'TD/G' },
+    ypc: { label: 'Yards per Carry', short: 'YPC' },
+    rec: { label: 'Receptions/Game', short: 'REC/G' },
+    rec_yds: { label: 'Receiving Yards/Game', short: 'RECYD/G' },
+    games: { label: 'Games Played', short: 'GP' },
+    career_rush_yds: { label: 'Career Rushing Yards', short: 'YDS' },
+    career_rush_td: { label: 'Career Rushing TDs', short: 'TD' },
+  };
+
+  const WR_STAT_DEFS = {
+    rec: { label: 'Receptions/Game', short: 'REC/G' },
+    rec_yds: { label: 'Receiving Yards/Game', short: 'YDS/G' },
+    rec_td: { label: 'Receiving TDs/Game', short: 'TD/G' },
+    ypr: { label: 'Yards per Reception', short: 'YPR' },
+    games: { label: 'Games Played', short: 'GP' },
+    career_rec: { label: 'Career Receptions', short: 'REC' },
+    career_rec_yds: { label: 'Career Receiving Yards', short: 'YDS' },
+    career_rec_td: { label: 'Career Receiving TDs', short: 'TD' },
+  };
+
   const SPORTS = {
     nba: {
       label: 'NBA',
@@ -87,17 +121,7 @@
       emoji: '🏈',
       file: 'cfb_qb_players.json',
       defaultPair: ['pass_yds', 'pass_td'],
-      statDefs: {
-        pass_yds: { label: 'Passing Yards/Game', short: 'YDS/G' },
-        pass_td: { label: 'Passing TDs/Game', short: 'TD/G' },
-        int: { label: 'Interceptions/Game', short: 'INT/G' },
-        comp_pct: { label: 'Completion %', short: 'COMP%' },
-        rating: { label: 'Passer Rating', short: 'RTG' },
-        rush_yds: { label: 'Rushing Yards/Game', short: 'RUSH/G' },
-        games: { label: 'Games Played', short: 'GP' },
-        career_pass_yds: { label: 'Career Passing Yards', short: 'YDS' },
-        career_pass_td: { label: 'Career Passing TDs', short: 'TD' },
-      },
+      statDefs: QB_STAT_DEFS,
     },
     cfb_rb: {
       label: 'CFB',
@@ -106,16 +130,7 @@
       emoji: '🏃',
       file: 'cfb_rb_players.json',
       defaultPair: ['rush_yds', 'rush_td'],
-      statDefs: {
-        rush_yds: { label: 'Rushing Yards/Game', short: 'YDS/G' },
-        rush_td: { label: 'Rushing TDs/Game', short: 'TD/G' },
-        ypc: { label: 'Yards per Carry', short: 'YPC' },
-        rec: { label: 'Receptions/Game', short: 'REC/G' },
-        rec_yds: { label: 'Receiving Yards/Game', short: 'RECYD/G' },
-        games: { label: 'Games Played', short: 'GP' },
-        career_rush_yds: { label: 'Career Rushing Yards', short: 'YDS' },
-        career_rush_td: { label: 'Career Rushing TDs', short: 'TD' },
-      },
+      statDefs: RB_STAT_DEFS,
     },
     cfb_wr: {
       label: 'CFB',
@@ -124,16 +139,34 @@
       emoji: '🙌',
       file: 'cfb_wr_players.json',
       defaultPair: ['rec', 'rec_yds'],
-      statDefs: {
-        rec: { label: 'Receptions/Game', short: 'REC/G' },
-        rec_yds: { label: 'Receiving Yards/Game', short: 'YDS/G' },
-        rec_td: { label: 'Receiving TDs/Game', short: 'TD/G' },
-        ypr: { label: 'Yards per Reception', short: 'YPR' },
-        games: { label: 'Games Played', short: 'GP' },
-        career_rec: { label: 'Career Receptions', short: 'REC' },
-        career_rec_yds: { label: 'Career Receiving Yards', short: 'YDS' },
-        career_rec_td: { label: 'Career Receiving TDs', short: 'TD' },
-      },
+      statDefs: WR_STAT_DEFS,
+    },
+    nfl_qb: {
+      label: 'NFL',
+      noun: 'quarterback',
+      article: 'an',
+      emoji: '🏈',
+      file: 'nfl_qb_players.json',
+      defaultPair: ['pass_yds', 'pass_td'],
+      statDefs: QB_STAT_DEFS,
+    },
+    nfl_rb: {
+      label: 'NFL',
+      noun: 'running back',
+      article: 'an',
+      emoji: '🏃',
+      file: 'nfl_rb_players.json',
+      defaultPair: ['rush_yds', 'rush_td'],
+      statDefs: RB_STAT_DEFS,
+    },
+    nfl_wr: {
+      label: 'NFL',
+      noun: 'wide receiver',
+      article: 'an',
+      emoji: '🙌',
+      file: 'nfl_wr_players.json',
+      defaultPair: ['rec', 'rec_yds'],
+      statDefs: WR_STAT_DEFS,
     },
   };
 

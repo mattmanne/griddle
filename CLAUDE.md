@@ -15,7 +15,8 @@ accidentally undone.
   dependencies — deliberately static so it can be served as-is from GitHub Pages.
 - `players.json`, `wnba_players.json`, `ncaam_players.json`, `mlb_hitters.json`,
   `nhl_skaters.json`, `cfb_qb_players.json`, `cfb_rb_players.json`,
-  `cfb_wr_players.json` — one JSON array per sport (or per position group, for
+  `cfb_wr_players.json`, `nfl_qb_players.json`, `nfl_rb_players.json`,
+  `nfl_wr_players.json` — one JSON array per sport (or per position group, for
   football), fetched at load.
 - `archive-v0/` — the original prototype (continuous running-average scoring, no
   batches). Kept for reference, not wired into `index.html`. If you're tempted to
@@ -86,12 +87,14 @@ When adding a new sport/stat, ask "does this need scaling to avoid a degenerate
 0–1 axis?" and "is there a stat-tracking-era gap I need to omit rather than fake?"
 before wiring up data.
 
-- **WNBA and NCAA men's basketball both reuse the same `HOOPS_STAT_DEFS` object in
-  `app.js` rather than each getting a copy.** All three basketball variants track
-  literally the same categories the same way, so duplicating the object would just be
-  more copies to keep in sync by hand. If any of them ever need their stat set to
-  diverge (e.g. college adds "Games Started"), give that one sport its own object at
-  that point — don't speculatively split them apart now.
+- **Sports that track identical categories share one `statDefs` object instead of each
+  getting a copy.** `HOOPS_STAT_DEFS` covers NBA/WNBA/NCAA men's basketball.
+  `QB_STAT_DEFS`/`RB_STAT_DEFS`/`WR_STAT_DEFS` each cover a college *and* NFL entry
+  (`cfb_qb`+`nfl_qb`, etc.) — a college and pro quarterback's stat line has the same
+  shape, so `cfb_qb.statDefs === nfl_qb.statDefs` by reference. Duplicating any of
+  these would just be more copies to keep in sync by hand. If one of them ever needs
+  to diverge (e.g. the NFL adds a stat college doesn't track), give that one sport its
+  own object at that point — don't speculatively split them apart now.
 
 ## Multi-sport architecture — why per-guess random sport, not merged axes
 
@@ -144,16 +147,26 @@ obvious from reading the functions in isolation:
   solves exactly that problem — each position is its own `SPORTS` entry (`cfb_qb`,
   `cfb_rb`, `cfb_wr`) with its own file and `statDefs`, toggled independently like any
   other sport. No position-aware logic was added anywhere; `pickRoundContext()`,
-  `eligiblePlayers()`, etc. don't know or care that three of the eight `SPORTS` entries
-  happen to represent one real-world sport split by position. **The lesson**: before
-  treating a backlog note's stated blocker as still true, check whether something
-  built since then already resolves it — item 7's premise was written before the
-  multi-sport toggle system existed.
+  `eligiblePlayers()`, etc. don't know or care that six of the eleven `SPORTS` entries
+  happen to represent two real-world sports (college and pro football) split by
+  position. **The lesson**: before treating a backlog note's stated blocker as still
+  true, check whether something built since then already resolves it — item 7's
+  premise was written before the multi-sport toggle system existed. NFL confirmed the
+  prediction directly: adding it after college football was zero new code, just three
+  more `SPORTS` entries pointing at the same `QB_STAT_DEFS`/`RB_STAT_DEFS`/
+  `WR_STAT_DEFS` objects college football already used.
+- **The same real person can legitimately appear once per league they played in.**
+  Ja'Marr Chase, CeeDee Lamb, Troy Aikman, and others show up in both a `cfb_*` and
+  an `nfl_*` file with different (correct) stat lines — one row is their college
+  career, the other their pro career. This isn't a duplicate-data bug to clean up; it's
+  the same pattern as Michael Jordan appearing in both `players.json` (NBA) and
+  `ncaam_players.json` (UNC) already. Don't "deduplicate" these across files.
 
 **Sizing note:** `.sport-switch` needs `flex-wrap: wrap` — it didn't originally, which
 was fine at 2-5 buttons but started overflowing the header once college football added
-3 more toggles (8 total). If you add another sport, this is why the buttons wrap to a
-second row instead of running off the edge of the screen.
+3 more toggles (8 total) and NFL added 3 more on top of that (11 total). If you add
+another sport, this is why the buttons wrap to a new row instead of running off the
+edge of the screen.
 
 ## Round lifecycle — the board disappears when "Fully Cooked"
 
