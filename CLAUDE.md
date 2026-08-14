@@ -124,7 +124,7 @@ obvious from reading the functions in isolation:
   `enabledSports`.** Forcing a specific stat pair or a specific player only makes
   sense pinned to one sport (you can't force "Points/Game vs Home Runs"), so the
   practice-sport selector exists so debug overrides stay predictable regardless of
-  what real gameplay has toggled on. See backlog #13 — this panel is debug-only and
+  what real gameplay has toggled on. See backlog #10 — this panel is debug-only and
   not yet gated from playtesters.
 - Every `guessResults` entry stores which sport it came from (not just the stat
   keys), because `STAT_DEFS` is a single mutable module-level binding reassigned each
@@ -140,7 +140,7 @@ obvious from reading the functions in isolation:
   to leave `#round-progress` alone whenever a round is active (`guessIndex !== 0 &&
   !roundOver`), so a toggle only affects which sport the *next* guess draws from.
 - **Position groups (college football's QB/RB/WR) are just more `SPORTS` entries, not
-  a new sub-feature.** Backlog item 7 originally assumed college/NFL football needed
+  a new sub-feature.** Backlog item 6 originally assumed college/NFL football needed
   "the position-group feature" as real new architecture, because QB/RB/WR stats share
   almost nothing (you can't plot "Passing Yards" against "Receptions" meaningfully any
   more than you can plot NBA against MLB). But the multi-sport toggle system already
@@ -150,7 +150,7 @@ obvious from reading the functions in isolation:
   `eligiblePlayers()`, etc. don't know or care that six of the eleven `SPORTS` entries
   happen to represent two real-world sports (college and pro football) split by
   position. **The lesson**: before treating a backlog note's stated blocker as still
-  true, check whether something built since then already resolves it — item 7's
+  true, check whether something built since then already resolves it — item 6's
   premise was written before the multi-sport toggle system existed. NFL confirmed the
   prediction directly: adding it after college football was zero new code, just three
   more `SPORTS` entries pointing at the same `QB_STAT_DEFS`/`RB_STAT_DEFS`/
