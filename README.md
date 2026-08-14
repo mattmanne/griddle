@@ -6,13 +6,15 @@ scored by how close you get.
 
 **Play it:** https://mattmanne.github.io/griddle
 
-Twelve packs so far, individually toggleable and mixable in the same batch:
+Eleven packs so far, individually toggleable and mixable in the same batch:
 
 - **Basketball:** NBA, WNBA, NCAA men's
 - **Baseball:** MLB hitters
 - **Hockey:** NHL skaters
-- **Football:** college (QB/RB/WR) and NFL (QB/RB/WR), each position its own pack
-- **Geography:** countries
+- **Football:** CFB and NFL, each pack pooling QB/RB/WR together
+- **Geography:** countries, US states
+- **Movies**
+- **Space:** planets (plus Pluto, Ceres, and Eris)
 
 ## Running locally
 

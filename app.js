@@ -16,38 +16,27 @@
     career_ast: { label: 'Career Assists', short: 'AST' },
   };
 
-  const QB_STAT_DEFS = {
-    pass_yds: { label: 'Passing Yards/Game', short: 'YDS/G' },
-    pass_td: { label: 'Passing TDs/Game', short: 'TD/G' },
+  const FOOTBALL_STAT_DEFS = {
+    pass_yds: { label: 'Passing Yards/Game', short: 'PASS YD/G' },
+    pass_td: { label: 'Passing TDs/Game', short: 'PASS TD/G' },
     int: { label: 'Interceptions/Game', short: 'INT/G' },
     comp_pct: { label: 'Completion %', short: 'COMP%' },
     rating: { label: 'Passer Rating', short: 'RTG' },
-    rush_yds: { label: 'Rushing Yards/Game', short: 'RUSH/G' },
-    games: { label: 'Games Played', short: 'GP' },
-    career_pass_yds: { label: 'Career Passing Yards', short: 'YDS' },
-    career_pass_td: { label: 'Career Passing TDs', short: 'TD' },
-  };
-
-  const RB_STAT_DEFS = {
-    rush_yds: { label: 'Rushing Yards/Game', short: 'YDS/G' },
-    rush_td: { label: 'Rushing TDs/Game', short: 'TD/G' },
+    rush_yds: { label: 'Rushing Yards/Game', short: 'RUSH YD/G' },
+    rush_td: { label: 'Rushing TDs/Game', short: 'RUSH TD/G' },
     ypc: { label: 'Yards per Carry', short: 'YPC' },
     rec: { label: 'Receptions/Game', short: 'REC/G' },
-    rec_yds: { label: 'Receiving Yards/Game', short: 'RECYD/G' },
-    games: { label: 'Games Played', short: 'GP' },
-    career_rush_yds: { label: 'Career Rushing Yards', short: 'YDS' },
-    career_rush_td: { label: 'Career Rushing TDs', short: 'TD' },
-  };
-
-  const WR_STAT_DEFS = {
-    rec: { label: 'Receptions/Game', short: 'REC/G' },
-    rec_yds: { label: 'Receiving Yards/Game', short: 'YDS/G' },
-    rec_td: { label: 'Receiving TDs/Game', short: 'TD/G' },
+    rec_yds: { label: 'Receiving Yards/Game', short: 'REC YD/G' },
+    rec_td: { label: 'Receiving TDs/Game', short: 'REC TD/G' },
     ypr: { label: 'Yards per Reception', short: 'YPR' },
     games: { label: 'Games Played', short: 'GP' },
+    career_pass_yds: { label: 'Career Passing Yards', short: 'PASS YDS' },
+    career_pass_td: { label: 'Career Passing TDs', short: 'PASS TD' },
+    career_rush_yds: { label: 'Career Rushing Yards', short: 'RUSH YDS' },
+    career_rush_td: { label: 'Career Rushing TDs', short: 'RUSH TD' },
     career_rec: { label: 'Career Receptions', short: 'REC' },
-    career_rec_yds: { label: 'Career Receiving Yards', short: 'YDS' },
-    career_rec_td: { label: 'Career Receiving TDs', short: 'TD' },
+    career_rec_yds: { label: 'Career Receiving Yards', short: 'REC YDS' },
+    career_rec_td: { label: 'Career Receiving TDs', short: 'REC TD' },
   };
 
   const PACKS = {
@@ -114,32 +103,23 @@
         career_p: { label: 'Career Points', short: 'PTS' },
       },
     },
-    football_qb: {
-      label: null,
-      noun: 'quarterback',
+    football_cfb: {
+      label: 'CFB',
+      noun: 'player',
       article: 'a',
       emoji: '🏈',
-      file: 'football_qb_players.json',
-      defaultPair: ['pass_yds', 'pass_td'],
-      statDefs: QB_STAT_DEFS,
+      file: 'football_cfb_players.json',
+      defaultPair: ['pass_yds', 'rush_yds'],
+      statDefs: FOOTBALL_STAT_DEFS,
     },
-    football_rb: {
-      label: null,
-      noun: 'running back',
-      article: 'a',
-      emoji: '🏃',
-      file: 'football_rb_players.json',
-      defaultPair: ['rush_yds', 'rush_td'],
-      statDefs: RB_STAT_DEFS,
-    },
-    football_wr: {
-      label: null,
-      noun: 'wide receiver',
-      article: 'a',
-      emoji: '🙌',
-      file: 'football_wr_players.json',
-      defaultPair: ['rec', 'rec_yds'],
-      statDefs: WR_STAT_DEFS,
+    football_nfl: {
+      label: 'NFL',
+      noun: 'player',
+      article: 'an',
+      emoji: '🏈',
+      file: 'football_nfl_players.json',
+      defaultPair: ['pass_yds', 'rush_yds'],
+      statDefs: FOOTBALL_STAT_DEFS,
     },
     geo_countries: {
       label: null,
@@ -324,6 +304,24 @@
     return pool[Math.floor(Math.random() * pool.length)];
   }
 
+  function hasEligiblePair(pack, x, y) {
+    return (dataCache[pack] || []).some((e) => Number.isFinite(e[x]) && Number.isFinite(e[y]));
+  }
+
+  // Packs whose entries share one stat schema (e.g. HOOPS_STAT_DEFS) always have every
+  // field on every entry, so any random pair works. Packs pooling entries with only
+  // partially-overlapping fields (e.g. football_cfb/football_nfl mixing QB/RB/WR stats)
+  // can randomly land on a pair no entry has both of (a QB stat vs. a WR-only stat) —
+  // rejection-sample until a pair with at least one eligible entry turns up.
+  function pickEligiblePair(pack, keys) {
+    for (let i = 0; i < 200; i++) {
+      const x = randomKey(keys);
+      const y = randomKey(keys, x);
+      if (hasEligiblePair(pack, x, y)) return { x, y };
+    }
+    return { x: keys[0], y: keys[1] };
+  }
+
   function pickRoundContext() {
     const forcedEntry = entrySelect.value;
     if (forceStatPairCheckbox.checked || forcedEntry) {
@@ -334,15 +332,13 @@
         x = statXSelect.value;
         y = statYSelect.value === x ? randomKey(keys, x) : statYSelect.value;
       } else {
-        x = randomKey(keys);
-        y = randomKey(keys, x);
+        ({ x, y } = pickEligiblePair(pack, keys));
       }
       return { pack, x, y };
     }
     const pack = randomKey(Array.from(enabledPacks));
     const keys = Object.keys(PACKS[pack].statDefs);
-    const x = randomKey(keys);
-    const y = randomKey(keys, x);
+    const { x, y } = pickEligiblePair(pack, keys);
     return { pack, x, y };
   }
 
@@ -483,7 +479,9 @@
       const found = pool.find((e) => e.name === chosenName);
       if (found) return found;
     }
-    return pool[Math.floor(Math.random() * pool.length)];
+    // pool can be empty only via an explicitly forced debug stat pair that no entry
+    // in a mixed-position pack (e.g. football_cfb) actually has both fields for.
+    return pool.length ? pool[Math.floor(Math.random() * pool.length)] : entries[0];
   }
 
   function beginNextGuess() {
