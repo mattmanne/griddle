@@ -10,7 +10,10 @@
 <body>
 <main class="app">
   <header class="app-header">
-    <h1>Griddle</h1>
+    <div class="header-top">
+      <h1>Griddle</h1>
+      <button type="button" id="info-btn" class="info-btn" aria-label="How to play" aria-haspopup="dialog">ℹ️</button>
+    </div>
     <div class="pack-switch" role="group" aria-label="Choose packs (select one or more)">
       <button type="button" class="pack-btn active" data-pack="nba">🏀 NBA</button>
       <button type="button" class="pack-btn active" data-pack="wnba">⛹️‍♀️ WNBA</button>
@@ -25,11 +28,24 @@
       <button type="button" class="pack-btn active" data-pack="space_planets">🪐 Planets</button>
     </div>
     <p class="instructions">
-      One batch, 5 guesses, a different pair of stats each time. You'll be given <span id="pack-clause">an entry</span>'s name —
-      press and drag on the grid to place their stats, then release to lock in your guess. Share your
-      batch when you're done!
+      Drag to place <span id="pack-clause">an entry</span>'s stats. 5 guesses per batch, closest wins.
     </p>
   </header>
+
+  <dialog id="info-modal" class="info-modal">
+    <h2>How to Play</h2>
+    <p>Each batch is 5 guesses. Every guess gives you a name and two stat categories —
+      say, Points/Game vs. Rebounds/Game.</p>
+    <p>Press and drag on the grid to place where you think that entry's real numbers
+      land: left-right for the first stat, bottom-top for the second. Release to lock
+      it in.</p>
+    <p>Your score is based on how close your guess lands to the real point — up to
+      1000 per guess, 5000 per batch.</p>
+    <p>Toggle multiple packs on at once (NBA, Movies, Countries, ...) to mix them —
+      each guess in the batch randomly draws from whichever packs are enabled.</p>
+    <p>Once you finish a batch, copy your results to share with friends.</p>
+    <button type="button" id="info-close-btn">Got it</button>
+  </dialog>
 
   <section class="target-panel" aria-live="polite">
     <span class="target-label">Order up:</span>

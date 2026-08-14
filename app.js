@@ -253,6 +253,9 @@
   const copyResultsBtn = document.getElementById('copy-results-btn');
   const replayBtn = document.getElementById('replay-btn');
   const packButtons = Array.from(document.querySelectorAll('.pack-btn'));
+  const infoBtn = document.getElementById('info-btn');
+  const infoModal = document.getElementById('info-modal');
+  const infoCloseBtn = document.getElementById('info-close-btn');
   const packClause = document.getElementById('pack-clause');
   const debugPackSelect = document.getElementById('debug-pack-select');
   const entryLabelEl = document.getElementById('entry-label');
@@ -631,6 +634,12 @@
   window.addEventListener('resize', () => {
     baseSize = viewport.clientWidth;
     setZoom(parseFloat(zoomSlider.value));
+  });
+
+  infoBtn.addEventListener('click', () => infoModal.showModal());
+  infoCloseBtn.addEventListener('click', () => infoModal.close());
+  infoModal.addEventListener('click', (evt) => {
+    if (evt.target === infoModal) infoModal.close();
   });
 
   function populateStatSelects() {
