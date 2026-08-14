@@ -62,6 +62,7 @@ body {
 
 .sport-switch {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin: 6px 0 10px;
 }

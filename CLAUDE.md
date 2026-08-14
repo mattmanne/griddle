@@ -14,7 +14,9 @@ accidentally undone.
 - `index.html` / `app.js` / `style.css` — the whole app. No build step, no
   dependencies — deliberately static so it can be served as-is from GitHub Pages.
 - `players.json`, `wnba_players.json`, `ncaam_players.json`, `mlb_hitters.json`,
-  `nhl_skaters.json` — one JSON array per sport, fetched at load.
+  `nhl_skaters.json`, `cfb_qb_players.json`, `cfb_rb_players.json`,
+  `cfb_wr_players.json` — one JSON array per sport (or per position group, for
+  football), fetched at load.
 - `archive-v0/` — the original prototype (continuous running-average scoring, no
   batches). Kept for reference, not wired into `index.html`. If you're tempted to
   bring back "session average" style scoring (backlog #14), this is where the old
@@ -134,6 +136,24 @@ obvious from reading the functions in isolation:
   The toggle handler now *only* mutates `enabledSports`; `updateSportUI()` is written
   to leave `#round-progress` alone whenever a round is active (`guessIndex !== 0 &&
   !roundOver`), so a toggle only affects which sport the *next* guess draws from.
+- **Position groups (college football's QB/RB/WR) are just more `SPORTS` entries, not
+  a new sub-feature.** Backlog item 7 originally assumed college/NFL football needed
+  "the position-group feature" as real new architecture, because QB/RB/WR stats share
+  almost nothing (you can't plot "Passing Yards" against "Receptions" meaningfully any
+  more than you can plot NBA against MLB). But the multi-sport toggle system already
+  solves exactly that problem — each position is its own `SPORTS` entry (`cfb_qb`,
+  `cfb_rb`, `cfb_wr`) with its own file and `statDefs`, toggled independently like any
+  other sport. No position-aware logic was added anywhere; `pickRoundContext()`,
+  `eligiblePlayers()`, etc. don't know or care that three of the eight `SPORTS` entries
+  happen to represent one real-world sport split by position. **The lesson**: before
+  treating a backlog note's stated blocker as still true, check whether something
+  built since then already resolves it — item 7's premise was written before the
+  multi-sport toggle system existed.
+
+**Sizing note:** `.sport-switch` needs `flex-wrap: wrap` — it didn't originally, which
+was fine at 2-5 buttons but started overflowing the header once college football added
+3 more toggles (8 total). If you add another sport, this is why the buttons wrap to a
+second row instead of running off the edge of the screen.
 
 ## Round lifecycle — the board disappears when "Fully Cooked"
 
