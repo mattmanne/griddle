@@ -201,6 +201,21 @@
         length_cm: { label: 'Body Length (cm)', short: 'LEN' },
       },
     },
+    music_artists: {
+      label: null,
+      noun: 'artist',
+      article: 'an',
+      emoji: '🎤',
+      file: 'music_artists.json',
+      defaultPair: ['records_sold_millions', 'number_one_hits'],
+      statDefs: {
+        records_sold_millions: { label: 'Records Sold (millions)', short: 'SOLD' },
+        number_one_hits: { label: '#1 Hits', short: '#1s' },
+        grammy_wins: { label: 'Grammy Wins', short: 'GRAMMYS' },
+        years_active: { label: 'Years Active', short: 'YRS' },
+        debut_year: { label: 'Debut Year', short: 'DEBUT' },
+      },
+    },
   };
 
   const PACK_KEYS = Object.keys(PACKS);

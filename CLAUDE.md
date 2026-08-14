@@ -17,8 +17,9 @@ accidentally undone.
 - `players.json`, `wnba_players.json`, `ncaam_players.json`, `mlb_hitters.json`,
   `nhl_skaters.json`, `football_cfb_players.json`, `football_nfl_players.json`,
   `geo_countries.json`, `us_states.json`, `movies.json`, `space_planets.json`,
-  `animals.json` — one JSON array per pack, fetched at load. The two football files
-  each pool QB/RB/WR together (one file per league, not per position — see below).
+  `animals.json`, `music_artists.json` — one JSON array per pack, fetched at load.
+  The two football files each pool QB/RB/WR together (one file per league, not per
+  position — see below).
 - `archive-v0/` — the original prototype (continuous running-average scoring, no
   batches). Kept for reference, not wired into `index.html`. If you're tempted to
   bring back "session average" style scoring (backlog #15), this is where the old
@@ -101,6 +102,30 @@ explains several otherwise-odd-looking numbers in the data:
   (if extremely wide) axis, and a truly degenerate axis would be a *0–1* range problem
   (the rate-stat-scaling issue described above), not a wide-range problem. No field
   needed splitting or re-scaling to avoid it.
+
+- **`music_artists.json`'s `number_one_hits` field isn't measured on one single chart** —
+  it's Billboard Hot 100 #1s for most artists, but Hot Country Songs/Country Airplay
+  #1s for country acts (Garth Brooks, Dolly Parton, Johnny Cash, Willie Nelson,
+  Shania Twain) and Hot Latin Songs #1s for Latin acts (Luis Miguel, Julio Iglesias,
+  Vicente Fernández), since the Hot 100 alone would undercount or misrepresent an
+  artist whose career centers on a different chart. This is the same judgment call as
+  football's rushing-vs-passing-vs-receiving stats living in one merged `statDefs` —
+  the field name is generic ("#1 Hits") but what it measures is picked per-entry to
+  be the most representative number for that artist, not a literal single metric
+  applied uniformly. No fields are omitted for any artist in this pack (every artist
+  has a well-defined sales/hits/awards/career-length figure, unlike the animal or
+  sports era-gap cases) — the open question for this pack isn't missing data, it's
+  *reliability* of the data that is there.
+- **`music_artists.json` is the least-verified pack in the repo.** All five research
+  batches that built it hit their WebSearch session budget before running a single
+  query, so every figure — sales, chart #1s, Grammy wins, career dates — is drawn
+  from trained-knowledge estimates rather than a live-checked source, more
+  pervasively than any earlier pack (which each had only partial WebSearch
+  interruptions). Backlog item 12 (verify pack-data accuracy) already covers this
+  generally, but `music_artists.json` specifically should be first in line for that
+  pass before real players start scrutinizing it — "records sold" in particular is
+  industry-wide contested/claimed even in the best sources, so treat that field as
+  the least trustworthy of the five even after a verification pass.
 
 When adding a new pack/stat, ask "does this need scaling to avoid a degenerate 0–1
 axis?", "is there a stat-tracking-era gap I need to omit rather than fake?", and (for
@@ -230,13 +255,13 @@ people.
 - **Packs stay in one flat, combinable toggle list — no separate "sports" vs.
   "trivia" mode.** This matches how the backlog itself frames packs (peers, not a
   hierarchy), and the architecture supports it for free. Not solved yet, and not
-  being designed for speculatively: 12 toggle buttons already wrap to multiple rows:
+  being designed for speculatively: 13 toggle buttons already wrap to multiple rows:
   once several more non-sports packs exist (~15-20+), a grouping/category UI will
   likely be worth revisiting.
 
 **Sizing note:** `.pack-switch` needs `flex-wrap: wrap` — it didn't originally, which
 was fine at 2-5 buttons but started overflowing the header as more packs were added
-(12 today). If you add another pack, this is why the buttons wrap to a new row
+(13 today). If you add another pack, this is why the buttons wrap to a new row
 instead of running off the edge of the screen.
 
 ## Round lifecycle — the board disappears when "Fully Cooked"

@@ -1,0 +1,642 @@
+[
+  {
+    "name": "The Beatles",
+    "records_sold_millions": 600,
+    "number_one_hits": 20,
+    "grammy_wins": 7,
+    "years_active": 10,
+    "debut_year": 1962
+  },
+  {
+    "name": "Elvis Presley",
+    "records_sold_millions": 500,
+    "number_one_hits": 18,
+    "grammy_wins": 3,
+    "years_active": 23,
+    "debut_year": 1954
+  },
+  {
+    "name": "Rolling Stones",
+    "records_sold_millions": 200,
+    "number_one_hits": 8,
+    "grammy_wins": 2,
+    "years_active": 64,
+    "debut_year": 1964
+  },
+  {
+    "name": "Led Zeppelin",
+    "records_sold_millions": 300,
+    "number_one_hits": 6,
+    "grammy_wins": 1,
+    "years_active": 12,
+    "debut_year": 1969
+  },
+  {
+    "name": "Queen",
+    "records_sold_millions": 300,
+    "number_one_hits": 2,
+    "grammy_wins": 0,
+    "years_active": 21,
+    "debut_year": 1973
+  },
+  {
+    "name": "Pink Floyd",
+    "records_sold_millions": 250,
+    "number_one_hits": 1,
+    "grammy_wins": 1,
+    "years_active": 30,
+    "debut_year": 1967
+  },
+  {
+    "name": "The Who",
+    "records_sold_millions": 100,
+    "number_one_hits": 0,
+    "grammy_wins": 0,
+    "years_active": 62,
+    "debut_year": 1965
+  },
+  {
+    "name": "Eagles",
+    "records_sold_millions": 150,
+    "number_one_hits": 5,
+    "grammy_wins": 6,
+    "years_active": 55,
+    "debut_year": 1972
+  },
+  {
+    "name": "Fleetwood Mac",
+    "records_sold_millions": 120,
+    "number_one_hits": 1,
+    "grammy_wins": 1,
+    "years_active": 59,
+    "debut_year": 1968
+  },
+  {
+    "name": "AC/DC",
+    "records_sold_millions": 200,
+    "number_one_hits": 0,
+    "grammy_wins": 1,
+    "years_active": 53,
+    "debut_year": 1975
+  },
+  {
+    "name": "Aerosmith",
+    "records_sold_millions": 150,
+    "number_one_hits": 1,
+    "grammy_wins": 4,
+    "years_active": 54,
+    "debut_year": 1973
+  },
+  {
+    "name": "Guns N' Roses",
+    "records_sold_millions": 100,
+    "number_one_hits": 1,
+    "grammy_wins": 0,
+    "years_active": 41,
+    "debut_year": 1987
+  },
+  {
+    "name": "Metallica",
+    "records_sold_millions": 125,
+    "number_one_hits": 6,
+    "grammy_wins": 9,
+    "years_active": 45,
+    "debut_year": 1983
+  },
+  {
+    "name": "Bon Jovi",
+    "records_sold_millions": 130,
+    "number_one_hits": 3,
+    "grammy_wins": 0,
+    "years_active": 43,
+    "debut_year": 1984
+  },
+  {
+    "name": "U2",
+    "records_sold_millions": 170,
+    "number_one_hits": 2,
+    "grammy_wins": 22,
+    "years_active": 50,
+    "debut_year": 1980
+  },
+  {
+    "name": "Bruce Springsteen",
+    "records_sold_millions": 140,
+    "number_one_hits": 0,
+    "grammy_wins": 20,
+    "years_active": 53,
+    "debut_year": 1973
+  },
+  {
+    "name": "Michael Jackson",
+    "records_sold_millions": 350,
+    "number_one_hits": 13,
+    "grammy_wins": 13,
+    "years_active": 45,
+    "debut_year": 1964
+  },
+  {
+    "name": "Madonna",
+    "records_sold_millions": 300,
+    "number_one_hits": 12,
+    "grammy_wins": 7,
+    "years_active": 44,
+    "debut_year": 1982
+  },
+  {
+    "name": "Whitney Houston",
+    "records_sold_millions": 200,
+    "number_one_hits": 11,
+    "grammy_wins": 6,
+    "years_active": 29,
+    "debut_year": 1983
+  },
+  {
+    "name": "Mariah Carey",
+    "records_sold_millions": 220,
+    "number_one_hits": 19,
+    "grammy_wins": 2,
+    "years_active": 36,
+    "debut_year": 1990
+  },
+  {
+    "name": "Celine Dion",
+    "records_sold_millions": 250,
+    "number_one_hits": 2,
+    "grammy_wins": 5,
+    "years_active": 36,
+    "debut_year": 1990
+  },
+  {
+    "name": "Taylor Swift",
+    "records_sold_millions": 200,
+    "number_one_hits": 12,
+    "grammy_wins": 14,
+    "years_active": 20,
+    "debut_year": 2006
+  },
+  {
+    "name": "Beyoncé",
+    "records_sold_millions": 200,
+    "number_one_hits": 5,
+    "grammy_wins": 32,
+    "years_active": 29,
+    "debut_year": 1997
+  },
+  {
+    "name": "Rihanna",
+    "records_sold_millions": 250,
+    "number_one_hits": 14,
+    "grammy_wins": 9,
+    "years_active": 21,
+    "debut_year": 2005
+  },
+  {
+    "name": "Adele",
+    "records_sold_millions": 120,
+    "number_one_hits": 5,
+    "grammy_wins": 16,
+    "years_active": 18,
+    "debut_year": 2008
+  },
+  {
+    "name": "Ed Sheeran",
+    "records_sold_millions": 150,
+    "number_one_hits": 2,
+    "grammy_wins": 4,
+    "years_active": 15,
+    "debut_year": 2011
+  },
+  {
+    "name": "Britney Spears",
+    "records_sold_millions": 150,
+    "number_one_hits": 1,
+    "grammy_wins": 1,
+    "years_active": 28,
+    "debut_year": 1998
+  },
+  {
+    "name": "Katy Perry",
+    "records_sold_millions": 143,
+    "number_one_hits": 8,
+    "grammy_wins": 0,
+    "years_active": 18,
+    "debut_year": 2008
+  },
+  {
+    "name": "Lady Gaga",
+    "records_sold_millions": 170,
+    "number_one_hits": 3,
+    "grammy_wins": 13,
+    "years_active": 18,
+    "debut_year": 2008
+  },
+  {
+    "name": "Bruno Mars",
+    "records_sold_millions": 130,
+    "number_one_hits": 9,
+    "grammy_wins": 15,
+    "years_active": 16,
+    "debut_year": 2010
+  },
+  {
+    "name": "Justin Bieber",
+    "records_sold_millions": 150,
+    "number_one_hits": 5,
+    "grammy_wins": 2,
+    "years_active": 17,
+    "debut_year": 2009
+  },
+  {
+    "name": "Ariana Grande",
+    "records_sold_millions": 90,
+    "number_one_hits": 6,
+    "grammy_wins": 2,
+    "years_active": 13,
+    "debut_year": 2013
+  },
+  {
+    "name": "Eminem",
+    "records_sold_millions": 220,
+    "number_one_hits": 4,
+    "grammy_wins": 15,
+    "years_active": 30,
+    "debut_year": 1996
+  },
+  {
+    "name": "Jay-Z",
+    "records_sold_millions": 140,
+    "number_one_hits": 1,
+    "grammy_wins": 24,
+    "years_active": 30,
+    "debut_year": 1996
+  },
+  {
+    "name": "Drake",
+    "records_sold_millions": 170,
+    "number_one_hits": 7,
+    "grammy_wins": 5,
+    "years_active": 20,
+    "debut_year": 2006
+  },
+  {
+    "name": "Kanye West",
+    "records_sold_millions": 160,
+    "number_one_hits": 2,
+    "grammy_wins": 22,
+    "years_active": 22,
+    "debut_year": 2004
+  },
+  {
+    "name": "Tupac Shakur",
+    "records_sold_millions": 75,
+    "number_one_hits": 2,
+    "grammy_wins": 0,
+    "years_active": 5,
+    "debut_year": 1991
+  },
+  {
+    "name": "The Notorious B.I.G.",
+    "records_sold_millions": 28,
+    "number_one_hits": 2,
+    "grammy_wins": 0,
+    "years_active": 3,
+    "debut_year": 1994
+  },
+  {
+    "name": "Snoop Dogg",
+    "records_sold_millions": 35,
+    "number_one_hits": 1,
+    "grammy_wins": 0,
+    "years_active": 34,
+    "debut_year": 1992
+  },
+  {
+    "name": "Nicki Minaj",
+    "records_sold_millions": 110,
+    "number_one_hits": 1,
+    "grammy_wins": 0,
+    "years_active": 16,
+    "debut_year": 2010
+  },
+  {
+    "name": "Usher",
+    "records_sold_millions": 80,
+    "number_one_hits": 8,
+    "grammy_wins": 8,
+    "years_active": 32,
+    "debut_year": 1994
+  },
+  {
+    "name": "Alicia Keys",
+    "records_sold_millions": 65,
+    "number_one_hits": 1,
+    "grammy_wins": 15,
+    "years_active": 25,
+    "debut_year": 2001
+  },
+  {
+    "name": "Stevie Wonder",
+    "records_sold_millions": 100,
+    "number_one_hits": 9,
+    "grammy_wins": 25,
+    "years_active": 64,
+    "debut_year": 1962
+  },
+  {
+    "name": "Marvin Gaye",
+    "records_sold_millions": 40,
+    "number_one_hits": 3,
+    "grammy_wins": 2,
+    "years_active": 23,
+    "debut_year": 1961
+  },
+  {
+    "name": "Kendrick Lamar",
+    "records_sold_millions": 30,
+    "number_one_hits": 2,
+    "grammy_wins": 22,
+    "years_active": 15,
+    "debut_year": 2011
+  },
+  {
+    "name": "Lil Wayne",
+    "records_sold_millions": 120,
+    "number_one_hits": 1,
+    "grammy_wins": 5,
+    "years_active": 27,
+    "debut_year": 1999
+  },
+  {
+    "name": "50 Cent",
+    "records_sold_millions": 30,
+    "number_one_hits": 3,
+    "grammy_wins": 0,
+    "years_active": 23,
+    "debut_year": 2003
+  },
+  {
+    "name": "Missy Elliott",
+    "records_sold_millions": 30,
+    "number_one_hits": 0,
+    "grammy_wins": 4,
+    "years_active": 29,
+    "debut_year": 1997
+  },
+  {
+    "name": "Garth Brooks",
+    "records_sold_millions": 170,
+    "number_one_hits": 19,
+    "grammy_wins": 2,
+    "years_active": 37,
+    "debut_year": 1989
+  },
+  {
+    "name": "Dolly Parton",
+    "records_sold_millions": 100,
+    "number_one_hits": 25,
+    "grammy_wins": 11,
+    "years_active": 59,
+    "debut_year": 1967
+  },
+  {
+    "name": "Johnny Cash",
+    "records_sold_millions": 90,
+    "number_one_hits": 13,
+    "grammy_wins": 13,
+    "years_active": 48,
+    "debut_year": 1955
+  },
+  {
+    "name": "Shania Twain",
+    "records_sold_millions": 100,
+    "number_one_hits": 3,
+    "grammy_wins": 5,
+    "years_active": 33,
+    "debut_year": 1993
+  },
+  {
+    "name": "Willie Nelson",
+    "records_sold_millions": 50,
+    "number_one_hits": 21,
+    "grammy_wins": 10,
+    "years_active": 64,
+    "debut_year": 1962
+  },
+  {
+    "name": "Luis Miguel",
+    "records_sold_millions": 100,
+    "number_one_hits": 10,
+    "grammy_wins": 6,
+    "years_active": 44,
+    "debut_year": 1982
+  },
+  {
+    "name": "Julio Iglesias",
+    "records_sold_millions": 300,
+    "number_one_hits": 6,
+    "grammy_wins": 2,
+    "years_active": 58,
+    "debut_year": 1968
+  },
+  {
+    "name": "Vicente Fernández",
+    "records_sold_millions": 50,
+    "number_one_hits": 14,
+    "grammy_wins": 8,
+    "years_active": 55,
+    "debut_year": 1966
+  },
+  {
+    "name": "ABBA",
+    "records_sold_millions": 150,
+    "number_one_hits": 1,
+    "grammy_wins": 0,
+    "years_active": 54,
+    "debut_year": 1972
+  },
+  {
+    "name": "Billy Joel",
+    "records_sold_millions": 150,
+    "number_one_hits": 3,
+    "grammy_wins": 6,
+    "years_active": 55,
+    "debut_year": 1971
+  },
+  {
+    "name": "Barbra Streisand",
+    "records_sold_millions": 150,
+    "number_one_hits": 4,
+    "grammy_wins": 8,
+    "years_active": 63,
+    "debut_year": 1963
+  },
+  {
+    "name": "Tina Turner",
+    "records_sold_millions": 100,
+    "number_one_hits": 1,
+    "grammy_wins": 8,
+    "years_active": 63,
+    "debut_year": 1960
+  },
+  {
+    "name": "Prince",
+    "records_sold_millions": 100,
+    "number_one_hits": 5,
+    "grammy_wins": 7,
+    "years_active": 38,
+    "debut_year": 1978
+  },
+  {
+    "name": "David Bowie",
+    "records_sold_millions": 140,
+    "number_one_hits": 1,
+    "grammy_wins": 5,
+    "years_active": 47,
+    "debut_year": 1969
+  },
+  {
+    "name": "Elton John",
+    "records_sold_millions": 300,
+    "number_one_hits": 9,
+    "grammy_wins": 5,
+    "years_active": 57,
+    "debut_year": 1969
+  },
+  {
+    "name": "Cher",
+    "records_sold_millions": 100,
+    "number_one_hits": 2,
+    "grammy_wins": 1,
+    "years_active": 61,
+    "debut_year": 1965
+  },
+  {
+    "name": "The Weeknd",
+    "records_sold_millions": 75,
+    "number_one_hits": 5,
+    "grammy_wins": 3,
+    "years_active": 15,
+    "debut_year": 2011
+  },
+  {
+    "name": "Post Malone",
+    "records_sold_millions": 80,
+    "number_one_hits": 3,
+    "grammy_wins": 0,
+    "years_active": 11,
+    "debut_year": 2015
+  },
+  {
+    "name": "Coldplay",
+    "records_sold_millions": 100,
+    "number_one_hits": 2,
+    "grammy_wins": 7,
+    "years_active": 26,
+    "debut_year": 2000
+  },
+  {
+    "name": "Maroon 5",
+    "records_sold_millions": 135,
+    "number_one_hits": 3,
+    "grammy_wins": 3,
+    "years_active": 24,
+    "debut_year": 2002
+  },
+  {
+    "name": "OneRepublic",
+    "records_sold_millions": 30,
+    "number_one_hits": 0,
+    "grammy_wins": 0,
+    "years_active": 19,
+    "debut_year": 2007
+  },
+  {
+    "name": "Backstreet Boys",
+    "records_sold_millions": 100,
+    "number_one_hits": 0,
+    "grammy_wins": 0,
+    "years_active": 30,
+    "debut_year": 1996
+  },
+  {
+    "name": "NSYNC",
+    "records_sold_millions": 70,
+    "number_one_hits": 1,
+    "grammy_wins": 0,
+    "years_active": 4,
+    "debut_year": 1998
+  },
+  {
+    "name": "Spice Girls",
+    "records_sold_millions": 100,
+    "number_one_hits": 1,
+    "grammy_wins": 0,
+    "years_active": 4,
+    "debut_year": 1996
+  },
+  {
+    "name": "BTS",
+    "records_sold_millions": 40,
+    "number_one_hits": 6,
+    "grammy_wins": 0,
+    "years_active": 13,
+    "debut_year": 2013
+  },
+  {
+    "name": "Shakira",
+    "records_sold_millions": 125,
+    "number_one_hits": 1,
+    "grammy_wins": 3,
+    "years_active": 35,
+    "debut_year": 1991
+  },
+  {
+    "name": "Selena",
+    "records_sold_millions": 60,
+    "number_one_hits": 0,
+    "grammy_wins": 1,
+    "years_active": 6,
+    "debut_year": 1989
+  },
+  {
+    "name": "Sade",
+    "records_sold_millions": 75,
+    "number_one_hits": 0,
+    "grammy_wins": 4,
+    "years_active": 42,
+    "debut_year": 1984
+  },
+  {
+    "name": "Bob Marley",
+    "records_sold_millions": 75,
+    "number_one_hits": 0,
+    "grammy_wins": 0,
+    "years_active": 19,
+    "debut_year": 1962
+  },
+  {
+    "name": "Bob Dylan",
+    "records_sold_millions": 125,
+    "number_one_hits": 0,
+    "grammy_wins": 10,
+    "years_active": 64,
+    "debut_year": 1962
+  },
+  {
+    "name": "Simon & Garfunkel",
+    "records_sold_millions": 100,
+    "number_one_hits": 2,
+    "grammy_wins": 5,
+    "years_active": 6,
+    "debut_year": 1964
+  },
+  {
+    "name": "Earth Wind & Fire",
+    "records_sold_millions": 90,
+    "number_one_hits": 1,
+    "grammy_wins": 6,
+    "years_active": 55,
+    "debut_year": 1971
+  }
+]
