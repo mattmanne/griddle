@@ -13,11 +13,11 @@ accidentally undone.
 
 - `index.html` / `app.js` / `style.css` — the whole app. No build step, no
   dependencies — deliberately static so it can be served as-is from GitHub Pages.
-- `players.json`, `wnba_players.json`, `mlb_hitters.json`, `nhl_skaters.json` — one JSON
-  array per sport, fetched at load.
+- `players.json`, `wnba_players.json`, `ncaam_players.json`, `mlb_hitters.json`,
+  `nhl_skaters.json` — one JSON array per sport, fetched at load.
 - `archive-v0/` — the original prototype (continuous running-average scoring, no
   batches). Kept for reference, not wired into `index.html`. If you're tempted to
-  bring back "session average" style scoring (backlog #13), this is where the old
+  bring back "session average" style scoring (backlog #14), this is where the old
   approach lived.
 - `BACKLOG.md` — planned work, with reasoning for priority/sequencing.
 
@@ -62,22 +62,34 @@ explains several otherwise-odd-looking numbers in the data:
   Wilt, Robertson, West, Baylor, Pettit, Cousy) simply don't have those keys. For NHL:
   individual shots-on-goal (and therefore shooting %) weren't reliably tracked before
   1959-60, so `sog`/`sh_pct` are omitted for the handful of skaters whose careers
-  predate or straddle that (Howe, Richard, Beliveau, B. Hull, Mahovlich, Mikita).
-  `eligiblePlayers()` filters on `Number.isFinite`, so a missing key correctly removes
-  a player from any round that needs it, rather than corrupting the axis range with a
-  fake 0. **This pattern will keep recurring** — any new sport/era-spanning pool needs
-  the same check: what stat categories didn't exist yet, or weren't officially
-  tracked, for the earliest players in the pool?
+  predate or straddle that (Howe, Richard, Beliveau, B. Hull, Mahovlich, Mikita). For
+  NCAA men's basketball: steals/blocks/turnovers weren't official NCAA stats before
+  1985-86, and the 3-point line wasn't adopted nationally until 1986-87, so those
+  fields are omitted for the many pre-1986 legends in `ncaam_players.json` (Maravich,
+  Walton, Alcindor, Robertson, Baylor, West, Bradley, Carr, Thompson, Bird, Magic,
+  Sampson, Ewing, Olajuwon, Jordan). `eligiblePlayers()` filters on `Number.isFinite`,
+  so a missing key correctly removes a player from any round that needs it, rather
+  than corrupting the axis range with a fake 0. **This pattern will keep recurring**
+  — any new sport/era-spanning pool needs the same check: what stat categories didn't
+  exist yet, or weren't officially tracked, for the earliest players in the pool?
+  **It can also show up in fields you didn't anticipate**: researching
+  `ncaam_players.json` turned up several pre-1986 players missing `ast` (assists
+  weren't recorded at all at some schools/eras) or `mpg` (minutes weren't kept before
+  the shot-clock era) — outside the two fields the omission rule was written for.
+  `eligiblePlayers()`'s generic `Number.isFinite` check handled both correctly with
+  zero code changes, which is the actual payoff of that design: it doesn't need to
+  know in advance which fields might be missing for which sport.
 
 When adding a new sport/stat, ask "does this need scaling to avoid a degenerate
 0–1 axis?" and "is there a stat-tracking-era gap I need to omit rather than fake?"
 before wiring up data.
 
-- **WNBA reuses NBA's exact `statDefs` object (`HOOPS_STAT_DEFS` in `app.js`) rather
-  than a copy.** The two leagues track literally the same categories the same way, so
-  duplicating the object would just be two copies to keep in sync by hand. If WNBA's
-  stat set ever needs to diverge from NBA's, give it its own object at that point —
-  don't speculatively split them apart now.
+- **WNBA and NCAA men's basketball both reuse the same `HOOPS_STAT_DEFS` object in
+  `app.js` rather than each getting a copy.** All three basketball variants track
+  literally the same categories the same way, so duplicating the object would just be
+  more copies to keep in sync by hand. If any of them ever need their stat set to
+  diverge (e.g. college adds "Games Started"), give that one sport its own object at
+  that point — don't speculatively split them apart now.
 
 ## Multi-sport architecture — why per-guess random sport, not merged axes
 
@@ -107,7 +119,7 @@ obvious from reading the functions in isolation:
   `enabledSports`.** Forcing a specific stat pair or a specific player only makes
   sense pinned to one sport (you can't force "Points/Game vs Home Runs"), so the
   practice-sport selector exists so debug overrides stay predictable regardless of
-  what real gameplay has toggled on. See backlog #12 — this panel is debug-only and
+  what real gameplay has toggled on. See backlog #13 — this panel is debug-only and
   not yet gated from playtesters.
 - Every `guessResults` entry stores which sport it came from (not just the stat
   keys), because `STAT_DEFS` is a single mutable module-level binding reassigned each

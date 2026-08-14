@@ -35,6 +35,15 @@
       defaultPair: ['pts', 'reb'],
       statDefs: HOOPS_STAT_DEFS,
     },
+    ncaam: {
+      label: 'NCAA',
+      noun: 'player',
+      article: 'an',
+      emoji: '🎓',
+      file: 'ncaam_players.json',
+      defaultPair: ['pts', 'reb'],
+      statDefs: HOOPS_STAT_DEFS,
+    },
     mlb: {
       label: 'MLB',
       noun: 'hitter',
