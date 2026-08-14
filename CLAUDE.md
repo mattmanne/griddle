@@ -20,7 +20,7 @@ accidentally undone.
   football), fetched at load.
 - `archive-v0/` — the original prototype (continuous running-average scoring, no
   batches). Kept for reference, not wired into `index.html`. If you're tempted to
-  bring back "session average" style scoring (backlog #14), this is where the old
+  bring back "session average" style scoring (backlog #15), this is where the old
   approach lived.
 - `BACKLOG.md` — planned work, with reasoning for priority/sequencing.
 
@@ -124,7 +124,7 @@ obvious from reading the functions in isolation:
   `enabledSports`.** Forcing a specific stat pair or a specific player only makes
   sense pinned to one sport (you can't force "Points/Game vs Home Runs"), so the
   practice-sport selector exists so debug overrides stay predictable regardless of
-  what real gameplay has toggled on. See backlog #10 — this panel is debug-only and
+  what real gameplay has toggled on. See backlog #11 — this panel is debug-only and
   not yet gated from playtesters.
 - Every `guessResults` entry stores which sport it came from (not just the stat
   keys), because `STAT_DEFS` is a single mutable module-level binding reassigned each
