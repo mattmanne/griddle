@@ -123,16 +123,9 @@ describe('regression: invalid forced debug stat pair no longer crashes the round
   test('forcing a QB-only stat against a WR-only stat in football_cfb falls back to a valid pair', async () => {
     const { page, consoleErrors } = await newPage();
 
-    // isolate football_cfb
-    await page.locator('.pack-settings summary').click();
-    const packs = ['nba', 'wnba', 'ncaam', 'mlb', 'nhl', 'football_cfb', 'football_nfl', 'geo_countries', 'geo_states', 'movies', 'space_planets', 'animals', 'music_artists', 'presidents'];
-    for (const p of packs) {
-      if (p !== 'football_cfb') {
-        const cls = await page.locator(`.pack-btn[data-pack="${p}"]`).getAttribute('class');
-        if (cls.includes('active')) await page.locator(`.pack-btn[data-pack="${p}"]`).click();
-      }
-    }
-
+    // No need to isolate football_cfb via the pack toggles first — forcing a
+    // stat pair in Kitchen Prep always draws from #debug-pack-select's chosen
+    // pack directly, ignoring enabledPacks entirely (see pickRoundContext()).
     await page.locator('.practice-settings summary').click();
     await page.selectOption('#debug-pack-select', 'football_cfb');
     await page.check('#force-stat-pair');
@@ -259,15 +252,19 @@ describe('pack toggles', () => {
   test('the last active pack cannot be deselected', async () => {
     const { page } = await newPage();
     await page.locator('.pack-settings summary').click();
-    const packs = ['nba', 'wnba', 'ncaam', 'mlb', 'nhl', 'football_cfb', 'football_nfl', 'geo_countries', 'geo_states', 'movies', 'space_planets', 'animals', 'music_artists'];
-    for (const p of packs) {
+    // Read the pack list from the page itself rather than hardcoding it, so
+    // this test doesn't need updating every time a pack is added or removed.
+    const allPacks = await page.locator('.pack-btn').evaluateAll((els) => els.map((el) => el.dataset.pack));
+    const total = allPacks.length;
+    const lastPack = allPacks[allPacks.length - 1];
+    for (const p of allPacks.slice(0, -1)) {
       await page.locator(`.pack-btn[data-pack="${p}"]`).click();
     }
-    // 13 of 14 turned off — one (presidents) should remain active no matter what
-    assert.equal(await page.locator('#pack-count-summary').textContent(), '(1/14 active)');
-    await page.locator('.pack-btn[data-pack="presidents"]').click(); // try to deselect the last one
-    assert.equal(await page.locator('#pack-count-summary').textContent(), '(1/14 active)');
-    assert.ok((await page.locator('.pack-btn[data-pack="presidents"]').getAttribute('class')).includes('active'));
+    // all but one turned off — the last one should remain active no matter what
+    assert.equal(await page.locator('#pack-count-summary').textContent(), `(1/${total} active)`);
+    await page.locator(`.pack-btn[data-pack="${lastPack}"]`).click(); // try to deselect the last one
+    assert.equal(await page.locator('#pack-count-summary').textContent(), `(1/${total} active)`);
+    assert.ok((await page.locator(`.pack-btn[data-pack="${lastPack}"]`).getAttribute('class')).includes('active'));
     await page.close();
   });
 });

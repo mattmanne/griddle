@@ -1,0 +1,242 @@
+[
+  {
+    "name": "Atlanta Hawks",
+    "championships": 1,
+    "founding_year": 1946,
+    "all_time_wins": 3013,
+    "win_pct": 49.4,
+    "arena_capacity": 17044
+  },
+  {
+    "name": "Boston Celtics",
+    "championships": 18,
+    "founding_year": 1946,
+    "all_time_wins": 3751,
+    "win_pct": 59.7,
+    "arena_capacity": 18624
+  },
+  {
+    "name": "Brooklyn Nets",
+    "championships": 0,
+    "founding_year": 1967,
+    "all_time_wins": 1700,
+    "win_pct": 42.2,
+    "arena_capacity": 17732
+  },
+  {
+    "name": "Charlotte Hornets",
+    "championships": 0,
+    "founding_year": 1988,
+    "all_time_wins": 1237,
+    "win_pct": 43,
+    "arena_capacity": 19077
+  },
+  {
+    "name": "Chicago Bulls",
+    "championships": 6,
+    "founding_year": 1966,
+    "all_time_wins": 2453,
+    "win_pct": 50.6,
+    "arena_capacity": 20917
+  },
+  {
+    "name": "Cleveland Cavaliers",
+    "championships": 1,
+    "founding_year": 1970,
+    "all_time_wins": 2148,
+    "win_pct": 47.6,
+    "arena_capacity": 19432
+  },
+  {
+    "name": "Dallas Mavericks",
+    "championships": 1,
+    "founding_year": 1980,
+    "all_time_wins": 1862,
+    "win_pct": 50.2,
+    "arena_capacity": 19200
+  },
+  {
+    "name": "Denver Nuggets",
+    "championships": 1,
+    "founding_year": 1967,
+    "all_time_wins": 2058,
+    "win_pct": 51,
+    "arena_capacity": 19520
+  },
+  {
+    "name": "Detroit Pistons",
+    "championships": 3,
+    "founding_year": 1941,
+    "all_time_wins": 2931,
+    "win_pct": 47.6,
+    "arena_capacity": 20332
+  },
+  {
+    "name": "Golden State Warriors",
+    "championships": 7,
+    "founding_year": 1946,
+    "all_time_wins": 3054,
+    "win_pct": 48.7,
+    "arena_capacity": 18064
+  },
+  {
+    "name": "Houston Rockets",
+    "championships": 2,
+    "founding_year": 1967,
+    "all_time_wins": 2473,
+    "win_pct": 51.8,
+    "arena_capacity": 18055
+  },
+  {
+    "name": "Indiana Pacers",
+    "championships": 0,
+    "founding_year": 1967,
+    "all_time_wins": 1999,
+    "win_pct": 49.6,
+    "arena_capacity": 17923
+  },
+  {
+    "name": "Los Angeles Clippers",
+    "championships": 0,
+    "founding_year": 1970,
+    "all_time_wins": 1935,
+    "win_pct": 42.8,
+    "arena_capacity": 18000
+  },
+  {
+    "name": "Los Angeles Lakers",
+    "championships": 17,
+    "founding_year": 1947,
+    "all_time_wins": 3653,
+    "win_pct": 59.2,
+    "arena_capacity": 18997
+  },
+  {
+    "name": "Memphis Grizzlies",
+    "championships": 0,
+    "founding_year": 1995,
+    "all_time_wins": 1071,
+    "win_pct": 43.3,
+    "arena_capacity": 17794
+  },
+  {
+    "name": "Miami Heat",
+    "championships": 3,
+    "founding_year": 1988,
+    "all_time_wins": 1601,
+    "win_pct": 52.5,
+    "arena_capacity": 19600
+  },
+  {
+    "name": "Milwaukee Bucks",
+    "championships": 2,
+    "founding_year": 1968,
+    "all_time_wins": 2469,
+    "win_pct": 52.7,
+    "arena_capacity": 17341
+  },
+  {
+    "name": "Minnesota Timberwolves",
+    "championships": 0,
+    "founding_year": 1989,
+    "all_time_wins": 1245,
+    "win_pct": 42.1,
+    "arena_capacity": 18024
+  },
+  {
+    "name": "New Orleans Pelicans",
+    "championships": 0,
+    "founding_year": 2002,
+    "all_time_wins": 878,
+    "win_pct": 45.4,
+    "arena_capacity": 16867
+  },
+  {
+    "name": "New York Knicks",
+    "championships": 3,
+    "founding_year": 1946,
+    "all_time_wins": 3078,
+    "win_pct": 49.1,
+    "arena_capacity": 19812
+  },
+  {
+    "name": "Oklahoma City Thunder",
+    "championships": 2,
+    "founding_year": 1967,
+    "all_time_wins": 2602,
+    "win_pct": 54.5,
+    "arena_capacity": 18203
+  },
+  {
+    "name": "Orlando Magic",
+    "championships": 0,
+    "founding_year": 1989,
+    "all_time_wins": 1401,
+    "win_pct": 47.2,
+    "arena_capacity": 18846
+  },
+  {
+    "name": "Philadelphia 76ers",
+    "championships": 3,
+    "founding_year": 1946,
+    "all_time_wins": 3170,
+    "win_pct": 51.9,
+    "arena_capacity": 20007
+  },
+  {
+    "name": "Phoenix Suns",
+    "championships": 0,
+    "founding_year": 1968,
+    "all_time_wins": 2510,
+    "win_pct": 53.5,
+    "arena_capacity": 17071
+  },
+  {
+    "name": "Portland Trail Blazers",
+    "championships": 1,
+    "founding_year": 1970,
+    "all_time_wins": 2370,
+    "win_pct": 52.4,
+    "arena_capacity": 19411
+  },
+  {
+    "name": "Sacramento Kings",
+    "championships": 0,
+    "founding_year": 1923,
+    "all_time_wins": 2810,
+    "win_pct": 45.6,
+    "arena_capacity": 17611
+  },
+  {
+    "name": "San Antonio Spurs",
+    "championships": 5,
+    "founding_year": 1967,
+    "all_time_wins": 2401,
+    "win_pct": 59.6,
+    "arena_capacity": 18354
+  },
+  {
+    "name": "Toronto Raptors",
+    "championships": 1,
+    "founding_year": 1995,
+    "all_time_wins": 1172,
+    "win_pct": 47.4,
+    "arena_capacity": 19800
+  },
+  {
+    "name": "Utah Jazz",
+    "championships": 0,
+    "founding_year": 1974,
+    "all_time_wins": 2216,
+    "win_pct": 52.8,
+    "arena_capacity": 18306
+  },
+  {
+    "name": "Washington Wizards",
+    "championships": 1,
+    "founding_year": 1961,
+    "all_time_wins": 2307,
+    "win_pct": 43.9,
+    "arena_capacity": 20333
+  }
+]

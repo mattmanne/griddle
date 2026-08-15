@@ -1,0 +1,258 @@
+[
+  {
+    "name": "Anaheim Ducks",
+    "championships": 1,
+    "founding_year": 1993,
+    "all_time_wins": 1224,
+    "win_pct": 48,
+    "arena_capacity": 17174
+  },
+  {
+    "name": "Boston Bruins",
+    "championships": 6,
+    "founding_year": 1924,
+    "all_time_wins": 3795,
+    "win_pct": 55,
+    "arena_capacity": 17850
+  },
+  {
+    "name": "Buffalo Sabres",
+    "championships": 0,
+    "founding_year": 1970,
+    "all_time_wins": 2021,
+    "win_pct": 47,
+    "arena_capacity": 19070
+  },
+  {
+    "name": "Calgary Flames",
+    "championships": 1,
+    "founding_year": 1972,
+    "all_time_wins": 2075,
+    "win_pct": 50,
+    "arena_capacity": 19289
+  },
+  {
+    "name": "Carolina Hurricanes",
+    "championships": 1,
+    "founding_year": 1972,
+    "all_time_wins": 1776,
+    "win_pct": 48,
+    "arena_capacity": 18700
+  },
+  {
+    "name": "Chicago Blackhawks",
+    "championships": 6,
+    "founding_year": 1926,
+    "all_time_wins": 3332,
+    "win_pct": 49,
+    "arena_capacity": 19717
+  },
+  {
+    "name": "Colorado Avalanche",
+    "championships": 3,
+    "founding_year": 1972,
+    "all_time_wins": 1887,
+    "win_pct": 51,
+    "arena_capacity": 18007
+  },
+  {
+    "name": "Columbus Blue Jackets",
+    "championships": 0,
+    "founding_year": 2000,
+    "all_time_wins": 867,
+    "win_pct": 44,
+    "arena_capacity": 18500
+  },
+  {
+    "name": "Dallas Stars",
+    "championships": 1,
+    "founding_year": 1967,
+    "all_time_wins": 2300,
+    "win_pct": 50,
+    "arena_capacity": 18532
+  },
+  {
+    "name": "Detroit Red Wings",
+    "championships": 11,
+    "founding_year": 1926,
+    "all_time_wins": 3604,
+    "win_pct": 53,
+    "arena_capacity": 19515
+  },
+  {
+    "name": "Edmonton Oilers",
+    "championships": 5,
+    "founding_year": 1972,
+    "all_time_wins": 1961,
+    "win_pct": 53,
+    "arena_capacity": 18347
+  },
+  {
+    "name": "Florida Panthers",
+    "championships": 2,
+    "founding_year": 1993,
+    "all_time_wins": 1224,
+    "win_pct": 48,
+    "arena_capacity": 19250
+  },
+  {
+    "name": "Los Angeles Kings",
+    "championships": 2,
+    "founding_year": 1967,
+    "all_time_wins": 2208,
+    "win_pct": 48,
+    "arena_capacity": 18230
+  },
+  {
+    "name": "Minnesota Wild",
+    "championships": 0,
+    "founding_year": 2000,
+    "all_time_wins": 985,
+    "win_pct": 50,
+    "arena_capacity": 17954
+  },
+  {
+    "name": "Montreal Canadiens",
+    "championships": 24,
+    "founding_year": 1909,
+    "all_time_wins": 4012,
+    "win_pct": 56.5,
+    "arena_capacity": 21105
+  },
+  {
+    "name": "Nashville Predators",
+    "championships": 0,
+    "founding_year": 1998,
+    "all_time_wins": 1075,
+    "win_pct": 50,
+    "arena_capacity": 17159
+  },
+  {
+    "name": "New Jersey Devils",
+    "championships": 3,
+    "founding_year": 1974,
+    "all_time_wins": 2000,
+    "win_pct": 50,
+    "arena_capacity": 16514
+  },
+  {
+    "name": "New York Islanders",
+    "championships": 4,
+    "founding_year": 1972,
+    "all_time_wins": 2034,
+    "win_pct": 49,
+    "arena_capacity": 17255
+  },
+  {
+    "name": "New York Rangers",
+    "championships": 4,
+    "founding_year": 1926,
+    "all_time_wins": 3400,
+    "win_pct": 50,
+    "arena_capacity": 18006
+  },
+  {
+    "name": "Ottawa Senators",
+    "championships": 0,
+    "founding_year": 1992,
+    "all_time_wins": 1246,
+    "win_pct": 47,
+    "arena_capacity": 17373
+  },
+  {
+    "name": "Philadelphia Flyers",
+    "championships": 2,
+    "founding_year": 1967,
+    "all_time_wins": 2484,
+    "win_pct": 54,
+    "arena_capacity": 19543
+  },
+  {
+    "name": "Pittsburgh Penguins",
+    "championships": 5,
+    "founding_year": 1967,
+    "all_time_wins": 2254,
+    "win_pct": 49,
+    "arena_capacity": 18387
+  },
+  {
+    "name": "San Jose Sharks",
+    "championships": 0,
+    "founding_year": 1991,
+    "all_time_wins": 1320,
+    "win_pct": 48,
+    "arena_capacity": 17562
+  },
+  {
+    "name": "Seattle Kraken",
+    "championships": 0,
+    "founding_year": 2021,
+    "all_time_wins": 150,
+    "win_pct": 47,
+    "arena_capacity": 17151
+  },
+  {
+    "name": "St. Louis Blues",
+    "championships": 1,
+    "founding_year": 1967,
+    "all_time_wins": 2300,
+    "win_pct": 50,
+    "arena_capacity": 18096
+  },
+  {
+    "name": "Tampa Bay Lightning",
+    "championships": 3,
+    "founding_year": 1992,
+    "all_time_wins": 1272,
+    "win_pct": 48,
+    "arena_capacity": 19092
+  },
+  {
+    "name": "Toronto Maple Leafs",
+    "championships": 13,
+    "founding_year": 1917,
+    "all_time_wins": 3550,
+    "win_pct": 50,
+    "arena_capacity": 18819
+  },
+  {
+    "name": "Utah Mammoth",
+    "championships": 0,
+    "founding_year": 2024,
+    "all_time_wins": 77,
+    "win_pct": 48,
+    "arena_capacity": 16000
+  },
+  {
+    "name": "Vancouver Canucks",
+    "championships": 0,
+    "founding_year": 1970,
+    "all_time_wins": 2064,
+    "win_pct": 48,
+    "arena_capacity": 18910
+  },
+  {
+    "name": "Vegas Golden Knights",
+    "championships": 1,
+    "founding_year": 2017,
+    "all_time_wins": 365,
+    "win_pct": 58,
+    "arena_capacity": 17500
+  },
+  {
+    "name": "Washington Capitals",
+    "championships": 1,
+    "founding_year": 1974,
+    "all_time_wins": 2000,
+    "win_pct": 50,
+    "arena_capacity": 18573
+  },
+  {
+    "name": "Winnipeg Jets",
+    "championships": 0,
+    "founding_year": 1999,
+    "all_time_wins": 984,
+    "win_pct": 48,
+    "arena_capacity": 15321
+  }
+]

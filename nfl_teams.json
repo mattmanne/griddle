@@ -1,0 +1,258 @@
+[
+  {
+    "name": "Arizona Cardinals",
+    "championships": 0,
+    "founding_year": 1898,
+    "all_time_wins": 596,
+    "win_pct": 41.9,
+    "arena_capacity": 63400
+  },
+  {
+    "name": "Atlanta Falcons",
+    "championships": 0,
+    "founding_year": 1966,
+    "all_time_wins": 406,
+    "win_pct": 43.8,
+    "arena_capacity": 71000
+  },
+  {
+    "name": "Baltimore Ravens",
+    "championships": 2,
+    "founding_year": 1996,
+    "all_time_wins": 276,
+    "win_pct": 57,
+    "arena_capacity": 71008
+  },
+  {
+    "name": "Buffalo Bills",
+    "championships": 0,
+    "founding_year": 1960,
+    "all_time_wins": 498,
+    "win_pct": 49.4,
+    "arena_capacity": 60108
+  },
+  {
+    "name": "Carolina Panthers",
+    "championships": 0,
+    "founding_year": 1995,
+    "all_time_wins": 227,
+    "win_pct": 45.4,
+    "arena_capacity": 75037
+  },
+  {
+    "name": "Chicago Bears",
+    "championships": 1,
+    "founding_year": 1920,
+    "all_time_wins": 809,
+    "win_pct": 55.4,
+    "arena_capacity": 62500
+  },
+  {
+    "name": "Cincinnati Bengals",
+    "championships": 0,
+    "founding_year": 1968,
+    "all_time_wins": 409,
+    "win_pct": 45.5,
+    "arena_capacity": 65515
+  },
+  {
+    "name": "Cleveland Browns",
+    "championships": 0,
+    "founding_year": 1946,
+    "all_time_wins": 567,
+    "win_pct": 50.3,
+    "arena_capacity": 67895
+  },
+  {
+    "name": "Dallas Cowboys",
+    "championships": 5,
+    "founding_year": 1960,
+    "all_time_wins": 576,
+    "win_pct": 57.1,
+    "arena_capacity": 80000
+  },
+  {
+    "name": "Denver Broncos",
+    "championships": 3,
+    "founding_year": 1960,
+    "all_time_wins": 532,
+    "win_pct": 52.8,
+    "arena_capacity": 76125
+  },
+  {
+    "name": "Detroit Lions",
+    "championships": 0,
+    "founding_year": 1930,
+    "all_time_wins": 615,
+    "win_pct": 46.2,
+    "arena_capacity": 65000
+  },
+  {
+    "name": "Green Bay Packers",
+    "championships": 4,
+    "founding_year": 1919,
+    "all_time_wins": 819,
+    "win_pct": 57.2,
+    "arena_capacity": 81441
+  },
+  {
+    "name": "Houston Texans",
+    "championships": 0,
+    "founding_year": 2002,
+    "all_time_wins": 174,
+    "win_pct": 44.9,
+    "arena_capacity": 72220
+  },
+  {
+    "name": "Indianapolis Colts",
+    "championships": 2,
+    "founding_year": 1953,
+    "all_time_wins": 572,
+    "win_pct": 52.4,
+    "arena_capacity": 67000
+  },
+  {
+    "name": "Jacksonville Jaguars",
+    "championships": 0,
+    "founding_year": 1995,
+    "all_time_wins": 215,
+    "win_pct": 42.9,
+    "arena_capacity": 69132
+  },
+  {
+    "name": "Kansas City Chiefs",
+    "championships": 4,
+    "founding_year": 1960,
+    "all_time_wins": 553,
+    "win_pct": 55,
+    "arena_capacity": 73426
+  },
+  {
+    "name": "Las Vegas Raiders",
+    "championships": 3,
+    "founding_year": 1960,
+    "all_time_wins": 512,
+    "win_pct": 50.9,
+    "arena_capacity": 66000
+  },
+  {
+    "name": "Los Angeles Chargers",
+    "championships": 0,
+    "founding_year": 1960,
+    "all_time_wins": 505,
+    "win_pct": 50.2,
+    "arena_capacity": 70000
+  },
+  {
+    "name": "Los Angeles Rams",
+    "championships": 2,
+    "founding_year": 1936,
+    "all_time_wins": 636,
+    "win_pct": 51,
+    "arena_capacity": 70000
+  },
+  {
+    "name": "Miami Dolphins",
+    "championships": 2,
+    "founding_year": 1966,
+    "all_time_wins": 511,
+    "win_pct": 55,
+    "arena_capacity": 65326
+  },
+  {
+    "name": "Minnesota Vikings",
+    "championships": 0,
+    "founding_year": 1961,
+    "all_time_wins": 546,
+    "win_pct": 55,
+    "arena_capacity": 66655
+  },
+  {
+    "name": "New England Patriots",
+    "championships": 6,
+    "founding_year": 1960,
+    "all_time_wins": 559,
+    "win_pct": 55.5,
+    "arena_capacity": 66829
+  },
+  {
+    "name": "New Orleans Saints",
+    "championships": 1,
+    "founding_year": 1967,
+    "all_time_wins": 423,
+    "win_pct": 46.3,
+    "arena_capacity": 73208
+  },
+  {
+    "name": "New York Giants",
+    "championships": 4,
+    "founding_year": 1925,
+    "all_time_wins": 728,
+    "win_pct": 51.8,
+    "arena_capacity": 82500
+  },
+  {
+    "name": "New York Jets",
+    "championships": 1,
+    "founding_year": 1960,
+    "all_time_wins": 436,
+    "win_pct": 43.2,
+    "arena_capacity": 82500
+  },
+  {
+    "name": "Philadelphia Eagles",
+    "championships": 2,
+    "founding_year": 1933,
+    "all_time_wins": 649,
+    "win_pct": 50.2,
+    "arena_capacity": 69596
+  },
+  {
+    "name": "Pittsburgh Steelers",
+    "championships": 6,
+    "founding_year": 1933,
+    "all_time_wins": 691,
+    "win_pct": 53.8,
+    "arena_capacity": 68984
+  },
+  {
+    "name": "San Francisco 49ers",
+    "championships": 5,
+    "founding_year": 1946,
+    "all_time_wins": 642,
+    "win_pct": 54.7,
+    "arena_capacity": 68500
+  },
+  {
+    "name": "Seattle Seahawks",
+    "championships": 2,
+    "founding_year": 1976,
+    "all_time_wins": 416,
+    "win_pct": 52.5,
+    "arena_capacity": 69000
+  },
+  {
+    "name": "Tampa Bay Buccaneers",
+    "championships": 2,
+    "founding_year": 1976,
+    "all_time_wins": 326,
+    "win_pct": 41.2,
+    "arena_capacity": 65890
+  },
+  {
+    "name": "Tennessee Titans",
+    "championships": 0,
+    "founding_year": 1960,
+    "all_time_wins": 482,
+    "win_pct": 47.7,
+    "arena_capacity": 69143
+  },
+  {
+    "name": "Washington Commanders",
+    "championships": 3,
+    "founding_year": 1932,
+    "all_time_wins": 646,
+    "win_pct": 49.5,
+    "arena_capacity": 64000
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Atlanta Dream",
+    "championships": 0,
+    "founding_year": 2008,
+    "all_time_wins": 305,
+    "win_pct": 46.6,
+    "arena_capacity": 3500
+  },
+  {
+    "name": "Chicago Sky",
+    "championships": 1,
+    "founding_year": 2006,
+    "all_time_wins": 319,
+    "win_pct": 44.1,
+    "arena_capacity": 10387
+  },
+  {
+    "name": "Connecticut Sun",
+    "championships": 0,
+    "founding_year": 1999,
+    "all_time_wins": 459,
+    "win_pct": 55,
+    "arena_capacity": 9323
+  },
+  {
+    "name": "Dallas Wings",
+    "championships": 3,
+    "founding_year": 1998,
+    "all_time_wins": 422,
+    "win_pct": 42.8,
+    "arena_capacity": 7000
+  },
+  {
+    "name": "Golden State Valkyries",
+    "championships": 0,
+    "founding_year": 2025,
+    "all_time_wins": 47,
+    "win_pct": 61,
+    "arena_capacity": 18064
+  },
+  {
+    "name": "Indiana Fever",
+    "championships": 1,
+    "founding_year": 2000,
+    "all_time_wins": 401,
+    "win_pct": 45.7,
+    "arena_capacity": 17274
+  },
+  {
+    "name": "Las Vegas Aces",
+    "championships": 3,
+    "founding_year": 1997,
+    "all_time_wins": 509,
+    "win_pct": 50.2,
+    "arena_capacity": 12000
+  },
+  {
+    "name": "Los Angeles Sparks",
+    "championships": 3,
+    "founding_year": 1997,
+    "all_time_wins": 563,
+    "win_pct": 55.7,
+    "arena_capacity": 13141
+  },
+  {
+    "name": "Minnesota Lynx",
+    "championships": 4,
+    "founding_year": 1999,
+    "all_time_wins": 544,
+    "win_pct": 57,
+    "arena_capacity": 18798
+  },
+  {
+    "name": "New York Liberty",
+    "championships": 1,
+    "founding_year": 1997,
+    "all_time_wins": 530,
+    "win_pct": 52.3,
+    "arena_capacity": 17732
+  },
+  {
+    "name": "Phoenix Mercury",
+    "championships": 3,
+    "founding_year": 1997,
+    "all_time_wins": 471,
+    "win_pct": 49.6,
+    "arena_capacity": 17071
+  },
+  {
+    "name": "Portland Fire",
+    "championships": 0,
+    "founding_year": 2026,
+    "all_time_wins": 14,
+    "win_pct": 41.2,
+    "arena_capacity": 19393
+  },
+  {
+    "name": "Seattle Storm",
+    "championships": 4,
+    "founding_year": 2000,
+    "all_time_wins": 451,
+    "win_pct": 51.3,
+    "arena_capacity": 18300
+  },
+  {
+    "name": "Toronto Tempo",
+    "championships": 0,
+    "founding_year": 2026,
+    "all_time_wins": 10,
+    "win_pct": 30.3,
+    "arena_capacity": 8500
+  },
+  {
+    "name": "Washington Mystics",
+    "championships": 1,
+    "founding_year": 1998,
+    "all_time_wins": 416,
+    "win_pct": 44.3,
+    "arena_capacity": 4200
+  }
+]

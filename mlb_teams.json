@@ -1,0 +1,242 @@
+[
+  {
+    "name": "New York Yankees",
+    "championships": 27,
+    "founding_year": 1903,
+    "all_time_wins": 10872,
+    "win_pct": 56.9,
+    "arena_capacity": 46537
+  },
+  {
+    "name": "Boston Red Sox",
+    "championships": 9,
+    "founding_year": 1901,
+    "all_time_wins": 10044,
+    "win_pct": 51.8,
+    "arena_capacity": 37755
+  },
+  {
+    "name": "Baltimore Orioles",
+    "championships": 3,
+    "founding_year": 1894,
+    "all_time_wins": 9195,
+    "win_pct": 47.5,
+    "arena_capacity": 42455
+  },
+  {
+    "name": "Toronto Blue Jays",
+    "championships": 2,
+    "founding_year": 1977,
+    "all_time_wins": 3855,
+    "win_pct": 50,
+    "arena_capacity": 39150
+  },
+  {
+    "name": "Tampa Bay Rays",
+    "championships": 0,
+    "founding_year": 1998,
+    "all_time_wins": 2168,
+    "win_pct": 48.9,
+    "arena_capacity": 25000
+  },
+  {
+    "name": "Cleveland Guardians",
+    "championships": 2,
+    "founding_year": 1896,
+    "all_time_wins": 9940,
+    "win_pct": 51.3,
+    "arena_capacity": 34820
+  },
+  {
+    "name": "Detroit Tigers",
+    "championships": 4,
+    "founding_year": 1894,
+    "all_time_wins": 9763,
+    "win_pct": 50.3,
+    "arena_capacity": 41083
+  },
+  {
+    "name": "Kansas City Royals",
+    "championships": 2,
+    "founding_year": 1969,
+    "all_time_wins": 4290,
+    "win_pct": 47.7,
+    "arena_capacity": 37903
+  },
+  {
+    "name": "Minnesota Twins",
+    "championships": 3,
+    "founding_year": 1894,
+    "all_time_wins": 9329,
+    "win_pct": 48.2,
+    "arena_capacity": 38544
+  },
+  {
+    "name": "Chicago White Sox",
+    "championships": 3,
+    "founding_year": 1894,
+    "all_time_wins": 9654,
+    "win_pct": 49.8,
+    "arena_capacity": 40615
+  },
+  {
+    "name": "Houston Astros",
+    "championships": 2,
+    "founding_year": 1962,
+    "all_time_wins": 5096,
+    "win_pct": 50.3,
+    "arena_capacity": 41168
+  },
+  {
+    "name": "Los Angeles Angels",
+    "championships": 1,
+    "founding_year": 1961,
+    "all_time_wins": 5093,
+    "win_pct": 49.5,
+    "arena_capacity": 45517
+  },
+  {
+    "name": "Athletics",
+    "championships": 9,
+    "founding_year": 1901,
+    "all_time_wins": 9405,
+    "win_pct": 48.6,
+    "arena_capacity": 13416
+  },
+  {
+    "name": "Seattle Mariners",
+    "championships": 0,
+    "founding_year": 1977,
+    "all_time_wins": 3689,
+    "win_pct": 47.8,
+    "arena_capacity": 47929
+  },
+  {
+    "name": "Texas Rangers",
+    "championships": 1,
+    "founding_year": 1961,
+    "all_time_wins": 4899,
+    "win_pct": 47.6,
+    "arena_capacity": 40300
+  },
+  {
+    "name": "Atlanta Braves",
+    "championships": 4,
+    "founding_year": 1871,
+    "all_time_wins": 11190,
+    "win_pct": 50.3,
+    "arena_capacity": 41084
+  },
+  {
+    "name": "Miami Marlins",
+    "championships": 2,
+    "founding_year": 1993,
+    "all_time_wins": 2382,
+    "win_pct": 46,
+    "arena_capacity": 36742
+  },
+  {
+    "name": "New York Mets",
+    "championships": 2,
+    "founding_year": 1962,
+    "all_time_wins": 4899,
+    "win_pct": 48.4,
+    "arena_capacity": 41922
+  },
+  {
+    "name": "Philadelphia Phillies",
+    "championships": 2,
+    "founding_year": 1883,
+    "all_time_wins": 10303,
+    "win_pct": 47.5,
+    "arena_capacity": 42901
+  },
+  {
+    "name": "Washington Nationals",
+    "championships": 1,
+    "founding_year": 1969,
+    "all_time_wins": 4331,
+    "win_pct": 48.1,
+    "arena_capacity": 41373
+  },
+  {
+    "name": "Chicago Cubs",
+    "championships": 3,
+    "founding_year": 1870,
+    "all_time_wins": 11419,
+    "win_pct": 51.3,
+    "arena_capacity": 41649
+  },
+  {
+    "name": "Cincinnati Reds",
+    "championships": 5,
+    "founding_year": 1881,
+    "all_time_wins": 11017,
+    "win_pct": 50.4,
+    "arena_capacity": 43500
+  },
+  {
+    "name": "Milwaukee Brewers",
+    "championships": 0,
+    "founding_year": 1969,
+    "all_time_wins": 4405,
+    "win_pct": 48.9,
+    "arena_capacity": 41900
+  },
+  {
+    "name": "Pittsburgh Pirates",
+    "championships": 5,
+    "founding_year": 1882,
+    "all_time_wins": 10910,
+    "win_pct": 50,
+    "arena_capacity": 38747
+  },
+  {
+    "name": "St. Louis Cardinals",
+    "championships": 11,
+    "founding_year": 1882,
+    "all_time_wins": 11363,
+    "win_pct": 52,
+    "arena_capacity": 44383
+  },
+  {
+    "name": "Arizona Diamondbacks",
+    "championships": 1,
+    "founding_year": 1998,
+    "all_time_wins": 2167,
+    "win_pct": 48.9,
+    "arena_capacity": 48330
+  },
+  {
+    "name": "Colorado Rockies",
+    "championships": 0,
+    "founding_year": 1993,
+    "all_time_wins": 2364,
+    "win_pct": 45.6,
+    "arena_capacity": 46897
+  },
+  {
+    "name": "Los Angeles Dodgers",
+    "championships": 9,
+    "founding_year": 1883,
+    "all_time_wins": 11525,
+    "win_pct": 53.2,
+    "arena_capacity": 56000
+  },
+  {
+    "name": "San Diego Padres",
+    "championships": 0,
+    "founding_year": 1969,
+    "all_time_wins": 4217,
+    "win_pct": 46.8,
+    "arena_capacity": 39860
+  },
+  {
+    "name": "San Francisco Giants",
+    "championships": 8,
+    "founding_year": 1883,
+    "all_time_wins": 11622,
+    "win_pct": 53.5,
+    "arena_capacity": 41331
+  }
+]

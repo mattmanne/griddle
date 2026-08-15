@@ -382,6 +382,12 @@ describe('PACKS data consistency', () => {
     assert.equal(G.PACKS.football_cfb.statDefs, G.FOOTBALL_STAT_DEFS);
     assert.equal(G.PACKS.football_nfl.statDefs, G.FOOTBALL_STAT_DEFS);
   });
+
+  test('all 5 team packs share one TEAM_STAT_DEFS object, not copies', () => {
+    for (const key of ['nba_teams', 'wnba_teams', 'mlb_teams', 'nhl_teams', 'nfl_teams']) {
+      assert.equal(G.PACKS[key].statDefs, G.TEAM_STAT_DEFS, `${key} should share TEAM_STAT_DEFS`);
+    }
+  });
 });
 
 describe('READY_MESSAGES', () => {

@@ -24,9 +24,10 @@ accidentally undone.
 - `players.json`, `wnba_players.json`, `ncaam_players.json`, `mlb_hitters.json`,
   `nhl_skaters.json`, `football_cfb_players.json`, `football_nfl_players.json`,
   `geo_countries.json`, `us_states.json`, `movies.json`, `space_planets.json`,
-  `animals.json`, `music_artists.json`, `presidents.json` — one JSON array per pack,
-  fetched at load. The two football files each pool QB/RB/WR together (one file per
-  league, not per position — see below).
+  `animals.json`, `music_artists.json`, `presidents.json`, `nba_teams.json`,
+  `wnba_teams.json`, `mlb_teams.json`, `nhl_teams.json`, `nfl_teams.json` — one
+  JSON array per pack, fetched at load. The two football files each pool QB/RB/WR
+  together (one file per league, not per position — see below).
 - `archive-v0/` — the original prototype (continuous running-average scoring, no
   batches). Kept for reference, not wired into `index.html`. If you're tempted to
   bring back "session average" style scoring (backlog #15), this is where the old
@@ -98,17 +99,18 @@ scripts used it all session — `chromium.launch()`, drive it, assert with
 tests, rather than mixing two frameworks with two different assertion styles.
 
 **What's unit-tested vs. data-tested vs. integration-tested.**
-`test/pure.test.js` (50 tests) covers `lib/pure.js` directly — fast, no browser,
+`test/pure.test.js` (51 tests) covers `lib/pure.js` directly — fast, no browser,
 this is what a TDD loop should run against for new pure logic. It includes
 tier-boundary checks for both snark systems (every tier's own `min` should select
 *that* tier, not the one below it — an off-by-one here would be easy to miss by
 eye), an exact-formula regression test for `computeScore` (not just "score A >
 score B" but the literal expected number, so a change to `SCORE_DECAY_RATE` or
 the distance formula gets caught), and object-*identity* checks (`===`, not deep-
-equality) confirming `HOOPS_STAT_DEFS`/`FOOTBALL_STAT_DEFS` are genuinely shared
-across the packs CLAUDE.md says share them, not accidentally forked copies.
-`test/data.test.js` (70 tests) is a different kind of check entirely — it reads
-all 14 pack JSON files directly off disk (no `lib/pure.js` logic involved beyond
+equality) confirming `HOOPS_STAT_DEFS`/`FOOTBALL_STAT_DEFS`/`TEAM_STAT_DEFS` are
+genuinely shared across the packs CLAUDE.md says share them, not accidentally
+forked copies.
+`test/data.test.js` (95 tests) is a different kind of check entirely — it reads
+all 19 pack JSON files directly off disk (no `lib/pure.js` logic involved beyond
 using `PACKS`/`eligibleEntries` as the source of truth for what "valid" means)
 and verifies structural integrity: no duplicate names within a file, no stray
 fields outside that pack's `statDefs`, every present stat field is a finite
@@ -277,7 +279,15 @@ data.
   instead of by league — see the pack-architecture section below for why it was
   consolidated into one.) If one of these shared objects ever needs to diverge for
   one pack but not another, give that pack its own object at that point — don't
-  speculatively split them apart now.
+  speculatively split them apart now. `TEAM_STAT_DEFS` covers all 5 team packs
+  (`nba_teams`/`wnba_teams`/`mlb_teams`/`nhl_teams`/`nfl_teams`) for a different
+  reason than the other two: it's not "same categories, different rosters" like
+  football, it's that franchise-level facts (championships, founding year,
+  all-time win/loss record, home venue capacity) mean the same thing regardless
+  of which sport the team plays — unlike *player* stats, which differ completely
+  by sport (there's no `HOOPS_STAT_DEFS`-style overlap between a basketball
+  player's PPG and a quarterback's passer rating). Team-level stats turned out to
+  be sport-agnostic in a way individual player stats never are.
 
 ## Pack architecture — from "sports" to a general framework
 
@@ -402,16 +412,29 @@ people.
   same position in one file) — cross-file duplication of the same real person is the
   ordinary, harmless case throughout this codebase; only *within-one-file* duplicate
   names ever need disambiguating.
+- **Team statistics (backlog #1: "support guessing team-level stats... as an
+  additional mode alongside the existing player-based one") needed zero new
+  architecture, same as every content addition before it.** The backlog item's own
+  wording assumed team stats would need a separate "mode" — but a team is just
+  another named entry with numeric stats, exactly like a player, a country, or a
+  president. `nba_teams`/`wnba_teams`/`mlb_teams`/`nhl_teams`/`nfl_teams` are five
+  more `PACKS` entries in the same flat toggle list, not a new switch or game
+  state. This is the same lesson CLAUDE.md keeps re-learning (position groups,
+  then geography, then the football re-split): **check whether the existing pack
+  framework already resolves a backlog item's stated blocker before building
+  anything new for it.** It usually does.
 - **Packs stay in one flat, combinable toggle list — no separate "sports" vs.
-  "trivia" mode.** This matches how the backlog itself frames packs (peers, not a
-  hierarchy), and the architecture supports it for free. Not solved yet, and not
-  being designed for speculatively: 14 toggle buttons already wrap to multiple rows:
-  once several more non-sports packs exist (~15-20+), a grouping/category UI will
-  likely be worth revisiting.
+  "trivia" mode**, even with team packs added alongside player packs (see below).
+  This matches how the backlog itself frames packs (peers, not a hierarchy), and
+  the architecture supports it for free. 19 toggle buttons already wrap to
+  multiple rows — right at the "~15-20+" count this section used to flag as
+  "probably worth a grouping/category UI eventually." Still not solved
+  speculatively ahead of time, but worth actually revisiting the next time a pack
+  gets added rather than continuing to defer it.
 
 **Sizing note:** `.pack-switch` needs `flex-wrap: wrap` — it didn't originally, which
 was fine at 2-5 buttons but started overflowing its container as more packs were
-added (14 today). If you add another pack, this is why the buttons wrap to a new
+added (19 today). If you add another pack, this is why the buttons wrap to a new
 row instead of running off the edge of the screen.
 
 **The pack toggles moved out of the header, into their own collapsed `<details
