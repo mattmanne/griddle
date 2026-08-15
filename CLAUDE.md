@@ -308,6 +308,34 @@ left most of the screen as dead space with no bigger board to show for it. The
 to before; only the px ceiling moved, so the extra size only kicks in where there's
 actually room for it.
 
+## Snark — commentary happens per-guess, not just per-batch
+
+`SNARK_TIERS` (batch-level, judged on the 5000-point total) originally had exactly
+one fixed line of text per tier. Two things changed after playtesting, explicitly
+modeled on *Dungeon Crawler Carl*'s constantly-narrating, escalating-mockery
+"System" voice rather than a single end-of-run report card:
+
+- **Every tier now holds 2-4 candidate lines** (`texts: [...]`), and `snarkFor()`
+  picks one at random each time via the shared `randomItem()` helper — so replaying
+  several batches at the same skill level doesn't surface the exact same sentence
+  every time. The worst tier in particular was rewritten to be genuinely more
+  cutting ("The griddle is embarrassed for you") rather than just mildly
+  disappointed, matching Carl's tendency to get *more* savage at the low end, not
+  less.
+- **`GUESS_SNARK_TIERS`/`guessSnarkFor(score)` is a second, separate tier system**
+  for a single guess's score (out of 1000), shown immediately in the results panel
+  (`#result-snark`) after every guess — not just once at the end of a 5-guess
+  batch. This is the core of the DCC-inspired change: the game reacts to every
+  action, not just the final tally, the same way Carl's announcer never goes
+  quiet between events. It intentionally has its own shorter, punchier copy
+  (`"🎯 Nailed it!"`, `"Did you even look at the board?"`) rather than reusing
+  `SNARK_TIERS`' longer batch-level lines, since it needs to read at a glance
+  immediately after a single guess, not as a batch-ending summary.
+
+`READY_MESSAGES` (the idle "Order up:" text shown once data finishes loading,
+before the first guess of a session) got the same treatment for the same
+reason — it used to be a single hardcoded "Ready when you are!" every time.
+
 ## Round lifecycle — the board disappears when "Fully Cooked"
 
 Once the 5th guess is scored, `finalizeGuess()` hides `.target-panel`, `.axis-grid`

@@ -437,6 +437,11 @@ button:active {
   color: var(--accent);
 }
 
+.result-snark {
+  font-style: italic;
+  color: var(--muted);
+}
+
 .round-summary {
   background: var(--panel);
   border: 1px solid var(--accent);

@@ -251,18 +251,75 @@
   const ROUND_MAX = SCORE_MAX * ROUND_SIZE;
 
   const SNARK_TIERS = [
-    { min: 0.9, text: "Golden-brown perfection. Chef's kiss.", emoji: "🧇" },
-    { min: 0.75, text: "Cooked to perfection. Restaurant-quality guessing.", emoji: "🔥" },
-    { min: 0.6, text: "Nicely browned. Respectable griddle work.", emoji: "😎" },
-    { min: 0.45, text: "A little undercooked in spots, but edible.", emoji: "🙂" },
-    { min: 0.3, text: "Getting a bit soggy. Turn up the heat.", emoji: "😬" },
-    { min: 0.15, text: "Burnt. Someone left the griddle on too long.", emoji: "💀" },
-    { min: 0, text: "Raw batter. Didn't even hit the griddle.", emoji: "🤡" },
+    { min: 0.9, emoji: "🧇", texts: [
+      "Golden-brown perfection. Chef's kiss.",
+      "Absolutely cooked, no notes.",
+      "The judges are speechless. Frame this batch.",
+    ] },
+    { min: 0.75, emoji: "🔥", texts: [
+      "Cooked to perfection. Restaurant-quality guessing.",
+      "Michelin-star nonsense right there.",
+      "You clearly know your numbers.",
+    ] },
+    { min: 0.6, emoji: "😎", texts: [
+      "Nicely browned. Respectable griddle work.",
+      "Solid batch. No complaints from the kitchen.",
+      "Decent spread today.",
+    ] },
+    { min: 0.45, emoji: "🙂", texts: [
+      "A little undercooked in spots, but edible.",
+      "Mixed bag. Some winners, some questionable choices.",
+      "Edible. Barely.",
+    ] },
+    { min: 0.3, emoji: "😬", texts: [
+      "Getting a bit soggy. Turn up the heat.",
+      "This batch needs some real work.",
+      "Rough morning at the griddle.",
+    ] },
+    { min: 0.15, emoji: "💀", texts: [
+      "Burnt. Someone left the griddle on too long.",
+      "This should be sent back to the kitchen.",
+      "Yikes. Just... yikes.",
+    ] },
+    { min: 0, emoji: "🤡", texts: [
+      "Raw batter. Didn't even hit the griddle.",
+      "Genuinely impressive how wrong that was.",
+      "The griddle is embarrassed for you.",
+      "Someone alert the health inspector.",
+    ] },
   ];
+
+  const GUESS_SNARK_TIERS = [
+    { min: 0.9, texts: ["🎯 Nailed it!", "Bullseye.", "Chef's kiss.", "Unreal guess."] },
+    { min: 0.75, texts: ["Really close!", "Nice read.", "Sharp guess."] },
+    { min: 0.6, texts: ["Not bad.", "Decent guess.", "Respectable."] },
+    { min: 0.45, texts: ["Eh, close enough?", "Mid. Very mid.", "Could be worse."] },
+    { min: 0.3, texts: ["Rough one.", "Way off.", "That's a swing and a miss."] },
+    { min: 0.15, texts: ["Yikes.", "Oof.", "That's not close."] },
+    { min: 0, texts: ["Did you even look at the board?", "That's borderline impressive.", "The numbers are right there!"] },
+  ];
+
+  const READY_MESSAGES = [
+    'Ready when you are!',
+    'Griddle is hot. Let\'s see what you\'ve got.',
+    'Batter\'s up.',
+    'The griddle awaits your genius (or lack thereof).',
+  ];
+
+  function randomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
 
   function snarkFor(total, max) {
     const pct = total / max;
-    return SNARK_TIERS.find((tier) => pct >= tier.min) || SNARK_TIERS[SNARK_TIERS.length - 1];
+    const tier = SNARK_TIERS.find((t) => pct >= t.min) || SNARK_TIERS[SNARK_TIERS.length - 1];
+    return { emoji: tier.emoji, text: randomItem(tier.texts) };
+  }
+
+  function guessSnarkFor(score) {
+    const pct = score / SCORE_MAX;
+    const tier = GUESS_SNARK_TIERS.find((t) => pct >= t.min) || GUESS_SNARK_TIERS[GUESS_SNARK_TIERS.length - 1];
+    return randomItem(tier.texts);
   }
 
   const svg = document.getElementById('grid-svg');
@@ -291,6 +348,7 @@
   const resultTarget = document.getElementById('result-target');
   const resultDistance = document.getElementById('result-distance');
   const resultScore = document.getElementById('result-score');
+  const resultSnarkEl = document.getElementById('result-snark');
   const roundSummary = document.getElementById('round-summary');
   const roundTotalScoreEl = document.getElementById('round-total-score');
   const roundSnarkEl = document.getElementById('round-snark');
@@ -495,6 +553,7 @@
     resultTarget.textContent = `${target.x.toFixed(1)} ${xLabel}, ${target.y.toFixed(1)} ${yLabel}`;
     resultDistance.textContent = Math.round((dist / Math.SQRT2) * 100);
     resultScore.textContent = score;
+    resultSnarkEl.textContent = guessSnarkFor(score);
     resultsSection.hidden = false;
 
     if (guessIndex < ROUND_SIZE) {
@@ -790,7 +849,7 @@
         updateEntryLabel();
         actionBtn.disabled = false;
         actionBtn.textContent = 'Fire Up the Griddle';
-        targetDisplay.textContent = 'Ready when you are!';
+        targetDisplay.textContent = randomItem(READY_MESSAGES);
         updatePackUI();
       })
       .catch((err) => {
