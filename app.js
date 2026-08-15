@@ -363,10 +363,16 @@
   // partially-overlapping fields (e.g. football_cfb/football_nfl mixing QB/RB/WR stats)
   // can randomly land on a pair no entry has both of (a QB stat vs. a WR-only stat) —
   // rejection-sample until a pair with at least one eligible entry turns up.
-  function pickEligiblePair(pack, keys) {
+  // `avoid` (optional) excludes specific keys from the sample — used to keep the very
+  // next guess in the same pack from repeating the previous guess's exact stat pair.
+  // Falls back to the unrestricted key list if avoiding would leave too few keys to
+  // pair (not expected in practice — every pack has at least 5 stat keys).
+  function pickEligiblePair(pack, keys, avoid) {
+    const preferred = avoid ? keys.filter((k) => !avoid.includes(k)) : keys;
+    const pool = preferred.length >= 2 ? preferred : keys;
     for (let i = 0; i < 200; i++) {
-      const x = randomKey(keys);
-      const y = randomKey(keys, x);
+      const x = randomKey(pool);
+      const y = randomKey(pool, x);
       if (hasEligiblePair(pack, x, y)) return { x, y };
     }
     return { x: keys[0], y: keys[1] };
@@ -377,21 +383,23 @@
     if (forceStatPairCheckbox.checked || forcedEntry) {
       const pack = debugPack;
       const keys = Object.keys(PACKS[pack].statDefs);
+      const avoid = pack === currentPack ? [statX, statY] : null;
       let x, y;
       if (forceStatPairCheckbox.checked) {
         x = statXSelect.value;
         y = statYSelect.value === x ? randomKey(keys, x) : statYSelect.value;
         if (!hasEligiblePair(pack, x, y)) {
-          ({ x, y } = pickEligiblePair(pack, keys));
+          ({ x, y } = pickEligiblePair(pack, keys, avoid));
         }
       } else {
-        ({ x, y } = pickEligiblePair(pack, keys));
+        ({ x, y } = pickEligiblePair(pack, keys, avoid));
       }
       return { pack, x, y };
     }
     const pack = randomKey(Array.from(enabledPacks));
     const keys = Object.keys(PACKS[pack].statDefs);
-    const { x, y } = pickEligiblePair(pack, keys);
+    const avoid = pack === currentPack ? [statX, statY] : null;
+    const { x, y } = pickEligiblePair(pack, keys, avoid);
     return { pack, x, y };
   }
 
