@@ -283,9 +283,30 @@ people.
   likely be worth revisiting.
 
 **Sizing note:** `.pack-switch` needs `flex-wrap: wrap` — it didn't originally, which
-was fine at 2-5 buttons but started overflowing the header as more packs were added
-(14 today). If you add another pack, this is why the buttons wrap to a new row
-instead of running off the edge of the screen.
+was fine at 2-5 buttons but started overflowing its container as more packs were
+added (14 today). If you add another pack, this is why the buttons wrap to a new
+row instead of running off the edge of the screen.
+
+**The pack toggles moved out of the header, into their own collapsed `<details
+class="pack-settings">`, below `.controls`.** They used to live directly in
+`.app-header`, always expanded, meaning a first-time visitor saw a 14-button wall
+of toggles before any actual game content — playtesting a novice persona
+specifically flagged this as reading like "a settings screen," not a game. Moving
+`.pack-switch` into a `<details>` (same collapsed-by-default pattern as `.practice-
+settings`/"Kitchen Prep") after the drag grid and action button means the game
+board is the first thing on screen, and pack selection is available but out of the
+way. `<summary>` shows a live `(N/14 active)` count (`updatePackUI()` sets
+`packCountSummary.textContent`) so a player doesn't lose visibility into which
+packs are enabled just because the section is collapsed. Unlike the sports-era
+header placement, this is a genuinely player-facing setting (not a debug tool like
+Kitchen Prep) — it just doesn't need to be the *first* thing visible.
+**`.app`'s `max-width` and `.viewport`'s size cap were both raised** (560px→680px,
+and the grid from `min(420px, 88vw)` to `min(600px, 88vw)`) at the same time —
+playtesting also found that at wider ("tablet"-ish) viewports the old 560px cap
+left most of the screen as dead space with no bigger board to show for it. The
+`88vw` factor is unchanged, so phone-width layouts render essentially identically
+to before; only the px ceiling moved, so the extra size only kicks in where there's
+actually room for it.
 
 ## Round lifecycle — the board disappears when "Fully Cooked"
 

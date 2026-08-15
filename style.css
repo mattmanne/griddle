@@ -32,7 +32,7 @@ body {
 }
 
 .app {
-  max-width: 560px;
+  max-width: 680px;
   margin: 0 auto;
   padding: 16px 16px 40px;
   display: flex;
@@ -136,6 +136,16 @@ body {
   box-shadow: 0 2px 10px rgba(245, 166, 35, 0.35);
 }
 
+.pack-settings summary {
+  font-size: 0.85rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.pack-settings .pack-switch {
+  margin-top: 8px;
+}
+
 .mode-link {
   margin: 6px 0 0;
   font-size: 0.85rem;
@@ -202,8 +212,8 @@ body {
 
 .viewport {
   grid-area: view;
-  width: min(420px, 88vw);
-  height: min(420px, 88vw);
+  width: min(600px, 88vw);
+  height: min(600px, 88vw);
   overflow: auto;
   overscroll-behavior: contain;
   border: 6px solid var(--waffle-shadow);

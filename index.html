@@ -14,22 +14,6 @@
       <h1>Griddle</h1>
       <button type="button" id="info-btn" class="info-btn" aria-label="How to play" aria-haspopup="dialog">ℹ️</button>
     </div>
-    <div class="pack-switch" role="group" aria-label="Choose packs (select one or more)">
-      <button type="button" class="pack-btn active" data-pack="nba">🏀 NBA</button>
-      <button type="button" class="pack-btn active" data-pack="wnba">⛹️‍♀️ WNBA</button>
-      <button type="button" class="pack-btn active" data-pack="ncaam">🎓 NCAA</button>
-      <button type="button" class="pack-btn active" data-pack="mlb">⚾ MLB</button>
-      <button type="button" class="pack-btn active" data-pack="nhl">🏒 NHL</button>
-      <button type="button" class="pack-btn active" data-pack="football_cfb">🏈 CFB</button>
-      <button type="button" class="pack-btn active" data-pack="football_nfl">🏈 NFL</button>
-      <button type="button" class="pack-btn active" data-pack="geo_countries">🌍 Countries</button>
-      <button type="button" class="pack-btn active" data-pack="geo_states">🗽 US States</button>
-      <button type="button" class="pack-btn active" data-pack="movies">🎬 Movies</button>
-      <button type="button" class="pack-btn active" data-pack="space_planets">🪐 Planets</button>
-      <button type="button" class="pack-btn active" data-pack="animals">🐾 Animals</button>
-      <button type="button" class="pack-btn active" data-pack="music_artists">🎤 Music</button>
-      <button type="button" class="pack-btn active" data-pack="presidents">🎩 Presidents</button>
-    </div>
     <p class="instructions">
       Drag to place <span id="pack-clause">an entry</span>'s stats. 5 guesses per batch, closest wins.
     </p>
@@ -101,6 +85,26 @@
     </label>
     <button id="action-btn" type="button" disabled>Preheating…</button>
   </section>
+
+  <details class="pack-settings">
+    <summary>Choose Packs <span id="pack-count-summary"></span></summary>
+    <div class="pack-switch" role="group" aria-label="Choose packs (select one or more)">
+      <button type="button" class="pack-btn active" data-pack="nba">🏀 NBA</button>
+      <button type="button" class="pack-btn active" data-pack="wnba">⛹️‍♀️ WNBA</button>
+      <button type="button" class="pack-btn active" data-pack="ncaam">🎓 NCAA</button>
+      <button type="button" class="pack-btn active" data-pack="mlb">⚾ MLB</button>
+      <button type="button" class="pack-btn active" data-pack="nhl">🏒 NHL</button>
+      <button type="button" class="pack-btn active" data-pack="football_cfb">🏈 CFB</button>
+      <button type="button" class="pack-btn active" data-pack="football_nfl">🏈 NFL</button>
+      <button type="button" class="pack-btn active" data-pack="geo_countries">🌍 Countries</button>
+      <button type="button" class="pack-btn active" data-pack="geo_states">🗽 US States</button>
+      <button type="button" class="pack-btn active" data-pack="movies">🎬 Movies</button>
+      <button type="button" class="pack-btn active" data-pack="space_planets">🪐 Planets</button>
+      <button type="button" class="pack-btn active" data-pack="animals">🐾 Animals</button>
+      <button type="button" class="pack-btn active" data-pack="music_artists">🎤 Music</button>
+      <button type="button" class="pack-btn active" data-pack="presidents">🎩 Presidents</button>
+    </div>
+  </details>
 
   <details class="practice-settings">
     <summary>Kitchen Prep</summary>

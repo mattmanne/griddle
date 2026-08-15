@@ -299,6 +299,7 @@
   const copyResultsBtn = document.getElementById('copy-results-btn');
   const replayBtn = document.getElementById('replay-btn');
   const packButtons = Array.from(document.querySelectorAll('.pack-btn'));
+  const packCountSummary = document.getElementById('pack-count-summary');
   const infoBtn = document.getElementById('info-btn');
   const infoModal = document.getElementById('info-modal');
   const infoCloseBtn = document.getElementById('info-close-btn');
@@ -757,6 +758,7 @@
   function updatePackUI() {
     packButtons.forEach((btn) => btn.classList.toggle('active', enabledPacks.has(btn.dataset.pack)));
     packClause.textContent = packClauseText();
+    packCountSummary.textContent = `(${enabledPacks.size}/${PACK_KEYS.length} active)`;
     if (guessIndex === 0 && !roundOver) {
       roundProgress.textContent = `${poolSummary()} loaded — press "Fire Up the Griddle" to begin.`;
     }
