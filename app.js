@@ -480,11 +480,11 @@
     guideX.setAttribute('visibility', 'hidden');
     guideY.setAttribute('visibility', 'hidden');
 
-    const xShort = STAT_DEFS[statX].short;
-    const yShort = STAT_DEFS[statY].short;
-    resultGuess.textContent = `${dataPoint.x.toFixed(1)} ${xShort}, ${dataPoint.y.toFixed(1)} ${yShort}`;
+    const xLabel = STAT_DEFS[statX].label;
+    const yLabel = STAT_DEFS[statY].label;
+    resultGuess.textContent = `${dataPoint.x.toFixed(1)} ${xLabel}, ${dataPoint.y.toFixed(1)} ${yLabel}`;
     resultTargetName.textContent = `${PACKS[currentPack].emoji} ${target.name}`;
-    resultTarget.textContent = `${target.x.toFixed(1)} ${xShort}, ${target.y.toFixed(1)} ${yShort}`;
+    resultTarget.textContent = `${target.x.toFixed(1)} ${xLabel}, ${target.y.toFixed(1)} ${yLabel}`;
     resultDistance.textContent = Math.round((dist / Math.SQRT2) * 100);
     resultScore.textContent = score;
     resultsSection.hidden = false;
