@@ -290,11 +290,11 @@ instead of running off the edge of the screen.
 ## Round lifecycle — the board disappears when "Fully Cooked"
 
 Once the 5th guess is scored, `finalizeGuess()` hides `.target-panel`, `.axis-grid`
-(the waffle board), `.legend`, `.controls`, and `.practice-settings`, so `#round-
-summary` ("Fresh Off the Griddle") becomes the only thing on screen besides the
-header — the board has no reason to stay visible once there's nothing left to guess,
-and leaving it up competed with the summary for attention. `beginRound()` un-hides
-all of them again when a new batch starts.
+(the waffle board), `.legend`, and `.controls`, so `#round-summary` ("Fresh Off the
+Griddle") becomes the only thing on screen besides the header — the board has no
+reason to stay visible once there's nothing left to guess, and leaving it up
+competed with the summary for attention. `beginRound()` un-hides all of them again
+when a new batch starts.
 
 **Gotcha if you touch this:** setting `.hidden = true` in JS only works if nothing in
 `style.css` sets an explicit `display` on that element — the browser's default
@@ -302,10 +302,61 @@ all of them again when a new batch starts.
 specificity (a plain class selector) later in the cascade. `.axis-grid`, `.controls`,
 and `.legend` all declare `display: grid`/`display: flex`, so hiding them silently did
 nothing until `style.css` got an explicit `.axis-grid[hidden], .controls[hidden],
-.legend[hidden] { display: none; }` override. `.target-panel` and `.practice-settings`
-never needed this because they don't set `display` themselves. If you add a new
-element to this hide/show list, check whether its selector sets `display` before
-assuming `.hidden = true` will work.
+.legend[hidden] { display: none; }` override. `.target-panel` never needed this
+because it doesn't set `display` itself. If you add a new element to this hide/show
+list, check whether its selector sets `display` before assuming `.hidden = true`
+will work.
+
+**`.practice-settings` (the "Kitchen Prep" debug panel) is deliberately excluded
+from this hide list**, unlike the sports-era version of this feature. A round of
+playtesting found that hiding it at round-summary time meant a Kitchen Prep user
+had no way to adjust debug settings (force a different stat pair, switch practice
+pack, etc.) between batches — clicking "Cook Another Batch" un-hides everything
+*and* immediately starts guess 1 in the same call (`beginRound()` calls
+`beginNextGuess()` synchronously), so the panel would reappear only after the next
+batch's first guess had already locked in whatever settings were left over from
+before. Leaving `.practice-settings` visible through the round-summary gives a
+debug user a window to change settings before starting the next batch. This
+doesn't conflict with the "only the summary matters" intent behind hiding the
+other four elements — Kitchen Prep is a debug drawer, not part of the board being
+guessed on, so it was never really part of that visual-competition problem.
+
+## Drag-to-guess grid — pointer events live on `.viewport`, not `#grid-svg`
+
+The drag/pinch pointer listeners (`pointerdown`/`pointermove`/`pointerup`/
+`pointercancel`) are attached to `#viewport` (the bordered, rounded, scrollable
+container), not `#grid-svg` (the SVG element itself) — this looks backwards since
+the SVG is what actually renders the grid, but it's the correct binding.
+
+**Why:** `.viewport` has `border-radius: 16px` plus `overflow: auto`, which clips
+its children (including `#grid-svg`) to the rounded rectangle shape — and that clip
+also governs hit-testing, not just painting. A pointerdown at the *literal* square
+corner of the SVG's bounding box (e.g. the exact top-left pixel) lands inside the
+region `.viewport` has visually rounded away, so the browser's hit-test resolves
+that point to `.viewport` itself, not to the (clipped-away-there) SVG or any of its
+children. When the listener lived on `#grid-svg`, a guess dragged to a literal grid
+corner would silently never fire `pointerdown` at all — no marker, no error, and
+the round stuck on "Cooking…" forever, since nothing had started the drag in the
+first place. Confirmed via `elementFromPoint()` at the exact corner pixel: it
+resolved to `viewport`, not `grid-svg` or any gridline. Moving the listeners up to
+`.viewport` fixes this for free, because `clientToData()` already reads
+`svg.getBoundingClientRect()` (not `evt.target`) to convert a click to a data
+point, and already clamps the result to the axis min/max — so it doesn't matter
+which specific element within `.viewport` actually received the pointer event.
+`touch-action` moved from `#grid-svg` (`none`) to `.viewport` (also `none`, replacing
+its old `pan-x pan-y`) to match — the corner dead-zone was also a place native touch
+panning could unexpectedly compete with the custom drag gesture, since `#grid-svg`'s
+`touch-action: none` never covered that clipped-away area either.
+
+**The zoom slider's waffle-pattern background is deliberately resynced in
+`setZoom()`.** `viewport.style.backgroundSize` is set to `36 * zoomLevel` px
+(matching the SVG's own `baseSize * zoomLevel` scaling) every time zoom changes.
+Without this, only the SVG grid (gridlines, markers) visibly grew when zooming —
+the `.viewport`'s CSS `background-image` waffle texture stayed a fixed 36px tile
+regardless of zoom level, so cranking the zoom slider to 4× looked like nothing had
+happened even though the underlying grid really had scaled. The waffle texture is
+purely decorative and was never wired to the zoom level until this was caught in
+playtesting.
 
 ## Deployment
 

@@ -433,6 +433,8 @@
     const px = Math.round(baseSize * z);
     svg.style.width = px + 'px';
     svg.style.height = px + 'px';
+    const wafflePx = Math.round(36 * z);
+    viewport.style.backgroundSize = `${wafflePx}px ${wafflePx}px`;
     zoomSlider.value = z;
   }
 
@@ -496,7 +498,6 @@
       gameBoard.hidden = true;
       legendEl.hidden = true;
       gameControls.hidden = true;
-      practiceSettingsEl.hidden = true;
       const total = guessResults.reduce((a, r) => a + r.score, 0);
       const snark = snarkFor(total, ROUND_MAX);
       roundTotalScoreEl.textContent = total;
@@ -603,10 +604,10 @@
     return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
   }
 
-  svg.addEventListener('pointerdown', (evt) => {
+  viewport.addEventListener('pointerdown', (evt) => {
     if (locked) return;
     evt.preventDefault();
-    svg.setPointerCapture(evt.pointerId);
+    viewport.setPointerCapture(evt.pointerId);
     pointers.set(evt.pointerId, { clientX: evt.clientX, clientY: evt.clientY });
 
     if (pointers.size === 1) {
@@ -625,7 +626,7 @@
     }
   });
 
-  svg.addEventListener('pointermove', (evt) => {
+  viewport.addEventListener('pointermove', (evt) => {
     if (!pointers.has(evt.pointerId)) return;
     pointers.set(evt.pointerId, { clientX: evt.clientX, clientY: evt.clientY });
 
@@ -655,8 +656,8 @@
     }
   }
 
-  svg.addEventListener('pointerup', handlePointerEnd);
-  svg.addEventListener('pointercancel', handlePointerEnd);
+  viewport.addEventListener('pointerup', handlePointerEnd);
+  viewport.addEventListener('pointercancel', handlePointerEnd);
 
   zoomSlider.addEventListener('input', () => setZoom(parseFloat(zoomSlider.value)));
   actionBtn.addEventListener('click', () => {

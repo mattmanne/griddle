@@ -218,13 +218,12 @@ body {
     inset 0 0 32px rgba(0, 0, 0, 0.45),
     0 0 0 3px var(--line),
     0 6px 18px rgba(0, 0, 0, 0.5);
-  touch-action: pan-x pan-y;
+  touch-action: none;
 }
 
 #grid-svg {
   display: block;
   background: transparent;
-  touch-action: none;
 }
 
 .gridline {
