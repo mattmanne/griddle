@@ -27,7 +27,11 @@ after(async () => {
 });
 
 async function newPage() {
-  const page = await browser.newPage({ viewport: { width: 480, height: 1300 } });
+  // Own browser context per page (not just browser.newPage()) so we can grant
+  // clipboard permissions for the "Copy My Batch" test without affecting others.
+  const context = await browser.newContext({ viewport: { width: 480, height: 1300 } });
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: baseUrl });
+  const page = await context.newPage();
   const consoleErrors = [];
   page.on('console', (msg) => { if (msg.type() === 'error') consoleErrors.push(msg.text()); });
   page.on('pageerror', (err) => consoleErrors.push('pageerror: ' + err.message));
@@ -201,6 +205,69 @@ describe('info modal', () => {
     await page.mouse.click(box.x - 5, box.y - 5);
     await page.waitForTimeout(100);
     assert.equal(await page.locator('#info-modal').evaluate((d) => d.open), false);
+    await page.close();
+  });
+});
+
+describe('Copy My Batch', () => {
+  test('copies the share text to the clipboard and confirms with button text', async () => {
+    const { page, consoleErrors } = await newPage();
+    for (let i = 0; i < 5; i++) {
+      await doGuess(page);
+    }
+    const shareText = await page.locator('#share-text').inputValue();
+    assert.ok(shareText.startsWith('Griddle 🧇'));
+
+    await page.locator('#copy-results-btn').click();
+    await page.waitForTimeout(100);
+    assert.equal(await page.locator('#copy-results-btn').textContent(), 'Copied!');
+
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    // The OS clipboard round-trip normalizes line endings to CRLF on Windows —
+    // that's a platform quirk in the read-back, not something app.js controls or
+    // should try to counteract, so normalize before comparing content.
+    assert.equal(clipboardText.replace(/\r\n/g, '\n'), shareText);
+    assert.deepEqual(consoleErrors, []);
+    await page.close();
+  });
+});
+
+describe('Kitchen Prep "lock this stat pair"', () => {
+  test('holds the same stat pair across all 5 guesses in a batch', async () => {
+    const { page } = await newPage();
+    await page.locator('.practice-settings summary').click();
+    await page.selectOption('#debug-pack-select', 'space_planets');
+    await page.check('#force-stat-pair');
+    await page.selectOption('#stat-x-select', { label: 'Diameter (km)' });
+    await page.selectOption('#stat-y-select', { label: 'Number of Moons' });
+
+    const pairsSeen = new Set();
+    for (let i = 0; i < 5; i++) {
+      await page.locator('#action-btn').click();
+      await page.waitForTimeout(120);
+      const target = await page.locator('#target-display').textContent();
+      pairsSeen.add(target.split('—')[1].trim());
+      await dragAt(page, 0.4, 0.4);
+    }
+    assert.equal(pairsSeen.size, 1, `expected one locked pair across all 5 guesses, saw: ${[...pairsSeen]}`);
+    assert.ok([...pairsSeen][0].includes('Diameter') && [...pairsSeen][0].includes('Number of Moons'));
+    await page.close();
+  });
+});
+
+describe('pack toggles', () => {
+  test('the last active pack cannot be deselected', async () => {
+    const { page } = await newPage();
+    await page.locator('.pack-settings summary').click();
+    const packs = ['nba', 'wnba', 'ncaam', 'mlb', 'nhl', 'football_cfb', 'football_nfl', 'geo_countries', 'geo_states', 'movies', 'space_planets', 'animals', 'music_artists'];
+    for (const p of packs) {
+      await page.locator(`.pack-btn[data-pack="${p}"]`).click();
+    }
+    // 13 of 14 turned off — one (presidents) should remain active no matter what
+    assert.equal(await page.locator('#pack-count-summary').textContent(), '(1/14 active)');
+    await page.locator('.pack-btn[data-pack="presidents"]').click(); // try to deselect the last one
+    assert.equal(await page.locator('#pack-count-summary').textContent(), '(1/14 active)');
+    assert.ok((await page.locator('.pack-btn[data-pack="presidents"]').getAttribute('class')).includes('active'));
     await page.close();
   });
 });

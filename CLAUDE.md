@@ -97,15 +97,40 @@ scripts used it all session — `chromium.launch()`, drive it, assert with
 `node:assert`. One test runner, one dependency, for both unit and integration
 tests, rather than mixing two frameworks with two different assertion styles.
 
-**What's unit-tested vs. integration-tested.** `test/pure.test.js` covers
-`lib/pure.js` directly — fast, no browser, this is what a TDD loop should run
-against for new pure logic. `test/integration.test.js` drives the real page via
-Playwright (own local server, spun up in a `before()` hook — no manual setup
-needed) and specifically encodes the exact regressions found this session: a
-literal-corner drag, an invalid forced debug stat pair, the Kitchen Prep badge,
-zoom auto-recentering, pack-toggle-mid-batch not resetting the round. These are
-the bugs that *should* have been caught automatically the first time; now they
-are.
+**What's unit-tested vs. data-tested vs. integration-tested.**
+`test/pure.test.js` (50 tests) covers `lib/pure.js` directly — fast, no browser,
+this is what a TDD loop should run against for new pure logic. It includes
+tier-boundary checks for both snark systems (every tier's own `min` should select
+*that* tier, not the one below it — an off-by-one here would be easy to miss by
+eye), an exact-formula regression test for `computeScore` (not just "score A >
+score B" but the literal expected number, so a change to `SCORE_DECAY_RATE` or
+the distance formula gets caught), and object-*identity* checks (`===`, not deep-
+equality) confirming `HOOPS_STAT_DEFS`/`FOOTBALL_STAT_DEFS` are genuinely shared
+across the packs CLAUDE.md says share them, not accidentally forked copies.
+`test/data.test.js` (70 tests) is a different kind of check entirely — it reads
+all 14 pack JSON files directly off disk (no `lib/pure.js` logic involved beyond
+using `PACKS`/`eligibleEntries` as the source of truth for what "valid" means)
+and verifies structural integrity: no duplicate names within a file, no stray
+fields outside that pack's `statDefs`, every present stat field is a finite
+number, and the `defaultPair` isn't degenerate (at least one entry has both
+stats). This is NOT a fact-checking pass (backlog #13 — is Adrian Dantley's MPG
+actually correct? — is still an open, separate question); it only catches
+malformed data, which is exactly the kind of mistake a manual data-entry pass is
+prone to and a computer is good at catching for free. `test/integration.test.js`
+(12 tests) drives the real page via Playwright (own local server, spun up in a
+`before()` hook — no manual setup needed) and specifically encodes the exact
+regressions found this session: a literal-corner drag, an invalid forced debug
+stat pair, the Kitchen Prep badge, zoom auto-recentering, pack-toggle-mid-batch
+not resetting the round, the last-active-pack guard, "Copy My Batch" actually
+writing to the clipboard, and "lock this stat pair" actually holding for a whole
+batch (not just the next guess). These are the bugs that *should* have been
+caught automatically the first time; now they are.
+
+**Gotcha if you add a clipboard-related test:** reading back `navigator.clipboard
+.readText()` after a `writeText()` round-trip normalizes `\n` to `\r\n` on
+Windows — that's the OS clipboard doing it, not `app.js`, and not something worth
+working around in the app itself. Normalize line endings in the test's assertion
+(`clipboardText.replace(/\r\n/g, '\n')`) rather than chasing it as a bug.
 
 **Going forward, new pure logic should be written test-first.** Add the test to
 `test/pure.test.js` (it'll fail, since `lib/pure.js` doesn't have the function

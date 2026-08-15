@@ -26,6 +26,39 @@ describe('capitalize', () => {
   });
 });
 
+describe('randomKey', () => {
+  test('returns one of the given keys', () => {
+    const keys = ['a', 'b', 'c'];
+    for (let i = 0; i < 20; i++) {
+      assert.ok(keys.includes(G.randomKey(keys)));
+    }
+  });
+
+  test('never returns the excluded key', () => {
+    const keys = ['a', 'b'];
+    for (let i = 0; i < 20; i++) {
+      assert.equal(G.randomKey(keys, 'a'), 'b');
+    }
+  });
+
+  test('returns the only key when the array has just one', () => {
+    assert.equal(G.randomKey(['solo']), 'solo');
+  });
+});
+
+describe('randomItem', () => {
+  test('returns one of the given items', () => {
+    const items = ['x', 'y', 'z'];
+    for (let i = 0; i < 20; i++) {
+      assert.ok(items.includes(G.randomItem(items)));
+    }
+  });
+
+  test('returns the only item when the array has just one', () => {
+    assert.equal(G.randomItem(['solo']), 'solo');
+  });
+});
+
 describe('pluralize', () => {
   test('appends a plain "s" by default', () => {
     assert.equal(G.pluralize('movie'), 'movies');
@@ -62,6 +95,15 @@ describe('computeScore', () => {
     const { score } = G.computeScore({ x: 0, y: 0 }, { x: 100, y: 100 }, axisX, axisY);
     assert.ok(score >= 0);
   });
+
+  test('matches the exact decay formula at a known distance (regression guard)', () => {
+    // guess is 10% of the axis range off on both axes -> normalized dist = sqrt(0.1^2 + 0.1^2)
+    const { dist, score } = G.computeScore({ x: 60, y: 60 }, { x: 50, y: 50 }, axisX, axisY);
+    const expectedDist = Math.sqrt(0.1 * 0.1 + 0.1 * 0.1);
+    const expectedScore = Math.round(G.SCORE_MAX * Math.exp(-G.SCORE_DECAY_RATE * expectedDist));
+    assert.ok(Math.abs(dist - expectedDist) < 1e-9);
+    assert.equal(score, expectedScore);
+  });
 });
 
 describe('axisRangeForStat', () => {
@@ -84,6 +126,16 @@ describe('axisRangeForStat', () => {
     const range = G.axisRangeForStat([{ pts: 7 }, { pts: 7 }], statDefs, 'pts');
     assert.equal(range.min, 7);
     assert.equal(range.max, 8);
+  });
+
+  test('documents current (non-crashing but degenerate) behavior when no entry has the stat', () => {
+    // Not expected to be hit in real gameplay — pickEligiblePair() guarantees at
+    // least one eligible entry before this is ever called — but this pins down
+    // what happens if that guarantee is ever broken, instead of leaving it as an
+    // unverified assumption.
+    const range = G.axisRangeForStat([{ pts: NaN }, {}], statDefs, 'pts');
+    assert.equal(range.min, Infinity);
+    assert.equal(range.max, Infinity);
   });
 });
 
@@ -245,6 +297,15 @@ describe('snarkFor', () => {
     const worstTier = G.SNARK_TIERS[G.SNARK_TIERS.length - 1];
     assert.ok(worstTier.texts.includes(text));
   });
+
+  test('every tier boundary lands in the tier it defines, not the one below it', () => {
+    // Each tier's own `min` fraction should select that tier (>= is inclusive),
+    // catching an off-by-one if a future edit changes >= to > or reorders tiers.
+    for (const tier of G.SNARK_TIERS) {
+      const { emoji } = G.snarkFor(tier.min * 5000, 5000);
+      assert.equal(emoji, tier.emoji, `pct ${tier.min} should select the tier whose own min it is`);
+    }
+  });
 });
 
 describe('guessSnarkFor', () => {
@@ -257,6 +318,13 @@ describe('guessSnarkFor', () => {
     const text = G.guessSnarkFor(0);
     const worstTier = G.GUESS_SNARK_TIERS[G.GUESS_SNARK_TIERS.length - 1];
     assert.ok(worstTier.texts.includes(text));
+  });
+
+  test('every tier boundary lands in the tier it defines', () => {
+    for (const tier of G.GUESS_SNARK_TIERS) {
+      const text = G.guessSnarkFor(tier.min * G.SCORE_MAX);
+      assert.ok(tier.texts.includes(text), `score at pct ${tier.min} should select its own tier's text`);
+    }
   });
 });
 
@@ -289,5 +357,39 @@ describe('PACKS data consistency', () => {
   test('no two packs accidentally share the same data file', () => {
     const files = G.PACK_KEYS.map((k) => G.PACKS[k].file);
     assert.equal(new Set(files).size, files.length);
+  });
+
+  test('every statDefs entry has a non-empty label and short code', () => {
+    for (const key of G.PACK_KEYS) {
+      const statDefs = G.PACKS[key].statDefs;
+      for (const [statKey, def] of Object.entries(statDefs)) {
+        assert.ok(def.label && def.label.length > 0, `${key}.${statKey} missing a label`);
+        assert.ok(def.short && def.short.length > 0, `${key}.${statKey} missing a short code`);
+      }
+    }
+  });
+
+  test('basketball packs (NBA/WNBA/NCAA) share one HOOPS_STAT_DEFS object, not copies', () => {
+    // CLAUDE.md documents this as deliberate — one shared object, not per-pack
+    // duplicates — so a future edit to one shouldn't silently diverge from the
+    // others. Identity (===), not just deep-equality, is what CLAUDE.md promises.
+    assert.equal(G.PACKS.nba.statDefs, G.HOOPS_STAT_DEFS);
+    assert.equal(G.PACKS.wnba.statDefs, G.HOOPS_STAT_DEFS);
+    assert.equal(G.PACKS.ncaam.statDefs, G.HOOPS_STAT_DEFS);
+  });
+
+  test('football_cfb and football_nfl share one FOOTBALL_STAT_DEFS object, not copies', () => {
+    assert.equal(G.PACKS.football_cfb.statDefs, G.FOOTBALL_STAT_DEFS);
+    assert.equal(G.PACKS.football_nfl.statDefs, G.FOOTBALL_STAT_DEFS);
+  });
+});
+
+describe('READY_MESSAGES', () => {
+  test('is a non-empty array of non-empty strings', () => {
+    assert.ok(Array.isArray(G.READY_MESSAGES) && G.READY_MESSAGES.length > 0);
+    for (const msg of G.READY_MESSAGES) {
+      assert.equal(typeof msg, 'string');
+      assert.ok(msg.length > 0);
+    }
   });
 });

@@ -41,8 +41,9 @@ npm install
 npm test
 ```
 
-`npm run test:unit` runs just the fast, browser-free unit tests (`test/pure.test.js`);
-`npm run test:e2e` runs just the Playwright integration tests (`test/integration.test.js`,
+`npm run test:unit` runs just the fast, browser-free tests (`test/pure.test.js`'s
+logic tests plus `test/data.test.js`'s pack-data integrity checks); `npm run
+test:e2e` runs just the Playwright integration tests (`test/integration.test.js`,
 spins up its own local server, no manual setup needed).
 
 ## Contributing / project notes
