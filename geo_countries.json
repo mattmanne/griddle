@@ -442,7 +442,8 @@
     "gdp_per_capita": 54214,
     "coastline": 1318,
     "life_expectancy": 82.9,
-    "literacy_pct": 98.1
+    "literacy_pct": 98.1,
+    "elevation": 1934
   },
   {
     "name": "Israel",

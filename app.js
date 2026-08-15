@@ -380,6 +380,9 @@
       if (forceStatPairCheckbox.checked) {
         x = statXSelect.value;
         y = statYSelect.value === x ? randomKey(keys, x) : statYSelect.value;
+        if (!hasEligiblePair(pack, x, y)) {
+          ({ x, y } = pickEligiblePair(pack, keys));
+        }
       } else {
         ({ x, y } = pickEligiblePair(pack, keys));
       }
