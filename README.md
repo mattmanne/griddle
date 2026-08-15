@@ -31,6 +31,20 @@ npx http-server .
 (Opening `index.html` directly via `file://` won't work — the browser blocks the
 `fetch()` calls that load each pack's JSON file under the `file://` protocol.)
 
+## Tests
+
+The game itself still has zero dependencies, but the test suite needs Node's
+built-in test runner plus Playwright for browser-driven tests:
+
+```
+npm install
+npm test
+```
+
+`npm run test:unit` runs just the fast, browser-free unit tests (`test/pure.test.js`);
+`npm run test:e2e` runs just the Playwright integration tests (`test/integration.test.js`,
+spins up its own local server, no manual setup needed).
+
 ## Contributing / project notes
 
 See `CLAUDE.md` for the reasoning behind non-obvious data/architecture decisions, and

@@ -14,6 +14,13 @@ accidentally undone.
 
 - `index.html` / `app.js` / `style.css` — the whole app. No build step, no
   dependencies — deliberately static so it can be served as-is from GitHub Pages.
+- `lib/pure.js` — the DOM-free half of the game's logic (pack config, scoring math,
+  stat-pair sampling, snark), extracted from `app.js` so it's unit-testable. See
+  "Testing" below for why this split exists and why it's structured this way.
+- `package.json` / `test/` — exist ONLY for the test suite (`npm test`). They don't
+  change how the app itself is built or deployed — GitHub Pages still serves
+  `index.html`/`app.js`/`lib/pure.js`/`style.css`/the pack JSON files directly, with
+  no install or build step. See "Testing" below.
 - `players.json`, `wnba_players.json`, `ncaam_players.json`, `mlb_hitters.json`,
   `nhl_skaters.json`, `football_cfb_players.json`, `football_nfl_players.json`,
   `geo_countries.json`, `us_states.json`, `movies.json`, `space_planets.json`,
@@ -25,6 +32,87 @@ accidentally undone.
   bring back "session average" style scoring (backlog #15), this is where the old
   approach lived.
 - `BACKLOG.md` — planned work, with reasoning for priority/sequencing.
+
+## Testing — why `lib/pure.js` exists, and why the tooling looks the way it does
+
+Backlog #9 ("build an automated test suite, then move to TDD") is done as of the
+`lib/pure.js` extraction + `test/` suite. Before this, the whole project had zero
+committed tests — every fix this whole session shipped with was verified via
+`node --check app.js` (syntax only) plus disposable Playwright scripts written
+fresh in a scratchpad each time and thrown away. That's how the corner-click dead
+zone, the invalid-forced-stat-pair crash, and the silent zoom bug all *originally*
+shipped unnoticed — nothing regression-tested them afterward, so the same class
+of bug could've come back with no warning.
+
+**Why `app.js` got split into two files.** `app.js` was one big IIFE with no
+exports at all: on load, it immediately calls `document.getElementById(...)`
+dozens of times, so requiring it from plain Node throws instantly (no `document`).
+None of its logic — not even the fully pure math like `computeScore` or
+`pluralize` — was reachable from a test without a real browser. `lib/pure.js`
+pulls out everything that doesn't touch the DOM (`PACKS` and both shared
+`statDefs` objects, `clamp`/`capitalize`/`pluralize`/`randomKey`/`randomItem`,
+`axisRangeForStat`, `eligibleEntries`, `hasEligiblePair`/`pickEligiblePair`,
+`pickEntry`, `computeScore`, `packClauseText`/`poolSummary`, `snarkFor`/
+`guessSnarkFor`, and the `SNARK_TIERS`/`GUESS_SNARK_TIERS`/`READY_MESSAGES` data)
+into one module. `app.js` keeps only DOM refs, event wiring, and orchestration
+(`pickRoundContext`, `beginNextGuess`, `finalizeGuess`, `setZoom`, etc.) — it
+destructures everything it needs from `window.GriddleLogic` in one line at the
+top rather than redefining any of it locally, so there's exactly one copy of
+each function.
+
+**Why a hand-rolled UMD wrapper instead of ES modules or a bundler.**
+`lib/pure.js` needs to work two ways at once: as a plain `<script>` tag
+`index.html` loads before `app.js` (attaching `window.GriddleLogic`), and as a
+`require()`-able CommonJS module from `test/`. A tiny UMD wrapper (`typeof module
+=== 'object' && module.exports ? ... : root.GriddleLogic = ...`) does both with
+zero build step and zero dependencies — the same "no build step, no dependencies"
+rule the rest of the app follows (see the top of this file's Files section).
+ES modules (`import`/`export`) were deliberately avoided here: `<script
+type="module">` would work for the browser half, but `index.html` still couldn't
+stay a `file://`-openable, build-step-free static page without a bundler if
+`app.js` also needed to import it, and Node's ESM/CJS interop for a plain `.js`
+file is one more thing that can silently break — the UMD wrapper sidesteps both
+problems for a handful of extra lines.
+
+**Why the parameterized functions in `lib/pure.js` don't match `app.js`'s old
+call sites 1:1.** Several extracted functions used to close over `app.js`'s
+module-level mutable state instead of taking it as an argument — e.g.
+`axisRangeForStat(key)` read the module's `entries`/`STAT_DEFS` directly;
+`hasEligiblePair(pack, x, y)` read `dataCache`; `packClauseText()`/`poolSummary()`
+read `enabledPacks`/`PACKS`. None of that is reachable from a test that only has
+`lib/pure.js` loaded, so each of these now takes that state as an explicit
+parameter (`axisRangeForStat(entries, statDefs, key)`,
+`hasEligiblePair(dataCache, pack, x, y)`, etc.). `app.js`'s call sites were
+updated to pass its own module state in explicitly — this is strictly a
+call-site change, not a behavior change.
+
+**Why `node --test` instead of Jest/Vitest/Mocha, and plain `playwright` instead
+of `@playwright/test`.** Both choices are the same reasoning as the UMD wrapper:
+minimize what has to be installed to verify this project. `node:test` and
+`node:assert/strict` ship with Node itself — `test/pure.test.js` needs zero
+devDependencies to run. `playwright` (the bare browser-automation library, not
+its own opinionated test-runner-plus-reporter framework) is the *only*
+devDependency in `package.json`, used the same way the scratchpad verification
+scripts used it all session — `chromium.launch()`, drive it, assert with
+`node:assert`. One test runner, one dependency, for both unit and integration
+tests, rather than mixing two frameworks with two different assertion styles.
+
+**What's unit-tested vs. integration-tested.** `test/pure.test.js` covers
+`lib/pure.js` directly — fast, no browser, this is what a TDD loop should run
+against for new pure logic. `test/integration.test.js` drives the real page via
+Playwright (own local server, spun up in a `before()` hook — no manual setup
+needed) and specifically encodes the exact regressions found this session: a
+literal-corner drag, an invalid forced debug stat pair, the Kitchen Prep badge,
+zoom auto-recentering, pack-toggle-mid-batch not resetting the round. These are
+the bugs that *should* have been caught automatically the first time; now they
+are.
+
+**Going forward, new pure logic should be written test-first.** Add the test to
+`test/pure.test.js` (it'll fail, since `lib/pure.js` doesn't have the function
+yet), then implement in `lib/pure.js` until it passes. DOM-wiring changes in
+`app.js` are harder to do strictly test-first (integration tests are slower and
+coarser-grained), but should still get an integration test added for any new
+user-facing interaction, not just a scratchpad script that gets thrown away.
 
 ## Data schema — why it's shaped this way
 
@@ -168,9 +256,10 @@ data.
 
 ## Pack architecture — from "sports" to a general framework
 
-`app.js`'s `PACKS` config holds one entry per pack (`label`, `noun`, `article`,
-`emoji`, `file`, `defaultPair`, `statDefs`) pointing at a JSON array of
-`{name, ...numeric fields}`. This was originally called `SPORTS` — it was renamed
+The `PACKS` config (defined in `lib/pure.js`, destructured into `app.js`) holds one
+entry per pack (`label`, `noun`, `article`, `emoji`, `file`, `defaultPair`,
+`statDefs`) pointing at a JSON array of `{name, ...numeric fields}`. This was
+originally called `SPORTS` — it was renamed
 once a non-sports pack (`geo_countries`) proved the engine never actually needed the
 entries to be sports. The core loop's "player" terminology (`pickPlayer()` →
 `pickEntry()`, `eligiblePlayers()` → `eligibleEntries()`, the `playerName` field on
@@ -264,7 +353,8 @@ people.
   both fields — no quarterback catches passes, no receiver throws them. The old
   per-position packs never hit this because every entry in a `football_qb` pack
   *was* a quarterback, so every QB stat applied to every entry. Fixed by
-  `hasEligiblePair()`/`pickEligiblePair()` in `app.js`: instead of picking any two
+  `hasEligiblePair()`/`pickEligiblePair()` (now in `lib/pure.js`, unit-tested —
+  see "Testing" above): instead of picking any two
   random stat keys, rounds rejection-sample from the pack's stat keys until landing
   on a pair at least one entry in that pack's pool actually has both fields for
   (bounded at 200 tries, falling back to the first two keys if that somehow never

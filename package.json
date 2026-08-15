@@ -1,0 +1,14 @@
+{
+  "name": "griddle",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A stats-guessing game. Static site, no build step — this package.json exists only for the test suite.",
+  "scripts": {
+    "test": "node --test test/pure.test.js test/integration.test.js",
+    "test:unit": "node --test test/pure.test.js",
+    "test:e2e": "node --test test/integration.test.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.48.0"
+  }
+}
