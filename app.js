@@ -335,6 +335,7 @@
   const statXSelect = document.getElementById('stat-x-select');
   const statYSelect = document.getElementById('stat-y-select');
   const entrySelect = document.getElementById('entry-select');
+  const forcedEntryBadge = document.getElementById('forced-entry-badge');
   const forceStatPairCheckbox = document.getElementById('force-stat-pair');
   const targetDisplay = document.getElementById('target-display');
   const roundProgress = document.getElementById('round-progress');
@@ -497,12 +498,26 @@
 
   function setZoom(level) {
     const z = clamp(level, ZOOM_MIN, ZOOM_MAX);
+
+    // Keep whatever point was centered in the viewport still centered after the
+    // resize below, expressed as a fraction of the (old) scrollable content size —
+    // otherwise zooming via the slider (unlike pinch-zoom, which tracks the pinch
+    // centroid itself) leaves the scroll position untouched and can strand the
+    // area you were looking at off-screen.
+    const oldWidth = svg.clientWidth || Math.round(baseSize * parseFloat(zoomSlider.value));
+    const oldHeight = svg.clientHeight || oldWidth;
+    const centerFracX = oldWidth ? (viewport.scrollLeft + viewport.clientWidth / 2) / oldWidth : 0.5;
+    const centerFracY = oldHeight ? (viewport.scrollTop + viewport.clientHeight / 2) / oldHeight : 0.5;
+
     const px = Math.round(baseSize * z);
     svg.style.width = px + 'px';
     svg.style.height = px + 'px';
     const wafflePx = Math.round(36 * z);
     viewport.style.backgroundSize = `${wafflePx}px ${wafflePx}px`;
     zoomSlider.value = z;
+
+    viewport.scrollLeft = centerFracX * px - viewport.clientWidth / 2;
+    viewport.scrollTop = centerFracY * px - viewport.clientHeight / 2;
   }
 
   function showGuessPreview(dataPoint) {
@@ -783,6 +798,17 @@
       opt.textContent = e.name;
       entrySelect.appendChild(opt);
     });
+    updateForcedEntryIndicator();
+  }
+
+  // A forced entry (anything but "Random") stays in effect independently of the
+  // "lock stat pair" checkbox — a real, useful combination (same entry, rotating
+  // stat pairs), not a bug. But playtesting found it's easy to forget it's still
+  // set after unchecking "lock stat pair," since nothing else in the UI showed it
+  // was active. This badge is the fix: a visible reminder, not a behavior change.
+  function updateForcedEntryIndicator() {
+    const forced = entrySelect.value !== '';
+    forcedEntryBadge.hidden = !forced;
   }
 
   function updateEntryLabel() {
@@ -877,6 +903,8 @@
     populateEntrySelect();
     updateEntryLabel();
   });
+
+  entrySelect.addEventListener('change', updateForcedEntryIndicator);
 
   drawGridlines();
   setZoom(1);

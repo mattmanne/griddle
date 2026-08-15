@@ -222,8 +222,20 @@ people.
   what real gameplay has toggled on. Its "Player"-labeled entry dropdown is now a
   dynamic label (`updateEntryLabel()`, capitalizing the current debug pack's `noun`
   — "Country," "Quarterback," "Player") rather than a hardcoded word, for the same
-  reason the rest of this section exists. See backlog #11 — this panel is debug-only
+  reason the rest of this section exists. See backlog #12 — this panel is debug-only
   and not yet gated from playtesters.
+- **Forcing a specific entry and locking the stat pair are two genuinely
+  independent toggles, on purpose** — forcing one entry while letting stat pairs
+  keep rotating (e.g. "always give me LeBron, but vary the stat pair each guess")
+  is a real, useful combination, not a bug to prevent. But playtesting found that
+  unchecking "lock this stat pair" doesn't clear a forced entry, and nothing in the
+  UI showed a forced entry was still active — easy to get stuck re-guessing the
+  same person without realizing why. Fixed with a visible reminder, not a behavior
+  change: `#forced-entry-badge` (`updateForcedEntryIndicator()` in `app.js`) shows
+  a small "forced 🔒" badge next to the entry dropdown whenever it's not set to
+  "Random," and hides again the moment it's reset. Selecting "Random" already
+  clears the forced state instantly (it always did) — the badge just makes it
+  obvious when it hasn't been.
 - Every `guessResults` entry stores which pack it came from (not just the stat keys),
   because `STAT_DEFS` is a single mutable module-level binding reassigned each guess
   — by the time the round summary is built, it only reflects the *last* guess's pack.
@@ -406,6 +418,19 @@ regardless of zoom level, so cranking the zoom slider to 4× looked like nothing
 happened even though the underlying grid really had scaled. The waffle texture is
 purely decorative and was never wired to the zoom level until this was caught in
 playtesting.
+
+**`setZoom()` also re-centers the viewport's scroll position on whatever was
+centered before the zoom change.** Pinch-zoom already tracked this itself (the
+`pointermove` 'pinch' branch sets `viewport.scrollLeft`/`scrollTop` from the pinch
+centroid right after calling `setZoom()`, overriding whatever `setZoom()` set —
+no conflict, just redundant-but-harmless for that path). The zoom *slider* had no
+such tracking at all: since a range input isn't a two-finger gesture with a
+centroid, nothing adjusted scroll when it fired, so zooming in via the slider
+could strand whatever you were looking at off-screen with no way back to it short
+of manually scrolling. `setZoom()` now computes the current viewport center as a
+fraction of the (pre-resize) scrollable content size, then re-applies that same
+fraction against the new size — so the visual center of the board stays roughly
+fixed regardless of which zoom control triggered the change.
 
 ## Deployment
 

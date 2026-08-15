@@ -404,6 +404,16 @@ button:active {
   border-radius: 6px;
 }
 
+.forced-badge {
+  margin-left: 6px;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 4px;
+}
+
 .checkbox-label {
   display: flex;
   align-items: center;
