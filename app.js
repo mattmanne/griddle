@@ -4,7 +4,7 @@
   // see CLAUDE.md's "Testing" section. Everything below is the DOM-wiring half.
   const {
     PACKS, PACK_KEYS, GRID, SCORE_MAX, READY_MESSAGES,
-    clamp, capitalize, randomKey, randomItem,
+    clamp, capitalize, pluralize, randomKey, randomItem,
     axisRangeForStat, eligibleEntries, hasEligiblePair, pickEligiblePair, pickEntry,
     computeScore, packClauseText, poolSummary, snarkFor, guessSnarkFor,
   } = window.GriddleLogic;
@@ -69,6 +69,17 @@
   const legendEl = document.querySelector('.legend');
   const gameControls = document.querySelector('.controls');
   const practiceSettingsEl = document.querySelector('.practice-settings');
+
+  // Kitchen Prep is a debug tool (force a stat pair, force an entry, jump packs),
+  // not something a playtester should stumble into by opening a <details> — see
+  // CLAUDE.md/backlog #12. `?debug=1` unlocks it and the unlock persists in
+  // localStorage so a dev doesn't need the query param on every reload.
+  const DEBUG_UNLOCK_KEY = 'griddle-debug-unlocked';
+  if (new URLSearchParams(location.search).has('debug')) {
+    localStorage.setItem(DEBUG_UNLOCK_KEY, '1');
+  }
+  const debugUnlocked = localStorage.getItem(DEBUG_UNLOCK_KEY) === '1';
+  practiceSettingsEl.hidden = !debugUnlocked;
 
   const BUTTER_W = 34;
   const BUTTER_H = 26;
@@ -262,14 +273,20 @@
     statY = ctx.y;
     AXIS_X = axisRangeForStat(entries, STAT_DEFS, statX);
     AXIS_Y = axisRangeForStat(entries, STAT_DEFS, statY);
+    // The visible label stays short (fixed-height vertical text on the left/right
+    // axes has no room for a clause), but the min/max are the highest/lowest value
+    // among THIS pack's own entries, not any real-world extreme — e.g. "Population
+    // max" is the most populous country in Griddle's pool, not the world's most
+    // populous country ever. The title tooltip spells that out for anyone unsure.
+    const poolNoun = pluralize(PACKS[currentPack].noun);
     axisTop.textContent = `${AXIS_Y.label} max: ${AXIS_Y.max}`;
-    axisTop.title = axisTop.textContent;
+    axisTop.title = `Highest ${AXIS_Y.label} among ${poolNoun} in this game — not necessarily the real-world max.`;
     axisBottom.textContent = `${AXIS_Y.label} min: ${AXIS_Y.min}`;
-    axisBottom.title = axisBottom.textContent;
+    axisBottom.title = `Lowest ${AXIS_Y.label} among ${poolNoun} in this game — not necessarily the real-world min.`;
     axisLeft.textContent = `${AXIS_X.label} min: ${AXIS_X.min}`;
-    axisLeft.title = axisLeft.textContent;
+    axisLeft.title = `Lowest ${AXIS_X.label} among ${poolNoun} in this game — not necessarily the real-world min.`;
     axisRight.textContent = `${AXIS_X.label} max: ${AXIS_X.max}`;
-    axisRight.title = axisRight.textContent;
+    axisRight.title = `Highest ${AXIS_X.label} among ${poolNoun} in this game — not necessarily the real-world max.`;
 
     const pool = eligibleEntries(entries, statX, statY);
     const entry = pickEntry(pool, entrySelect.value, entries);
@@ -303,7 +320,7 @@
     gameBoard.hidden = false;
     legendEl.hidden = false;
     gameControls.hidden = false;
-    practiceSettingsEl.hidden = false;
+    practiceSettingsEl.hidden = !debugUnlocked;
 
     beginNextGuess();
   }
@@ -322,7 +339,18 @@
   viewport.addEventListener('pointerdown', (evt) => {
     if (locked) return;
     evt.preventDefault();
-    viewport.setPointerCapture(evt.pointerId);
+    // setPointerCapture can throw for pointer-lifecycle reasons outside our
+    // control (platform/browser quirks). Losing capture just means a drag that
+    // leaves the viewport's bounds stops receiving move/up events — not a reason
+    // to abandon tracking this pointer. Left unguarded, a throw here aborted the
+    // whole handler before `pointers.set()` ran, silently dropping the drag with
+    // no marker, no error the player could see, and no way to un-stick the round
+    // short of reloading — see CLAUDE.md.
+    try {
+      viewport.setPointerCapture(evt.pointerId);
+    } catch (err) {
+      // no-op — tracking continues without capture.
+    }
     pointers.set(evt.pointerId, { clientX: evt.clientX, clientY: evt.clientY });
 
     if (pointers.size === 1) {

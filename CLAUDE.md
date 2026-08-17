@@ -346,8 +346,22 @@ people.
   what real gameplay has toggled on. Its "Player"-labeled entry dropdown is now a
   dynamic label (`updateEntryLabel()`, capitalizing the current debug pack's `noun`
   — "Country," "Quarterback," "Player") rather than a hardcoded word, for the same
-  reason the rest of this section exists. See backlog #12 — this panel is debug-only
-  and not yet gated from playtesters.
+  reason the rest of this section exists.
+- **Kitchen Prep is gated behind `?debug=1` (backlog #12), not visible by
+  default.** The whole point of the panel — force a stat pair, force a specific
+  entry, jump to any pack independent of `enabledPacks` — is developer/QA
+  tooling; a playtester who idly opens the `<details>` gets confusing controls
+  with no explanation of what they do or why the "real" game ignores their pack
+  toggles while one is set. There's no server and no real auth on a static
+  GitHub Pages site, so this is a visibility gate, not a security boundary — it
+  just keeps the panel out of a casual player's way, the same threat model as
+  the collapsed-by-default `<details>` it was already inside. Visiting with
+  `?debug=1` in the URL sets `localStorage['griddle-debug-unlocked'] = '1'` and
+  unhides `.practice-settings`; the unlock persists across reloads so a
+  dev/tester doesn't need to keep re-adding the query param. `app.js` checks this
+  once at load (`debugUnlocked`) and reuses it in `beginRound()`'s unhide call
+  (previously unconditional `practiceSettingsEl.hidden = false`) so starting a
+  new batch can't silently re-reveal a locked-out panel.
 - **Forcing a specific entry and locking the stat pair are two genuinely
   independent toggles, on purpose** — forcing one entry while letting stat pairs
   keep rotating (e.g. "always give me LeBron, but vary the stat pair each guess")
@@ -569,6 +583,43 @@ of manually scrolling. `setZoom()` now computes the current viewport center as a
 fraction of the (pre-resize) scrollable content size, then re-applies that same
 fraction against the new size — so the visual center of the board stays roughly
 fixed regardless of which zoom control triggered the change.
+
+**`pointerdown`'s `setPointerCapture()` call is wrapped in `try`/`catch`, silently
+swallowing a failed capture** — a real playtester hit the exact same symptom as
+the corner-click dead zone above (stuck on "Cooking…" forever, no marker, no
+visible error) but from a different cause. `setPointerCapture` can throw for
+pointer-lifecycle reasons outside this app's control (platform/browser quirks
+around pointerId timing), and that call sat unguarded *before*
+`pointers.set(evt.pointerId, ...)` — so a throw aborted the rest of the handler
+and the pointer was never added to the tracking `Map` at all. The drag that
+followed then hit every downstream guard that assumes a tracked pointer
+(`pointermove`'s `!pointers.has(...)` early-return, `handlePointerEnd`'s
+`wasPlacing` check) and silently did nothing, with the exception logged only to
+the console — invisible to a player, and with no in-game way to recover short of
+reloading (which also throws away the whole batch). Reproduced by monkey-patching
+`viewport.setPointerCapture` to throw once and confirming the pre-fix build got
+stuck exactly this way; see `test/integration.test.js`'s "a failed pointer
+capture does not strand a guess" for the regression test. The fix is deliberately
+minimal: catch-and-ignore, since capture is a nice-to-have (keeps receiving
+move/up events if the drag leaves `.viewport`'s bounds) and losing it doesn't
+break `clientToData()`'s hit-testing math, which never depended on capture
+succeeding in the first place.
+
+**Axis min/max are the pool's own extremes, not the real-world record — and
+playtesting found this wasn't obvious.** `axisRangeForStat()` floors/ceils across
+whatever's in `dataCache[currentPack]` for that guess, so e.g. "Population max"
+is the most populous *country Griddle tracks*, not the world's actual most
+populous country — correct behavior (there's no other sane way to build a finite
+axis from a finite pool), but a playtester read the axis labels as claims about
+the real world. Fixed without touching the visible label text itself: `.axis-top`/
+`.axis-bottom`/`.axis-left`/`.axis-right` are short, `white-space: nowrap`, and
+`.axis-left`/`.axis-right` render sideways (`writing-mode: vertical-rl`) — there's
+no room to append a clarifying clause without either overflowing or making the
+vertical labels comically tall. Instead the `title` tooltip (previously just a
+copy of the visible text, adding nothing) now spells out "among {pluralized pack
+noun} in this game — not necessarily the real-world max/min," and the info modal
+gained a matching sentence for players who won't discover a hover tooltip
+(especially on touch, where `title` isn't reliably reachable at all).
 
 ## Deployment
 

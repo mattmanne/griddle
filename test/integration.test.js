@@ -26,7 +26,7 @@ after(async () => {
   await stopServer();
 });
 
-async function newPage() {
+async function newPage({ debug = false } = {}) {
   // Own browser context per page (not just browser.newPage()) so we can grant
   // clipboard permissions for the "Copy My Batch" test without affecting others.
   const context = await browser.newContext({ viewport: { width: 480, height: 1300 } });
@@ -35,7 +35,9 @@ async function newPage() {
   const consoleErrors = [];
   page.on('console', (msg) => { if (msg.type() === 'error') consoleErrors.push(msg.text()); });
   page.on('pageerror', (err) => consoleErrors.push('pageerror: ' + err.message));
-  await page.goto(baseUrl);
+  // Kitchen Prep is gated behind ?debug=1 (backlog #12) — tests that need to
+  // open it opt in explicitly rather than relying on it being visible by default.
+  await page.goto(debug ? `${baseUrl}?debug=1` : baseUrl);
   await page.waitForSelector('#target-display', { timeout: 10000 });
   return { page, consoleErrors };
 }
@@ -66,6 +68,36 @@ describe('a full 5-guess batch', () => {
     assert.equal(await page.locator('#round-summary').isHidden(), false);
     const total = await page.locator('#round-total-score').textContent();
     assert.ok(Number(total) >= 0 && Number(total) <= 5000);
+    assert.deepEqual(consoleErrors, []);
+    await page.close();
+  });
+});
+
+describe('regression: a failed pointer capture does not strand a guess', () => {
+  test('the drag still registers even if setPointerCapture throws', async () => {
+    // setPointerCapture can throw for pointer-lifecycle reasons outside our
+    // control (platform/browser quirks) — a real playtester hit this and got
+    // stuck mid-batch with the action button frozen on "Cooking..." and no way
+    // to recover short of reloading, since the unguarded throw aborted the
+    // pointerdown handler before the pointer was ever added to the tracking
+    // Map. See CLAUDE.md's drag-to-guess section.
+    const { page, consoleErrors } = await newPage();
+    await page.evaluate(() => {
+      const vp = document.getElementById('viewport');
+      const orig = vp.setPointerCapture.bind(vp);
+      let armed = true;
+      vp.setPointerCapture = (id) => {
+        if (armed) { armed = false; throw new DOMException('forced failure for test', 'NotFoundError'); }
+        return orig(id);
+      };
+    });
+
+    await page.locator('#action-btn').click();
+    await page.waitForTimeout(120);
+    await dragAt(page, 0.4, 0.4);
+
+    assert.equal(await page.locator('#action-btn').textContent(), 'Flip It (2/5)');
+    assert.equal(await page.locator('#results').isHidden(), false);
     assert.deepEqual(consoleErrors, []);
     await page.close();
   });
@@ -119,9 +151,29 @@ describe('regression: corner-click dead zone (fixed by moving drag listeners to 
   });
 });
 
+describe('Kitchen Prep gating (backlog #12)', () => {
+  test('is hidden from a normal visit and revealed by ?debug=1', async () => {
+    const { page } = await newPage();
+    assert.equal(await page.locator('.practice-settings').isHidden(), true);
+    await page.close();
+
+    const { page: debugPage } = await newPage({ debug: true });
+    assert.equal(await debugPage.locator('.practice-settings').isHidden(), false);
+    await debugPage.close();
+  });
+
+  test('unlock persists across reloads without the query param', async () => {
+    const { page } = await newPage({ debug: true });
+    await page.goto(baseUrl);
+    await page.waitForSelector('#target-display', { timeout: 10000 });
+    assert.equal(await page.locator('.practice-settings').isHidden(), false);
+    await page.close();
+  });
+});
+
 describe('regression: invalid forced debug stat pair no longer crashes the round', () => {
   test('forcing a QB-only stat against a WR-only stat in football_cfb falls back to a valid pair', async () => {
-    const { page, consoleErrors } = await newPage();
+    const { page, consoleErrors } = await newPage({ debug: true });
 
     // No need to isolate football_cfb via the pack toggles first — forcing a
     // stat pair in Kitchen Prep always draws from #debug-pack-select's chosen
@@ -147,7 +199,7 @@ describe('regression: invalid forced debug stat pair no longer crashes the round
 
 describe('Kitchen Prep forced-entry badge', () => {
   test('appears when a specific entry is forced and disappears when reset to Random', async () => {
-    const { page } = await newPage();
+    const { page } = await newPage({ debug: true });
     await page.locator('.practice-settings summary').click();
     assert.equal(await page.locator('#forced-entry-badge').isHidden(), true);
 
@@ -227,7 +279,7 @@ describe('Copy My Batch', () => {
 
 describe('Kitchen Prep "lock this stat pair"', () => {
   test('holds the same stat pair across all 5 guesses in a batch', async () => {
-    const { page } = await newPage();
+    const { page } = await newPage({ debug: true });
     await page.locator('.practice-settings summary').click();
     await page.selectOption('#debug-pack-select', 'space_planets');
     await page.check('#force-stat-pair');
