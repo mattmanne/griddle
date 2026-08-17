@@ -101,6 +101,11 @@
   let AXIS_X = { min: 0, max: 100, label: '' };
   let AXIS_Y = { min: 0, max: 100, label: '' };
   let target = null;
+  // The raw pool/entry (not the {x,y,name} display shape `target` gets wrapped
+  // into) — kept around so the difficulty toggle can recompute reference
+  // markers for the CURRENT guess immediately, not just the next one.
+  let currentPool = [];
+  let currentEntry = null;
   let locked = false;
   let previewData = null;
   const pointers = new Map();
@@ -203,6 +208,20 @@
     guideX.setAttribute('visibility', 'visible');
     guideY.setAttribute('y1', sy); guideY.setAttribute('y2', sy);
     guideY.setAttribute('visibility', 'visible');
+  }
+
+  // Recomputes and redraws reference markers from the CURRENT guess's
+  // pool/entry — called both when a new guess starts (beginNextGuess) and when
+  // the difficulty toggle is clicked, so switching Regular<->Hard takes effect
+  // immediately on the in-progress guess, not just the next one. Unlike the
+  // pack toggles (which affect an invisible future draw), reference markers
+  // are already on screen — deferring the effect to "next guess" read as the
+  // button silently doing nothing, which is exactly what a playtester hit.
+  function updateReferenceMarkers() {
+    const refs = difficulty === 'regular' && currentEntry
+      ? pickReferenceEntries(currentPool, currentEntry, REFERENCE_COUNT)
+      : [];
+    renderReferenceMarkers(refs);
   }
 
   // Regular-difficulty reference points: real entries from this guess's pool,
@@ -354,9 +373,10 @@
     const pool = eligibleEntries(entries, statX, statY);
     const entry = pickEntry(pool, entrySelect.value, entries);
     target = { x: entry[statX], y: entry[statY], name: entry.name };
+    currentPool = pool;
+    currentEntry = entry;
 
-    const refs = difficulty === 'regular' ? pickReferenceEntries(pool, entry, REFERENCE_COUNT) : [];
-    renderReferenceMarkers(refs);
+    updateReferenceMarkers();
 
     locked = false;
     previewData = null;
@@ -599,6 +619,7 @@
         b.classList.toggle('active', active);
         b.setAttribute('aria-pressed', String(active));
       });
+      updateReferenceMarkers();
     });
   });
 

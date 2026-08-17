@@ -646,14 +646,32 @@ no reference points, a truly blind guess.
 **No scoring change.** Reference entries are a rendering-only aid; a guess is
 still scored purely against `target`, exactly as before this feature existed.
 
-**State is session-only, read once per guess** — same precedent as
-`enabledPacks` (always resets to "all packs on" on reload) rather than the
-`localStorage`-persisted precedent used for the Kitchen Prep unlock (see
-backlog #12 above). `difficulty` is read at the top of `beginNextGuess()`,
-mirroring how `pickRoundContext()`'s pack choice is re-read every guess — so
-switching difficulty mid-batch never resets the round (the same rule this file
-already establishes for pack toggles), it just takes effect starting the
-*next* guess, not retroactively on the guess in progress.
+**State is session-only** — same precedent as `enabledPacks` (always resets to
+"all packs on" on reload) rather than the `localStorage`-persisted precedent
+used for the Kitchen Prep unlock (see backlog #12 above). Switching difficulty
+mid-batch never resets the round (the same rule this file already establishes
+for pack toggles).
+
+**Unlike pack toggles, switching difficulty takes effect immediately on the
+guess already in progress, not just the next one — this was the wrong call the
+first time and a real playtester hit it.** The first version only re-read
+`difficulty` at the top of `beginNextGuess()` (mirroring how
+`pickRoundContext()`'s pack choice is re-read every guess), deferring the
+effect to the next guess. That's the right call for pack toggles because
+`enabledPacks` has no on-screen representation of the *current* guess to leave
+stale — but reference markers are already sitting on the grid, visible, when
+the toggle is clicked. Clicking "Hard" while 3 dots are on screen and having
+them just sit there until the *next* guess reads exactly like a dead button —
+reported verbatim as "the Regular/Hard buttons don't work." Fixed by promoting
+the raw pool/entry (`currentPool`/`currentEntry` — distinct from `target`,
+which is already reshaped into `{x, y, name}` and has lost the object identity
+`pickReferenceEntries` excludes by) to module-level state, and adding
+`updateReferenceMarkers()` — a shared helper called from both
+`beginNextGuess()` (new guess) and the difficulty buttons' click handler
+(toggle mid-guess) — so both paths redraw from the same current pool/entry.
+The lesson generalizes: "does this setting change something already visible
+right now, or only something about the next draw" is the actual question,
+not "is this a toggle like the other toggles."
 
 **`pickReferenceEntries(pool, target, count)` lives in `lib/pure.js`**, not
 `app.js` — a Fisher-Yates sample of up to `count` entries from `pool` excluding
@@ -668,8 +686,9 @@ pack) rather than crashing — the same graceful-degradation approach as
 `pickEligiblePair`'s bounded-retry-then-fallback.
 
 **Rendering (`renderReferenceMarkers()` in `app.js`) needs no round-completion
-cleanup.** `#reference-markers` is a `<g>` inside `#grid-svg`, redrawn once per
-guess from `beginNextGuess()` — added to the DOM *before* `#guide-x`/
+cleanup.** `#reference-markers` is a `<g>` inside `#grid-svg`, redrawn via
+`updateReferenceMarkers()` from both `beginNextGuess()` (new guess) and the
+difficulty toggle (see above) — added to the DOM *before* `#guide-x`/
 `#guess-marker`/`#target-marker` so reference dots always render behind those,
 never on top. Unlike the guess/target markers (which get explicitly hidden and
 reset each guess because they show the *previous* guess's result),

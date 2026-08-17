@@ -92,7 +92,27 @@ describe('difficulty: Regular reference markers', () => {
     await page.close();
   });
 
-  test('switching to Hard clears reference markers on the next guess', async () => {
+  test('switching to Hard clears reference markers immediately, mid-guess', async () => {
+    // A playtester reported "the Regular/Hard buttons don't work" — root cause
+    // was that the effect used to be deferred to the NEXT guess (matching the
+    // pack-toggle precedent), but reference markers are already visible on
+    // screen, so clicking Hard while dots are showing and having nothing
+    // happen reads exactly like a dead button. Fixed to apply immediately.
+    const { page } = await newPage();
+    await page.locator('#action-btn').click();
+    await page.waitForTimeout(150);
+    assert.ok((await page.locator('#reference-markers .reference-dot').count()) > 0);
+
+    await page.locator('.difficulty-btn[data-difficulty="hard"]').click();
+    assert.equal(await page.locator('.difficulty-btn[data-difficulty="hard"]').getAttribute('class'), 'difficulty-btn active');
+    assert.equal(await page.locator('#reference-markers .reference-dot').count(), 0);
+
+    await page.locator('.difficulty-btn[data-difficulty="regular"]').click();
+    assert.ok((await page.locator('#reference-markers .reference-dot').count()) > 0);
+    await page.close();
+  });
+
+  test('switching to Hard clears reference markers on the next guess too', async () => {
     const { page } = await newPage();
     await doGuess(page); // guess 1, Regular (default) — has reference markers
 
