@@ -68,6 +68,7 @@
   const gameBoard = document.querySelector('.axis-grid');
   const legendEl = document.querySelector('.legend');
   const gameControls = document.querySelector('.controls');
+  const axisNoteEl = document.getElementById('axis-note');
   const practiceSettingsEl = document.querySelector('.practice-settings');
 
   // Kitchen Prep is a debug tool (force a stat pair, force an entry, jump packs),
@@ -234,6 +235,7 @@
       targetPanel.hidden = true;
       gameBoard.hidden = true;
       legendEl.hidden = true;
+      axisNoteEl.hidden = true;
       gameControls.hidden = true;
       const total = guessResults.reduce((a, r) => a + r.score, 0);
       const snark = snarkFor(total, ROUND_MAX);
@@ -277,7 +279,10 @@
     // axes has no room for a clause), but the min/max are the highest/lowest value
     // among THIS pack's own entries, not any real-world extreme — e.g. "Population
     // max" is the most populous country in Griddle's pool, not the world's most
-    // populous country ever. The title tooltip spells that out for anyone unsure.
+    // populous country ever. The hover title spells that out for desktop users;
+    // `#axis-note` (always visible, no hover/click needed) does the same for
+    // everyone else — see CLAUDE.md, playtesting found the title-only version
+    // wasn't discoverable on a phone.
     const poolNoun = pluralize(PACKS[currentPack].noun);
     axisTop.textContent = `${AXIS_Y.label} max: ${AXIS_Y.max}`;
     axisTop.title = `Highest ${AXIS_Y.label} among ${poolNoun} in this game — not necessarily the real-world max.`;
@@ -287,6 +292,7 @@
     axisLeft.title = `Lowest ${AXIS_X.label} among ${poolNoun} in this game — not necessarily the real-world min.`;
     axisRight.textContent = `${AXIS_X.label} max: ${AXIS_X.max}`;
     axisRight.title = `Highest ${AXIS_X.label} among ${poolNoun} in this game — not necessarily the real-world max.`;
+    axisNoteEl.textContent = `Ranges shown are the highest/lowest among ${poolNoun} in Griddle's pool — not real-world records.`;
 
     const pool = eligibleEntries(entries, statX, statY);
     const entry = pickEntry(pool, entrySelect.value, entries);
@@ -319,6 +325,7 @@
     targetPanel.hidden = false;
     gameBoard.hidden = false;
     legendEl.hidden = false;
+    axisNoteEl.hidden = false;
     gameControls.hidden = false;
     practiceSettingsEl.hidden = !debugUnlocked;
 

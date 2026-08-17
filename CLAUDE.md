@@ -611,15 +611,26 @@ whatever's in `dataCache[currentPack]` for that guess, so e.g. "Population max"
 is the most populous *country Griddle tracks*, not the world's actual most
 populous country — correct behavior (there's no other sane way to build a finite
 axis from a finite pool), but a playtester read the axis labels as claims about
-the real world. Fixed without touching the visible label text itself: `.axis-top`/
-`.axis-bottom`/`.axis-left`/`.axis-right` are short, `white-space: nowrap`, and
-`.axis-left`/`.axis-right` render sideways (`writing-mode: vertical-rl`) — there's
-no room to append a clarifying clause without either overflowing or making the
-vertical labels comically tall. Instead the `title` tooltip (previously just a
-copy of the visible text, adding nothing) now spells out "among {pluralized pack
-noun} in this game — not necessarily the real-world max/min," and the info modal
-gained a matching sentence for players who won't discover a hover tooltip
-(especially on touch, where `title` isn't reliably reachable at all).
+the real world. First attempt fixed this via the `title` tooltip alone (plus a
+matching info-modal sentence) without touching the visible label text —
+`.axis-top`/`.axis-bottom`/`.axis-left`/`.axis-right` are short, `white-space:
+nowrap`, and `.axis-left`/`.axis-right` render sideways (`writing-mode:
+vertical-rl`), so there's no room to append a clarifying clause without either
+overflowing or making the vertical labels comically tall. **That wasn't enough**
+— the same playtester came back still not seeing any context, because a hover
+tooltip is invisible on a phone (no cursor to hover with, and `title` isn't
+reliably reachable via touch at all) and an info-modal sentence requires
+deliberately tapping the ℹ️ button first. `#axis-note` (`.axis-note` in
+`style.css`, `axisNoteEl` in `app.js`) is the actual fix: a short caption below
+the legend, always visible with no interaction required, set alongside the axis
+labels in `beginNextGuess()` ("Ranges shown are the highest/lowest among
+{pluralized pack noun} in Griddle's pool — not real-world records"). It's in the
+same hide/show list as `.legend` (hidden at round-completion, shown again in
+`beginRound()`) for the same reason `.legend`/`.axis-grid`/`.controls` are —
+it's contextual to the grid being guessed on, not something to show once the
+board's gone. The `title` tooltip and info-modal sentence stay too, as a
+secondary/redundant path for desktop users — removing them wouldn't fix anything
+new, and they cost nothing to keep.
 
 ## Deployment
 

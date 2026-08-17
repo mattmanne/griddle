@@ -182,7 +182,8 @@ body {
 
 .axis-grid[hidden],
 .controls[hidden],
-.legend[hidden] {
+.legend[hidden],
+.axis-note[hidden] {
   display: none;
 }
 
@@ -321,6 +322,14 @@ body {
 
 .legend-swatch-target::before { transform: translate(-50%, -50%) rotate(45deg); }
 .legend-swatch-target::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+.axis-note {
+  display: block;
+  text-align: center;
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
 
 .controls {
   display: flex;
