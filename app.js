@@ -6,6 +6,7 @@
     PACKS, PACK_KEYS, GRID, SCORE_MAX, READY_MESSAGES,
     clamp, capitalize, pluralize, randomKey, randomItem,
     axisRangeForStat, eligibleEntries, hasEligiblePair, pickEligiblePair, pickEntry,
+    pickReferenceEntries,
     computeScore, packClauseText, poolSummary, snarkFor, guessSnarkFor,
   } = window.GriddleLogic;
 
@@ -16,6 +17,13 @@
   let currentPack = debugPack;
   let STAT_DEFS = PACKS[currentPack].statDefs;
 
+  // Regular (default) plots REFERENCE_COUNT other real entries on the grid as
+  // visual calibration points; Hard is the original blind guess. Session-only,
+  // same precedent as enabledPacks — re-read once per guess in beginNextGuess()
+  // so switching mid-batch never resets the round (see CLAUDE.md).
+  let difficulty = 'regular';
+  const REFERENCE_COUNT = 3;
+
   const ZOOM_MIN = 1;
   const ZOOM_MAX = 4;
   const ROUND_SIZE = 5;
@@ -24,6 +32,7 @@
   const svg = document.getElementById('grid-svg');
   const viewport = document.getElementById('viewport');
   const gridlinesGroup = document.getElementById('gridlines');
+  const referenceMarkersGroup = document.getElementById('reference-markers');
   const guessMarker = document.getElementById('guess-marker');
   const targetMarker = document.getElementById('target-marker');
   const guideX = document.getElementById('guide-x');
@@ -57,6 +66,7 @@
   const copyResultsBtn = document.getElementById('copy-results-btn');
   const replayBtn = document.getElementById('replay-btn');
   const packButtons = Array.from(document.querySelectorAll('.pack-btn'));
+  const difficultyButtons = Array.from(document.querySelectorAll('.difficulty-btn'));
   const packCountSummary = document.getElementById('pack-count-summary');
   const infoBtn = document.getElementById('info-btn');
   const infoModal = document.getElementById('info-modal');
@@ -195,6 +205,53 @@
     guideY.setAttribute('visibility', 'visible');
   }
 
+  // Regular-difficulty reference points: real entries from this guess's pool,
+  // plotted at their true position with a name label but no stat values — a
+  // visual calibration aid, not part of scoring. Redrawn once per guess (called
+  // from beginNextGuess); no round-completion cleanup needed since the whole
+  // #grid-svg already hides wholesale at round-end (see CLAUDE.md).
+  function renderReferenceMarkers(refs) {
+    referenceMarkersGroup.innerHTML = '';
+    const svgNS = 'http://www.w3.org/2000/svg';
+    refs.forEach((ref) => {
+      const { sx, sy } = dataToSvg(ref[statX], ref[statY]);
+
+      const dot = document.createElementNS(svgNS, 'circle');
+      dot.setAttribute('class', 'reference-dot');
+      dot.setAttribute('cx', sx);
+      dot.setAttribute('cy', sy);
+      dot.setAttribute('r', 9);
+      referenceMarkersGroup.appendChild(dot);
+
+      const text = document.createElementNS(svgNS, 'text');
+      text.setAttribute('class', 'reference-label');
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('y', sy - 16);
+      text.textContent = ref.name;
+      referenceMarkersGroup.appendChild(text);
+
+      // getBBox() needs the element in the DOM first — measure the rendered
+      // text, then clamp its x so a label near the grid's edge doesn't run
+      // off it, then draw a background chip sized to the measured width so
+      // the name stays legible over the waffle pattern (same "measure, then
+      // draw a backing shape" idea as the fixed-size guess/target markers,
+      // just applied to variable-width text).
+      const bbox = text.getBBox();
+      const padX = 6, padY = 3;
+      const clampedX = clamp(sx, bbox.width / 2 + padX, GRID - bbox.width / 2 - padX);
+      text.setAttribute('x', clampedX);
+
+      const bg = document.createElementNS(svgNS, 'rect');
+      bg.setAttribute('class', 'reference-label-bg');
+      bg.setAttribute('x', clampedX - bbox.width / 2 - padX);
+      bg.setAttribute('y', bbox.y - padY);
+      bg.setAttribute('width', bbox.width + padX * 2);
+      bg.setAttribute('height', bbox.height + padY * 2);
+      bg.setAttribute('rx', 4);
+      referenceMarkersGroup.insertBefore(bg, text);
+    });
+  }
+
   function finalizeGuess(dataPoint) {
     if (locked || !target) return;
     locked = true;
@@ -297,6 +354,9 @@
     const pool = eligibleEntries(entries, statX, statY);
     const entry = pickEntry(pool, entrySelect.value, entries);
     target = { x: entry[statX], y: entry[statY], name: entry.name };
+
+    const refs = difficulty === 'regular' ? pickReferenceEntries(pool, entry, REFERENCE_COUNT) : [];
+    renderReferenceMarkers(refs);
 
     locked = false;
     previewData = null;
@@ -528,6 +588,17 @@
         enabledPacks.add(pack);
       }
       updatePackUI();
+    });
+  });
+
+  difficultyButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      difficulty = btn.dataset.difficulty;
+      difficultyButtons.forEach((b) => {
+        const active = b === btn;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-pressed', String(active));
+      });
     });
   });
 

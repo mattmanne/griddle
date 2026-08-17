@@ -632,6 +632,103 @@ board's gone. The `title` tooltip and info-modal sentence stay too, as a
 secondary/redundant path for desktop users — removing them wouldn't fix anything
 new, and they cost nothing to keep.
 
+## Difficulty — Regular (default) plots reference entries, Hard is the original blind guess
+
+Backlog #18 ("Difficulty modes") plus direct playtesting feedback ("the game is
+too hard") led to a `difficulty` toggle (`.difficulty-switch` in the header,
+always visible — unlike pack selection or Kitchen Prep, this is a core,
+frequently-relevant setting, not something to bury in a collapsed `<details>`).
+**Regular** (default) plots `REFERENCE_COUNT` (3) other real entries from the
+same guess's pack/stat-pair pool on the grid — name only, no stat values — as
+visual calibration points. **Hard** is today's original behavior, unchanged:
+no reference points, a truly blind guess.
+
+**No scoring change.** Reference entries are a rendering-only aid; a guess is
+still scored purely against `target`, exactly as before this feature existed.
+
+**State is session-only, read once per guess** — same precedent as
+`enabledPacks` (always resets to "all packs on" on reload) rather than the
+`localStorage`-persisted precedent used for the Kitchen Prep unlock (see
+backlog #12 above). `difficulty` is read at the top of `beginNextGuess()`,
+mirroring how `pickRoundContext()`'s pack choice is re-read every guess — so
+switching difficulty mid-batch never resets the round (the same rule this file
+already establishes for pack toggles), it just takes effect starting the
+*next* guess, not retroactively on the guess in progress.
+
+**`pickReferenceEntries(pool, target, count)` lives in `lib/pure.js`**, not
+`app.js` — a Fisher-Yates sample of up to `count` entries from `pool` excluding
+`target` by reference. Same parameterization philosophy as
+`axisRangeForStat`/`hasEligiblePair`: explicit inputs, no closing over `app.js`
+module state, so it's reachable from `test/pure.test.js` without a browser. It
+takes the *pool* and *target entry*, not `statX`/`statY` — the caller
+(`app.js`) already has those in scope and extracts `entry[statX]`/
+`entry[statY]` itself, the same way it already does for `target`. Naturally
+returns fewer than `count` if the pool doesn't have enough others (e.g. a small
+pack) rather than crashing — the same graceful-degradation approach as
+`pickEligiblePair`'s bounded-retry-then-fallback.
+
+**Rendering (`renderReferenceMarkers()` in `app.js`) needs no round-completion
+cleanup.** `#reference-markers` is a `<g>` inside `#grid-svg`, redrawn once per
+guess from `beginNextGuess()` — added to the DOM *before* `#guide-x`/
+`#guess-marker`/`#target-marker` so reference dots always render behind those,
+never on top. Unlike the guess/target markers (which get explicitly hidden and
+reset each guess because they show the *previous* guess's result),
+`#grid-svg` itself lives inside `.axis-grid`, which is already hidden wholesale
+at round-completion (`gameBoard.hidden = true`) — so reference markers
+disappear for free along with the rest of the board; no new entry was needed
+in the round-completion hide list. `#reference-markers` gets `pointer-events:
+none` in CSS as a defensive measure, though the actual drag listeners already
+live on `.viewport`, not any SVG child (see the drag-to-guess section above),
+so this doesn't change hit-testing — it just documents intent.
+
+**Each reference label gets a measured background chip, not a fixed-size
+one** — entry names vary wildly in length ("LeBron James" vs. "Minnesota
+Lynx" vs. "Oklahoma City Thunder"), unlike the guess/target markers, which are
+always the same fixed shape. `renderReferenceMarkers()` appends the `<text>`
+first, calls `text.getBBox()` (only reliable once the element is actually in
+the DOM), then inserts a `<rect>` sized to the measured width — same
+measure-then-draw idea as the fixed-size markers, just applied to
+variable-width text. The label's `x` is clamped so it doesn't run past the
+grid's 0–1000 `viewBox` edges.
+
+## Axis labels — made loud on purpose, and a pre-existing sizing tension that surfaced doing it
+
+Playtesting: the X/Y axis min/max labels (the actual scale a guess is placed
+against) read as visually secondary — `.axis-label` was `font-size: 0.8rem;
+color: var(--muted);`, no border, no background, easy to skim past. Bumped to
+`font-weight: 700`, `color: var(--ink)` (high-contrast, not muted), and a
+background+border chip — but only on `.axis-top`/`.axis-bottom`. `.axis-left`/
+`.axis-right` (the vertical `writing-mode: vertical-rl` labels) keep the bigger/
+bolder/brighter text but skip the chip and use a slightly smaller `0.9rem`
+instead of `1rem`.
+
+**Why the split:** `.axis-top`/`.axis-bottom` sit in the grid's `1fr` "view"
+column, whose width is already capped independently (`max-width: min(600px,
+88vw)`) — a chip there costs nothing extra, it's within a budget that's already
+accounted for. `.axis-left`/`.axis-right` sit in the grid's `auto` *columns*,
+whose width comes directly out of the same horizontal budget `.viewport` (`min(
+600px, 88vw)`) is already drawing from on a narrow phone screen, with barely
+any slack (this file's "Sizing note" on `.pack-switch` and the `88vw` tuning
+history describe the same tight-phone-width constraint). A chip's padding+
+border in that direction was enough to push the left label off a narrow
+phone's screen entirely.
+
+**This surfaced a pre-existing bug, not a new one.** Measuring
+`document.documentElement.scrollWidth` vs. `clientWidth` on a 390px-wide
+viewport with the *original* (pre-difficulty-feature, pre-chip) axis CSS still
+showed a few px of horizontal overflow — `.axis-left`'s bounding box already
+started at a negative `x` before any of this session's changes. `.viewport`'s
+`88vw` sizing was tuned (per this file's "Sizing note") without accounting for
+the `auto` label columns' own width demand alongside it, on the narrowest
+phones. Making the left/right labels bigger unavoidably adds a few more px to
+that pre-existing tension (mitigated by the `0.9rem` trim above, but not
+eliminated) — full elimination would mean re-deriving the `88vw`/label-column
+sizing math together, which is a separate, more invasive fix than "make the
+axis labels more noticeable" asked for and risks new regressions in sizing
+that was already deliberately tuned. Flagging here rather than silently
+shipping it unnoticed; revisit if it ever visibly clips real content (so far
+it hasn't — the overhang is sub-pixel-of-content, not a truncated label).
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions

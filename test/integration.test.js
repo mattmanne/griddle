@@ -73,6 +73,48 @@ describe('a full 5-guess batch', () => {
   });
 });
 
+describe('difficulty: Regular reference markers', () => {
+  test('Regular is active by default and plots reference entries (name only, never the target)', async () => {
+    const { page } = await newPage();
+    assert.equal(await page.locator('.difficulty-btn[data-difficulty="regular"]').getAttribute('class'), 'difficulty-btn active');
+
+    await page.locator('#action-btn').click();
+    await page.waitForTimeout(150);
+
+    const dotCount = await page.locator('#reference-markers .reference-dot').count();
+    assert.ok(dotCount >= 1 && dotCount <= 3, `expected 1-3 reference dots, saw ${dotCount}`);
+    const labelCount = await page.locator('#reference-markers .reference-label').count();
+    assert.equal(labelCount, dotCount);
+
+    const targetName = (await page.locator('#target-display').textContent()).split('—')[0].trim();
+    const labels = await page.locator('#reference-markers .reference-label').allTextContents();
+    assert.ok(labels.every((l) => !targetName.endsWith(l) && l.length > 0));
+    await page.close();
+  });
+
+  test('switching to Hard clears reference markers on the next guess', async () => {
+    const { page } = await newPage();
+    await doGuess(page); // guess 1, Regular (default) — has reference markers
+
+    await page.locator('.difficulty-btn[data-difficulty="hard"]').click();
+    assert.equal(await page.locator('.difficulty-btn[data-difficulty="hard"]').getAttribute('class'), 'difficulty-btn active');
+
+    await page.locator('#action-btn').click(); // start guess 2 under Hard
+    await page.waitForTimeout(150);
+    assert.equal(await page.locator('#reference-markers .reference-dot').count(), 0);
+    await page.close();
+  });
+
+  test('switching difficulty mid-batch does not reset the round', async () => {
+    const { page } = await newPage();
+    await doGuess(page); // guess 1 of 5
+    assert.equal(await page.locator('#round-progress').textContent(), 'Guess 1 of 5');
+    await page.locator('.difficulty-btn[data-difficulty="hard"]').click();
+    assert.equal(await page.locator('#round-progress').textContent(), 'Guess 1 of 5');
+    await page.close();
+  });
+});
+
 describe('regression: a failed pointer capture does not strand a guess', () => {
   test('the drag still registers even if setPointerCapture throws', async () => {
     // setPointerCapture can throw for pointer-lifecycle reasons outside our

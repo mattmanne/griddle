@@ -113,6 +113,30 @@ body {
   font-size: 0.9rem;
 }
 
+.difficulty-switch {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 0;
+}
+
+.difficulty-btn {
+  flex: 1;
+  background: var(--panel);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  box-shadow: none;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.difficulty-btn.active {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+  box-shadow: 0 2px 10px rgba(245, 166, 35, 0.35);
+}
+
 .pack-switch {
   display: flex;
   flex-wrap: wrap;
@@ -201,15 +225,38 @@ body {
 }
 
 .axis-label {
-  font-size: 0.8rem;
-  color: var(--muted);
-  white-space: nowrap;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.01em;
 }
 
-.axis-top { grid-area: top; text-align: center; }
-.axis-bottom { grid-area: bottom; text-align: center; }
-.axis-left { grid-area: left; writing-mode: vertical-rl; transform: rotate(180deg); }
-.axis-right { grid-area: right; writing-mode: vertical-rl; }
+/* Top/bottom sit in the "view" column's own width budget (already capped at
+   min(600px, 88vw)), so a background chip there is free — it doesn't compete
+   with anything for space. */
+.axis-top, .axis-bottom {
+  text-align: center;
+  white-space: normal;
+  max-width: min(600px, 88vw);
+  margin: 0 auto;
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 4px 10px;
+}
+.axis-top { grid-area: top; }
+.axis-bottom { grid-area: bottom; }
+
+/* Left/right live in the grid's "auto" columns, whose width comes straight out
+   of the phone screen's already-tight budget (.viewport alone is 88vw, leaving
+   almost no slack — a PRE-EXISTING few-px overflow on narrow phones, see
+   CLAUDE.md). A chip's padding+border there was enough to push the left label
+   off-screen entirely, so they skip the chip; font-size is trimmed slightly
+   vs. top/bottom to limit how much this pass adds to that pre-existing overflow,
+   while still reading as far more noticeable than the old 0.8rem muted gray. */
+.axis-left, .axis-right { white-space: nowrap; writing-mode: vertical-rl; font-size: 0.9rem; }
+.axis-left { grid-area: left; transform: rotate(180deg); }
+.axis-right { grid-area: right; }
 
 .viewport {
   grid-area: view;
@@ -248,6 +295,31 @@ body {
   stroke-width: 2;
   stroke-dasharray: 6 6;
   opacity: 0.7;
+}
+
+/* Regular-difficulty reference points (see CLAUDE.md) — deliberately muted so
+   they read as context, not competing with the guess/target markers. Belt-and-
+   braces pointer-events:none; the drag listeners live on .viewport, not any
+   SVG child, so this doesn't change hit-testing. */
+#reference-markers {
+  pointer-events: none;
+}
+
+.reference-dot {
+  fill: var(--waffle-shadow);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  opacity: 0.85;
+}
+
+.reference-label-bg {
+  fill: var(--panel);
+  opacity: 0.85;
+}
+
+.reference-label {
+  fill: var(--muted);
+  font-size: 22px;
 }
 
 .result-line {

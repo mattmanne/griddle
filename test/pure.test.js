@@ -238,6 +238,43 @@ describe('pickEntry', () => {
   });
 });
 
+describe('pickReferenceEntries', () => {
+  const target = { name: 'Target' };
+  const pool = [target, { name: 'A' }, { name: 'B' }, { name: 'C' }, { name: 'D' }];
+
+  test('returns `count` entries when the pool has enough others', () => {
+    for (let i = 0; i < 20; i++) {
+      const refs = G.pickReferenceEntries(pool, target, 3);
+      assert.equal(refs.length, 3);
+    }
+  });
+
+  test('never includes the target entry', () => {
+    for (let i = 0; i < 20; i++) {
+      const refs = G.pickReferenceEntries(pool, target, 3);
+      assert.ok(!refs.includes(target));
+    }
+  });
+
+  test('never duplicates an entry', () => {
+    for (let i = 0; i < 20; i++) {
+      const refs = G.pickReferenceEntries(pool, target, 3);
+      assert.equal(new Set(refs).size, refs.length);
+    }
+  });
+
+  test('returns all-but-target (not a crash) when the pool is smaller than count + 1', () => {
+    const smallPool = [target, { name: 'A' }, { name: 'B' }];
+    const refs = G.pickReferenceEntries(smallPool, target, 3);
+    assert.equal(refs.length, 2);
+    assert.ok(!refs.includes(target));
+  });
+
+  test('returns an empty array when the pool is only the target', () => {
+    assert.deepEqual(G.pickReferenceEntries([target], target, 3), []);
+  });
+});
+
 describe('packClauseText', () => {
   test('uses the single pack\'s article + label + noun when only one pack is enabled', () => {
     const packs = { nba: { article: 'an', label: 'NBA', noun: 'player' } };

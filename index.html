@@ -17,6 +17,10 @@
     <p class="instructions">
       Drag to place <span id="pack-clause">an entry</span>'s stats. 5 guesses per batch, closest wins.
     </p>
+    <div class="difficulty-switch" role="group" aria-label="Difficulty">
+      <button type="button" class="difficulty-btn active" data-difficulty="regular" aria-pressed="true">Regular</button>
+      <button type="button" class="difficulty-btn" data-difficulty="hard" aria-pressed="false">Hard</button>
+    </div>
   </header>
 
   <dialog id="info-modal" class="info-modal">
@@ -30,6 +34,9 @@
       1000 per guess, 5000 per batch.</p>
     <p>Toggle multiple packs on at once (NBA, Movies, Countries, ...) to mix them —
       each guess in the batch randomly draws from whichever packs are enabled.</p>
+    <p><strong>Regular</strong> difficulty (the default) plots 3 other real entries
+      on the grid — name only, no stats — so you've got real points of comparison.
+      Switch to <strong>Hard</strong> for the original blind guess.</p>
     <p>The numbers at each end of the grid are the highest/lowest value among the
       entries Griddle actually tracks for that guess's pack — not the real-world
       record. (Hover an axis label for a reminder.)</p>
@@ -57,6 +64,7 @@
           </radialGradient>
         </defs>
         <g id="gridlines"></g>
+        <g id="reference-markers"></g>
         <line id="guide-x" class="guide-line" x1="0" y1="0" x2="0" y2="1000" visibility="hidden"></line>
         <line id="guide-y" class="guide-line" x1="0" y1="0" x2="1000" y2="0" visibility="hidden"></line>
         <line id="result-line" class="result-line" visibility="hidden"></line>

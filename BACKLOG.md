@@ -30,7 +30,17 @@
 15. **Soccer — deferred, phased rollout:** start with **EPL**, then **Champions League**, then **World Cup**. Leagues/competitions aren't apples-to-apples (goals/90, competition-level differences), needs a normalization decision first — likely handle each competition as its own pool rather than merging them.
 16. **Personal best / score history** via localStorage — V0 had rounds-played/average, dropped in the V1 batch model.
 17. **Add women's college basketball.** Deferred from the men's-only pass at item 5 above — same near-direct-port reasoning as WNBA vs. NBA.
-18. **Difficulty modes** — e.g. tighter axis ranges, larger player pool, or a timed mode once the roster is deeper.
+18. ~~**Difficulty modes.**~~ **Done** — shipped as a Regular (default) / Hard
+    toggle rather than the tighter-ranges/larger-pool/timed-mode ideas
+    originally sketched here. Regular plots 3 other real entries from the same
+    pool on the grid (name only, no stats) as visual reference points; Hard is
+    the original blind guess, unchanged. Driven directly by playtesting ("the
+    game is too hard"), not the axis-range/pool-size angle this item
+    originally floated — those remain open if a *second* difficulty axis is
+    wanted later (e.g. Hard could additionally shrink the pool or the axis
+    range, on top of dropping reference points). See `CLAUDE.md` for why the
+    setting is session-only (same precedent as pack toggles) and why
+    `pickReferenceEntries()` lives in `lib/pure.js` rather than `app.js`.
 19. **Shareable leaderboard** — right now friends compare scores by manually pasting the copied text; a lightweight shared leaderboard would remove that friction. A 4-persona playtesting round separately floated a "daily griddle" idea (a shared, seeded batch so friends' scores are directly comparable, not just similarly-formatted) — related enough to fold into this item rather than track separately.
 20. **Sound/haptics** — griddle sizzle or button-press feedback, in keeping with the fuller re-skin direction.
 21. **Add-to-home-screen / PWA manifest** — makes it feel more like an app when friends play repeatedly on their phones.
