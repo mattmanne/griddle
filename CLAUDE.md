@@ -339,6 +339,18 @@ people.
   path also always uses the article "a" — correct for every noun in use today (all
   consonant-sound-first), but would need a real per-noun article lookup if a future
   pack's noun needs "an" (e.g. "element"); there's a comment at the call site.
+- **Pack-toggle/Kitchen-Prep-dropdown button text says "Players" for every
+  player pack (NBA/WNBA/NCAA/MLB/NHL/CFB/NFL), mirroring "Teams" on the 5 team
+  packs — added once team packs existed, since before that there was nothing
+  to disambiguate from.** This is UI copy only, in `index.html`'s button/option
+  text — the `PACKS` config's own `label` field (`'NBA'`, etc.) is unchanged,
+  since that field feeds `packClauseText()`'s generated sentences ("an NBA
+  player"), where appending "Players" would double up into "an NBA Players
+  player." NCAA's emoji also changed from 🎓 (a graduation cap — reads as
+  "cap," not "basketball," when scanning the pack list) to 🏀, matching NBA's —
+  intentionally the same icon as NBA rather than a distinct one; the pack
+  identity is already disambiguated by the "Players" text and the `label`
+  field's "NCAA" in generated sentences, not by the emoji alone.
 - **The debug "Kitchen Prep" panel has its own `debugPack`, independent of
   `enabledPacks`.** Forcing a specific stat pair or a specific entry only makes sense
   pinned to one pack (you can't force "Points/Game vs Home Runs"), so the
