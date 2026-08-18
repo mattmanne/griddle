@@ -60,8 +60,12 @@ body {
   border: 1px solid var(--line);
   border-radius: 50%;
   box-shadow: none;
-  width: 28px;
-  height: 28px;
+  /* 44x44 is the widely-used minimum touch-target size (WCAG 2.5.5 AAA,
+     Apple/Google HIG) — the visual glyph stays small via font-size, only the
+     tappable area grows, so this doesn't change how the button looks next to
+     the h1, just how easy it is to actually hit on a phone. */
+  width: 44px;
+  height: 44px;
   padding: 0;
   font-size: 0.9rem;
   line-height: 1;
@@ -98,13 +102,6 @@ body {
 
 .info-modal button {
   margin-top: 4px;
-}
-
-.version {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--muted);
-  vertical-align: middle;
 }
 
 .instructions {
@@ -164,6 +161,10 @@ body {
   font-size: 0.85rem;
   color: var(--muted);
   cursor: pointer;
+  /* The <summary> line was only ~18px tall by content alone — padding brings
+     the tappable area closer to the 44px touch-target minimum without
+     changing the visible text size. */
+  padding: 10px 0;
 }
 
 .settings-section {
@@ -181,17 +182,6 @@ body {
 
 .settings .pack-switch {
   margin-top: 0;
-}
-
-.mode-link {
-  margin: 6px 0 0;
-  font-size: 0.85rem;
-}
-
-.mode-link a {
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 600;
 }
 
 .target-panel {
@@ -486,29 +476,6 @@ button:active {
   opacity: 0.85;
 }
 
-.custom-target summary {
-  font-size: 0.85rem;
-  color: var(--muted);
-  cursor: pointer;
-}
-
-.custom-target-inputs {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-top: 8px;
-  flex-wrap: wrap;
-}
-
-.custom-target-inputs input {
-  width: 70px;
-  padding: 6px;
-  background: var(--panel);
-  color: var(--ink);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-}
-
 .practice-settings summary {
   font-size: 0.85rem;
   color: var(--muted);
@@ -648,10 +615,4 @@ button:active {
   background: var(--syrup);
   color: var(--butter);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-}
-
-.session-stats {
-  text-align: center;
-  font-size: 0.85rem;
-  color: var(--muted);
 }

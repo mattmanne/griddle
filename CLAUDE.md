@@ -98,35 +98,44 @@ scripts used it all session — `chromium.launch()`, drive it, assert with
 `node:assert`. One test runner, one dependency, for both unit and integration
 tests, rather than mixing two frameworks with two different assertion styles.
 
-**What's unit-tested vs. data-tested vs. integration-tested.**
-`test/pure.test.js` (51 tests) covers `lib/pure.js` directly — fast, no browser,
+**What's unit-tested vs. data-tested vs. integration-tested.** (Counts below
+are a snapshot, not a promise to keep updated forever — run `npm test` for
+the real current numbers rather than trusting a stale count here; this
+section itself was caught stale once already, see the full-review note near
+the end of this file.)
+`test/pure.test.js` (~60 tests) covers `lib/pure.js` directly — fast, no browser,
 this is what a TDD loop should run against for new pure logic. It includes
 tier-boundary checks for both snark systems (every tier's own `min` should select
 *that* tier, not the one below it — an off-by-one here would be easy to miss by
 eye), an exact-formula regression test for `computeScore` (not just "score A >
 score B" but the literal expected number, so a change to `SCORE_DECAY_RATE` or
-the distance formula gets caught), and object-*identity* checks (`===`, not deep-
+the distance formula gets caught), object-*identity* checks (`===`, not deep-
 equality) confirming `HOOPS_STAT_DEFS`/`FOOTBALL_STAT_DEFS`/`TEAM_STAT_DEFS` are
 genuinely shared across the packs CLAUDE.md says share them, not accidentally
-forked copies.
+forked copies, and `pickReferenceEntries`/`pickEligiblePairForEntry` coverage
+for the difficulty-mode and forced-entry-pair logic added later.
 `test/data.test.js` (95 tests) is a different kind of check entirely — it reads
 all 19 pack JSON files directly off disk (no `lib/pure.js` logic involved beyond
 using `PACKS`/`eligibleEntries` as the source of truth for what "valid" means)
 and verifies structural integrity: no duplicate names within a file, no stray
 fields outside that pack's `statDefs`, every present stat field is a finite
 number, and the `defaultPair` isn't degenerate (at least one entry has both
-stats). This is NOT a fact-checking pass (backlog #13 — is Adrian Dantley's MPG
-actually correct? — is still an open, separate question); it only catches
-malformed data, which is exactly the kind of mistake a manual data-entry pass is
-prone to and a computer is good at catching for free. `test/integration.test.js`
-(12 tests) drives the real page via Playwright (own local server, spun up in a
-`before()` hook — no manual setup needed) and specifically encodes the exact
-regressions found this session: a literal-corner drag, an invalid forced debug
-stat pair, the Kitchen Prep badge, zoom auto-recentering, pack-toggle-mid-batch
-not resetting the round, the last-active-pack guard, "Copy My Batch" actually
-writing to the clipboard, and "lock this stat pair" actually holding for a whole
-batch (not just the next guess). These are the bugs that *should* have been
-caught automatically the first time; now they are.
+stats). This is NOT a fact-checking pass (backlog #13 — pack-data accuracy — is
+tracked separately, partially done); it only catches malformed data, which is
+exactly the kind of mistake a manual data-entry pass is prone to and a computer
+is good at catching for free. `test/integration.test.js` (~24 tests) drives the
+real page via Playwright (own local server, spun up in a `before()` hook — no
+manual setup needed) and specifically encodes real regressions found through
+playtesting: a literal-corner drag, an invalid forced debug stat pair, the
+Kitchen Prep badge and its `?debug=1` gate, zoom auto-recentering,
+pack-toggle-mid-batch not resetting the round, the last-active-pack guard,
+"Copy My Batch" actually writing to the clipboard, "lock this stat pair"
+actually holding for a whole batch, a failed `setPointerCapture` not stranding
+a guess, a pinch-zoom gesture ending one finger at a time not submitting a
+stale guess, the round-summary scrolling into view (and back to top on a new
+batch), and axis labels not overflowing a narrow phone's viewport. These are
+the bugs that *should* have been caught automatically the first time; now they
+are.
 
 **Gotcha if you add a clipboard-related test:** reading back `navigator.clipboard
 .readText()` after a `writeText()` round-trip normalizes `\n` to `\r\n` on
@@ -471,11 +480,17 @@ specifically flagged this as reading like "a settings screen," not a game. Movin
 `.pack-switch` into a `<details>` (same collapsed-by-default pattern as `.practice-
 settings`/"Kitchen Prep") after the drag grid and action button means the game
 board is the first thing on screen, and pack selection is available but out of the
-way. `<summary>` shows a live `(N/14 active)` count (`updatePackUI()` sets
-`packCountSummary.textContent`) so a player doesn't lose visibility into which
-packs are enabled just because the section is collapsed. Unlike the sports-era
-header placement, this is a genuinely player-facing setting (not a debug tool like
-Kitchen Prep) — it just doesn't need to be the *first* thing visible.
+way. At the time this shipped, `<summary>` showed a live `(N/14 active)` count
+directly (`updatePackUI()` sets `packCountSummary.textContent`) so a player
+didn't lose visibility into which packs were enabled just because the section
+was collapsed. **That count's location has since moved** — the panel was
+later renamed `.settings` and consolidated with the difficulty toggle (see the
+"Round-completion 'reset' feel, unified Settings..." section), and
+`#pack-count-summary` now lives in a "Packs" sub-heading inside the panel body,
+not in `<summary>` itself (which just reads "⚙️ Settings"). Unlike the
+sports-era header placement, this is a genuinely player-facing setting (not a
+debug tool like Kitchen Prep) — it just doesn't need to be the *first* thing
+visible.
 **`.app`'s `max-width` and `.viewport`'s size cap were both raised** (560px→680px,
 and the grid from `min(420px, 88vw)` to `min(600px, 88vw)`) at the same time —
 playtesting also found that at wider ("tablet"-ish) viewports the old 560px cap
@@ -647,9 +662,10 @@ new, and they cost nothing to keep.
 ## Difficulty — Regular (default) plots reference entries, Hard is the original blind guess
 
 Backlog #18 ("Difficulty modes") plus direct playtesting feedback ("the game is
-too hard") led to a `difficulty` toggle (`.difficulty-switch` in the header,
-always visible — unlike pack selection or Kitchen Prep, this is a core,
-frequently-relevant setting, not something to bury in a collapsed `<details>`).
+too hard") led to a `difficulty` toggle (`.difficulty-switch`). It originally
+lived directly in the header, always visible — that placement is now stale;
+see the later "Round-completion 'reset' feel, unified Settings..." section for
+why it moved into the collapsed Settings `<details>` alongside pack selection.
 **Regular** (default) plots `REFERENCE_COUNT` (3) other real entries from the
 same guess's pack/stat-pair pool on the grid — name only, no stat values — as
 visual calibration points. **Hard** is today's original behavior, unchanged:
@@ -729,9 +745,14 @@ against) read as visually secondary — `.axis-label` was `font-size: 0.8rem;
 color: var(--muted);`, no border, no background, easy to skim past. Bumped to
 `font-weight: 700`, `color: var(--ink)` (high-contrast, not muted), and a
 background+border chip — but only on `.axis-top`/`.axis-bottom`. `.axis-left`/
-`.axis-right` (the vertical `writing-mode: vertical-rl` labels) keep the bigger/
-bolder/brighter text but skip the chip and use a slightly smaller `0.9rem`
-instead of `1rem`.
+`.axis-right` (the vertical `writing-mode: vertical-rl` labels) initially kept
+the bigger/bolder/brighter text but skipped the chip and used a slightly
+smaller `0.9rem` instead of `1rem` — **this was superseded in a later pass**
+(see "The X-axis chip reuses a cheaper technique..." further down): left/right
+now also get a chip, just built from `box-shadow`+asymmetric padding instead of
+`border`, so this paragraph's specific font-size/no-chip claim is historical,
+not current — read on for why the split existed at all, then skip to the later
+section for what's actually shipped today.
 
 **Why the split:** `.axis-top`/`.axis-bottom` sit in the grid's `1fr` "view"
 column, whose width is already capped independently (`max-width: min(600px,
@@ -921,6 +942,115 @@ waffle texture varies by position via its radial gradient), same idea as the
 reference-label background chips but implemented as a text outline instead of
 a backing rect, since a two-line `<tspan>` block doesn't have one clean
 rectangle to size a `getBBox()`-measured backing shape to.
+
+## Full-project review (2026-08-18) — backlog #11/#13/#14
+
+Requested as "a full review," which turned out to mean more than code
+correctness: code review, continued pack-data verification, an accessibility
+pass, a test-coverage gap analysis, and a CLAUDE.md staleness check, run as
+parallel agents/forks. Two real, user-facing bugs surfaced this way that
+hadn't been caught by any of the (extensive) manual playtesting earlier in
+this same session:
+
+**A pinch-zoom gesture ending one finger at a time silently submitted a stale
+guess.** Found by an end-to-end playtest sweep, not by hand-testing — the bug
+only manifests with a genuine two-finger gesture where the fingers lift at
+different instants (the normal way a pinch ends; both lifting in the exact
+same instant essentially never happens on real hardware). `handlePointerEnd()`
+transitioned back to `mode = 'placing'` the moment only one finger remained,
+but never refreshed `previewData` — a lift of that remaining finger looked
+identical to completing a legitimate single-finger drag, and `finalizeGuess()`
+used whatever position was recorded from *before the pinch started*. Fixed by
+calling `showGuessPreview()` with the remaining pointer's actual current
+position at the moment a pinch ends (2→1 pointers), so the guess reflects
+where that finger actually is, not stale data. Confirmed via `test/
+integration.test.js`'s pinch-zoom regression test, which checks the finalized
+guess coordinates land near the *second* finger's position, not the first's.
+
+**`pickEligiblePairForEntry` (added during this same review pass to fix a
+different bug — see below) was exported from `lib/pure.js` but never added to
+`app.js`'s destructure of `window.GriddleLogic`, throwing `ReferenceError` and
+preventing any round from completing whenever a forced entry was in play.**
+Also caught by the same playtest sweep, within minutes of the fix landing —
+a reminder that adding a function to `lib/pure.js`'s return object and to
+`app.js`'s destructure are two separate edits, and it's easy to do one and
+forget the other. No test caught this either, since `test/pure.test.js` only
+imports `lib/pure.js` directly (`require('../lib/pure.js')`), never through
+`app.js`'s destructure — a mismatch there is only visible to something that
+actually loads `app.js` in a browser, which is what the integration suite is
+for.
+
+**The bug `pickEligiblePairForEntry` itself fixes:** forcing a specific entry
+in Kitchen Prep without also checking "lock this stat pair" could silently
+swap in a *different* entry than the one forced. `pickRoundContext()`'s
+override path used `pickEligiblePair()` (pack-wide: "does *any* entry have
+this pair"), not "does *the forced entry specifically* have this pair" — so
+on a mixed-position pack like `football_cfb`, forcing a WR and leaving the
+pair unlocked could roll a QB-only pair, which the forced WR doesn't have,
+causing `pickEntry()` to fall through to a random different entry while
+`#forced-entry-badge` kept showing the WR as if it were still in effect.
+`pickEligiblePairForEntry(entry, keys, avoid)` mirrors `pickEligiblePair`'s
+exact rejection-sampling shape but checks one specific entry's own fields
+instead of "any entry in the pack."
+
+**Other findings applied:** `test/server.js`'s path-containment check used a
+bare `filePath.startsWith(ROOT)`, which a sibling directory sharing ROOT as a
+string prefix (not just a path ancestor) could have bypassed — fixed to check
+`ROOT + path.sep`. Pack-toggle buttons weren't disabled during the initial
+`Promise.all` fetch, so clicking one before data loaded wrote a "0 loaded"
+message to `#round-progress` while `#target-display` still said
+"Preheating…" — two adjacent elements telling the player contradictory
+things; fixed by disabling `.pack-btn`s for the duration of `loadAllData()`.
+`beginNextGuess()`'s four near-identical axis-label `textContent`+`title`
+assignments were collapsed into one `setAxisLabel()` helper, since editing 3
+of 4 near-duplicate call sites and missing the 4th was a real risk, not a
+hypothetical one. Several CSS classes (`.mode-link`, `.custom-target*`,
+`.version`, `.session-stats`) had zero references anywhere in `index.html`/
+`app.js` — dead code from an earlier UI iteration, removed. `aria-pressed` was
+added to the 19 `.pack-btn` toggles (both the static HTML default and
+`updatePackUI()`'s live sync) and the `#info-btn`/`.settings summary` touch
+targets were grown toward the 44px minimum (`#info-btn` was 28×28, `.settings
+summary` was ~18px tall) — backlog #14's accessibility pass. Color contrast
+was also checked (computed WCAG ratios for every text/background pairing in
+`style.css`) and found already well above the AA minimum everywhere — no
+changes needed there, the muted-text-on-dark-background concern backlog #14
+originally flagged turned out to be a non-issue once actually measured.
+
+**One finding investigated and deliberately left as-is:** `axisRangeForStat()`
+producing `Infinity`/`NaN` when a stat key has zero finite values across a
+pack's entries is a real theoretical gap, and is already explicitly
+documented and tested as accepted, degenerate-but-non-crashing behavior (see
+the "Testing" section above) rather than something to guard against — the
+existing test's own comment says "not expected to be hit in real
+gameplay... this pins down what happens if that guarantee is ever broken."
+The `pickEligiblePairForEntry` fix above closes the one path that could have
+made it reachable (a forced debug entry/pair combination), so this is now
+better-guarded than it was, without touching a deliberate, already-tested
+design decision on a hypothetical that isn't currently reachable.
+
+**Pack-data verification (backlog #13) made further progress but is still
+incomplete.** This pass covered all 32 NHL teams (uncovering a systemic
+issue — `all_time_wins`/`win_pct` were wrong for at least 11 of 32 teams,
+several with suspiciously identical placeholder-looking values across
+unrelated franchises like `2300` for both Dallas Stars and St. Louis Blues;
+fixed the 11 confirmed teams plus Utah Mammoth, but the remaining ~20 weren't
+individually re-verified and the pattern suggests they're worth a dedicated
+re-derivation pass, not a spot-check), all 32 NFL teams (a similar systemic
+issue in `championships` — the field was counting Super Bowl wins only for
+about half the league, silently dropping pre-Super-Bowl-era NFL titles and
+pre-merger AFL titles the schema's own definition says should count; ~15
+teams fixed), the remaining ~10 NBA teams and all 15 WNBA teams (mostly
+`arena_capacity` staleness — post-renovation seating changes the file hadn't
+caught up to — plus one real Sacramento Kings `championships` miss, 0 vs. the
+correct 1 for their 1951 Rochester Royals title), the remaining 15 MLB teams
+(one real `arena_capacity` fix — the Athletics' temporary Sacramento home),
+and 60 more music artists (spanning classic rock through hip-hop, pop, and
+country/Latin acts — dozens of Grammy-count and #1-hit-count corrections,
+several sourced to an artist's own Wikipedia page directly contradicting the
+file). Presidents (fully verified previously) and the Adrian Dantley spot-
+check remain the only fully-closed-out pieces of #13; Animals and the older
+sports-roster packs (players.json, ncaam/cfb/nfl player files, geography,
+movies, space, etc.) still haven't been touched by any verification pass.
 
 ## Deployment
 

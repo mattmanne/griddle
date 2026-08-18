@@ -22,7 +22,10 @@ function start() {
     if (urlPath.endsWith('/')) urlPath += 'index.html';
     const filePath = path.join(ROOT, urlPath);
 
-    if (!filePath.startsWith(ROOT)) {
+    // Trailing separator matters: a bare startsWith(ROOT) would also match a
+    // sibling directory whose name happens to start with ROOT's name (e.g.
+    // "griddle-secrets" next to "griddle").
+    if (!filePath.startsWith(ROOT + path.sep)) {
       res.writeHead(403);
       res.end('Forbidden');
       return;

@@ -215,6 +215,52 @@ describe('pickEligiblePair', () => {
   });
 });
 
+describe('pickEligiblePairForEntry', () => {
+  const qb = { name: 'QB', pass_yds: 250, pass_td: 2, games: 16 };
+  const keys = ['pass_yds', 'pass_td', 'rec_yds', 'rec_td', 'games'];
+
+  test('always returns a pair the given entry actually has both fields for', () => {
+    for (let i = 0; i < 50; i++) {
+      const { x, y } = G.pickEligiblePairForEntry(qb, keys);
+      assert.ok(
+        Number.isFinite(qb[x]) && Number.isFinite(qb[y]),
+        `${x} vs ${y} should both be finite on the forced entry`
+      );
+    }
+  });
+
+  test('respects an avoid list when enough keys remain', () => {
+    // qb only has 3 finite fields (pass_yds/pass_td/games) — avoiding the
+    // first two would leave it with no eligible pair at all among the
+    // remaining keys, forcing the "not enough options" fallback (tested
+    // separately below) rather than genuinely exercising the avoid list.
+    // This entry has every field finite so avoiding two of them still leaves
+    // a real choice.
+    const versatile = { name: 'Versatile', pass_yds: 200, pass_td: 1, rec_yds: 50, rec_td: 1, games: 16 };
+    for (let i = 0; i < 50; i++) {
+      const { x, y } = G.pickEligiblePairForEntry(versatile, keys, ['pass_yds', 'pass_td']);
+      assert.ok(!(x === 'pass_yds' && y === 'pass_td') && !(x === 'pass_td' && y === 'pass_yds'));
+    }
+  });
+
+  test('falls back to the full key list if avoiding would leave fewer than 2 keys', () => {
+    const twoKeys = ['pass_yds', 'pass_td'];
+    const { x, y } = G.pickEligiblePairForEntry(qb, twoKeys, twoKeys);
+    assert.ok(twoKeys.includes(x) && twoKeys.includes(y));
+  });
+
+  test('never returns a pair a WR-only entry lacks, even though a QB elsewhere in the pack has it', () => {
+    // This is the exact bug this function fixes: pickEligiblePair (pack-wide)
+    // would happily return pass_yds/pass_td since the QB has them, even when
+    // the entry actually forced is the WR, which doesn't.
+    const wr = { name: 'WR', rec_yds: 80, rec_td: 1, games: 16 };
+    for (let i = 0; i < 50; i++) {
+      const { x, y } = G.pickEligiblePairForEntry(wr, keys);
+      assert.ok(Number.isFinite(wr[x]) && Number.isFinite(wr[y]));
+    }
+  });
+});
+
 describe('pickEntry', () => {
   const pool = [{ name: 'Alice' }, { name: 'Bob' }];
   const allEntries = [{ name: 'Alice' }, { name: 'Bob' }, { name: 'Zed', missingStat: true }];

@@ -185,6 +185,102 @@ describe('regression: a failed pointer capture does not strand a guess', () => {
   });
 });
 
+describe('regression: pinch-zoom ending one finger at a time does not submit a stale guess', () => {
+  test('the finalized guess uses the remaining finger\'s current position, not the pre-pinch one', async () => {
+    // A real two-finger pinch almost never ends with both fingers lifting at
+    // the exact same instant — one lifts first, leaving one still down.
+    // Before this fix, that remaining finger's eventual release finalized the
+    // guess using whatever position was recorded before the pinch even
+    // started, silently submitting a guess nowhere near where the player was
+    // actually looking. See CLAUDE.md's drag-to-guess section.
+    const { page, consoleErrors } = await newPage();
+    await page.locator('#action-btn').click();
+    await page.waitForTimeout(150);
+
+    const axisLeftText = await page.locator('#axis-left').textContent();
+    const axisRightText = await page.locator('#axis-right').textContent();
+    const min = Number(axisLeftText.match(/-?[\d.]+$/)[0]);
+    const max = Number(axisRightText.match(/-?[\d.]+$/)[0]);
+
+    const box = await page.locator('#grid-svg').boundingBox();
+    const x1 = box.x + box.width * 0.2, y1 = box.y + box.height * 0.2;
+    const x2 = box.x + box.width * 0.8, y2 = box.y + box.height * 0.8;
+
+    await page.evaluate(({ x1, y1, x2, y2 }) => {
+      const vp = document.getElementById('viewport');
+      const fire = (type, id, cx, cy, isPrimary) => {
+        vp.dispatchEvent(new PointerEvent(type, { pointerId: id, clientX: cx, clientY: cy, isPrimary, pointerType: 'touch', bubbles: true, cancelable: true }));
+      };
+      fire('pointerdown', 1, x1, y1, true);  // finger 1 starts a single-finger drag
+      fire('pointerdown', 2, x2, y2, false); // finger 2 touches down (pinch begins)
+      fire('pointerup', 1, x1, y1, true);    // finger 1 lifts first (natural pinch end)
+      fire('pointerup', 2, x2, y2, false);   // finger 2 (still down) lifts last
+    }, { x1, y1, x2, y2 });
+
+    await page.waitForTimeout(200);
+    assert.equal(await page.locator('#action-btn').textContent(), 'Flip It (2/5)');
+
+    const guessText = await page.locator('#result-guess').textContent();
+    const guessedX = Number(guessText.match(/^-?[\d.]+/)[0]);
+    const fractionGuessed = (guessedX - min) / (max - min);
+    // x2 was at 80% across the grid; x1 (the stale pre-pinch position) was at
+    // 20% — a wide enough gap that landing near 80% confirms the fix, not
+    // pixel-rounding noise.
+    assert.ok(fractionGuessed > 0.6, `expected guess near the x2 (80%) position, landed at fraction ${fractionGuessed.toFixed(2)}`);
+    assert.deepEqual(consoleErrors, []);
+    await page.close();
+  });
+});
+
+describe('regression: round-completion is unmissable', () => {
+  test('the summary scrolls into view even when the batch finished off-screen', async () => {
+    // A playtester repeatedly reported "no recap after 5 guesses" — turned out
+    // the transition was real but easy to miss if scrolled away from the top.
+    const { page } = await newPage();
+    for (let i = 0; i < 5; i++) {
+      await doGuess(page);
+    }
+    await page.waitForTimeout(500); // let the smooth scroll settle
+    const summaryBox = await page.locator('#round-summary').boundingBox();
+    const viewportSize = page.viewportSize();
+    assert.ok(summaryBox.y >= 0 && summaryBox.y < viewportSize.height,
+      `expected #round-summary within the viewport without manual scrolling, got y=${summaryBox.y}`);
+    await page.close();
+  });
+
+  test('starting a new batch scrolls back to the top', async () => {
+    const { page } = await newPage();
+    for (let i = 0; i < 5; i++) {
+      await doGuess(page);
+    }
+    await page.waitForTimeout(300);
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.locator('#replay-btn').click();
+    await page.waitForTimeout(500);
+    assert.equal(await page.evaluate(() => window.scrollY), 0);
+    await page.close();
+  });
+});
+
+describe('regression: axis labels stay within the viewport on a narrow phone', () => {
+  test('no horizontal overflow after starting a guess on a 390px-wide screen', async () => {
+    // The X-axis chip went through two attempts — the first visibly clipped
+    // text on a narrow viewport, caught only by manual inspection, not by any
+    // test. Pins the tolerance down so a future CSS change gets a fast signal.
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    const page = await context.newPage();
+    await page.goto(baseUrl);
+    await page.waitForSelector('#target-display', { timeout: 10000 });
+    await page.locator('#action-btn').click();
+    await page.waitForTimeout(200);
+    const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+    const clientWidth = await page.evaluate(() => document.documentElement.clientWidth);
+    assert.ok(scrollWidth - clientWidth <= 15,
+      `expected at most ~15px of overflow, got ${scrollWidth - clientWidth}px (scrollWidth=${scrollWidth}, clientWidth=${clientWidth})`);
+    await page.close();
+  });
+});
+
 describe('pack toggling', () => {
   test('does not reset an in-progress round', async () => {
     const { page } = await newPage();

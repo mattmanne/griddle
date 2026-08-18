@@ -5,7 +5,7 @@
   const {
     PACKS, PACK_KEYS, GRID, SCORE_MAX, READY_MESSAGES,
     clamp, capitalize, pluralize, randomKey, randomItem,
-    axisRangeForStat, eligibleEntries, hasEligiblePair, pickEligiblePair, pickEntry,
+    axisRangeForStat, eligibleEntries, hasEligiblePair, pickEligiblePair, pickEligiblePairForEntry, pickEntry,
     pickReferenceEntries,
     computeScore, packClauseText, poolSummary, snarkFor, guessSnarkFor,
   } = window.GriddleLogic;
@@ -122,15 +122,29 @@
       const pack = debugPack;
       const keys = Object.keys(PACKS[pack].statDefs);
       const avoid = pack === currentPack ? [statX, statY] : null;
+      // When a specific entry is forced, any override pair must be eligible
+      // for THAT entry specifically — falling back to pack-wide eligibility
+      // (pickEligiblePair) could pick a pair only some OTHER entry has,
+      // silently swapping in a random different entry later at pickEntry()
+      // time while the UI still shows the one the user actually forced.
+      const forcedEntryObj = forcedEntry
+        ? (dataCache[pack] || []).find((e) => e.name === forcedEntry)
+        : null;
+      const pickOverridePair = () => forcedEntryObj
+        ? pickEligiblePairForEntry(forcedEntryObj, keys, avoid)
+        : pickEligiblePair(dataCache, pack, keys, avoid);
       let x, y;
       if (forceStatPairCheckbox.checked) {
         x = statXSelect.value;
         y = statYSelect.value === x ? randomKey(keys, x) : statYSelect.value;
-        if (!hasEligiblePair(dataCache, pack, x, y)) {
-          ({ x, y } = pickEligiblePair(dataCache, pack, keys, avoid));
+        const valid = forcedEntryObj
+          ? Number.isFinite(forcedEntryObj[x]) && Number.isFinite(forcedEntryObj[y])
+          : hasEligiblePair(dataCache, pack, x, y);
+        if (!valid) {
+          ({ x, y } = pickOverridePair());
         }
       } else {
-        ({ x, y } = pickEligiblePair(dataCache, pack, keys, avoid));
+        ({ x, y } = pickOverridePair());
       }
       return { pack, x, y };
     }
@@ -339,6 +353,15 @@
     }
   }
 
+  // Collapses what used to be 4 near-identical textContent+title pairs in
+  // beginNextGuess() into one call per label — a future wording change now
+  // only needs to touch one place instead of 4 call sites that could drift
+  // out of sync with each other.
+  function setAxisLabel(el, statLabel, value, isMax, poolNoun) {
+    el.textContent = `${statLabel} ${isMax ? 'max' : 'min'}: ${value}`;
+    el.title = `${isMax ? 'Highest' : 'Lowest'} ${statLabel} among ${poolNoun} in this game — not necessarily the real-world ${isMax ? 'max' : 'min'}.`;
+  }
+
   function buildShareText(total, snark) {
     const lines = [`Griddle 🧇 — Batch score ${total}/${ROUND_MAX} ${snark.emoji}`];
     guessResults.forEach((r, i) => {
@@ -368,14 +391,10 @@
     // everyone else — see CLAUDE.md, playtesting found the title-only version
     // wasn't discoverable on a phone.
     const poolNoun = pluralize(PACKS[currentPack].noun);
-    axisTop.textContent = `${AXIS_Y.label} max: ${AXIS_Y.max}`;
-    axisTop.title = `Highest ${AXIS_Y.label} among ${poolNoun} in this game — not necessarily the real-world max.`;
-    axisBottom.textContent = `${AXIS_Y.label} min: ${AXIS_Y.min}`;
-    axisBottom.title = `Lowest ${AXIS_Y.label} among ${poolNoun} in this game — not necessarily the real-world min.`;
-    axisLeft.textContent = `${AXIS_X.label} min: ${AXIS_X.min}`;
-    axisLeft.title = `Lowest ${AXIS_X.label} among ${poolNoun} in this game — not necessarily the real-world min.`;
-    axisRight.textContent = `${AXIS_X.label} max: ${AXIS_X.max}`;
-    axisRight.title = `Highest ${AXIS_X.label} among ${poolNoun} in this game — not necessarily the real-world max.`;
+    setAxisLabel(axisTop, AXIS_Y.label, AXIS_Y.max, true, poolNoun);
+    setAxisLabel(axisBottom, AXIS_Y.label, AXIS_Y.min, false, poolNoun);
+    setAxisLabel(axisLeft, AXIS_X.label, AXIS_X.min, false, poolNoun);
+    setAxisLabel(axisRight, AXIS_X.label, AXIS_X.max, true, poolNoun);
     axisNoteEl.textContent = `Ranges shown are the highest/lowest among ${poolNoun} in Griddle's pool — not real-world records.`;
 
     const pool = eligibleEntries(entries, statX, statY);
@@ -490,6 +509,7 @@
 
   function handlePointerEnd(evt) {
     const wasPlacing = mode === 'placing' && pointers.has(evt.pointerId);
+    const wasPinching = mode === 'pinch';
     pointers.delete(evt.pointerId);
 
     if (wasPlacing && pointers.size === 0 && previewData) {
@@ -498,6 +518,16 @@
     } else if (pointers.size < 2) {
       mode = pointers.size === 1 ? 'placing' : 'idle';
       pinchStart = null;
+      // A real two-finger pinch almost never ends with both fingers lifting
+      // at the exact same instant — one lifts first, leaving one still down.
+      // Without refreshing previewData here, that remaining finger's eventual
+      // release would finalize the guess using whatever stale position was
+      // recorded before the pinch even started, silently submitting a guess
+      // nowhere near where the player was actually looking.
+      if (wasPinching && mode === 'placing') {
+        const [remaining] = Array.from(pointers.values());
+        showGuessPreview(clientToData(remaining.clientX, remaining.clientY));
+      }
     }
   }
 
@@ -578,7 +608,11 @@
   }
 
   function updatePackUI() {
-    packButtons.forEach((btn) => btn.classList.toggle('active', enabledPacks.has(btn.dataset.pack)));
+    packButtons.forEach((btn) => {
+      const active = enabledPacks.has(btn.dataset.pack);
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', String(active));
+    });
     packClause.textContent = packClauseText(enabledPacks, PACKS);
     packCountSummary.textContent = `(${enabledPacks.size}/${PACK_KEYS.length} active)`;
     if (guessIndex === 0 && !roundOver) {
@@ -590,6 +624,12 @@
     actionBtn.disabled = true;
     actionBtn.textContent = 'Preheating…';
     targetDisplay.textContent = 'Preheating…';
+    // Toggling a pack before the initial fetch resolves would call
+    // updatePackUI() against an empty dataCache, overwriting #round-progress
+    // with a "0 loaded" message that contradicts #target-display still
+    // showing "Preheating…" — two adjacent elements telling the player
+    // contradictory things about load state.
+    packButtons.forEach((btn) => { btn.disabled = true; });
 
     Promise.all(
       PACK_KEYS.map((pack) =>
@@ -605,6 +645,7 @@
         actionBtn.disabled = false;
         actionBtn.textContent = 'Fire Up the Griddle';
         targetDisplay.textContent = randomItem(READY_MESSAGES);
+        packButtons.forEach((btn) => { btn.disabled = false; });
         updatePackUI();
       })
       .catch((err) => {
