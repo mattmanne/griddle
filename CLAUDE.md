@@ -30,7 +30,7 @@ accidentally undone.
   together (one file per league, not per position — see below).
 - `archive-v0/` — the original prototype (continuous running-average scoring, no
   batches). Kept for reference, not wired into `index.html`. If you're tempted to
-  bring back "session average" style scoring (backlog #15), this is where the old
+  bring back "session average" style scoring (backlog #17), this is where the old
   approach lived.
 - `BACKLOG.md` — planned work, with reasoning for priority/sequencing.
 
@@ -661,7 +661,7 @@ new, and they cost nothing to keep.
 
 ## Difficulty — Regular (default) plots reference entries, Hard is the original blind guess
 
-Backlog #18 ("Difficulty modes") plus direct playtesting feedback ("the game is
+Backlog #19 ("Difficulty modes") plus direct playtesting feedback ("the game is
 too hard") led to a `difficulty` toggle (`.difficulty-switch`). It originally
 lived directly in the header, always visible — that placement is now stale;
 see the later "Round-completion 'reset' feel, unified Settings..." section for
@@ -944,7 +944,7 @@ reference-label background chips but implemented as a text outline instead of
 a backing rect, since a two-line `<tspan>` block doesn't have one clean
 rectangle to size a `getBBox()`-measured backing shape to.
 
-## Full-project review (2026-08-18) — backlog #11/#13/#14
+## Full-project review (2026-08-18) — backlog #11/#13/#15
 
 Requested as "a full review," which turned out to mean more than code
 correctness: code review, continued pack-data verification, an accessibility
@@ -1011,10 +1011,10 @@ hypothetical one. Several CSS classes (`.mode-link`, `.custom-target*`,
 added to the 19 `.pack-btn` toggles (both the static HTML default and
 `updatePackUI()`'s live sync) and the `#info-btn`/`.settings summary` touch
 targets were grown toward the 44px minimum (`#info-btn` was 28×28, `.settings
-summary` was ~18px tall) — backlog #14's accessibility pass. Color contrast
+summary` was ~18px tall) — backlog #15's accessibility pass. Color contrast
 was also checked (computed WCAG ratios for every text/background pairing in
 `style.css`) and found already well above the AA minimum everywhere — no
-changes needed there, the muted-text-on-dark-background concern backlog #14
+changes needed there, the muted-text-on-dark-background concern backlog #15
 originally flagged turned out to be a non-issue once actually measured.
 
 **One finding investigated and deliberately left as-is:** `axisRangeForStat()`
