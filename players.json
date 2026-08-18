@@ -523,7 +523,7 @@
     "ft_pct": 81.4,
     "games": 932,
     "career_pts": 25192,
-    "career_reb": 5366,
+    "career_reb": 5376,
     "career_ast": 6238
   },
   {
@@ -849,7 +849,8 @@
     "games": 1611,
     "career_pts": 23334,
     "career_reb": 14715,
-    "career_ast": 2180
+    "career_ast": 2180,
+    "three_pct": 0
   },
   {
     "name": "Adrian Dantley",
@@ -898,7 +899,8 @@
     "games": 971,
     "career_pts": 17335,
     "career_reb": 7122,
-    "career_ast": 1670
+    "career_ast": 1670,
+    "three_pct": 26.1
   },
   {
     "name": "Bernard King",
@@ -948,7 +950,8 @@
     "games": 1307,
     "career_pts": 16784,
     "career_reb": 13017,
-    "career_ast": 1646
+    "career_ast": 1646,
+    "three_pct": 16.7
   },
   {
     "name": "Scottie Pippen",
@@ -1314,7 +1317,7 @@
     "ast": 3.1,
     "stl": 1,
     "blk": 0.6,
-    "mpg": 30.1,
+    "mpg": 30.7,
     "fg_pct": 43.5,
     "three_pct": 37.1,
     "ft_pct": 79.8,
@@ -1373,7 +1376,7 @@
     "games": 486,
     "career_pts": 9247,
     "career_reb": 4494,
-    "career_ast": 769
+    "career_ast": 776
   },
   {
     "name": "Amar'e Stoudemire",
@@ -1406,7 +1409,7 @@
     "tov": 2.8,
     "games": 835,
     "career_pts": 13447,
-    "career_reb": 3183,
+    "career_reb": 3173,
     "career_ast": 6025
   },
   {
@@ -1424,7 +1427,7 @@
     "games": 1058,
     "career_pts": 16827,
     "career_reb": 9040,
-    "career_ast": 2184
+    "career_ast": 2221
   },
   {
     "name": "Chauncey Billups",
@@ -1462,8 +1465,8 @@
   },
   {
     "name": "Russell Westbrook",
-    "pts": 21.2,
-    "reb": 7,
+    "pts": 20.9,
+    "reb": 6.9,
     "ast": 8,
     "stl": 1.6,
     "blk": 0.3,
@@ -1479,7 +1482,7 @@
   },
   {
     "name": "Kawhi Leonard",
-    "pts": 20.1,
+    "pts": 20.7,
     "reb": 6.4,
     "ast": 3.1,
     "stl": 1.7,

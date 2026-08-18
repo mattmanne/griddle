@@ -57,10 +57,41 @@
     and many more), several sourced directly to an artist's own Wikipedia page
     contradicting the file. The `years_active` methodology question from the
     prior update is still unresolved. **Not yet touched by any verification
-    pass:** `players.json` (NBA), `ncaam_players.json`, `football_cfb_players.
+    pass:** `ncaam_players.json`, `football_cfb_players.
     json`, `football_nfl_players.json`, `mlb_hitters.json`, `nhl_skaters.json`,
     `geo_countries.json`, `us_states.json`, `movies.json`, `space_planets.json`,
     `animals.json` — see `CLAUDE.md`'s "Full-project review" section.
+
+    **Update (2026-08-18, `players.json`/NBA):** all 108 NBA players checked —
+    the flagship, most-played pack. 108/108 confirmed correct on career-shape
+    fields (career-long per-game averages, shooting %s), with a handful of
+    fixes: Jerry West's `career_reb` (off by 10 — a data-entry slip, not a
+    disagreement), three players missing a real, knowable `three_pct` that had
+    been omitted rather than recorded (Robert Parish, Kevin McHale, Buck
+    Williams — all three played entirely within the 3-point era, so 0%/26.1%/
+    16.7% are real values, not unknowns; Walt Frazier's similar gap was left
+    omitted since his career barely overlaps the 3-point line's 1979-80
+    introduction and the "correct" value is a near-zero-attempt small sample,
+    not a meaningful stat), and two real internal-consistency bugs — Russell
+    Westbrook's and Kawhi Leonard's per-game `pts`/`reb` hadn't been
+    recalculated after their `career_*`/`games` totals were last updated
+    (`career_pts ÷ games` didn't reproduce the file's own stored average).
+    **A broader, not-yet-fixed pattern surfaced: 13 active/recently-retired
+    players' `games`/`career_*` totals lag their real current numbers by
+    roughly a season or more** (Klay Thompson, Draymond Green, DeMar DeRozan,
+    Al Horford, Paul George, Jimmy Butler, Kyle Lowry, Devin Booker, Donovan
+    Mitchell, Ja Morant, Anthony Edwards, Domantas Sabonis, Jalen Brunson) —
+    in two cases (Edwards, Brunson) severe enough to miss a real 10,000-career-
+    point milestone. This is different from the small day-to-day snapshot lag
+    CLAUDE.md already accepts as fine (per-game rate stats staying accurate
+    even as `games`/career totals drift a bit) — these are large enough gaps
+    that a full re-verification (not a single-field patch) is warranted before
+    trusting them, and the exact replacement numbers weren't independently
+    double-checked with high confidence, so no edits were made for these 13
+    pending a dedicated follow-up. **This is also a preview of a maintenance
+    problem, not just a one-time data-entry problem**: any pack containing
+    still-active people/teams will keep drifting every season — see the new
+    note in `CLAUDE.md` about this.
 14. **"Easy" difficulty tier.** Conditional, not scheduled: only build this if playtesting still says the game is too hard after the two cheaper levers shipped 2026-08-18 (`SCORE_DECAY_RATE` softened 4→2.5, `REFERENCE_COUNT` bumped 3→5 — see `CLAUDE.md`). Don't build it preemptively just because it's the next idea on the list; wait for signal that the cheap levers weren't enough. Candidate mechanics for this tier, roughly in order of how big a lever each is:
     - **Reveal reference points' exact stat values**, not just name/position — turns the guess into interpolating between two known values instead of pure estimation. The biggest single lever of the three, and the original idea behind this item.
     - **Live score preview while dragging** — show an estimated score as the marker moves, before the guess locks in, so a player can adjust instead of committing blind. Doesn't change the underlying difficulty of estimating the right spot, but removes the "find out after" anxiety.
@@ -86,3 +117,4 @@
 22. **Add-to-home-screen / PWA manifest** — makes it feel more like an app when friends play repeatedly on their phones.
 23. **Footer stat-source disclaimer** — e.g. "Stats: 2023–24 season averages," for credibility once real players are looking closely.
 24. **Pack grouping/category UI** — CLAUDE.md has flagged since the geography pack that a flat toggle list would eventually need this "once several more non-sports packs exist (~15-20+)." The team-stats pack additions just pushed the count to 19, right at that threshold. Worth an actual look next time a pack gets added, rather than continuing to defer it.
+25. **Periodic refresh habit for active-roster packs.** Surfaced 2026-08-18 while verifying `players.json`: 13 of 108 NBA players' `games`/`career_*` totals had drifted a season or more out of date (two badly enough to miss a real 10,000-career-point milestone), and the prior pass found a similar concentration of NHL/NFL current-figure staleness. Every pack with still-active people/teams (NBA/WNBA/NHL/NFL/MLB rosters, all 5 team packs) will keep drifting every season — this isn't a one-time data-entry bug item 13 can ever fully "finish," it's a recurring maintenance need. Worth deciding on a cadence (e.g. revisit active-roster packs once a season) rather than re-discovering the same staleness pattern from scratch on the next verification pass. See `CLAUDE.md`'s `players.json` write-up for the full reasoning.

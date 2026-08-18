@@ -1053,6 +1053,53 @@ check remain the only fully-closed-out pieces of #13; Animals and the older
 sports-roster packs (players.json, ncaam/cfb/nfl player files, geography,
 movies, space, etc.) still haven't been touched by any verification pass.
 
+## `players.json` (NBA) verified — and a distinct "stale active player" problem, not a data-entry problem
+
+A follow-up pass fully checked all 108 NBA players — the flagship, most-played
+pack. Found: one plain data-entry slip (Jerry West's `career_reb` off by 10),
+three players with a real, knowable `three_pct` that had been omitted rather
+than recorded (Robert Parish, Kevin McHale, Buck Williams — all played
+entirely within the 3-point era, so a real percentage exists and omitting it
+was wrong, same principle as the era-gap rule elsewhere in this file, just
+applied to "should have this field but doesn't" instead of "shouldn't have
+it and doesn't"), and two genuine internal-consistency bugs — Russell
+Westbrook's and Kawhi Leonard's per-game `pts`/`reb` didn't match
+`career_pts ÷ games` computed from the file's *own* `career_pts`/`games`
+fields, meaning the career totals got updated at some point without
+recalculating the derived per-game average to match.
+
+**The more interesting finding: 13 active/recently-retired players'
+`games`/`career_*` totals lag their real current numbers, in a way that's
+qualitatively different from the day-to-day snapshot lag this file already
+accepts as fine.** The existing design principle (see "Data schema" above) is
+that career *per-game* stats (PPG, RPG, etc.) don't need refreshing every
+season — and for most active players checked, that held: rate stats matched
+exactly even though `games`/career totals were a partial season behind,
+confirming the file is a legitimate point-in-time snapshot, not broken. But
+13 players had gaps large enough (a full season or more; Devin Booker's
+`games` was ~128 games short, over 1.5 seasons) that two of them (Anthony
+Edwards, Jalen Brunson) actually missed a real reported milestone — both
+crossed 10,000 career points in-season, a fact the file's stale `career_pts`
+doesn't reflect. That's no longer "a snapshot that's slightly old," it's
+"a snapshot old enough to be materially wrong about something players might
+actually notice." No fixes were applied for these 13 — the replacement
+numbers came from AI-summarized page fetches (Basketball-Reference blocks
+direct fetches; Wikipedia/StatMuse fills the AI's summary, which isn't the
+same confidence level as reading the table yourself), so this needs a proper
+dedicated re-verification pass, not a quick patch with numbers this pass
+isn't confident enough in to commit to the file.
+
+**The bigger-picture lesson: any pack containing still-active people or
+teams is not a one-time data-entry problem, it's a recurring maintenance
+one.** Every pack with current players/teams (NBA, WNBA, NHL, NFL, MLB rosters
+and all 5 team packs) will keep drifting every season, the same way this pass
+just found 13 NBA players and (in the prior pass) an NHL/NFL systemic issue
+concentrated in current-season figures. Backlog #13 as originally scoped
+("verify accuracy" as a one-time task) doesn't capture this — worth deciding,
+next time this comes up, whether Griddle wants a periodic refresh habit (e.g.
+revisit active-roster packs once a season) rather than treating every
+verification pass as if it's the last one needed.
+
 ## Making Regular difficulty easier (2026-08-18) — two cheap levers before a bigger one
 
 A playtester's exact words: "cool, but way too hard." Two low-risk levers were
