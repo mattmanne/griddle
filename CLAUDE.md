@@ -1464,6 +1464,52 @@ sub-1% gap from the file when reconstructed from season-level box scores —
 left unfixed, since a reconstruction this indirect is at least as likely to
 be slightly off as the file itself.
 
+## `ncaam_players.json` verified (2026-08-18) — same no-drift-risk profile as CFB, but a real systemic pattern this time
+
+All 75 players checked. Same starting point as `football_cfb_players.json`
+above (every player has finished their college eligibility, so no
+roster-drift risk) — but this pass found something CFB's pass didn't: a
+genuine systemic error pattern, not scattered one-offs.
+
+**Errors clustered almost entirely in multi-season players' career-weighted
+stats, while true one-and-done freshmen came back clean.** Jimmer Fredette,
+Buddy Hield, Doug McDermott, Frank Mason III, Malcolm Brogdon, and Blake
+Griffin all had a wrong `games` count that cascaded into wrong per-game
+rates and shooting percentages — the shape of the bug looks like each
+player's per-game rate and games-played total were entered independently at
+some point rather than derived together from real season-by-season data,
+so the two silently drifted apart from each other. One-and-done freshmen
+(Durant, Zion, Towns, Ayton, Cunningham, Mobley, Holmgren, Banchero, and
+more) have no such risk by construction — a single season has no career
+aggregation step to get wrong. 13 players fixed in total, all games-count
+cascades or individual shooting-percentage errors.
+
+**DeMarcus Cousins' `three_pct: 0` was an actual data error, not the
+legitimate omission it looked like at a glance.** This file has several
+true centers with `three_pct: 0` (Shaquille O'Neal, Elton Brand, Greg Oden,
+Jahlil Okafor) who plausibly never attempted a college three — same
+"zero is sometimes real, not missing" principle as `coastline: 0` for a
+landlocked country (see "Data schema" above). Cousins looked like another
+one of these at a glance, but he actually shot 16.7% on non-trivial
+attempts per Wikipedia — his `0` was simply wrong, not a genuine
+zero-attempts case. Worth remembering: a value matching an established
+"this is sometimes legitimately zero" pattern still needs checking against
+the specific entry, not just pattern-matched against its neighbors.
+
+**One genuinely unresolved question, left open rather than guessed at:**
+David Robinson has no `three_pct` field at all, despite his Navy career
+(1983-87) spanning the 3-point line's 1986-87 introduction partway through.
+Unlike Cousins above, no source reachable this pass could confirm whether
+this is a legitimate zero-attempts omission (plausible for a center of that
+specific era) or a real gap — left as-is rather than fabricating either a
+value or an omission-justification that isn't actually confirmed.
+
+**This closes out the originally-scoped remainder of backlog #13's pack
+list — but auditing the full pack list surfaced one that was never on it:
+`wnba_players.json` has never been verified.** Every prior mention of
+"WNBA" in this item's history refers to WNBA *teams* (verified in the
+NBA/WNBA team-pack pass), never WNBA *players*. Worth picking up next.
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions

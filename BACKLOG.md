@@ -275,6 +275,49 @@
     landed exactly on the file's number — the prose sentence, not the file,
     was the outlier.
 
+    **Update (2026-08-18, `ncaam_players.json`):** all 75 players checked
+    (two batches, 37/38). Like the CFB pack, every player here has finished
+    their college eligibility, so no roster-drift risk — but unlike CFB,
+    this pass found a real, systemic pattern: **errors clustered heavily in
+    multi-season players' career-weighted stats** (their per-game rate and
+    games-played count look like they were computed independently rather
+    than derived together from real season-by-season data), while true
+    one-and-done freshmen (Durant, Davis, Zion, Towns, Young, Ayton,
+    Cunningham, Mobley, Holmgren, Banchero, and more) came back essentially
+    clean single-season copies. 13 players fixed: Sean Elliott (`three_pct`
+    42.8→45.6), Damian Lillard (`career_pts` 2270→1934 — Wikipedia states
+    his total explicitly), Jimmer Fredette, Buddy Hield, Doug McDermott,
+    Frank Mason III, and Malcolm Brogdon (all had wrong `games` counts
+    cascading into wrong per-game rates and shooting percentages — fixed
+    together as a set since a wrong games count invalidates every rate
+    stat derived from it), Blake Griffin (same games-count-cascade
+    pattern), DeMarcus Cousins (`fg_pct`/`ft_pct` corrected, and `three_pct`
+    was wrongly `0` — he did attempt/make 3s at 16.7%, an actual data error,
+    not a legitimate zero-attempts case), Andrew Wiggins (`ft_pct`),
+    Jahlil Okafor (`stl`), RJ Barrett (`pts`, small), Kemba Walker
+    (`career_ast`/`career_reb`). Left unfixed: Damian Lillard's `pts`/
+    `games` (flagged as likely also wrong, but no season-by-season table
+    was available to derive an exact replacement), and several low-
+    confidence items from older players (Ralph Sampson `ft_pct`, Bill
+    Bradley `ft_pct`, Patrick Ewing `career_pts`, Elgin Baylor's games/pts/
+    reb scope question) where the available source didn't clearly
+    contradict the file. **One genuinely open question, not resolved this
+    pass:** David Robinson has no `three_pct` field at all, despite his
+    Navy career (1983-87) spanning the 3-point line's 1986-87 introduction
+    — could be a legitimate zero-attempts omission for a center of that
+    era, or a real gap that should read `three_pct: 0`. No source reachable
+    this pass could settle it either way; the other three centers in the
+    file with `three_pct: 0` (Shaq, Elton Brand, Greg Oden) plus Okafor
+    were spot-checked and all look like genuine zero-attempt cases, so this
+    isn't a systemic gap, just one unresolved player.
+
+    **`ncaam_players.json` was the last of the originally-scoped 8 remaining
+    packs from item 13's list, but a full audit turned up one pack that was
+    never actually in that list: `wnba_players.json` has never been
+    verified at all** — every session-history mention of "WNBA" in this
+    item's updates refers to *WNBA teams* (verified), never WNBA *players*.
+    Worth picking up next.
+
     **Update (2026-08-18, `movies.json`):** first non-roster pack checked —
     deliberately picked to get off the "active roster drift" pattern above,
     and it confirmed this pack has a genuinely different risk profile, not
