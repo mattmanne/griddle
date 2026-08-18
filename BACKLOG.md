@@ -251,6 +251,30 @@
     within an active-roster pack is still possible (injury/trade cases),
     even when the pack overall needs fixing.
 
+    **Update (2026-08-18, `football_cfb_players.json`):** all 75 players
+    checked (two batches, 37/38). Unlike the NFL/NBA/NHL/MLB packs, every
+    player here has already finished their college eligibility (all now in
+    the NFL or retired), so there's no "still-active, stats still
+    accumulating" risk — the actual risk for this pack is data-entry error
+    or a stat pulled from the wrong sample size (mixing NFL-scale career
+    totals into a 2-4-year college line). Only 1 fix applied: Tim Tebow's
+    `comp_pct` (66.4→67.1) — his career passing line (9,286 yds, 88 TD, 55
+    games) matched the file exactly, and Florida's own season-by-season
+    completion table summed to 67.1%, not 66.4%. 73 of 75 players confirmed
+    fully correct, including several (Randy Moss, Tim Brown, Desmond
+    Howard) whose Wikipedia pages predate the standard college-stats-table
+    format and needed reconciling against career-total prose instead. Cam
+    Newton's `career_pass_yds`/`rush_yds` were flagged at low confidence
+    (a ~14-yard/~0.5% gap reconstructing his combined Florida+Auburn totals
+    from season-level box scores, since no single source has one clean
+    combined table for his split college career) but left unfixed — the gap
+    is small enough that a reconstruction error is at least as likely as a
+    file error. One near-miss worth noting: Troy Aikman's passer `rating`
+    initially looked inconsistent with a Wikipedia prose figure, but
+    recomputing the actual NCAA formula from the file's own career totals
+    landed exactly on the file's number — the prose sentence, not the file,
+    was the outlier.
+
     **Update (2026-08-18, `movies.json`):** first non-roster pack checked —
     deliberately picked to get off the "active roster drift" pattern above,
     and it confirmed this pack has a genuinely different risk profile, not

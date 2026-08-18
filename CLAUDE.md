@@ -1431,6 +1431,39 @@ Kamara, Chubb, and Taylor specifically because no updated carry-attempt
 total was available to recompute it from — a case where the reasoning
 *wasn't* available, so it stayed unfixed despite the same overall pattern.
 
+## `football_cfb_players.json` verified (2026-08-18) — a roster pack with no roster-drift risk
+
+All 75 players checked. This pack looks like every other sports-roster pack
+at a glance, but has a structurally different risk profile: every player
+listed has already finished their college eligibility (they're all now in
+the NFL or retired), so there's no "still active, stats still accumulating"
+staleness bug to find here — the whole "active roster needs periodic
+refresh" pattern documented at length above for NBA/NHL/MLB/NFL simply
+doesn't apply to a pack whose entries are all, by construction, complete
+careers. The actual risk instead is what movies.json and animals.json
+already demonstrated: plain data-entry error, or (specific to this pack)
+mixing in a much-larger-sample NFL career figure where a short college
+career total belongs.
+
+Only 1 fix needed: Tim Tebow's `comp_pct` (66.4→67.1) — his other career
+totals matched exactly, and Florida's own season-by-season table summed to
+a different completion percentage than the file had. 73 of 75 checked out
+clean, including several older players (Randy Moss, Tim Brown, Desmond
+Howard) whose Wikipedia pages predate the standard stats-table format and
+needed reconciling against career-total prose instead of a clean table.
+
+**Worth remembering: a verification agent's own reconstruction can be the
+thing that's wrong, not the file.** Troy Aikman's passer `rating` initially
+looked like it might conflict with a Wikipedia sentence citing a different
+combined figure — but recomputing the actual NCAA passer-rating formula
+directly from the file's own career totals landed exactly on the file's
+number. The prose sentence was the outlier, not the data. Cam Newton's
+split Florida/Auburn career (no single source has one clean combined table,
+since he transferred through a juco in between) produced two figures with a
+sub-1% gap from the file when reconstructed from season-level box scores —
+left unfixed, since a reconstruction this indirect is at least as likely to
+be slightly off as the file itself.
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions
