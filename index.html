@@ -110,25 +110,65 @@
     <div class="settings-section">
       <h3 class="settings-heading">Packs <span id="pack-count-summary"></span></h3>
       <div class="pack-switch" role="group" aria-label="Choose packs (select one or more)">
-        <button type="button" class="pack-btn active" data-pack="nba" aria-pressed="true">🏀 NBA Players</button>
-        <button type="button" class="pack-btn active" data-pack="wnba" aria-pressed="true">⛹️‍♀️ WNBA Players</button>
-        <button type="button" class="pack-btn active" data-pack="ncaam" aria-pressed="true">🏀 NCAA Players</button>
-        <button type="button" class="pack-btn active" data-pack="mlb" aria-pressed="true">⚾ MLB Players</button>
-        <button type="button" class="pack-btn active" data-pack="nhl" aria-pressed="true">🏒 NHL Players</button>
-        <button type="button" class="pack-btn active" data-pack="football_cfb" aria-pressed="true">🏈 CFB Players</button>
-        <button type="button" class="pack-btn active" data-pack="football_nfl" aria-pressed="true">🏈 NFL Players</button>
-        <button type="button" class="pack-btn active" data-pack="geo_countries" aria-pressed="true">🌍 Countries</button>
-        <button type="button" class="pack-btn active" data-pack="geo_states" aria-pressed="true">🗽 US States</button>
-        <button type="button" class="pack-btn active" data-pack="movies" aria-pressed="true">🎬 Movies</button>
-        <button type="button" class="pack-btn active" data-pack="space_planets" aria-pressed="true">🪐 Planets</button>
-        <button type="button" class="pack-btn active" data-pack="animals" aria-pressed="true">🐾 Animals</button>
-        <button type="button" class="pack-btn active" data-pack="music_artists" aria-pressed="true">🎤 Music</button>
-        <button type="button" class="pack-btn active" data-pack="presidents" aria-pressed="true">🎩 Presidents</button>
-        <button type="button" class="pack-btn active" data-pack="nba_teams" aria-pressed="true">🏀 NBA Teams</button>
-        <button type="button" class="pack-btn active" data-pack="wnba_teams" aria-pressed="true">⛹️‍♀️ WNBA Teams</button>
-        <button type="button" class="pack-btn active" data-pack="mlb_teams" aria-pressed="true">⚾ MLB Teams</button>
-        <button type="button" class="pack-btn active" data-pack="nhl_teams" aria-pressed="true">🏒 NHL Teams</button>
-        <button type="button" class="pack-btn active" data-pack="nfl_teams" aria-pressed="true">🏈 NFL Teams</button>
+        <div class="pack-group">
+          <h4 class="pack-group-heading">🏀 Basketball</h4>
+          <div class="pack-group-buttons">
+            <button type="button" class="pack-btn active" data-pack="nba" aria-pressed="true">🏀 NBA Players</button>
+            <button type="button" class="pack-btn active" data-pack="wnba" aria-pressed="true">⛹️‍♀️ WNBA Players</button>
+            <button type="button" class="pack-btn active" data-pack="ncaam" aria-pressed="true">🏀 NCAA Players</button>
+            <button type="button" class="pack-btn active" data-pack="nba_teams" aria-pressed="true">🏀 NBA Teams</button>
+            <button type="button" class="pack-btn active" data-pack="wnba_teams" aria-pressed="true">⛹️‍♀️ WNBA Teams</button>
+          </div>
+        </div>
+        <div class="pack-group">
+          <h4 class="pack-group-heading">⚾ Baseball</h4>
+          <div class="pack-group-buttons">
+            <button type="button" class="pack-btn active" data-pack="mlb" aria-pressed="true">⚾ MLB Players</button>
+            <button type="button" class="pack-btn active" data-pack="mlb_teams" aria-pressed="true">⚾ MLB Teams</button>
+          </div>
+        </div>
+        <div class="pack-group">
+          <h4 class="pack-group-heading">🏒 Hockey</h4>
+          <div class="pack-group-buttons">
+            <button type="button" class="pack-btn active" data-pack="nhl" aria-pressed="true">🏒 NHL Players</button>
+            <button type="button" class="pack-btn active" data-pack="nhl_teams" aria-pressed="true">🏒 NHL Teams</button>
+          </div>
+        </div>
+        <div class="pack-group">
+          <h4 class="pack-group-heading">🏈 Football</h4>
+          <div class="pack-group-buttons">
+            <button type="button" class="pack-btn active" data-pack="football_cfb" aria-pressed="true">🏈 CFB Players</button>
+            <button type="button" class="pack-btn active" data-pack="football_nfl" aria-pressed="true">🏈 NFL Players</button>
+            <button type="button" class="pack-btn active" data-pack="nfl_teams" aria-pressed="true">🏈 NFL Teams</button>
+          </div>
+        </div>
+        <div class="pack-group">
+          <h4 class="pack-group-heading">🌍 Geography</h4>
+          <div class="pack-group-buttons">
+            <button type="button" class="pack-btn active" data-pack="geo_countries" aria-pressed="true">🌍 Countries</button>
+            <button type="button" class="pack-btn active" data-pack="geo_states" aria-pressed="true">🗽 US States</button>
+          </div>
+        </div>
+        <div class="pack-group">
+          <h4 class="pack-group-heading">🎬 Entertainment</h4>
+          <div class="pack-group-buttons">
+            <button type="button" class="pack-btn active" data-pack="movies" aria-pressed="true">🎬 Movies</button>
+            <button type="button" class="pack-btn active" data-pack="music_artists" aria-pressed="true">🎤 Music</button>
+          </div>
+        </div>
+        <div class="pack-group">
+          <h4 class="pack-group-heading">🔭 Science</h4>
+          <div class="pack-group-buttons">
+            <button type="button" class="pack-btn active" data-pack="space_planets" aria-pressed="true">🪐 Planets</button>
+            <button type="button" class="pack-btn active" data-pack="animals" aria-pressed="true">🐾 Animals</button>
+          </div>
+        </div>
+        <div class="pack-group">
+          <h4 class="pack-group-heading">🎩 History</h4>
+          <div class="pack-group-buttons">
+            <button type="button" class="pack-btn active" data-pack="presidents" aria-pressed="true">🎩 Presidents</button>
+          </div>
+        </div>
       </div>
     </div>
   </details>

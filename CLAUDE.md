@@ -1148,6 +1148,35 @@ conditional: build this tier (and pick which mechanic(s)) only if playtesting
 still says "too hard" after the softer curve + more reference points ship,
 not preemptively.
 
+## Pack grouping (2026-08-18) — backlog #24, and why it needed zero JS changes
+
+The flat 19-button `.pack-switch` list finally got the category headers
+CLAUDE.md flagged as coming "once several more non-sports packs exist" back
+when the geography pack shipped. Grouped by sport/domain (a sport's player
+pack and its team pack sit together — Basketball holds NBA/WNBA/NCAA/NBA
+Teams/WNBA Teams as one group, not player packs in one bucket and team packs
+in another) rather than by "Player Stats vs. Team Stats vs. Trivia" — a
+domain-first mental model ("I want basketball") over a schema-first one
+("I want player packs"), since a player picking packs thinks in terms of
+what they're a fan of, not which internal `statDefs` object a pack happens to
+share. Visual grouping only — no per-category "select all" bulk action  —
+keeps this a pure layout change.
+
+**Why this needed zero `app.js` changes.** `packButtons` is built from
+`document.querySelectorAll('.pack-btn')`, and every click handler/
+`updatePackUI()` sync operates on that flat NodeList via each button's own
+`dataset.pack` — none of it cares how deeply a `.pack-btn` is nested inside
+the DOM, only that the class and `data-pack` attribute exist. Wrapping each
+group's buttons in a `<div class="pack-group">` with a `<h4>` heading is
+purely additive markup; the only CSS change needed was making `.pack-switch`
+itself a vertical flex column (was previously the *direct* flex-wrap
+container for the buttons) and moving the `flex-wrap: wrap` behavior down one
+level to a new `.pack-group-buttons` wrapper. This is the same lesson the
+Settings-panel consolidation surfaced: as long as a feature's JS keys off
+stable classes/IDs on the leaf elements rather than DOM structure/depth,
+restructuring the surrounding markup for a UI change like this is close to
+free.
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions

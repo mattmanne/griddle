@@ -136,9 +136,24 @@ body {
 
 .pack-switch {
   display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 6px 0 10px;
+}
+
+.pack-group-heading {
+  margin: 0 0 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pack-group-buttons {
+  display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 6px 0 10px;
 }
 
 .pack-btn {
