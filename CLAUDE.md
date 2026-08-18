@@ -1393,6 +1393,44 @@ figure a debunked 1930s force-calculation claim, so there's unusually high
 confidence the number itself is wrong, but still no confidently-sourced
 correct swordfish speed to swap in. Both stayed as-is.
 
+## `football_nfl_players.json` verified (2026-08-18) — a fourth sport confirms the pattern, with one new wrinkle
+
+All 75 players checked. This is the fourth sports-roster pack this session
+to hit the "active player stats lag reality" bug already documented above
+for NBA/NHL/MLB — 17 players fixed (5 QBs: Mahomes, Josh Allen, Herbert,
+Lamar Jackson, Burrow; 12 RB/WRs: Henry, McCaffrey, Barkley, Kamara, Chubb,
+Taylor, Bijan Robinson, Jefferson, Chase, Lamb, Evans, Keenan Allen),
+`games`/career totals plus recomputed per-game rates in every case.
+
+**The new wrinkle: not every active player was stale, and the exceptions
+have a real explanation each time, not randomness.** Stafford and Goff were
+already fully current — the pack seems to have been built right after the
+2025 season closed for those two specifically. Ezekiel Elliott, Tyreek Hill,
+and Odell Beckham Jr. were also already correct, but for a different
+reason: each missed most or all of a recent season (a practice-squad cut,
+an injury-shortened year), so there simply wasn't enough new game data to
+move their totals since the pack was built. Davante Adams and Stefon Diggs
+checked out too. The lesson: "this pack has active players" predicts *some*
+staleness risk, but doesn't mean every active player individually needs a
+fix — verify each one rather than assuming the pattern applies uniformly.
+
+**Confidence bar applied per-player, not per-pack.** 5 QBs and 3 of the 12
+RB/WR fixes (Henry, Barkley, Jefferson) were corroborated by two independent
+sources (Wikipedia + StatMuse) — high confidence, same bar as the NHL/MLB
+passes. The other 9 RB/WR fixes were single-source Wikipedia, which the
+agent itself rated medium confidence — applied anyway, because the specific
+numbers weren't an isolated guess: they matched the exact direction and
+shape of the same bug already confirmed at high confidence elsewhere in this
+same pack (a snapshot that predates the 2025 season's end), and each
+player's per-game rate recomputed correctly from career_total ÷ games. A
+number can be "single-sourced" and still be a safe fix when the *reasoning*
+generating it is independently well-established, versus a genuinely
+uncertain fact where a second source is the only thing that would add
+confidence. `ypc` (yards per carry) was left unfixed for Henry, McCaffrey,
+Kamara, Chubb, and Taylor specifically because no updated carry-attempt
+total was available to recompute it from — a case where the reasoning
+*wasn't* available, so it stayed unfixed despite the same overall pattern.
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions

@@ -224,6 +224,33 @@
     replacement was found either — flagging a number as wrong isn't the
     same as having a number to replace it with).
 
+    **Update (2026-08-18, `football_nfl_players.json`):** all 75 players
+    checked (two batches, ~37 each). A fourth sport hitting the identical
+    active-roster-drift pattern — but with a twist: not every active player
+    was stale. Stafford, Goff, Ezekiel Elliott, Davante Adams, Tyreek Hill,
+    Stefon Diggs, and Odell Beckham Jr. were all confirmed already fully
+    current (several because a season-ending injury or a trade-deadline cut
+    meant they simply hadn't played enough new games to move their totals).
+    **17 players fixed** — `games`/career totals plus recomputed per-game
+    rates: 5 QBs (Mahomes, Josh Allen, Herbert, Lamar Jackson, Burrow — all
+    high confidence, two independent sources agreeing) and 12 RB/WRs (Derrick
+    Henry, Saquon Barkley, Justin Jefferson — high confidence, two sources;
+    Christian McCaffrey, Alvin Kamara, Nick Chubb, Jonathan Taylor, Bijan
+    Robinson, Ja'Marr Chase, CeeDee Lamb, Mike Evans, Keenan Allen — medium
+    confidence, single-source Wikipedia, applied anyway since the pattern,
+    direction, and internal career-total÷games consistency all matched the
+    same well-established bug this project keeps finding, not a genuinely
+    uncertain fact). `ypc` (yards per carry) couldn't be recomputed for
+    Henry/McCaffrey/Kamara/Chubb/Taylor — no updated carry-attempt total was
+    available from the sources checked — so those were left as-is rather
+    than guessed at; Barkley's and Bijan Robinson's `ypc` *were* updated
+    since their sources did include attempts. **100% of active-roster packs
+    checked this session (NBA, NHL, MLB hitters, NFL) have now needed at
+    least one active-player correction** — this pack is no exception to the
+    rule, just a reminder that "no update needed" for a specific player
+    within an active-roster pack is still possible (injury/trade cases),
+    even when the pack overall needs fixing.
+
     **Update (2026-08-18, `movies.json`):** first non-roster pack checked —
     deliberately picked to get off the "active roster drift" pattern above,
     and it confirmed this pack has a genuinely different risk profile, not
