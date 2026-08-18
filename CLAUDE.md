@@ -114,8 +114,8 @@ equality) confirming `HOOPS_STAT_DEFS`/`FOOTBALL_STAT_DEFS`/`TEAM_STAT_DEFS` are
 genuinely shared across the packs CLAUDE.md says share them, not accidentally
 forked copies, and `pickReferenceEntries`/`pickEligiblePairForEntry` coverage
 for the difficulty-mode and forced-entry-pair logic added later.
-`test/data.test.js` (95 tests) is a different kind of check entirely — it reads
-all 19 pack JSON files directly off disk (no `lib/pure.js` logic involved beyond
+`test/data.test.js` is a different kind of check entirely — it reads
+every pack JSON file directly off disk (no `lib/pure.js` logic involved beyond
 using `PACKS`/`eligibleEntries` as the source of truth for what "valid" means)
 and verifies structural integrity: no duplicate names within a file, no stray
 fields outside that pack's `statDefs`, every present stat field is a finite
@@ -1176,6 +1176,50 @@ Settings-panel consolidation surfaced: as long as a feature's JS keys off
 stable classes/IDs on the leaf elements rather than DOM structure/depth,
 restructuring the surrounding markup for a UI change like this is close to
 free.
+
+## MLB Pitchers (2026-08-18) — the "later" item from backlog #2, finally built
+
+Backlog #2 (adding MLB hitters) flagged pitchers as a deliberate later
+addition — "separate stat set from hitters" — back when the multi-sport
+architecture was first built. 72 pitchers (`mlb_pitchers.json`, a new
+`mlb_pitchers` entry in `PACKS`), spanning Cy Young through 2026's active
+staff, with `defaultPair: ['era', 'strikeouts']`. Zero new engine code, same
+lesson every content addition since item 6 has confirmed — a pitcher is just
+another named entry with numeric stats, exactly like a hitter or a team.
+
+**Schema decision: `era`/`whip`/`k9` stay plain decimals, unlike batting
+average/OBP/slugging's whole-number scaling.** The scaling rule in this file's
+"Data schema" section exists specifically for stats that are naturally
+confined to a narrow 0–1 band (batting average, shooting percentages) —
+without it, `axisRangeForStat`'s floor/ceil would collapse the *entire* pool's
+real variation into a tiny sliver of the axis. ERA (~1.5–5), WHIP (~0.9–1.5),
+and K/9 (~4–13) don't have that problem: each already spans several tenths-to-
+whole-units across this pool, so floor/ceil produces a proportionate axis
+without any scaling trick. Storing them as plain decimals also means they
+*display* the way pitching stats are actually discussed ("2.94 ERA," "1.15
+WHIP") — scaling WHIP to a whole number (e.g. `115`) would have avoided a
+non-issue at the cost of making the displayed number look unfamiliar to
+anyone who follows baseball. `saves` is legitimately `0` for most starters —
+a real value (no save opportunities), never omitted, same principle as
+`coastline: 0` for a landlocked country.
+
+**Pack-toggle button text needed a rename this time, not just a new
+button.** With two MLB player packs now (hitters and pitchers), the existing
+"MLB Players" button/Kitchen-Prep-option text became ambiguous — which one?
+Renamed to "MLB Hitters" alongside the new "MLB Pitchers," the same kind of
+disambiguation-by-necessity that added "Players"/"Teams" suffixes in the
+first place once team packs existed (see the pack-toggle-labeling note
+above) — a label only needs to be more specific once something else it could
+be confused with actually exists.
+
+**Data compiled from three parallel research batches (24 pitchers each),
+same pattern as every pack-verification pass this session** — split across
+eras (pre-1970s legends, 1970s-2000s Hall of Famers, 2010s-2026 active
+staff) rather than alphabetically, so each agent's "is this pitcher active,
+and is Aug-2026 data current" judgment call only had to be made for the
+batch that actually needed it. All 72 came back with real numbers and zero
+`?` placeholders — no partial/incomplete entries to chase down before
+shipping, unlike some of the verification passes' `?`-flagged gaps.
 
 ## Deployment
 

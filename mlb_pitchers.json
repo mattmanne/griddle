@@ -1,0 +1,650 @@
+[
+  {
+    "name": "Cy Young",
+    "era": 2.63,
+    "whip": 1.13,
+    "k9": 3.43,
+    "wins": 511,
+    "strikeouts": 2803,
+    "saves": 17
+  },
+  {
+    "name": "Walter Johnson",
+    "era": 2.17,
+    "whip": 1.06,
+    "k9": 5.34,
+    "wins": 417,
+    "strikeouts": 3509,
+    "saves": 34
+  },
+  {
+    "name": "Christy Mathewson",
+    "era": 2.13,
+    "whip": 1.06,
+    "k9": 4.71,
+    "wins": 373,
+    "strikeouts": 2507,
+    "saves": 30
+  },
+  {
+    "name": "Grover Cleveland Alexander",
+    "era": 2.56,
+    "whip": 1.12,
+    "k9": 3.81,
+    "wins": 373,
+    "strikeouts": 2198,
+    "saves": 32
+  },
+  {
+    "name": "Lefty Grove",
+    "era": 3.06,
+    "whip": 1.28,
+    "k9": 5.18,
+    "wins": 300,
+    "strikeouts": 2266,
+    "saves": 54
+  },
+  {
+    "name": "Carl Hubbell",
+    "era": 2.98,
+    "whip": 1.17,
+    "k9": 4.2,
+    "wins": 253,
+    "strikeouts": 1677,
+    "saves": 33
+  },
+  {
+    "name": "Dizzy Dean",
+    "era": 3.02,
+    "whip": 1.21,
+    "k9": 5.32,
+    "wins": 150,
+    "strikeouts": 1163,
+    "saves": 31
+  },
+  {
+    "name": "Bob Feller",
+    "era": 3.25,
+    "whip": 1.32,
+    "k9": 6.07,
+    "wins": 266,
+    "strikeouts": 2581,
+    "saves": 22
+  },
+  {
+    "name": "Warren Spahn",
+    "era": 3.09,
+    "whip": 1.19,
+    "k9": 4.43,
+    "wins": 363,
+    "strikeouts": 2583,
+    "saves": 28
+  },
+  {
+    "name": "Whitey Ford",
+    "era": 2.75,
+    "whip": 1.22,
+    "k9": 5.55,
+    "wins": 236,
+    "strikeouts": 1956,
+    "saves": 11
+  },
+  {
+    "name": "Sandy Koufax",
+    "era": 2.76,
+    "whip": 1.11,
+    "k9": 9.28,
+    "wins": 165,
+    "strikeouts": 2396,
+    "saves": 9
+  },
+  {
+    "name": "Bob Gibson",
+    "era": 2.91,
+    "whip": 1.19,
+    "k9": 7.22,
+    "wins": 251,
+    "strikeouts": 3117,
+    "saves": 6
+  },
+  {
+    "name": "Juan Marichal",
+    "era": 2.89,
+    "whip": 1.1,
+    "k9": 5.91,
+    "wins": 243,
+    "strikeouts": 2303,
+    "saves": 2
+  },
+  {
+    "name": "Don Drysdale",
+    "era": 2.95,
+    "whip": 1.15,
+    "k9": 6.52,
+    "wins": 209,
+    "strikeouts": 2486,
+    "saves": 6
+  },
+  {
+    "name": "Early Wynn",
+    "era": 3.54,
+    "whip": 1.33,
+    "k9": 4.6,
+    "wins": 300,
+    "strikeouts": 2334,
+    "saves": 16
+  },
+  {
+    "name": "Robin Roberts",
+    "era": 3.41,
+    "whip": 1.17,
+    "k9": 4.52,
+    "wins": 286,
+    "strikeouts": 2357,
+    "saves": 25
+  },
+  {
+    "name": "Gaylord Perry",
+    "era": 3.11,
+    "whip": 1.18,
+    "k9": 5.95,
+    "wins": 314,
+    "strikeouts": 3534,
+    "saves": 10
+  },
+  {
+    "name": "Steve Carlton",
+    "era": 3.22,
+    "whip": 1.25,
+    "k9": 7.13,
+    "wins": 329,
+    "strikeouts": 4136,
+    "saves": 2
+  },
+  {
+    "name": "Tom Seaver",
+    "era": 2.86,
+    "whip": 1.12,
+    "k9": 6.85,
+    "wins": 311,
+    "strikeouts": 3640,
+    "saves": 1
+  },
+  {
+    "name": "Nolan Ryan",
+    "era": 3.19,
+    "whip": 1.25,
+    "k9": 9.55,
+    "wins": 324,
+    "strikeouts": 5714,
+    "saves": 3
+  },
+  {
+    "name": "Jim Palmer",
+    "era": 2.86,
+    "whip": 1.18,
+    "k9": 5.04,
+    "wins": 268,
+    "strikeouts": 2212,
+    "saves": 4
+  },
+  {
+    "name": "Fergie Jenkins",
+    "era": 3.34,
+    "whip": 1.14,
+    "k9": 6.38,
+    "wins": 284,
+    "strikeouts": 3192,
+    "saves": 7
+  },
+  {
+    "name": "Phil Niekro",
+    "era": 3.35,
+    "whip": 1.27,
+    "k9": 5.57,
+    "wins": 318,
+    "strikeouts": 3342,
+    "saves": 29
+  },
+  {
+    "name": "Don Sutton",
+    "era": 3.26,
+    "whip": 1.14,
+    "k9": 6.09,
+    "wins": 324,
+    "strikeouts": 3574,
+    "saves": 5
+  },
+  {
+    "name": "Bert Blyleven",
+    "era": 3.31,
+    "whip": 1.2,
+    "k9": 6.7,
+    "wins": 287,
+    "strikeouts": 3701,
+    "saves": 0
+  },
+  {
+    "name": "Catfish Hunter",
+    "era": 3.26,
+    "whip": 1.13,
+    "k9": 5.25,
+    "wins": 224,
+    "strikeouts": 2012,
+    "saves": 1
+  },
+  {
+    "name": "Rollie Fingers",
+    "era": 2.9,
+    "whip": 1.16,
+    "k9": 6.87,
+    "wins": 114,
+    "strikeouts": 1299,
+    "saves": 341
+  },
+  {
+    "name": "Goose Gossage",
+    "era": 3.01,
+    "whip": 1.23,
+    "k9": 7.47,
+    "wins": 124,
+    "strikeouts": 1502,
+    "saves": 310
+  },
+  {
+    "name": "Bruce Sutter",
+    "era": 2.83,
+    "whip": 1.14,
+    "k9": 7.44,
+    "wins": 68,
+    "strikeouts": 861,
+    "saves": 300
+  },
+  {
+    "name": "Dennis Eckersley",
+    "era": 3.5,
+    "whip": 1.16,
+    "k9": 6.58,
+    "wins": 197,
+    "strikeouts": 2401,
+    "saves": 390
+  },
+  {
+    "name": "Jack Morris",
+    "era": 3.9,
+    "whip": 1.3,
+    "k9": 5.83,
+    "wins": 254,
+    "strikeouts": 2478,
+    "saves": 0
+  },
+  {
+    "name": "Orel Hershiser",
+    "era": 3.48,
+    "whip": 1.26,
+    "k9": 5.79,
+    "wins": 204,
+    "strikeouts": 2014,
+    "saves": 5
+  },
+  {
+    "name": "Lee Smith",
+    "era": 3.03,
+    "whip": 1.26,
+    "k9": 8.73,
+    "wins": 71,
+    "strikeouts": 1251,
+    "saves": 478
+  },
+  {
+    "name": "Greg Maddux",
+    "era": 3.16,
+    "whip": 1.14,
+    "k9": 6.06,
+    "wins": 355,
+    "strikeouts": 3371,
+    "saves": 0
+  },
+  {
+    "name": "Randy Johnson",
+    "era": 3.29,
+    "whip": 1.17,
+    "k9": 10.61,
+    "wins": 303,
+    "strikeouts": 4875,
+    "saves": 2
+  },
+  {
+    "name": "Roger Clemens",
+    "era": 3.12,
+    "whip": 1.17,
+    "k9": 8.55,
+    "wins": 354,
+    "strikeouts": 4672,
+    "saves": 0
+  },
+  {
+    "name": "John Smoltz",
+    "era": 3.33,
+    "whip": 1.18,
+    "k9": 7.99,
+    "wins": 213,
+    "strikeouts": 3084,
+    "saves": 154
+  },
+  {
+    "name": "Tom Glavine",
+    "era": 3.54,
+    "whip": 1.31,
+    "k9": 5.32,
+    "wins": 305,
+    "strikeouts": 2607,
+    "saves": 0
+  },
+  {
+    "name": "David Cone",
+    "era": 3.46,
+    "whip": 1.26,
+    "k9": 8.28,
+    "wins": 194,
+    "strikeouts": 2688,
+    "saves": 1
+  },
+  {
+    "name": "Curt Schilling",
+    "era": 3.46,
+    "whip": 1.14,
+    "k9": 8.6,
+    "wins": 216,
+    "strikeouts": 3116,
+    "saves": 22
+  },
+  {
+    "name": "Mike Mussina",
+    "era": 3.68,
+    "whip": 1.19,
+    "k9": 7.11,
+    "wins": 270,
+    "strikeouts": 2813,
+    "saves": 0
+  },
+  {
+    "name": "John Franco",
+    "era": 2.89,
+    "whip": 1.33,
+    "k9": 7.04,
+    "wins": 90,
+    "strikeouts": 975,
+    "saves": 424
+  },
+  {
+    "name": "Trevor Hoffman",
+    "era": 2.87,
+    "whip": 1.06,
+    "k9": 9.36,
+    "wins": 61,
+    "strikeouts": 1133,
+    "saves": 601
+  },
+  {
+    "name": "Pedro Martinez",
+    "era": 2.93,
+    "whip": 1.05,
+    "k9": 10.04,
+    "wins": 219,
+    "strikeouts": 3154,
+    "saves": 3
+  },
+  {
+    "name": "Roy Halladay",
+    "era": 3.38,
+    "whip": 1.18,
+    "k9": 6.93,
+    "wins": 203,
+    "strikeouts": 2117,
+    "saves": 1
+  },
+  {
+    "name": "Mariano Rivera",
+    "era": 2.21,
+    "whip": 1,
+    "k9": 8.22,
+    "wins": 82,
+    "strikeouts": 1173,
+    "saves": 652
+  },
+  {
+    "name": "Billy Wagner",
+    "era": 2.31,
+    "whip": 1,
+    "k9": 11.92,
+    "wins": 47,
+    "strikeouts": 1196,
+    "saves": 422
+  },
+  {
+    "name": "Johan Santana",
+    "era": 3.2,
+    "whip": 1.13,
+    "k9": 8.83,
+    "wins": 139,
+    "strikeouts": 1988,
+    "saves": 0
+  },
+  {
+    "name": "CC Sabathia",
+    "era": 3.74,
+    "whip": 1.26,
+    "k9": 7.78,
+    "wins": 251,
+    "strikeouts": 3093,
+    "saves": 0
+  },
+  {
+    "name": "Francisco Rodriguez",
+    "era": 2.86,
+    "whip": 1.15,
+    "k9": 10.6,
+    "wins": 52,
+    "strikeouts": 1142,
+    "saves": 437
+  },
+  {
+    "name": "Justin Verlander",
+    "era": 3.33,
+    "whip": 1.14,
+    "k9": 8.96,
+    "wins": 266,
+    "strikeouts": 3554,
+    "saves": 0
+  },
+  {
+    "name": "Max Scherzer",
+    "era": 3.26,
+    "whip": 1.09,
+    "k9": 10.55,
+    "wins": 221,
+    "strikeouts": 3520,
+    "saves": 0
+  },
+  {
+    "name": "Clayton Kershaw",
+    "era": 2.53,
+    "whip": 1.02,
+    "k9": 9.62,
+    "wins": 223,
+    "strikeouts": 3052,
+    "saves": 0
+  },
+  {
+    "name": "Zack Greinke",
+    "era": 3.49,
+    "whip": 1.17,
+    "k9": 7.91,
+    "wins": 225,
+    "strikeouts": 2979,
+    "saves": 1
+  },
+  {
+    "name": "Chris Sale",
+    "era": 2.96,
+    "whip": 1.04,
+    "k9": 11.14,
+    "wins": 157,
+    "strikeouts": 2739,
+    "saves": 12
+  },
+  {
+    "name": "Felix Hernandez",
+    "era": 3.42,
+    "whip": 1.21,
+    "k9": 8.32,
+    "wins": 169,
+    "strikeouts": 2524,
+    "saves": 0
+  },
+  {
+    "name": "Craig Kimbrel",
+    "era": 2.67,
+    "whip": 1.03,
+    "k9": 13.79,
+    "wins": 56,
+    "strikeouts": 1314,
+    "saves": 440
+  },
+  {
+    "name": "Aroldis Chapman",
+    "era": 2.5,
+    "whip": 1.08,
+    "k9": 14.44,
+    "wins": 62,
+    "strikeouts": 1383,
+    "saves": 394
+  },
+  {
+    "name": "Kenley Jansen",
+    "era": 2.61,
+    "whip": 0.97,
+    "k9": 12.33,
+    "wins": 57,
+    "strikeouts": 1317,
+    "saves": 491
+  },
+  {
+    "name": "Jacob deGrom",
+    "era": 2.67,
+    "whip": 1,
+    "k9": 10.83,
+    "wins": 104,
+    "strikeouts": 1998,
+    "saves": 0
+  },
+  {
+    "name": "Madison Bumgarner",
+    "era": 3.47,
+    "whip": 1.15,
+    "k9": 8.43,
+    "wins": 134,
+    "strikeouts": 2070,
+    "saves": 0
+  },
+  {
+    "name": "Gerrit Cole",
+    "era": 3.18,
+    "whip": 1.09,
+    "k9": 10.33,
+    "wins": 159,
+    "strikeouts": 2343,
+    "saves": 0
+  },
+  {
+    "name": "Shane Bieber",
+    "era": 3.33,
+    "whip": 1.13,
+    "k9": 9.97,
+    "wins": 70,
+    "strikeouts": 1032,
+    "saves": 0
+  },
+  {
+    "name": "Sandy Alcantara",
+    "era": 3.62,
+    "whip": 1.17,
+    "k9": 7.66,
+    "wins": 65,
+    "strikeouts": 1061,
+    "saves": 0
+  },
+  {
+    "name": "Spencer Strider",
+    "era": 3.86,
+    "whip": 1.18,
+    "k9": 12.24,
+    "wins": 42,
+    "strikeouts": 672,
+    "saves": 0
+  },
+  {
+    "name": "Shohei Ohtani",
+    "era": 2.83,
+    "whip": 1.06,
+    "k9": 11.21,
+    "wins": 47,
+    "strikeouts": 765,
+    "saves": 0
+  },
+  {
+    "name": "Blake Snell",
+    "era": 3.15,
+    "whip": 1.22,
+    "k9": 11.2,
+    "wins": 82,
+    "strikeouts": 1460,
+    "saves": 0
+  },
+  {
+    "name": "Yoshinobu Yamamoto",
+    "era": 2.64,
+    "whip": 0.98,
+    "k9": 9.73,
+    "wins": 31,
+    "strikeouts": 442,
+    "saves": 0
+  },
+  {
+    "name": "Edwin Diaz",
+    "era": 3.06,
+    "whip": 1.08,
+    "k9": 14.49,
+    "wins": 30,
+    "strikeouts": 858,
+    "saves": 260
+  },
+  {
+    "name": "Paul Skenes",
+    "era": 2.53,
+    "whip": 1,
+    "k9": 10.91,
+    "wins": 30,
+    "strikeouts": 552,
+    "saves": 0
+  },
+  {
+    "name": "Tarik Skubal",
+    "era": 3.05,
+    "whip": 1.02,
+    "k9": 10.47,
+    "wins": 61,
+    "strikeouts": 1024,
+    "saves": 0
+  },
+  {
+    "name": "Corbin Burnes",
+    "era": 3.15,
+    "whip": 1.07,
+    "k9": 10.36,
+    "wins": 63,
+    "strikeouts": 1114,
+    "saves": 2
+  }
+]

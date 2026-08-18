@@ -2,7 +2,7 @@
 
 1. ~~**Deepen the NBA player pool.**~~ **Done.** Expanded 28 → 108 players spanning 1950s–2020s, all positions, stars and role players (matters because a small pool makes repeat batches predictable/stale). See `CLAUDE.md` for the era-appropriate-fields rule this surfaced (pre-1973-74 steals/blocks, pre-1977-78 turnovers, pre-1979-80 three-point stats don't exist and are omitted rather than faked as 0).
 2. ~~**Add MLB (hitters only).**~~ **Done** — and taken further than originally scoped. Added 73 hitters (`mlb_hitters.json`) plus a full multi-sport architecture (`SPORTS` config in `app.js`) rather than a one-time stat-defs swap, because the natural next ask was mixing sports in one batch, not just switching between them. NBA/MLB are now independent multi-select toggles: each of the 5 guesses in a batch randomly draws from whichever sport(s) are enabled, so a single batch can mix leagues. See `CLAUDE.md` for why counting stats (HR/RBI/SB) are career totals while rate stats (AVG/OBP/SLG) are scaled whole numbers. NBA originally launched as *all* rate stats with no counting stats — a gap, not a choice — since fixed by retrofitting `games`/`career_pts`/`career_reb`/`career_ast` onto all 108 players; see the schema rule in `CLAUDE.md` so future sports don't repeat the retrofit.
-   - *Later:* add MLB pitchers (ERA, WHIP, K/9, etc.) — separate stat set from hitters.
+   - ~~*Later:* add MLB pitchers (ERA, WHIP, K/9, etc.) — separate stat set from hitters.~~ **Done (2026-08-18).** 72 pitchers (`mlb_pitchers.json`), Cy Young through 2026's active staff — `era`/`whip`/`k9`/`wins`/`strikeouts`/`saves`. Existing "MLB Players" button renamed to "MLB Hitters" now that there are two MLB player packs to disambiguate. See `CLAUDE.md` for why `era`/`whip`/`k9` stay plain decimals (unlike batting average) rather than getting the whole-number scaling treatment.
 3. ~~**Add NHL (skaters only).**~~ **Done.** Added 75 skaters (`nhl_skaters.json`) spanning Original Six-era legends through current stars, plus a handful of enforcers (McSorley, Probert, Domi, Laraque) for the same low-points/high-PIM stat variety Rodman/Wallace give the NBA pool. Shipped with the rate+counting mix from day one (Goals/Assists/Points/PIM/Shots per game, plus Games Played and career Goals/Assists/Points) — no retrofit needed this time. Shots-on-goal/shooting % are omitted for the 6 players whose careers predate reliable individual shot tracking (pre-1959-60), same reasoning as NBA's pre-1973-74 steals/blocks gap.
    - *Later:* add NHL goalies (save %, GAA, shutouts) — separate stat set from skaters.
 4. ~~**Add WNBA.**~~ **Done.** Added 75 players (`wnba_players.json`) spanning the league's 1997 founding through current rookies (Clark, Reese, Cardoso), reusing NBA's exact `statDefs` object (`HOOPS_STAT_DEFS` in `app.js`) since the schema is identical — a true near-direct port, no retrofit or era-omission needed (WNBA has tracked steals/blocks/turnovers/3PT since day one). Surfaced one real bug: the "an {sport} {noun}" instructions text was hardcoded with "an", which is wrong for WNBA ("a WNBA player," not "an WNBA player" — W's letter-name starts with a consonant sound). Fixed by giving each sport an explicit `article` field rather than guessing grammar from the label.
@@ -58,7 +58,7 @@
     contradicting the file. The `years_active` methodology question from the
     prior update is still unresolved. **Not yet touched by any verification
     pass:** `ncaam_players.json`, `football_cfb_players.
-    json`, `football_nfl_players.json`, `mlb_hitters.json`,
+    json`, `football_nfl_players.json`,
     `geo_countries.json`, `us_states.json`, `movies.json`, `space_planets.json`,
     `animals.json` — see `CLAUDE.md`'s "Full-project review" section.
 
@@ -106,6 +106,20 @@
     NBA pass's AI-summarized single-source numbers that were deliberately
     left unfixed. Confirms backlog #25 isn't a one-off — every active-roster
     pack checked so far has needed this exact correction.
+
+    **Update (2026-08-18, `mlb_hitters.json`):** all 73 hitters checked — a
+    third sport, same pattern, and this time it hit harder than NBA/NHL did.
+    56 long-retired legends fully clean. **All 17 currently-active players
+    had stale stats — not just counting totals (`hr`/`rbi`/`sb`), but `avg`/
+    `obp`/`slg` too**, which the NBA/NHL passes found to be comparatively
+    stable season-to-season. All 17 fixed (Trout, Judge, Ohtani, Betts,
+    Acuña, Freeman, Soto, Altuve, Machado, Arenado, Goldschmidt, Yelich,
+    Harper, Devers, Guerrero Jr., Ramírez, Alvarez) — high confidence, two
+    independent sources agreeing on every value, same bar as the NHL fixes.
+    **100% of active players checked across all three sports so far (NBA,
+    NHL, MLB) needed a correction** — this is no longer a "sometimes"
+    pattern, it's the expected default state of any active-roster pack that
+    hasn't been touched recently.
 14. **"Easy" difficulty tier.** Conditional, not scheduled: only build this if playtesting still says the game is too hard after the two cheaper levers shipped 2026-08-18 (`SCORE_DECAY_RATE` softened 4→2.5, `REFERENCE_COUNT` bumped 3→5 — see `CLAUDE.md`). Don't build it preemptively just because it's the next idea on the list; wait for signal that the cheap levers weren't enough. Candidate mechanics for this tier, roughly in order of how big a lever each is:
     - **Reveal reference points' exact stat values**, not just name/position — turns the guess into interpolating between two known values instead of pure estimation. The biggest single lever of the three, and the original idea behind this item.
     - **Live score preview while dragging** — show an estimated score as the marker moves, before the guess locks in, so a player can adjust instead of committing blind. Doesn't change the underlying difficulty of estimating the right spot, but removes the "find out after" anxiety.
