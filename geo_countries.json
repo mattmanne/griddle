@@ -91,7 +91,7 @@
   },
   {
     "name": "Bolivia",
-    "population": 12244159,
+    "population": 11365333,
     "area": 1098581,
     "gdp_per_capita": 6333,
     "coastline": 0,
@@ -101,7 +101,7 @@
   },
   {
     "name": "Paraguay",
-    "population": 6844146,
+    "population": 6460159,
     "area": 406752,
     "gdp_per_capita": 9372,
     "coastline": 0,
@@ -131,7 +131,7 @@
   },
   {
     "name": "Cuba",
-    "population": 11019931,
+    "population": 9434593,
     "area": 109884,
     "coastline": 3735,
     "life_expectancy": 78.1,
@@ -517,7 +517,7 @@
   },
   {
     "name": "Nigeria",
-    "population": 227882945,
+    "population": 242747130,
     "area": 923768,
     "gdp_per_capita": 1556,
     "coastline": 853,
@@ -527,7 +527,7 @@
   },
   {
     "name": "Ethiopia",
-    "population": 128691692,
+    "population": 138902185,
     "area": 1104300,
     "gdp_per_capita": 1081,
     "coastline": 0,
@@ -597,7 +597,7 @@
   },
   {
     "name": "Democratic Republic of the Congo",
-    "population": 105789731,
+    "population": 116452000,
     "area": 2344858,
     "gdp_per_capita": 1122,
     "coastline": 37,

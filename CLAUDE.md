@@ -1277,6 +1277,37 @@ data-entry error at the rate sports rosters have shown — it's a handful of
 genuinely slow-drifting or genuinely contested fields, which is a much
 cheaper problem to live with.
 
+## `geo_countries.json` verified (2026-08-18) — population is this pack's roster-drift equivalent
+
+All 85 countries checked (two batches of ~43). 6 population fixes applied:
+Cuba (11.0M→9.43M), Bolivia (12.2M→11.4M), Paraguay (6.84M→6.46M), Nigeria
+(227.9M→242.7M), Ethiopia (128.7M→138.9M), DR Congo (105.8M→116.5M).
+
+**This is the same "actively-changing entity drifts out of date" bug every
+sports roster pack has hit, just wearing a different costume.** Nigeria,
+Ethiopia, and DR Congo are simply fast-growing countries where a ~2023-
+vintage population estimate now trails the current one by 6.5-9.2% — no
+different in kind from Devin Booker's stale `career_pts`. But it's not a
+uniform "the whole file is old" problem: other high-growth countries in the
+same batch (Kenya, Tanzania, South Africa, Zambia) checked out fine, some
+even slightly *ahead* of the newest estimate. Cuba and Bolivia's drift has a
+different, non-generic cause each — Cuba's is a real, documented
+mass-emigration decline since its 2022 census (not just "an older
+estimate"), Bolivia's is simply a newer census superseding an older one.
+
+**One finding was left as a flag, not a fix, because it's a schema decision
+disguised as a data error.** Venezuela's `gdp_per_capita` ($4,140) matches
+its standard-cited IMF figure — factually defensible — but Wikipedia's own
+Economy-of-Venezuela article documents the government manipulating economic
+statistics, and the IMF suspended relations with Venezuela from 2019-2026
+specifically over data reliability. That's the identical category of
+non-market-currency/reporting distortion this file's schema already uses to
+justify omitting `gdp_per_capita` entirely for Cuba and North Korea (see
+"Data schema" above) — so the honest fix here isn't "pick a different
+number," it's "decide whether Venezuela belongs on that omission list too."
+Left unomitted this pass since that's a design change, not a correction a
+verification pass should make unilaterally.
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions

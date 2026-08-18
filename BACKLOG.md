@@ -121,6 +121,43 @@
     pattern, it's the expected default state of any active-roster pack that
     hasn't been touched recently.
 
+    **Update (2026-08-18, `geo_countries.json`):** all 85 countries checked
+    (two batches of ~43). 6 population fixes applied, all high/medium-high
+    confidence against current Wikipedia infoboxes: Cuba (11.0M to 9.43M — a
+    real mass-emigration decline since the 2022 census, not just a stale
+    estimate-year drift), Bolivia (12.2M to 11.4M, 2024 census), Paraguay
+    (6.84M to 6.46M — file exceeded even the highest current estimate),
+    Nigeria (227.9M to 242.7M), Ethiopia (128.7M to 138.9M), DR Congo (105.8M
+    to 116.5M) — the latter three are fast-growing countries where a
+    ~2023-vintage estimate now lags by 6.5-9.2%; several other high-growth
+    countries checked in the same pass (Kenya, Tanzania, South Africa,
+    Zambia) turned out fine, so this isn't a uniform "whole file is stale"
+    problem, just specific to the highest-growth-rate entries — the same
+    "actively-changing entity needs periodic refresh" pattern as sports
+    rosters, just for population instead of player stats. Coastline (85/85),
+    GDP per capita (all except the flag below), and area were essentially
+    clean. Left unfixed as contested/low-confidence: Mexico and Panama
+    population (source-dependent, file within or near the plausible range),
+    Madagascar population (2.4% gap, low-medium confidence), Egypt
+    population (a methodology difference — UN total vs. domestic
+    census-agency count — not a staleness error), Romania/Monaco GDP per
+    capita, Monaco/Ghana elevation (both have a genuine "which peak counts"
+    ambiguity), US area (CIA vs. UN measurement convention), and 9 countries'
+    literacy_pct where the comparison source's own cited year was a decade
+    or more stale (Saudi Arabia, UAE, Israel, Jordan, Qatar, Iran, Pakistan,
+    Malaysia, Nepal) — the file's higher figures are plausibly more
+    current, not wrong, but couldn't be independently confirmed via infobox.
+    **One flag needs a deliberate decision, not a fix:** Venezuela's
+    `gdp_per_capita` ($4,140) matches its standard cited IMF figure, but per
+    Wikipedia's own Economy-of-Venezuela article the government has
+    documented a history of manipulating economic statistics, and the IMF
+    suspended relations with Venezuela from 2019-2026 specifically over data
+    reliability — the same non-market-currency/reporting-distortion category
+    the schema already uses to justify omitting this field for Cuba and
+    North Korea. Not omitted this pass (that's a schema/design change, not a
+    factual correction) — worth a deliberate call next time this pack comes
+    up.
+
     **Update (2026-08-18, `movies.json`):** first non-roster pack checked —
     deliberately picked to get off the "active roster drift" pattern above,
     and it confirmed this pack has a genuinely different risk profile, not
