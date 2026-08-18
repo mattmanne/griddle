@@ -1305,8 +1305,10 @@ non-market-currency/reporting distortion this file's schema already uses to
 justify omitting `gdp_per_capita` entirely for Cuba and North Korea (see
 "Data schema" above) — so the honest fix here isn't "pick a different
 number," it's "decide whether Venezuela belongs on that omission list too."
-Left unomitted this pass since that's a design change, not a correction a
-verification pass should make unilaterally.
+**Decided (2026-08-18): keep it in.** The figure stays as a plain field,
+not omitted — Cuba/North Korea's omission is reserved for cases with no
+usable market-based number at all, not every country whose statistics
+agency has a credibility question.
 
 ## Deployment
 
