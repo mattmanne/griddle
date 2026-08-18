@@ -1342,6 +1342,30 @@ verification passes on any pack with a field that has more than one
 defensible counting convention: check a few *other* rows sharing that same
 edge case before accepting an individually-plausible number.
 
+## `space_planets.json` verified (2026-08-18) — a radius stored where a diameter belonged
+
+All 11 bodies checked (small enough for one agent, no batching needed). One
+fix: Neptune's `diameter` was `24761` km — its *equatorial radius*, not its
+diameter, off by almost exactly a factor of 2 while every other one of the
+11 bodies (Mercury through Eris) correctly stored the doubled figure.
+Corrected to `49528` km. Caught because the verification agent cross-checked
+which diameter *convention* the file uses at all — oblate bodies like Earth,
+Mars, Jupiter, Saturn, Uranus, and Ceres have a meaningfully different
+equatorial vs. mean diameter, and the file consistently picks equatorial for
+all of them. Neptune alone broke that pattern, and by exactly the ratio a
+radius/diameter mixup would produce — a much stronger signal than "this
+number looks a little off."
+
+**`moons_count` — flagged going in as the field most likely to be stale,
+came back 100% clean.** New moons around the gas giants get officially
+confirmed periodically (this file's own design notes elsewhere in this
+project assume drift is the default for any field tracking something that
+changes over time), so this was checked specifically against 2026 sources
+for Jupiter/Saturn/Uranus/Neptune — all four matched exactly, including
+Uranus's August 2025 discovery and Neptune's 2024-confirmed moons already
+being reflected. Worth remembering as the counterexample to "assume the
+field most likely to drift has drifted" — sometimes it just hasn't yet.
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions

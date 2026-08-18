@@ -182,6 +182,23 @@
     a field can be individually plausible and still wrong relative to how
     every *other* row in the same file was built.
 
+    **Update (2026-08-18, `space_planets.json`):** all 11 bodies checked
+    (small enough for one agent, no batching needed). 1 fix: Neptune's
+    `diameter` was `24761` — its *radius*, not diameter, off by almost
+    exactly 2x while every other one of the 11 bodies correctly stored the
+    doubled figure. Corrected to `49528` (equatorial diameter, matching the
+    convention every other body in the file already uses — confirmed by
+    cross-checking oblate bodies like Earth/Mars/Jupiter/Saturn/Uranus/Ceres
+    where equatorial and mean diameter differ and the file consistently
+    picked equatorial). `moons_count` — the field flagged as most likely to
+    be stale, since new moons around the gas giants get confirmed
+    periodically — checked out 100% current for Jupiter/Saturn/Uranus/
+    Neptune against 2026 sources. Every other field (distance_from_sun,
+    day_length_hours, orbital_period_days, surface_gravity) was clean across
+    all 11 entries, including Eris's tidally-locked-to-its-moon day length
+    (378.9 h) and orbital period, both genuinely non-obvious figures the
+    file already had right.
+
     **Update (2026-08-18, `movies.json`):** first non-roster pack checked —
     deliberately picked to get off the "active roster drift" pattern above,
     and it confirmed this pack has a genuinely different risk profile, not
