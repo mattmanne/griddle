@@ -748,6 +748,70 @@ that was already deliberately tuned. Flagging here rather than silently
 shipping it unnoticed; revisit if it ever visibly clips real content (so far
 it hasn't — the overhang is sub-pixel-of-content, not a truncated label).
 
+## Pack-data verification pass (2026-08-17) — scoped down from "verify everything," and why it stayed incomplete
+
+Backlog #13 covers all 19 pack files — realistically ~1,000+ entries, thousands of
+individual stat values. A full exhaustive check of everything in one pass isn't a
+reasonable scope for a single session; this pass deliberately targeted only what
+CLAUDE.md/BACKLOG already flagged as highest-risk (Music/Artists, Presidents, the
+5 team packs, and the specific suspicious Adrian Dantley stat pair), leaving the
+rest of #13 open rather than pretending a shallow full-file skim was equivalent
+to real verification.
+
+**Parallel research agents share one WebSearch budget for the whole session, not
+one each.** Six agents were launched (one each for Presidents, two Music/Artists
+halves, and three team-pack groupings). Several of those agents, on discovering
+their assigned batch was too large for one pass, spawned their *own* child agents
+to split the work further — a reasonable instinct, but it meant far more than six
+agents ended up racing against the same session-wide 200-call WebSearch cap and
+a shared API rate limit. Several agents (all of WNBA, all of NHL, all of NFL, one
+NBA batch, one MLB batch, most of Music/Artists) got cut off mid-task with zero
+usable output once the shared budget ran dry — this is why backlog #13's "done"
+list is uneven (Presidents fully checked, Music/Artists only 20/80, some team
+packs 0% checked) rather than uniformly partial. Lesson for next time: either cap
+subagents from spawning further children for a research fan-out like this, or
+budget for it explicitly up front (fewer, larger batches; one agent per pack file
+rather than splitting further) — the failure mode isn't bad data, it's silently
+incomplete coverage that looks like it was assigned evenly but wasn't.
+
+**A live WebFetch to Wikipedia was used to resolve one flagged uncertainty
+directly** (whether the New York Knicks' `championships: 3` legitimately
+includes a 2026 title) after the session's WebSearch budget was exhausted —
+confirmed real, `en.wikipedia.org/wiki/New_York_Knicks`'s infobox lists 1970/
+1973/2026. This is the same pattern as the Adrian Dantley spot-check earlier in
+this file: when a specific, narrow fact needs checking, a single targeted
+fetch/search from the main loop is often more reliable and far cheaper than
+spinning up a whole subagent for it.
+
+**Corrections applied only where confidence was high; genuinely contested
+figures were left alone on purpose.** Music-artist sales figures in particular
+(Metallica, Michael Jackson, Prince, Cher, Post Malone) are contested
+industry-wide even in good sources — swapping the file's number for a
+different agent-reported number wouldn't have made the pack more accurate, just
+replaced one guess with another. Only fixed: clear miscounts corroborated by a
+specific authoritative source (Grammy.com's own award database, a chart
+discography page) and sales figures where an artist's own Wikipedia page states
+one specific "more than X million" figure the file was clearly off from (not a
+range dispute). Metallica's `number_one_hits` was the most clear-cut error in
+the whole pass: the file had 6, but Metallica has zero Billboard Hot 100 #1s —
+no metal song ever has — so 6 was almost certainly conflating a different chart
+(Billboard 200 #1 *albums*, which Metallica does have ~6-7 of) with the
+Hot-100-#1-*singles* the field is supposed to measure.
+
+**An unresolved `years_active` methodology question surfaced, and no fixes were
+applied for it.** Some pack entries appear to measure `years_active` as
+(current or death year) − `debut_year` (e.g. Bruce Springsteen: 2026 − 1973 =
+53, matching the file); others reflect the artist's true performing-career span
+starting from when they actually began performing/touring, which can predate
+their first *recorded* release (`debut_year`) by several years (e.g. Aerosmith:
+formed 1970, `debut_year` in the file is 1973 for their first album, and
+`years_active`=54 in the file matches the 1970-based span, not a 1973-based
+one). Since the pack doesn't consistently pick one definition, "correcting"
+individual artists toward whichever span an agent happened to find would make
+the pack *less* internally consistent, not more — this needs a deliberate
+decision on which definition `years_active` is supposed to mean before touching
+it further, not a quiet fix.
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions

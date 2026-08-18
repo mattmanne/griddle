@@ -98,7 +98,7 @@
   {
     "name": "Metallica",
     "records_sold_millions": 125,
-    "number_one_hits": 6,
+    "number_one_hits": 0,
     "grammy_wins": 9,
     "years_active": 45,
     "debut_year": 1983
@@ -106,8 +106,8 @@
   {
     "name": "Bon Jovi",
     "records_sold_millions": 130,
-    "number_one_hits": 3,
-    "grammy_wins": 0,
+    "number_one_hits": 4,
+    "grammy_wins": 1,
     "years_active": 43,
     "debut_year": 1984
   },
@@ -145,7 +145,7 @@
   },
   {
     "name": "Whitney Houston",
-    "records_sold_millions": 200,
+    "records_sold_millions": 220,
     "number_one_hits": 11,
     "grammy_wins": 6,
     "years_active": 29,
@@ -155,7 +155,7 @@
     "name": "Mariah Carey",
     "records_sold_millions": 220,
     "number_one_hits": 19,
-    "grammy_wins": 2,
+    "grammy_wins": 5,
     "years_active": 36,
     "debut_year": 1990
   },
@@ -490,7 +490,7 @@
   {
     "name": "David Bowie",
     "records_sold_millions": 140,
-    "number_one_hits": 1,
+    "number_one_hits": 2,
     "grammy_wins": 5,
     "years_active": 47,
     "debut_year": 1969
@@ -506,7 +506,7 @@
   {
     "name": "Cher",
     "records_sold_millions": 100,
-    "number_one_hits": 2,
+    "number_one_hits": 4,
     "grammy_wins": 1,
     "years_active": 61,
     "debut_year": 1965
@@ -515,21 +515,21 @@
     "name": "The Weeknd",
     "records_sold_millions": 75,
     "number_one_hits": 5,
-    "grammy_wins": 3,
+    "grammy_wins": 4,
     "years_active": 15,
     "debut_year": 2011
   },
   {
     "name": "Post Malone",
     "records_sold_millions": 80,
-    "number_one_hits": 3,
+    "number_one_hits": 6,
     "grammy_wins": 0,
     "years_active": 11,
     "debut_year": 2015
   },
   {
     "name": "Coldplay",
-    "records_sold_millions": 100,
+    "records_sold_millions": 160,
     "number_one_hits": 2,
     "grammy_wins": 7,
     "years_active": 26,
@@ -538,14 +538,14 @@
   {
     "name": "Maroon 5",
     "records_sold_millions": 135,
-    "number_one_hits": 3,
+    "number_one_hits": 4,
     "grammy_wins": 3,
     "years_active": 24,
     "debut_year": 2002
   },
   {
     "name": "OneRepublic",
-    "records_sold_millions": 30,
+    "records_sold_millions": 16,
     "number_one_hits": 0,
     "grammy_wins": 0,
     "years_active": 19,
@@ -553,7 +553,7 @@
   },
   {
     "name": "Backstreet Boys",
-    "records_sold_millions": 100,
+    "records_sold_millions": 150,
     "number_one_hits": 0,
     "grammy_wins": 0,
     "years_active": 30,
