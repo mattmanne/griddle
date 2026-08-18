@@ -103,6 +103,7 @@ describe('difficulty: Regular reference markers', () => {
     await page.waitForTimeout(150);
     assert.ok((await page.locator('#reference-markers .reference-dot').count()) > 0);
 
+    await page.locator('.settings summary').click();
     await page.locator('.difficulty-btn[data-difficulty="hard"]').click();
     assert.equal(await page.locator('.difficulty-btn[data-difficulty="hard"]').getAttribute('class'), 'difficulty-btn active');
     assert.equal(await page.locator('#reference-markers .reference-dot').count(), 0);
@@ -116,6 +117,7 @@ describe('difficulty: Regular reference markers', () => {
     const { page } = await newPage();
     await doGuess(page); // guess 1, Regular (default) — has reference markers
 
+    await page.locator('.settings summary').click();
     await page.locator('.difficulty-btn[data-difficulty="hard"]').click();
     assert.equal(await page.locator('.difficulty-btn[data-difficulty="hard"]').getAttribute('class'), 'difficulty-btn active');
 
@@ -129,6 +131,7 @@ describe('difficulty: Regular reference markers', () => {
     const { page } = await newPage();
     await doGuess(page); // guess 1 of 5
     assert.equal(await page.locator('#round-progress').textContent(), 'Guess 1 of 5');
+    await page.locator('.settings summary').click();
     await page.locator('.difficulty-btn[data-difficulty="hard"]').click();
     assert.equal(await page.locator('#round-progress').textContent(), 'Guess 1 of 5');
     await page.close();
@@ -171,7 +174,7 @@ describe('pack toggling', () => {
     await doGuess(page); // guess 1 of 5
     assert.equal(await page.locator('#round-progress').textContent(), 'Guess 1 of 5');
 
-    await page.locator('.pack-settings summary').click();
+    await page.locator('.settings summary').click();
     await page.locator('.pack-btn[data-pack="nhl"]').click(); // toggle a pack off mid-batch
 
     // still on guess 1's progress text — toggling shouldn't have reset guessIndex
@@ -365,7 +368,7 @@ describe('Kitchen Prep "lock this stat pair"', () => {
 describe('pack toggles', () => {
   test('the last active pack cannot be deselected', async () => {
     const { page } = await newPage();
-    await page.locator('.pack-settings summary').click();
+    await page.locator('.settings summary').click();
     // Read the pack list from the page itself rather than hardcoding it, so
     // this test doesn't need updating every time a pack is added or removed.
     const allPacks = await page.locator('.pack-btn').evaluateAll((els) => els.map((el) => el.dataset.pack));

@@ -325,6 +325,12 @@
         .join(' · ');
       shareTextArea.value = buildShareText(total, snark);
       roundSummary.hidden = false;
+      // Guarantee the summary is actually seen regardless of scroll position —
+      // a playtester reported "no recap" when the real issue was never
+      // noticing it land off-screen. The CSS entrance animation on
+      // .round-summary (see style.css) replays every time since toggling
+      // `hidden` is a fresh display:none -> block insertion.
+      roundSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
       actionBtn.disabled = true;
       actionBtn.textContent = 'Fully Cooked';
@@ -408,6 +414,9 @@
     axisNoteEl.hidden = false;
     gameControls.hidden = false;
     practiceSettingsEl.hidden = !debugUnlocked;
+    // Scrolling to top makes a new batch read as a clean, deliberate restart —
+    // the symmetric counterpart to scrolling the summary into view above.
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     beginNextGuess();
   }

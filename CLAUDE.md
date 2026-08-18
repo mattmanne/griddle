@@ -812,6 +812,71 @@ the pack *less* internally consistent, not more — this needs a deliberate
 decision on which definition `years_active` is supposed to mean before touching
 it further, not a quiet fix.
 
+## Round-completion "reset" feel, unified Settings, and the X-axis chip (2026-08-17)
+
+**Batch-completion getting an entrance animation + scroll-into-view wasn't
+fixing a broken feature — it was fixing an unnoticed one.** A live playtest
+(Playwright against the deployed site) confirmed `#round-summary` rendered
+correctly with zero console errors when a playtester reported "no recap after
+5 rounds" — the actual issue was that the instant, no-transition swap from
+board to summary is easy to miss entirely if you're scrolled anywhere but the
+very top when the last guess lands. `#round-summary`'s CSS now plays a
+`round-summary-in` keyframe (scale+fade) every time, because toggling the
+`hidden` attribute is a fresh `display: none` → `block` insertion into the
+render tree each time, not a one-shot "first paint" animation. `app.js`'s
+`finalizeGuess()` also calls `roundSummary.scrollIntoView(...)` right after
+un-hiding it, and `beginRound()` calls `window.scrollTo({top: 0, ...})` — the
+same "make the state change undeniable" fix applied symmetrically to both
+ends of a batch, not just completion.
+
+**Settings consolidation:** the pack toggles (`<details class="pack-settings">`)
+and the difficulty toggle (previously a standalone always-visible
+`.difficulty-switch` in the header) are now one `<details class="settings">`
+with two `.settings-section`s inside — "make A settings area where people can
+choose packs, set difficulty, maybe other things" was explicit about wanting
+one consolidated entry point, not the difficulty toggle duplicated in two
+places. Collapsed by default, same reasoning this file already documents for
+why `.pack-switch` moved out of the header in the first place (game board
+first, settings available but out of the way) — difficulty defaulting to
+Regular means most players never need to open it anyway. Every button/ID the
+JS touches (`.difficulty-btn`, `.pack-btn`, `#pack-count-summary`,
+`.pack-switch`) kept its exact class/ID, so `app.js` needed zero changes —
+only the wrapping `<details>`/`<summary>` moved. **Kitchen Prep stays a
+separate panel, not folded in** — it's gated behind `?debug=1` (backlog #12)
+specifically so playtesters don't see debug-only controls; merging it into
+the player-facing Settings panel would mean either exposing those controls to
+everyone or teaching Settings to conditionally hide part of itself, both
+worse than two panels for two different audiences.
+
+**The X-axis (`.axis-left`/`.axis-right`) chip reuses a cheaper technique to
+avoid the overflow problem the Y-axis (`.axis-top`/`.axis-bottom`) chip
+already ran into — but the first attempt at the cheaper technique still
+wasn't cheap enough, caught by re-measuring rather than assuming.** The
+previous pass gave top/bottom a `border` + `padding: 4px 10px` chip but
+explicitly skipped it for left/right, because `border`+padding there directly
+costs horizontal width in the grid's tight "auto" columns on a narrow phone
+(see the axis-label section above) — a chip that size pushed the left label
+off-screen entirely. `box-shadow: inset 0 0 0 1px var(--accent)` reads as an
+outline but, unlike `border`, adds **zero** to the element's layout size — the
+right instinct, but the first attempt paired it with a symmetric `padding: 2px
+3px` and restored the full `1rem` font, and measuring afterward
+(`getBoundingClientRect` on a 390px viewport, same method that caught the
+original regression) showed the label had grown from 20px to 27px wide and
+was now **visibly clipping actual characters**, not just the harmless few-px
+sub-pixel overhang documented elsewhere in this file. The fix that actually
+worked: asymmetric `padding: 3px 1px` — nearly all the padding's cost goes into
+the *vertical* direction (where these labels have plenty of room, being tall
+vertical-rl text blocks), leaving only ~2px of real horizontal cost instead of
+~4px, landing at 23px wide with no visible clipping across several different
+stat-pair labels of varying length (label string length doesn't affect a
+vertical label's horizontal footprint at all — only font metrics do, confirmed
+by measuring identical width across four different random guesses). The
+general lesson: when a visual treatment needs to fit a genuinely tight layout
+dimension, reach for properties that paint without consuming layout space
+(`box-shadow`, `outline` with a negative offset, `background`) before reaching
+for ones that do (`border`, `padding`, `margin`) — but *re-measure after*,
+because "should be cheap" and "is actually cheap enough" are different claims.
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions
