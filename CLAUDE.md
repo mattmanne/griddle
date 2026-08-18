@@ -1221,6 +1221,62 @@ batch that actually needed it. All 72 came back with real numbers and zero
 `?` placeholders — no partial/incomplete entries to chase down before
 shipping, unlike some of the verification passes' `?`-flagged gaps.
 
+## `movies.json` verified (2026-08-18) — the first non-roster pack, and a genuinely different risk profile
+
+Every pack checked so far in backlog #13 had been a sports roster, and every
+one of them turned up the same "active player/current-season stats are
+stale" bug (see the `players.json` section above). `movies.json` was picked
+next specifically to get off that pattern and see what a non-roster pack's
+actual failure mode looks like — it turned out to be different, not absent.
+
+All 80 films checked (two batches of 40, split by array order). 10 fixes
+applied: 6 IMDb-rating drifts (Titanic, Pulp Fiction, Independence Day, Home
+Alone, The Sixth Sense, Good Will Hunting), 2 Rotten Tomatoes score
+corrections (Inception 86→87, Slumdog Millionaire 92→91), and 2 worldwide
+box-office corrections against current Wikipedia infoboxes (La La Land
+$523.1M→$504.6M, Parasite $263.4M→$258.1M).
+
+**The IMDb-rating drift is the movie-pack equivalent of the roster packs'
+staleness bug, but far gentler.** `imdb_rating` is explicitly documented as a
+live figure that shifts slightly as more people vote — the schema already
+anticipated this — but nothing had actually re-checked it against current
+IMDb since the pack was built. Unlike the roster packs (where a stat can be
+off by a full season, a materially wrong number), every drift found here was
+±0.1, the smallest-magnitude correction any verification pass this session
+has applied. Worth remembering as a distinct case: "this field is documented
+as expected to drift" doesn't mean it's exempt from ever being re-checked,
+it just means the check should expect small deltas, not large ones.
+
+**`budget` is this pack's contested-figure problem, playing the same role
+`years_active` did for `music_artists.json` and `height_cm` did for
+`presidents.json`.** Alien, Ghostbusters, Good Will Hunting, Saving Private
+Ryan, Guardians of the Galaxy, Star Wars: The Force Awakens, and Mad Max:
+Fury Road all have real, reputable sources citing meaningfully different
+numbers for the same film — often an originally-publicized estimate versus a
+later-disclosed actual cost (Guardians' widely-reported $170M estimate vs.
+Disney's own 2015 UK financial filing showing ~$196M net after a rebate).
+None of these were changed — same principle as every other contested-figure
+case in this file: swapping one sourced guess for a different sourced guess
+doesn't make the pack more accurate, it just moves which number is wrong.
+
+**Two box-office figures (Oppenheimer, Top Gun: Maverick) and one runtime
+(The Wolf of Wall Street) were flagged but deliberately left unfixed** for a
+reason distinct from contested-figure cases above: single-source WebFetch
+confidence, not corroborated by a second source. Same bar this file has
+applied consistently since the NBA-vs-NHL confidence-gap finding — "found a
+plausible discrepancy" and "confident enough to write it to the file" are
+different thresholds, and this pass's own agents were explicit that their
+WebSearch budget was already exhausted before they started, leaving WebFetch
+against a single site as the only tool available for these three.
+
+**Rotten Tomatoes scores were the most stable field in the whole pack** — 78
+of 80 matched current sources exactly, the highest agreement rate of any
+field checked in this pass. Box office and runtime were similarly clean
+outside the corrections above. This pack's actual risk, in other words, isn't
+data-entry error at the rate sports rosters have shown — it's a handful of
+genuinely slow-drifting or genuinely contested fields, which is a much
+cheaper problem to live with.
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions

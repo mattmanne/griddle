@@ -120,6 +120,32 @@
     NHL, MLB) needed a correction** — this is no longer a "sometimes"
     pattern, it's the expected default state of any active-roster pack that
     hasn't been touched recently.
+
+    **Update (2026-08-18, `movies.json`):** first non-roster pack checked —
+    deliberately picked to get off the "active roster drift" pattern above,
+    and it confirmed this pack has a genuinely different risk profile, not
+    the same bug in new clothes. All 80 films checked. 10 fixes applied:
+    6 IMDb-rating drifts (Titanic 7.9→8.0, Pulp Fiction 8.9→8.8, Independence
+    Day 6.9→7.0, Home Alone 7.7→7.8, The Sixth Sense 8.1→8.2, Good Will
+    Hunting 8.3→8.4 — the same "drifts slightly as more votes come in"
+    behavior the schema already anticipates, just never checked before), 2
+    Rotten Tomatoes score corrections (Inception 86→87, Slumdog Millionaire
+    92→91), and 2 worldwide-box-office corrections sourced to current
+    Wikipedia infoboxes (La La Land $523.1M→$504.6M, Parasite $263.4M→
+    $258.1M — both look like they were originally recorded against a
+    domestic-heavy or since-revised gross). Several `budget` figures were
+    flagged as genuinely contested rather than fixed — Alien, Ghostbusters,
+    Good Will Hunting, Saving Private Ryan, Guardians of the Galaxy, Star
+    Wars: The Force Awakens, and Mad Max: Fury Road all have real sources
+    citing meaningfully different numbers (often "originally estimated" vs.
+    "later-disclosed actual cost," e.g. Guardians' publicized $170M vs.
+    Disney's own 2015 UK filing showing ~$196M net) — same principle as the
+    Presidents' `height_cm` disputes: don't swap one guess for another
+    guess. Oppenheimer and Top Gun: Maverick box-office figures and The Wolf
+    of Wall Street's runtime were flagged only medium/low confidence (single-
+    source WebFetch, no second source to corroborate) and left unfixed. RT
+    scores were the most stable field checked — all 80 matched current
+    sources with zero discrepancies outside the 2 fixed above.
 14. **"Easy" difficulty tier.** Conditional, not scheduled: only build this if playtesting still says the game is too hard after the two cheaper levers shipped 2026-08-18 (`SCORE_DECAY_RATE` softened 4→2.5, `REFERENCE_COUNT` bumped 3→5 — see `CLAUDE.md`). Don't build it preemptively just because it's the next idea on the list; wait for signal that the cheap levers weren't enough. Candidate mechanics for this tier, roughly in order of how big a lever each is:
     - **Reveal reference points' exact stat values**, not just name/position — turns the guess into interpolating between two known values instead of pure estimation. The biggest single lever of the three, and the original idea behind this item.
     - **Live score preview while dragging** — show an estimated score as the marker moves, before the guess locks in, so a player can adjust instead of committing blind. Doesn't change the underlying difficulty of estimating the right spot, but removes the "find out after" anxiety.

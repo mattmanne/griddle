@@ -148,7 +148,7 @@
     "box_office_worldwide": 2264000000,
     "budget": 200000000,
     "runtime_minutes": 195,
-    "imdb_rating": 7.9,
+    "imdb_rating": 8.0,
     "rt_score": 88,
     "release_year": 1997
   },
@@ -184,7 +184,7 @@
     "box_office_worldwide": 213900000,
     "budget": 8000000,
     "runtime_minutes": 154,
-    "imdb_rating": 8.9,
+    "imdb_rating": 8.8,
     "rt_score": 92,
     "release_year": 1994
   },
@@ -220,7 +220,7 @@
     "box_office_worldwide": 817400000,
     "budget": 75000000,
     "runtime_minutes": 145,
-    "imdb_rating": 6.9,
+    "imdb_rating": 7.0,
     "rt_score": 77,
     "release_year": 1996
   },
@@ -238,7 +238,7 @@
     "box_office_worldwide": 476700000,
     "budget": 18000000,
     "runtime_minutes": 103,
-    "imdb_rating": 7.7,
+    "imdb_rating": 7.8,
     "rt_score": 66,
     "release_year": 1990
   },
@@ -247,7 +247,7 @@
     "box_office_worldwide": 672800000,
     "budget": 40000000,
     "runtime_minutes": 107,
-    "imdb_rating": 8.1,
+    "imdb_rating": 8.2,
     "rt_score": 86,
     "release_year": 1999
   },
@@ -265,7 +265,7 @@
     "box_office_worldwide": 225900000,
     "budget": 10000000,
     "runtime_minutes": 126,
-    "imdb_rating": 8.3,
+    "imdb_rating": 8.4,
     "rt_score": 97,
     "release_year": 1997
   },
@@ -428,7 +428,7 @@
     "budget": 15000000,
     "runtime_minutes": 120,
     "imdb_rating": 8,
-    "rt_score": 92,
+    "rt_score": 91,
     "release_year": 2008
   },
   {
@@ -455,7 +455,7 @@
     "budget": 160000000,
     "runtime_minutes": 148,
     "imdb_rating": 8.8,
-    "rt_score": 86,
+    "rt_score": 87,
     "release_year": 2010
   },
   {
@@ -541,7 +541,7 @@
   },
   {
     "name": "La La Land",
-    "box_office_worldwide": 523088208,
+    "box_office_worldwide": 504600000,
     "budget": 30000000,
     "runtime_minutes": 128,
     "imdb_rating": 8,
@@ -568,7 +568,7 @@
   },
   {
     "name": "Parasite",
-    "box_office_worldwide": 263423899,
+    "box_office_worldwide": 258100000,
     "budget": 11400000,
     "runtime_minutes": 132,
     "imdb_rating": 8.5,
