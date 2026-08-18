@@ -1366,6 +1366,33 @@ Uranus's August 2025 discovery and Neptune's 2024-confirmed moons already
 being reflected. Worth remembering as the counterexample to "assume the
 field most likely to drift has drifted" — sometimes it just hasn't yet.
 
+## `animals.json` verified (2026-08-18) — biology doesn't drift, but data entry still errs
+
+All 80 animals checked (two batches of 40). This pack's risk profile is
+different again from every prior one this session: biological facts like a
+species' typical lifespan or top speed don't go stale year to year the way
+a season's stats or a country's census do, so the failure mode here is
+plain data-entry error or an implausible outlier, not staleness.
+
+3 fixes applied, all high confidence: Snow Leopard's `lifespan_years` was
+10 (Wikipedia's wild range is 15-18 years — not a "picked the low end" call,
+just wrong), Great White Shark's `top_speed_kmh` was 56 (more than double
+the real ~24 km/h sprint speed), and Giant Pacific Octopus's `length_cm`
+was 150 (Wikipedia's cited arm span reaches 4.3m — the file had barely a
+third of that).
+
+**Several medium-confidence findings were left flagged specifically because
+a plausible-sounding replacement number isn't the same as a sourced one.**
+Giant Pacific Octopus's `top_speed_kmh` (40) reads as implausible for a
+species documented as stationary ~94% of the time, but no source gave an
+actual top-speed figure to replace it with — "this is probably wrong" and
+"here's the right number" are different claims, and only the second one
+justifies an edit. Swordfish's `top_speed_kmh` (97) is the same shape of
+problem from the other direction: Wikipedia explicitly calls that exact
+figure a debunked 1930s force-calculation claim, so there's unusually high
+confidence the number itself is wrong, but still no confidently-sourced
+correct swordfish speed to swap in. Both stayed as-is.
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions

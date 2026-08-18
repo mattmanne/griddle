@@ -43,7 +43,7 @@
     "name": "Snow Leopard",
     "top_speed_kmh": 55,
     "weight_kg": 40,
-    "lifespan_years": 10,
+    "lifespan_years": 16,
     "gestation_days": 95,
     "length_cm": 195
   },
@@ -401,7 +401,7 @@
   },
   {
     "name": "Great White Shark",
-    "top_speed_kmh": 56,
+    "top_speed_kmh": 24,
     "weight_kg": 900,
     "lifespan_years": 70,
     "length_cm": 450
@@ -457,7 +457,7 @@
     "top_speed_kmh": 40,
     "weight_kg": 15,
     "lifespan_years": 4,
-    "length_cm": 150
+    "length_cm": 430
   },
   {
     "name": "Manta Ray",

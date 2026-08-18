@@ -199,6 +199,31 @@
     (378.9 h) and orbital period, both genuinely non-obvious figures the
     file already had right.
 
+    **Update (2026-08-18, `animals.json`):** all 80 animals checked (two
+    batches of 40). Unlike sports/geography, this pack's facts are mostly
+    stable biology, not something that drifts year to year — the risk here
+    was data-entry error or an implausible outlier, not staleness. 3 fixes
+    applied, all high confidence: Snow Leopard `lifespan_years` (10→16 — the
+    file's 10 was well below Wikipedia's cited 15-18 year wild range, not
+    just a conservative low pick), Great White Shark `top_speed_kmh` (56→24
+    — more than double the real figure), Giant Pacific Octopus `length_cm`
+    (150→430 — Wikipedia's cited arm span up to 4.3m, the file was using
+    barely a third of that). Left flagged/unfixed at medium-or-lower
+    confidence: Jaguar `length_cm` (185, plausibly missing the tail the way
+    Lion/Tiger's figures include it, but not independently confirmed for
+    Jaguar specifically), Giraffe `weight_kg` (900, ~10-20% under the
+    male/female average), Asian Elephant `top_speed_kmh` and
+    `lifespan_years` (both single-source, low-to-medium confidence), Orca/
+    Sperm Whale/Humpback Whale `weight_kg` (all flagged as possibly a bit
+    low vs. male-only figures, but ambiguous which sex/convention the
+    file's "typical adult weight" is meant to represent), Giant Pacific
+    Octopus `top_speed_kmh` (flagged as implausible for a mostly-sedentary
+    species, but no confidently-sourced replacement number found), and
+    Swordfish `top_speed_kmh` (97 traces to a specifically-debunked 1930s
+    force-calculation claim per Wikipedia, but no confidently-sourced
+    replacement was found either — flagging a number as wrong isn't the
+    same as having a number to replace it with).
+
     **Update (2026-08-18, `movies.json`):** first non-roster pack checked —
     deliberately picked to get off the "active roster drift" pattern above,
     and it confirmed this pack has a genuinely different risk profile, not
