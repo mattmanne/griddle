@@ -1310,6 +1310,38 @@ not omitted — Cuba/North Korea's omission is reserved for cases with no
 usable market-based number at all, not every country whose statistics
 agency has a credibility question.
 
+## `us_states.json` verified (2026-08-18) — internal consistency mattered more than freshness
+
+All 50 states checked. Unlike every prior pack this session, population,
+income, area, and electoral votes were 100% clean — this file was built
+straight from each state's own Wikipedia infobox, which stays internally
+consistent even where a separate cross-state aggregate list page (verified
+stale for several states, e.g. Oklahoma/Tennessee area figures) would have
+produced false positives if used instead. 6 fixes applied: 3 elevation
+off-by-ones (Minnesota, Missouri, Michigan — each a specific peak's own
+infobox disagreeing with the file by 1-2 ft), Connecticut's `counties`
+(9→8, CT has never had 9 counties), and Maryland/Missouri's `counties`
+(23→24, 114→115).
+
+**The Maryland/Missouri fix is a different kind of bug than every other
+fix in this file's history: an internal-consistency violation, not a
+factual error caught against an outside source.** Maryland's 23 and
+Missouri's 114 are both individually defensible numbers — they're the
+correct county *count*, full stop. But this same verification pass also
+confirmed Virginia's `counties: 133` (95 counties + 38 independent cities)
+and Nevada's `counties: 17` (16 counties + Carson City) as correct — both
+of which *do* fold their state's independent city(ies) into the total.
+Maryland (Baltimore City) and Missouri (St. Louis City) simply hadn't been
+counted the same way as the rest of the file, silently violating a
+convention the pack's own other rows already establish. This is the same
+category of bug as `players.json`'s Westbrook/Kawhi per-game-vs-career-total
+mismatch (see above) — a value can be independently plausible and still
+wrong, because "wrong" here means "inconsistent with how every other row in
+this file was built," not "factually false." Worth remembering for future
+verification passes on any pack with a field that has more than one
+defensible counting convention: check a few *other* rows sharing that same
+edge case before accepting an individually-plausible number.
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions

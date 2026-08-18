@@ -58,7 +58,7 @@
     "population": 3688496,
     "area": 5543,
     "median_household_income": 91665,
-    "counties": 9,
+    "counties": 8,
     "elevation": 2386,
     "electoral_votes": 7
   },
@@ -175,7 +175,7 @@
     "population": 6265347,
     "area": 12406,
     "median_household_income": 98678,
-    "counties": 23,
+    "counties": 24,
     "elevation": 3360,
     "electoral_votes": 10
   },
@@ -194,7 +194,7 @@
     "area": 96714,
     "median_household_income": 69183,
     "counties": 83,
-    "elevation": 1978,
+    "elevation": 1979,
     "electoral_votes": 15
   },
   {
@@ -203,7 +203,7 @@
     "area": 86936,
     "median_household_income": 85086,
     "counties": 87,
-    "elevation": 2300,
+    "elevation": 2301,
     "electoral_votes": 10
   },
   {
@@ -220,8 +220,8 @@
     "population": 6270541,
     "area": 69707,
     "median_household_income": 68545,
-    "counties": 114,
-    "elevation": 1770,
+    "counties": 115,
+    "elevation": 1772,
     "electoral_votes": 10
   },
   {

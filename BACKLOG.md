@@ -158,6 +158,30 @@
     factual correction) — worth a deliberate call next time this pack comes
     up.
 
+    **Update (2026-08-18, `us_states.json`):** all 50 states checked (two
+    batches of 25). Population, median household income, area, and
+    electoral votes were 100% clean across every state — the file was built
+    directly from each state's own Wikipedia infobox, which stays
+    internally consistent even where a separate aggregate cross-state list
+    page (verified stale/rounding-inconsistent for several states, e.g.
+    Oklahoma/Tennessee area) would have produced false positives. 6 fixes
+    applied: 3 elevation off-by-ones sourced to the specific peak's own
+    infobox (Minnesota 2300→2301 ft, Missouri 1770→1772 ft, Michigan 1978→
+    1979 ft — Michigan's fix carries a footnote that a 2025 resurvey found
+    neighboring Mount Curwood may sit a sub-foot amount higher than Mount
+    Arvon, genuinely contested but not yet an official redesignation),
+    Connecticut's `counties` (9→8 — CT has never had 9), and Maryland/
+    Missouri's `counties` (23→24, 114→115). The Maryland/Missouri fix isn't
+    a simple factual error so much as an **internal-consistency catch**:
+    Virginia (133 = 95 counties + 38 independent cities) and Nevada (17 = 16
+    counties + Carson City) were both already confirmed correct in this same
+    pass, and both count independent cities toward the total — Maryland
+    (missing Baltimore City) and Missouri (missing St. Louis City) simply
+    hadn't been counted the same way as the rest of the file. Same lesson as
+    the Westbrook/Kawhi per-game-vs-career-total mismatch in `players.json`:
+    a field can be individually plausible and still wrong relative to how
+    every *other* row in the same file was built.
+
     **Update (2026-08-18, `movies.json`):** first non-roster pack checked —
     deliberately picked to get off the "active roster drift" pattern above,
     and it confirmed this pack has a genuinely different risk profile, not
