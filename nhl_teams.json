@@ -3,16 +3,16 @@
     "name": "Anaheim Ducks",
     "championships": 1,
     "founding_year": 1993,
-    "all_time_wins": 1224,
-    "win_pct": 48,
+    "all_time_wins": 1106,
+    "win_pct": 45,
     "arena_capacity": 17174
   },
   {
     "name": "Boston Bruins",
     "championships": 6,
     "founding_year": 1924,
-    "all_time_wins": 3795,
-    "win_pct": 55,
+    "all_time_wins": 3482,
+    "win_pct": 50,
     "arena_capacity": 17850
   },
   {
@@ -37,14 +37,14 @@
     "founding_year": 1972,
     "all_time_wins": 1776,
     "win_pct": 48,
-    "arena_capacity": 18700
+    "arena_capacity": 18547
   },
   {
     "name": "Chicago Blackhawks",
     "championships": 6,
     "founding_year": 1926,
-    "all_time_wins": 3332,
-    "win_pct": 49,
+    "all_time_wins": 2914,
+    "win_pct": 42,
     "arena_capacity": 19717
   },
   {
@@ -67,16 +67,16 @@
     "name": "Dallas Stars",
     "championships": 1,
     "founding_year": 1967,
-    "all_time_wins": 2300,
-    "win_pct": 50,
+    "all_time_wins": 2087,
+    "win_pct": 46,
     "arena_capacity": 18532
   },
   {
     "name": "Detroit Red Wings",
     "championships": 11,
     "founding_year": 1926,
-    "all_time_wins": 3604,
-    "win_pct": 53,
+    "all_time_wins": 3177,
+    "win_pct": 46,
     "arena_capacity": 19515
   },
   {
@@ -91,8 +91,8 @@
     "name": "Florida Panthers",
     "championships": 2,
     "founding_year": 1993,
-    "all_time_wins": 1224,
-    "win_pct": 48,
+    "all_time_wins": 1128,
+    "win_pct": 45,
     "arena_capacity": 19250
   },
   {
@@ -115,8 +115,8 @@
     "name": "Montreal Canadiens",
     "championships": 24,
     "founding_year": 1909,
-    "all_time_wins": 4012,
-    "win_pct": 56.5,
+    "all_time_wins": 3716,
+    "win_pct": 51,
     "arena_capacity": 21105
   },
   {
@@ -131,8 +131,8 @@
     "name": "New Jersey Devils",
     "championships": 3,
     "founding_year": 1974,
-    "all_time_wins": 2000,
-    "win_pct": 50,
+    "all_time_wins": 1595,
+    "win_pct": 47,
     "arena_capacity": 16514
   },
   {
@@ -147,8 +147,8 @@
     "name": "New York Rangers",
     "championships": 4,
     "founding_year": 1926,
-    "all_time_wins": 3400,
-    "win_pct": 50,
+    "all_time_wins": 3110,
+    "win_pct": 45,
     "arena_capacity": 18006
   },
   {
@@ -195,8 +195,8 @@
     "name": "St. Louis Blues",
     "championships": 1,
     "founding_year": 1967,
-    "all_time_wins": 2300,
-    "win_pct": 50,
+    "all_time_wins": 2102,
+    "win_pct": 47,
     "arena_capacity": 18096
   },
   {
@@ -211,16 +211,16 @@
     "name": "Toronto Maple Leafs",
     "championships": 13,
     "founding_year": 1917,
-    "all_time_wins": 3550,
-    "win_pct": 50,
+    "all_time_wins": 3234,
+    "win_pct": 45,
     "arena_capacity": 18819
   },
   {
     "name": "Utah Mammoth",
     "championships": 0,
     "founding_year": 2024,
-    "all_time_wins": 77,
-    "win_pct": 48,
+    "all_time_wins": 81,
+    "win_pct": 49,
     "arena_capacity": 16000
   },
   {
@@ -243,8 +243,8 @@
     "name": "Washington Capitals",
     "championships": 1,
     "founding_year": 1974,
-    "all_time_wins": 2000,
-    "win_pct": 50,
+    "all_time_wins": 1913,
+    "win_pct": 47,
     "arena_capacity": 18573
   },
   {

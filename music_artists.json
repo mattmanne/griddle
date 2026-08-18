@@ -26,7 +26,7 @@
   {
     "name": "Led Zeppelin",
     "records_sold_millions": 300,
-    "number_one_hits": 6,
+    "number_one_hits": 0,
     "grammy_wins": 1,
     "years_active": 12,
     "debut_year": 1969
@@ -179,7 +179,7 @@
     "name": "Beyoncé",
     "records_sold_millions": 200,
     "number_one_hits": 5,
-    "grammy_wins": 32,
+    "grammy_wins": 35,
     "years_active": 29,
     "debut_year": 1997
   },
@@ -210,7 +210,7 @@
   {
     "name": "Britney Spears",
     "records_sold_millions": 150,
-    "number_one_hits": 1,
+    "number_one_hits": 5,
     "grammy_wins": 1,
     "years_active": 28,
     "debut_year": 1998
@@ -226,8 +226,8 @@
   {
     "name": "Lady Gaga",
     "records_sold_millions": 170,
-    "number_one_hits": 3,
-    "grammy_wins": 13,
+    "number_one_hits": 4,
+    "grammy_wins": 16,
     "years_active": 18,
     "debut_year": 2008
   },
@@ -251,7 +251,7 @@
     "name": "Ariana Grande",
     "records_sold_millions": 90,
     "number_one_hits": 6,
-    "grammy_wins": 2,
+    "grammy_wins": 3,
     "years_active": 13,
     "debut_year": 2013
   },
@@ -322,23 +322,23 @@
   {
     "name": "Usher",
     "records_sold_millions": 80,
-    "number_one_hits": 8,
+    "number_one_hits": 9,
     "grammy_wins": 8,
     "years_active": 32,
     "debut_year": 1994
   },
   {
     "name": "Alicia Keys",
-    "records_sold_millions": 65,
-    "number_one_hits": 1,
-    "grammy_wins": 15,
+    "records_sold_millions": 90,
+    "number_one_hits": 3,
+    "grammy_wins": 17,
     "years_active": 25,
     "debut_year": 2001
   },
   {
     "name": "Stevie Wonder",
     "records_sold_millions": 100,
-    "number_one_hits": 9,
+    "number_one_hits": 10,
     "grammy_wins": 25,
     "years_active": 64,
     "debut_year": 1962
@@ -354,8 +354,8 @@
   {
     "name": "Kendrick Lamar",
     "records_sold_millions": 30,
-    "number_one_hits": 2,
-    "grammy_wins": 22,
+    "number_one_hits": 6,
+    "grammy_wins": 27,
     "years_active": 15,
     "debut_year": 2011
   },
@@ -371,13 +371,13 @@
     "name": "50 Cent",
     "records_sold_millions": 30,
     "number_one_hits": 3,
-    "grammy_wins": 0,
+    "grammy_wins": 1,
     "years_active": 23,
     "debut_year": 2003
   },
   {
     "name": "Missy Elliott",
-    "records_sold_millions": 30,
+    "records_sold_millions": 40,
     "number_one_hits": 0,
     "grammy_wins": 4,
     "years_active": 29,
@@ -410,7 +410,7 @@
   {
     "name": "Shania Twain",
     "records_sold_millions": 100,
-    "number_one_hits": 3,
+    "number_one_hits": 8,
     "grammy_wins": 5,
     "years_active": 33,
     "debut_year": 1993
@@ -418,14 +418,14 @@
   {
     "name": "Willie Nelson",
     "records_sold_millions": 50,
-    "number_one_hits": 21,
-    "grammy_wins": 10,
+    "number_one_hits": 25,
+    "grammy_wins": 12,
     "years_active": 64,
     "debut_year": 1962
   },
   {
     "name": "Luis Miguel",
-    "records_sold_millions": 100,
+    "records_sold_millions": 60,
     "number_one_hits": 10,
     "grammy_wins": 6,
     "years_active": 44,
@@ -459,14 +459,14 @@
     "name": "Billy Joel",
     "records_sold_millions": 150,
     "number_one_hits": 3,
-    "grammy_wins": 6,
+    "grammy_wins": 5,
     "years_active": 55,
     "debut_year": 1971
   },
   {
     "name": "Barbra Streisand",
     "records_sold_millions": 150,
-    "number_one_hits": 4,
+    "number_one_hits": 5,
     "grammy_wins": 8,
     "years_active": 63,
     "debut_year": 1963
@@ -587,7 +587,7 @@
     "name": "Shakira",
     "records_sold_millions": 125,
     "number_one_hits": 1,
-    "grammy_wins": 3,
+    "grammy_wins": 4,
     "years_active": 35,
     "debut_year": 1991
   },
@@ -626,8 +626,8 @@
   {
     "name": "Simon & Garfunkel",
     "records_sold_millions": 100,
-    "number_one_hits": 2,
-    "grammy_wins": 5,
+    "number_one_hits": 3,
+    "grammy_wins": 9,
     "years_active": 6,
     "debut_year": 1964
   },

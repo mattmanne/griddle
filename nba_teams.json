@@ -181,7 +181,7 @@
     "founding_year": 1946,
     "all_time_wins": 3170,
     "win_pct": 51.9,
-    "arena_capacity": 20007
+    "arena_capacity": 20478
   },
   {
     "name": "Phoenix Suns",
@@ -197,11 +197,11 @@
     "founding_year": 1970,
     "all_time_wins": 2370,
     "win_pct": 52.4,
-    "arena_capacity": 19411
+    "arena_capacity": 19393
   },
   {
     "name": "Sacramento Kings",
-    "championships": 0,
+    "championships": 1,
     "founding_year": 1923,
     "all_time_wins": 2810,
     "win_pct": 45.6,
@@ -213,7 +213,7 @@
     "founding_year": 1967,
     "all_time_wins": 2401,
     "win_pct": 59.6,
-    "arena_capacity": 18354
+    "arena_capacity": 18418
   },
   {
     "name": "Toronto Raptors",
@@ -229,7 +229,7 @@
     "founding_year": 1974,
     "all_time_wins": 2216,
     "win_pct": 52.8,
-    "arena_capacity": 18306
+    "arena_capacity": 18186
   },
   {
     "name": "Washington Wizards",
@@ -237,6 +237,6 @@
     "founding_year": 1961,
     "all_time_wins": 2307,
     "win_pct": 43.9,
-    "arena_capacity": 20333
+    "arena_capacity": 20356
   }
 ]
