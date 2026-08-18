@@ -58,7 +58,7 @@
     contradicting the file. The `years_active` methodology question from the
     prior update is still unresolved. **Not yet touched by any verification
     pass:** `ncaam_players.json`, `football_cfb_players.
-    json`, `football_nfl_players.json`, `mlb_hitters.json`, `nhl_skaters.json`,
+    json`, `football_nfl_players.json`, `mlb_hitters.json`,
     `geo_countries.json`, `us_states.json`, `movies.json`, `space_planets.json`,
     `animals.json` — see `CLAUDE.md`'s "Full-project review" section.
 
@@ -92,6 +92,20 @@
     problem, not just a one-time data-entry problem**: any pack containing
     still-active people/teams will keep drifting every season — see the new
     note in `CLAUDE.md` about this.
+
+    **Update (2026-08-18, `nhl_skaters.json`):** all 75 skaters checked.
+    57 confirmed clean (38 long-retired legends with zero issues; 5 active
+    players — Kane, Toews, Stamkos, Karlsson, Doughty — already current; 14
+    more long-retired). **18 active players had the exact same stale-season
+    pattern flagged as a risk in `players.json`'s update above** (Ovechkin,
+    Crosby, Malkin, McDavid, MacKinnon, Matthews, Draisaitl, Kucherov,
+    Pastrnak, Hedman, Makar, Josi, Panarin, Rantanen, Kaprizov, Marner,
+    Marchand, Tavares) — but this time both `games`/`career_*` totals *and*
+    the derived per-game rates were fixed, because two independent sources
+    (Wikipedia + StatMuse) agreed on every single one, a higher bar than the
+    NBA pass's AI-summarized single-source numbers that were deliberately
+    left unfixed. Confirms backlog #25 isn't a one-off — every active-roster
+    pack checked so far has needed this exact correction.
 14. **"Easy" difficulty tier.** Conditional, not scheduled: only build this if playtesting still says the game is too hard after the two cheaper levers shipped 2026-08-18 (`SCORE_DECAY_RATE` softened 4→2.5, `REFERENCE_COUNT` bumped 3→5 — see `CLAUDE.md`). Don't build it preemptively just because it's the next idea on the list; wait for signal that the cheap levers weren't enough. Candidate mechanics for this tier, roughly in order of how big a lever each is:
     - **Reveal reference points' exact stat values**, not just name/position — turns the guess into interpolating between two known values instead of pure estimation. The biggest single lever of the three, and the original idea behind this item.
     - **Live score preview while dragging** — show an estimated score as the marker moves, before the guess locks in, so a player can adjust instead of committing blind. Doesn't change the underlying difficulty of estimating the right spot, but removes the "find out after" anxiety.

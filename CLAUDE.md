@@ -1100,6 +1100,18 @@ next time this comes up, whether Griddle wants a periodic refresh habit (e.g.
 revisit active-roster packs once a season) rather than treating every
 verification pass as if it's the last one needed.
 
+**Confirmed on the very next pack checked: `nhl_skaters.json`'s 75 skaters
+hit the identical pattern** — 57 clean, 18 active players stale by roughly a
+season (Ovechkin, Crosby, McDavid, MacKinnon, and 14 more). This time the
+fixes *were* applied, `games`/`career_*` totals and the derived per-game
+rates both — the difference from the NBA pass wasn't confidence in the
+pattern (identical), it was confidence in the *specific replacement numbers*:
+this pass got two independent sources (Wikipedia + StatMuse) agreeing on
+every single figure, where the NBA pass only had one AI-summarized fetch per
+player. Same underlying bug, different bar for "confident enough to write to
+the file" — worth remembering that "found the same pattern again" and "have
+good enough numbers to fix it" are two separate questions.
+
 ## Making Regular difficulty easier (2026-08-18) — two cheap levers before a bigger one
 
 A playtester's exact words: "cool, but way too hard." Two low-risk levers were
