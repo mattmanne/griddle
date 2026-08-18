@@ -1077,14 +1077,17 @@ this was a one-line constant change plus updating the couple of places that
 hardcoded the old number in prose (the info modal, a CLAUDE.md mention, one
 test assertion's range check).
 
-**Deliberately not built yet: an "Easy" tier that also reveals reference
-points' exact stat values, not just their names/positions.** This is a
-real, larger difficulty lever (turns the guess into interpolating between two
-known values rather than pure estimation) — but it's also a new mode with new
-UI, not a tweak, and the two cheap levers above hadn't been tried yet when the
-report came in. Tracked in `BACKLOG.md` as conditional: build it only if
-playtesting still says "too hard" after the softer curve + more reference
-points ship, not preemptively.
+**Deliberately not built yet: an "Easy" tier**, with three candidate mechanics
+(revealing reference points' exact stat values — the biggest lever, turning
+the guess into interpolating between two known values rather than pure
+estimation; a live score preview while dragging, so a guess can be adjusted
+before it locks in rather than finding out after; an on-demand per-guess hint
+at a small score penalty). All three are real, larger difficulty/UX levers —
+but each is new mode/UI work, not a tweak, and the two cheap levers above
+hadn't been tried yet when the report came in. Tracked in `BACKLOG.md` as
+conditional: build this tier (and pick which mechanic(s)) only if playtesting
+still says "too hard" after the softer curve + more reference points ship,
+not preemptively.
 
 ## Deployment
 
