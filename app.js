@@ -22,7 +22,9 @@
   // same precedent as enabledPacks — re-read once per guess in beginNextGuess()
   // so switching mid-batch never resets the round (see CLAUDE.md).
   let difficulty = 'regular';
-  const REFERENCE_COUNT = 3;
+  // Bumped from 3 to 5 (playtesting: "cool but way too hard") — more
+  // calibration points per guess, same rendering/scoring mechanics otherwise.
+  const REFERENCE_COUNT = 5;
 
   const ZOOM_MIN = 1;
   const ZOOM_MAX = 4;

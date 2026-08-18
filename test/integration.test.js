@@ -99,7 +99,7 @@ describe('difficulty: Regular reference markers', () => {
     await page.waitForTimeout(150);
 
     const dotCount = await page.locator('#reference-markers .reference-dot').count();
-    assert.ok(dotCount >= 1 && dotCount <= 3, `expected 1-3 reference dots, saw ${dotCount}`);
+    assert.ok(dotCount >= 1 && dotCount <= 5, `expected 1-5 reference dots, saw ${dotCount}`);
     const labelCount = await page.locator('#reference-markers .reference-label').count();
     assert.equal(labelCount, dotCount);
 

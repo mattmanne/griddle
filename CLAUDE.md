@@ -666,7 +666,8 @@ too hard") led to a `difficulty` toggle (`.difficulty-switch`). It originally
 lived directly in the header, always visible — that placement is now stale;
 see the later "Round-completion 'reset' feel, unified Settings..." section for
 why it moved into the collapsed Settings `<details>` alongside pack selection.
-**Regular** (default) plots `REFERENCE_COUNT` (3) other real entries from the
+**Regular** (default) plots `REFERENCE_COUNT` (5 — bumped from 3, see the
+full-project-review section below) other real entries from the
 same guess's pack/stat-pair pool on the grid — name only, no stat values — as
 visual calibration points. **Hard** is today's original behavior, unchanged:
 no reference points, a truly blind guess.
@@ -1051,6 +1052,39 @@ file). Presidents (fully verified previously) and the Adrian Dantley spot-
 check remain the only fully-closed-out pieces of #13; Animals and the older
 sports-roster packs (players.json, ncaam/cfb/nfl player files, geography,
 movies, space, etc.) still haven't been touched by any verification pass.
+
+## Making Regular difficulty easier (2026-08-18) — two cheap levers before a bigger one
+
+A playtester's exact words: "cool, but way too hard." Two low-risk levers were
+tried first, in order of how invasive they are, before reaching for a genuinely
+new mode:
+
+**`SCORE_DECAY_RATE` softened from 4 to 2.5.** This constant controls how fast
+`computeScore()`'s `exp(-rate * dist)` curve falls off — at the old rate, a
+guess just 25% of an axis's range off in *each* direction already scored only
+~368/1000, which reads as brutal even for a "pretty close" guess. Lowering it
+doesn't change what a player *sees* or how they *guess* — same grid, same
+reference points — it only changes how forgivingly closeness gets converted to
+points. `test/pure.test.js`'s exact-formula regression test already derives
+its expected value from `G.SCORE_DECAY_RATE` itself rather than a hardcoded
+number, so it didn't need updating — a nice side effect of that test being
+written to guard the *formula*, not one specific constant's output.
+
+**`REFERENCE_COUNT` bumped from 3 to 5.** Cheaper than it sounds — `app.js`
+and `lib/pure.js`'s `pickReferenceEntries()` already handle "fewer than N
+available" gracefully (small-pool packs just show fewer dots, no crash), so
+this was a one-line constant change plus updating the couple of places that
+hardcoded the old number in prose (the info modal, a CLAUDE.md mention, one
+test assertion's range check).
+
+**Deliberately not built yet: an "Easy" tier that also reveals reference
+points' exact stat values, not just their names/positions.** This is a
+real, larger difficulty lever (turns the guess into interpolating between two
+known values rather than pure estimation) — but it's also a new mode with new
+UI, not a tweak, and the two cheap levers above hadn't been tried yet when the
+report came in. Tracked in `BACKLOG.md` as conditional: build it only if
+playtesting still says "too hard" after the softer curve + more reference
+points ship, not preemptively.
 
 ## Deployment
 
