@@ -343,6 +343,31 @@ body {
   font-size: 22px;
 }
 
+@keyframes drag-hint-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Shown only while a guess is waiting to be placed (between beginNextGuess()
+   and the first drag) — a playtester repeatedly mistook "clicked the action
+   button" for "guess submitted," not realizing the drag itself is the second,
+   separate step. pointer-events:none so it never competes with the drag
+   gesture for hit-testing (same reasoning as #reference-markers). */
+.drag-hint {
+  fill: var(--accent);
+  font-size: 40px;
+  font-weight: 700;
+  pointer-events: none;
+  animation: drag-hint-pulse 1.6s ease-in-out infinite;
+  /* accent-on-waffle is low-contrast on its own (both warm/orange tones) — a
+     thick syrup-colored outline (drawn under the fill via paint-order) keeps
+     it legible over the busy waffle pattern regardless of zoom/scroll. */
+  paint-order: stroke;
+  stroke: var(--syrup);
+  stroke-width: 6px;
+  stroke-linejoin: round;
+}
+
 .result-line {
   stroke: var(--syrup);
   stroke-width: 3;

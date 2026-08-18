@@ -73,6 +73,23 @@ describe('a full 5-guess batch', () => {
   });
 });
 
+describe('drag hint', () => {
+  test('shows after starting a guess and hides once the drag begins', async () => {
+    // A playtester repeatedly mistook "clicked the action button" for "guess
+    // submitted," not realizing the drag itself is the required second step —
+    // most visibly on the 5th guess, where they expected the recap right after
+    // clicking "Flip It (5/5)". This on-grid hint is the fix.
+    const { page } = await newPage();
+    await page.locator('#action-btn').click();
+    await page.waitForTimeout(150);
+    assert.equal(await page.locator('#drag-hint').isHidden(), false);
+
+    await dragAt(page, 0.4, 0.4);
+    assert.equal(await page.locator('#drag-hint').isHidden(), true);
+    await page.close();
+  });
+});
+
 describe('difficulty: Regular reference markers', () => {
   test('Regular is active by default and plots reference entries (name only, never the target)', async () => {
     const { page } = await newPage();

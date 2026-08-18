@@ -889,6 +889,39 @@ dimension, reach for properties that paint without consuming layout space
 for ones that do (`border`, `padding`, `margin`) — but *re-measure after*,
 because "should be cheap" and "is actually cheap enough" are different claims.
 
+## The "no recap" reports were never a bug — they were a missing "drag now" cue
+
+Every prior "I don't see the recap after 5 guesses" report this session turned
+out to be something else once actually reproduced (a real pointer-capture bug,
+once — see the drag-to-guess section — but otherwise nothing): a screenshot a
+playtester sent showed "Guess 5 of 5" with the action button correctly reading
+"Cooking…" and the full board still visible — the perfectly normal state
+*between* clicking the action button and dragging to place that guess, not a
+stuck or broken one. The playtester confirmed they hadn't dragged yet when the
+screenshot was taken. The actual gap: nothing on screen said "you still need
+to drag" — clicking "Flip It (N/5)" *starts* a guess, it doesn't submit one,
+and that two-step shape (click to start, drag to submit) isn't obvious from
+the button label alone, especially on the last guess where a player
+reasonably expects *something* to happen right after clicking.
+
+Fixed with `#drag-hint`, an SVG `<text>` centered in the grid (`index.html`),
+shown by `beginNextGuess()` right when a guess starts and hidden by
+`showGuessPreview()` the instant a drag begins (whether via pointerdown-only,
+a tap, or a real drag — all of them call `showGuessPreview()`). Gets
+`pointer-events: none` for the same reason `#reference-markers` does — it must
+never compete with the drag gesture for hit-testing, and the real drag
+listeners live on `.viewport` regardless (see the drag-to-guess section).
+
+**The hint's accent-orange fill was illegible against the waffle background on
+first pass** — both are warm/orange tones, so the text nearly vanished into
+the pattern despite being technically "shown." Fixed with `paint-order:
+stroke` plus a thick syrup-colored stroke underneath the fill — a cheap way to
+guarantee legibility over a background whose color can't be predicted (the
+waffle texture varies by position via its radial gradient), same idea as the
+reference-label background chips but implemented as a text outline instead of
+a backing rect, since a two-line `<tspan>` block doesn't have one clean
+rectangle to size a `getBBox()`-measured backing shape to.
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions

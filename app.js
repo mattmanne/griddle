@@ -33,6 +33,7 @@
   const viewport = document.getElementById('viewport');
   const gridlinesGroup = document.getElementById('gridlines');
   const referenceMarkersGroup = document.getElementById('reference-markers');
+  const dragHint = document.getElementById('drag-hint');
   const guessMarker = document.getElementById('guess-marker');
   const targetMarker = document.getElementById('target-marker');
   const guideX = document.getElementById('guide-x');
@@ -199,6 +200,7 @@
   }
 
   function showGuessPreview(dataPoint) {
+    dragHint.setAttribute('visibility', 'hidden');
     previewData = dataPoint;
     const { sx, sy } = dataToSvg(dataPoint.x, dataPoint.y);
     guessMarker.setAttribute('x', sx - BUTTER_W / 2);
@@ -394,6 +396,10 @@
     resultLine.setAttribute('visibility', 'hidden');
     guideX.setAttribute('visibility', 'hidden');
     guideY.setAttribute('visibility', 'hidden');
+    // Visible until the first drag (showGuessPreview hides it) — a playtester
+    // repeatedly mistook "clicked the action button" for "guess submitted,"
+    // not realizing the drag itself is the required second step. See CLAUDE.md.
+    dragHint.setAttribute('visibility', 'visible');
     resultsSection.hidden = true;
 
     targetDisplay.textContent = `${PACKS[currentPack].emoji} ${entry.name} — ${STAT_DEFS[statX].label} vs ${STAT_DEFS[statY].label}`;
