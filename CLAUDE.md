@@ -1510,6 +1510,44 @@ list — but auditing the full pack list surfaced one that was never on it:
 "WNBA" in this item's history refers to WNBA *teams* (verified in the
 NBA/WNBA team-pack pass), never WNBA *players*. Worth picking up next.
 
+## `wnba_players.json` verified (2026-08-18) — the last unchecked pack, and the highest active-player hit rate yet
+
+All 75 players checked. This pack had genuinely never been verified before
+— every prior "WNBA" mention in backlog #13's history turned out to be
+about WNBA *teams*, not players, a gap only caught by auditing the full
+pack list rather than trusting the item's own summary prose. This closes
+out backlog #13: every pack file in the project has now been checked at
+least once.
+
+41 fixes applied. The second batch (skewed toward current/recent players)
+hit the active-roster-drift pattern documented throughout this file at the
+highest rate seen all session — 37 of 38 players needed a correction, where
+every other roster pack (NBA, NHL, MLB, NFL) had at least a few players
+who happened to already be current when checked.
+
+**A methodology finding from the first batch is worth carrying into any
+future pass on this kind of pack: a single AI-summarized Wikipedia fetch,
+checked in isolation, is not reliable enough to justify overwriting an
+already-shipped figure.** Nine retired players' small-total fields
+(steals, blocks, single-digit assist counts) disagreed with the file by
+double digits against one Wikipedia fetch — cross-checked against
+StatMuse, and the *file* was right all nine times. Only two kinds of
+finding were actually applied: corroborated discrepancies (two independent
+sources agreeing on a different number) and structurally-obvious ones (an
+active player's games count that plainly hasn't caught up to a season that
+already happened). One fix, Briann January's `games` (413→393), was
+neither roster drift nor a corroboration case by coincidence — she retired
+in 2022, so this was a plain data-entry error, caught the same corroborated
+way as the drift fixes even though its cause was different.
+
+**DeWanna Bonner's entry was already ahead of the other five active
+players checked in the same batch** — already reflecting partial 2026
+season data while Griner/Diggins-Smith/Ogwumike/Charles/Stewart were all a
+full season behind. The same lesson as the NFL pack's Stafford/Goff
+exceptions: staleness isn't uniform even within one pack, so each active
+player needs its own check rather than assuming the whole roster drifted
+by the same amount.
+
 ## Deployment
 
 Static site served by GitHub Pages directly from `main` branch root (no Actions
